@@ -7,11 +7,7 @@ module ActionView # :nodoc:
         template ||= read_template_file(file_path, template_extension)
         handler.new(self).render(template, local_assigns, file_path)
       else
-<<<<<<< .mine
         render_template_without_markaby_line_support(template_extension, template, file_path, local_assigns)
-=======
-        compile_and_render_template(@@template_handlers[template_extension.to_sym], template, file_path, local_assigns)
->>>>>>> .r125
       end
     end
     
