@@ -1,0 +1,18 @@
+h1 'New <%= singular_name %>'
+
+error_messages_for :<%= singular_name %>
+
+form_for(@<%= singular_name %>) do |f|
+<% for attribute in attributes -%>
+  p do
+    b '<%= attribute.column.human_name %>'
+    br
+    text f.<%= attribute.field_type %> :<%= attribute.name %>
+  end
+<% end -%>
+  p do
+    text f.submit "Create"
+  end
+end
+
+link_to 'Back', <%= plural_name %>_path
