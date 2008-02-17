@@ -5,7 +5,7 @@ module ActionView # :nodoc:
         template ||= read_template_file(file_path, template_extension)
         handler.new(self).render(template, local_assigns, file_path)
       else
-        compile_and_render_template(template_extension, template, file_path, local_assigns)
+        compile_and_render_template(@@template_handlers[template_extension.to_sym], template, file_path, local_assigns)
       end
     end
   end
