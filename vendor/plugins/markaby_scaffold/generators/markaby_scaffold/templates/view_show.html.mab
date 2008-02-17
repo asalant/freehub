@@ -1,8 +1,5 @@
 <% for attribute in attributes -%>
-p do
-  b '<%= attribute.column.human_name %>:'
-  text @<%= singular_name %>.<%= attribute.name %>
-end
+labeled_value '<%= attribute.column.human_name %>', @<%= singular_name %>.<%= attribute.name %>
 <% end -%>
 
 link_to 'Edit', edit_<%= singular_name %>_path(@<%= singular_name %>)

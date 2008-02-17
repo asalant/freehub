@@ -1,0 +1,10 @@
+html do
+  head do
+    title "#{controller.controller_name.singularize.titleize} #{action_name.titleize} on Freehub"
+    stylesheet_link_tag 'scaffold'
+  end
+  body do
+    self << content_for_layout
+  end
+end
+

@@ -1,0 +1,14 @@
+h1 'Editing shop'
+
+error_messages_for :shop
+
+form_for(@shop) do |f|
+  labeled_input 'Name', :for => :name do
+    text f.text_field(:name)
+  end
+  p { f.submit("Update") }
+end
+
+link_to('Show', @shop) 
+text ' | '
+link_to('Back', shops_path)
