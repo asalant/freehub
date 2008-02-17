@@ -1,10 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  def markaby1(&block)
-    Markaby::Builder.new({}, self, &block)
-  end
-
   def markaby(&proc)
    assigns = {}
    instance_variables.each do |name|
@@ -12,7 +8,6 @@ module ApplicationHelper
     end
    Markaby::Builder.new(assigns, self).capture(&proc)
   end
-
 
   def string_path(string)
     string
@@ -27,4 +22,14 @@ module ApplicationHelper
       end
     end
   end
+
+  def labeled_value(label_value, value)
+    markaby do
+      p do
+        b label_value + ':'
+        text value
+      end
+    end
+  end
+  
 end
