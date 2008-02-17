@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="true" type="RAILS_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/tmp" />
+    </content>
+    <orderEntry type="jdk" jdkName="Ruby SDK 1.8.6" jdkType="RUBY_SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntryProperties />
+  </component>
+  <component name="RailsModuleContentRootManager">
+    <TEST_URLS url="file://$MODULE_DIR$/test" />
+    <USER_URLS url="file://$MODULE_DIR$/public/javascripts" />
+    file://$MODULE_DIR$/public/javascripts
+    <USER_URLS url="file://$MODULE_DIR$/vendor/rails" />
+    file://$MODULE_DIR$/vendor/rails
+    <USER_URLS url="file://$MODULE_DIR$/lib" />
+    file://$MODULE_DIR$/lib
+    <USER_URLS url="file://$MODULE_DIR$/db" />
+    file://$MODULE_DIR$/db
+    <USER_URLS url="file://$MODULE_DIR$/public/stylesheets" />
+    file://$MODULE_DIR$/public/stylesheets
+    <USER_URLS url="file://$MODULE_DIR$/vendor/plugins" />
+    file://$MODULE_DIR$/vendor/plugins
+  </component>
+</module>
+
