@@ -26,7 +26,7 @@ module ApplicationHelper
   def labeled_value(label_value, value)
     markaby do
       p do
-        b label_value + ':'
+        b label_value + ': '
         text value
       end
     end
