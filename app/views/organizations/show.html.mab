@@ -1,0 +1,6 @@
+labeled_value 'Name', @organization.name
+labeled_value 'Timezone', @organization.timezone
+
+link_to 'Edit', edit_organization_path(@organization)
+text ' | '
+link_to 'Back', organizations_path

@@ -1,8 +1,8 @@
-h1 'Editing shop'
+h1 'Editing organization'
 
-error_messages_for :shop
+error_messages_for :organization
 
-form_for @shop do |f|
+form_for @organization do |f|
   labeled_input'Name', :for => :name do
     f.text_field :name
   end
@@ -12,6 +12,6 @@ form_for @shop do |f|
   p { f.submit "Update"  }
 end
 
-link_to 'Show', @shop
+link_to 'Show', @organization
 text ' | '
-link_to 'Back', shops_path
+link_to 'Back', organizations_path

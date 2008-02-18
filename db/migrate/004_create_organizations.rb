@@ -1,6 +1,6 @@
-class CreateShops < ActiveRecord::Migration
+class CreateOrganizations < ActiveRecord::Migration
   def self.up
-    create_table :shops do |t|
+    create_table :organizations do |t|
       t.string :name
       t.string :timezone
 
@@ -9,6 +9,6 @@ class CreateShops < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :shops
+    drop_table :organizations
   end
 end

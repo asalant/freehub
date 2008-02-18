@@ -1,8 +1,8 @@
-h1 'New shop'
+h1 'New organization'
 
-error_messages_for :shop
+error_messages_for :organization
 
-form_for @shop do |f|
+form_for @organization do |f|
   labeled_input'Name', :for => :name do
     f.text_field :name
   end
@@ -14,4 +14,4 @@ form_for @shop do |f|
   end
 end
 
-link_to 'Back', shops_path
+link_to 'Back', organizations_path

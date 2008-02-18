@@ -1,0 +1,22 @@
+h1 "Listing organizations"
+
+table do
+  tr do
+    th { 'Name' }
+    th { 'Timezone' }
+  end
+
+  for organization in @organizations
+    tr do
+      td { organization.name }
+      td { organization.timezone }
+      td { link_to 'Show', organization }
+      td { link_to 'Edit', edit_organization_path(organization) }
+      td { link_to 'Destroy', organization, :confirm => 'Are you sure?', :method => :delete }
+    end
+  end
+end
+
+br
+
+link_to 'New organization', new_organization_path
