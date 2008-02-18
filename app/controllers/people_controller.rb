@@ -41,7 +41,7 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
-    @person.organization = Organization.find(params[:organization_id]) if params[:organization_id]
+    @person.organization = @organization
 
     respond_to do |format|
       if @person.save

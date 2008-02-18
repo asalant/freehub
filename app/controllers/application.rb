@@ -10,4 +10,14 @@ class ApplicationController < ActionController::Base
 
   # Include restful_authentication support
   include AuthenticatedSystem
+
+  # Root object for nested resources
+  before_filter :resolve_organization
+
+  private
+
+  def resolve_organization
+    @organization = Organization.find(params[:organization_id]) if params[:organization_id]
+  end
+
 end

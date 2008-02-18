@@ -4,6 +4,11 @@ html do
     stylesheet_link_tag 'scaffold'
   end
   body do
+    h1 do
+      link_to @organization.name, organization_path(:id => @organization)
+      text " on Freehub"
+    end if @organization
+    hr
     p flash[:notice], :style => "color: green"
     self << content_for_layout
   end
