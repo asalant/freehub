@@ -1,8 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :organizations, :has_many => [ :people ]
 
-  map.resources :people
-
   map.resources :users
 
   map.resource :session

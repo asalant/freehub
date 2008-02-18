@@ -9,8 +9,8 @@ labeled_value 'Country', @person.country
 labeled_value 'Email', @person.email
 labeled_value 'Phone', @person.phone
 labeled_value 'Staff', @person.staff
-labeled_value 'Organization', @person.organization_id
+labeled_value 'Organization', @person.organization.name
 
-link_to 'Edit', edit_person_path(@person)
+link_to 'Edit', edit_organization_person_path(:id => @person)
 text ' | '
-link_to 'Back', people_path
+link_to 'Back', organization_people_path

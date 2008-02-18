@@ -41,11 +41,12 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
+    @person.organization = Organization.find(params[:organization_id]) if params[:organization_id]
 
     respond_to do |format|
       if @person.save
         flash[:notice] = 'Person was successfully created.'
-        format.html { redirect_to(@person) }
+        format.html { redirect_to(organization_person_path(:id => @person)) }
         format.xml  { render :xml => @person, :status => :created, :location => @person }
       else
         format.html { render :action => "new" }
@@ -62,7 +63,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.update_attributes(params[:person])
         flash[:notice] = 'Person was successfully updated.'
-        format.html { redirect_to(@person) }
+        format.html { redirect_to(organization_person_path) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -78,7 +79,7 @@ class PeopleController < ApplicationController
     @person.destroy
 
     respond_to do |format|
-      format.html { redirect_to(people_url) }
+      format.html { redirect_to(organization_people_path) }
       format.xml  { head :ok }
     end
   end

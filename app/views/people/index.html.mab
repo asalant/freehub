@@ -29,14 +29,14 @@ table do
       td { person.email }
       td { person.phone }
       td { person.staff }
-      td { person.organization_id }
-      td { link_to 'Show', person }
-      td { link_to 'Edit', edit_person_path(person) }
-      td { link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete }
+      td { person.organization.name }
+      td { link_to 'Show', organization_person_path(:id => person) }
+      td { link_to 'Edit', edit_organization_person_path(:id => person) }
+      td { link_to 'Destroy', organization_person_path(:id => person), :confirm => 'Are you sure?', :method => :delete }
     end
   end
 end
 
 br
 
-link_to 'New person', new_person_path
+link_to 'New person', new_organization_person_path
