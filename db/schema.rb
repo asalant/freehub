@@ -11,6 +11,13 @@
 
 ActiveRecord::Schema.define(:version => 3) do
 
+  create_table "organizations", :force => true do |t|
+    t.string   "name"
+    t.string   "timezone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -23,17 +30,12 @@ ActiveRecord::Schema.define(:version => 3) do
     t.string   "email"
     t.string   "phone"
     t.boolean  "staff"
-    t.integer  "shop_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id"
   end
 
-  create_table "shops", :force => true do |t|
-    t.string   "name"
-    t.string   "timezone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "people", ["organization_id"], :name => "fk_people_organization"
 
   create_table "users", :force => true do |t|
     t.string   "login"

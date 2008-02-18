@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :organizations
+  map.resources :organizations, :has_many => [ :people ]
 
   map.resources :people
 

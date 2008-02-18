@@ -12,10 +12,13 @@ class CreatePeople < ActiveRecord::Migration
       t.string :email
       t.string :phone
       t.boolean :staff
-      t.integer :shop_id
 
       t.timestamps
+
+      t.references :organization
     end
+
+    execute "ALTER TABLE people ADD CONSTRAINT fk_people_organization FOREIGN KEY (organization_id) REFERENCES organizations(id)"
   end
 
   def self.down

@@ -9,7 +9,7 @@ labeled_value 'Country', @person.country
 labeled_value 'Email', @person.email
 labeled_value 'Phone', @person.phone
 labeled_value 'Staff', @person.staff
-labeled_value 'Shop', @person.shop_id
+labeled_value 'Organization', @person.organization_id
 
 link_to 'Edit', edit_person_path(@person)
 text ' | '

@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  timezone: MyString
+sfbk:
+  name: San Francisco Bike Kitchen
+  timezone: Pacific
 
-two:
-  name: MyString
-  timezone: MyString
+scbc:
+  name: Santa Cruz Bike Church
+  timezone: Pacific

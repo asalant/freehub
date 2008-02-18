@@ -1,22 +1,22 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  first_name: MyString
-  last_name: MyString
+mary:
+  first_name: Mary
+  last_name: Member
   street1: MyString
   street2: MyString
   city: MyString
   state: MyString
   postal_code: MyString
   country: MyString
-  email: MyString
+  email: mary@example.com
   phone: MyString
   staff: false
-  shop_id: 1
+  organization: sfbk
 
-two:
-  first_name: MyString
-  last_name: MyString
+daryl:
+  first_name: Daryl
+  last_name: Dayuse
   street1: MyString
   street2: MyString
   city: MyString
@@ -26,4 +26,18 @@ two:
   email: MyString
   phone: MyString
   staff: false
-  shop_id: 1
+  organization: sfbk
+
+victor:
+  first_name: Victor
+  last_name: Volunteer
+  street1: MyString
+  street2: MyString
+  city: MyString
+  state: MyString
+  postal_code: MyString
+  country: MyString
+  email: MyString
+  phone: MyString
+  staff: false
+  organization: sfbk

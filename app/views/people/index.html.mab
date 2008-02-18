@@ -13,7 +13,7 @@ table do
     th { 'Email' }
     th { 'Phone' }
     th { 'Staff' }
-    th { 'Shop' }
+    th { 'Organization' }
   end
 
   for person in @people
@@ -29,7 +29,7 @@ table do
       td { person.email }
       td { person.phone }
       td { person.staff }
-      td { person.shop_id }
+      td { person.organization_id }
       td { link_to 'Show', person }
       td { link_to 'Edit', edit_person_path(person) }
       td { link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete }
