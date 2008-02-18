@@ -1,4 +1,5 @@
 labeled_value 'Name', @shop.name
+labeled_value 'Timezone', @shop.timezone
 
 link_to 'Edit', edit_shop_path(@shop)
 text ' | '

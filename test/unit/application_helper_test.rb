@@ -20,6 +20,6 @@ class ApplicationHelperTest < Test::Unit::TestCase
 
   def test_labeled_value
     result = labeled_value 'Label', 'value'
-    assert_equal '<p><b>Label:</b>value</p>', result.to_s
+    assert_equal '<p><b>Label: </b>value</p>', result.to_s
   end
 end

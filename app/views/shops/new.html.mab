@@ -2,12 +2,15 @@ h1 'New shop'
 
 error_messages_for :shop
 
-form_for(@shop) do |f|
-  labeled_input 'Name', :for => :name do
-    text f.text_field :name
+form_for @shop do |f|
+  labeled_input'Name', :for => :name do
+    f.text_field :name
+  end
+  labeled_input'Timezone', :for => :timezone do
+    f.text_field :timezone
   end
   p do
-    text f.submit "Create"
+    f.submit"Create"
   end
 end
 

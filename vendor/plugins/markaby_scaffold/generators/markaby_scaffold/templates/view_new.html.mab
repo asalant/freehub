@@ -2,14 +2,14 @@ h1 'New <%= singular_name %>'
 
 error_messages_for :<%= singular_name %>
 
-form_for(@<%= singular_name %>) do |f|
+form_for @<%= singular_name %> do |f|
 <% for attribute in attributes -%>
-  labeled_input '<%= attribute.column.human_name %>', :for => :<%= attribute.name %> do
-    text f.<%= attribute.field_type %> :<%= attribute.name %>
+  labeled_input'<%= attribute.column.human_name %>', :for => :<%= attribute.name %> do
+    f.<%= attribute.field_type %> :<%= attribute.name %>
   end
 <% end -%>
   p do
-    text f.submit "Create"
+    f.submit"Create"
   end
 end
 

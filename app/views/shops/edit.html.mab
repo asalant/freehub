@@ -2,13 +2,16 @@ h1 'Editing shop'
 
 error_messages_for :shop
 
-form_for(@shop) do |f|
-  labeled_input 'Name', :for => :name do
-    text f.text_field(:name)
+form_for @shop do |f|
+  labeled_input'Name', :for => :name do
+    f.text_field :name
   end
-  p { f.submit("Update") }
+  labeled_input'Timezone', :for => :timezone do
+    f.text_field :timezone
+  end
+  p { f.submit "Update"  }
 end
 
-link_to('Show', @shop) 
+link_to 'Show', @shop
 text ' | '
-link_to('Back', shops_path)
+link_to 'Back', shops_path

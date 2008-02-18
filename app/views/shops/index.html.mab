@@ -3,18 +3,20 @@ h1 "Listing shops"
 table do
   tr do
     th { 'Name' }
+    th { 'Timezone' }
   end
 
   for shop in @shops
     tr do
       td { shop.name }
-      td { link_to('Show', shop) }
-      td { link_to('Edit', edit_shop_path(shop)) }
-      td { link_to('Destroy', shop, :confirm => 'Are you sure?', :method => :delete) }
+      td { shop.timezone }
+      td { link_to 'Show', shop }
+      td { link_to 'Edit', edit_shop_path(shop) }
+      td { link_to 'Destroy', shop, :confirm => 'Are you sure?', :method => :delete }
     end
   end
 end
 
 br
 
-link_to('New shop', new_shop_path)
+link_to 'New shop', new_shop_path
