@@ -1,0 +1,16 @@
+labeled_value 'First name', @person.first_name
+labeled_value 'Last name', @person.last_name
+labeled_value 'Street1', @person.street1
+labeled_value 'Street2', @person.street2
+labeled_value 'City', @person.city
+labeled_value 'State', @person.state
+labeled_value 'Postal code', @person.postal_code
+labeled_value 'Country', @person.country
+labeled_value 'Email', @person.email
+labeled_value 'Phone', @person.phone
+labeled_value 'Staff', @person.staff
+labeled_value 'Shop', @person.shop_id
+
+link_to 'Edit', edit_person_path(@person)
+text ' | '
+link_to 'Back', people_path

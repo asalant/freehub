@@ -1,0 +1,42 @@
+h1 "Listing people"
+
+table do
+  tr do
+    th { 'First name' }
+    th { 'Last name' }
+    th { 'Street1' }
+    th { 'Street2' }
+    th { 'City' }
+    th { 'State' }
+    th { 'Postal code' }
+    th { 'Country' }
+    th { 'Email' }
+    th { 'Phone' }
+    th { 'Staff' }
+    th { 'Shop' }
+  end
+
+  for person in @people
+    tr do
+      td { person.first_name }
+      td { person.last_name }
+      td { person.street1 }
+      td { person.street2 }
+      td { person.city }
+      td { person.state }
+      td { person.postal_code }
+      td { person.country }
+      td { person.email }
+      td { person.phone }
+      td { person.staff }
+      td { person.shop_id }
+      td { link_to 'Show', person }
+      td { link_to 'Edit', edit_person_path(person) }
+      td { link_to 'Destroy', person, :confirm => 'Are you sure?', :method => :delete }
+    end
+  end
+end
+
+br
+
+link_to 'New person', new_person_path
