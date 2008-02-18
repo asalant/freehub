@@ -10,6 +10,6 @@ labeled_value 'Email', @person.email
 labeled_value 'Phone', @person.phone
 labeled_value 'Staff', @person.staff
 
-link_to 'Edit', edit_organization_person_path(:id => @person)
+link_to 'Edit', edit_person_path(:id => @person)
 text ' | '
-link_to 'Back', organization_people_path
+link_to 'Back', people_path

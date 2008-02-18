@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class OrganizationTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+
+  def test_find_by_key
+    assert_equal organizations(:sfbk), Organization.find_by_key('sfbk')
   end
 end

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   private
 
   def resolve_organization
-    @organization = Organization.find(params[:organization_id]) if params[:organization_id]
+    @organization = Organization.find_by_key(params[:organization_key]) if params[:organization_key]
   end
 
 end

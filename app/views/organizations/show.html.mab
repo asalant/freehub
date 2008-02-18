@@ -1,8 +1,9 @@
 labeled_value 'Name', @organization.name
+labeled_value 'Key', @organization.key
 labeled_value 'Timezone', @organization.timezone
 
 link_to 'Edit', edit_organization_path(@organization)
 text ' | '
 link_to 'Back', organizations_path
 text ' | '
-link_to 'People', organization_people_path(:organization_id => @organization)
+link_to 'People', people_path(:organization_key => @organization.key)

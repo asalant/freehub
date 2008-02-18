@@ -6,6 +6,9 @@ form_for @organization do |f|
   labeled_input'Name', :for => :name do
     f.text_field :name
   end
+  labeled_input'Key', :for => :key do
+    f.text_field :key
+  end
   labeled_input'Timezone', :for => :timezone do
     f.text_field :timezone
   end

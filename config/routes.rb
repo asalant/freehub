@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :organizations, :has_many => [ :people ]
+  map.resources :organizations
+  map.resources :people, :path_prefix => '/:organization_key'
 
   map.resources :users
 

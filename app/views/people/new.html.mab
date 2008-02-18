@@ -2,7 +2,7 @@ h1 'New person'
 
 error_messages_for :person
 
-form_for @person, :url => organization_people_path do |f|
+form_for @person do |f|
   labeled_input'First name', :for => :first_name do
     f.text_field :first_name
   end
@@ -41,4 +41,4 @@ form_for @person, :url => organization_people_path do |f|
   end
 end
 
-link_to 'Back', organization_people_path
+link_to 'Back', people_path

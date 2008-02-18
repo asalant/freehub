@@ -2,7 +2,7 @@ h1 'Editing person'
 
 error_messages_for :person
 
-form_for @person, :url => organization_person_path do |f|
+form_for @person, :url => person_path do |f|
   labeled_input'First name', :for => :first_name do
     f.text_field :first_name
   end
@@ -39,6 +39,6 @@ form_for @person, :url => organization_person_path do |f|
   p { f.submit "Update"  }
 end
 
-link_to 'Show', organization_person_path(:id => @person)
+link_to 'Show', person_path(:id => @person)
 text ' | '
-link_to 'Back', organization_people_path
+link_to 'Back', people_path
