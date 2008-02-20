@@ -54,6 +54,10 @@ class MarkabyScaffoldGenerator < Rails::Generator::NamedBase
       m.template('layout.html.mab', File.join('app/views/layouts', controller_class_path, "#{controller_file_name}.html.mab"))
       m.template('style.css', 'public/stylesheets/scaffold.css')
 
+      # MarkabyHelper
+      m.template('markaby_helper.rb', 'app/helpers/markaby_helper.rb')
+      m.template('markaby_helper_test.rb', 'test/unit/markaby_helper_test.rb')
+
       m.dependency 'model', [name] + @args, :collision => :skip
 
       m.template(

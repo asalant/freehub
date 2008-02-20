@@ -1,13 +1,14 @@
-MarkabyScaffold
+Description
 ===============
 
-Introduction goes here.
+This plugin is replicates the base Rails scaffolding but produces views in Markaby instead of ERB.
+It creates a MarkabyHelper class as a starting point for writing your own Markaby helpers.
+It also monkey patches Rails 2.0.2 to fix an error specific to Markaby and Rails 2.0.2.
+Requires that Markaby plugin is installed.
 
+Examples
+=============
 
-Example
-=======
-
-Example goes here.
-
-
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+./script/generate markaby_scaffold post # no attributes, view will be anemic
+./script/generate markaby_scaffold post title:string body:text published:boolean
+./script/generate markaby_scaffold purchase order_id:integer amount:decimal
