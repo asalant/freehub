@@ -1,4 +1,4 @@
-h1 'New user'
+h1 'Editing user'
 
 error_messages_for :user
 
@@ -18,9 +18,9 @@ form_for @user do |f|
   labeled_input 'Confirm Password', :for => :password_confirmation do
     f.password_field :password_confirmation
   end
-  p do
-    submit_tag 'Sign up'
-  end
+  p { f.submit "Update"  }
 end
 
+link_to 'Show', @user
+text ' | '
 link_to 'Back', users_path

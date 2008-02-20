@@ -1,0 +1,24 @@
+h1 "Listing users"
+
+table do
+  tr do
+    th { 'Name' }
+    th { 'Email' }
+    th { 'Login' }
+  end
+
+  for user in @users
+    tr do
+      td { user.name }
+      td { user.email }
+      td { user.login }
+      td { link_to 'Show', user }
+      td { link_to 'Edit', edit_user_path(user) }
+      td { link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete }
+    end
+  end
+end
+
+br
+
+link_to 'New user', new_user_path

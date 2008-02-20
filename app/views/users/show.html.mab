@@ -1,0 +1,7 @@
+labeled_value 'Name', @user.name
+labeled_value 'Email', @user.email
+labeled_value 'Login', @user.login
+
+link_to 'Edit', edit_user_path(@user)
+text ' | '
+link_to 'Back', users_path
