@@ -14,10 +14,3 @@ test:
   username: root
   password:
   host: 127.0.0.1
-
-production:
-  adapter: mysql
-  database: freehub_for_all_production
-  username: root
-  password:
-  host: 127.0.0.1
