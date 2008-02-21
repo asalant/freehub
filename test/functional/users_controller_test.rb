@@ -52,6 +52,28 @@ class UsersControllerTest < Test::Unit::TestCase
       assert_response :success
     end
   end
+  
+  def test_should_activate_user
+    assert_nil User.authenticate('mechanic', 'test')
+    get :activate, :activation_code => users(:mechanic).activation_code
+    assert_redirected_to '/'
+    assert_not_nil flash[:notice]
+    assert_equal users(:mechanic), User.authenticate('mechanic', 'test')
+  end
+  
+  def test_should_not_activate_user_without_key
+    get :activate
+    assert_nil flash[:notice]
+  rescue ActionController::RoutingError
+    # in the event your routes deny this, we'll just bow out gracefully.
+  end
+
+  def test_should_not_activate_user_with_blank_key
+    get :activate, :activation_code => ''
+    assert_nil flash[:notice]
+  rescue ActionController::RoutingError
+    # well played, sir
+  end
 
   def test_should_get_index
     get :index
@@ -86,7 +108,7 @@ class UsersControllerTest < Test::Unit::TestCase
 
     assert_redirected_to users_path
   end
-  
+
 
   protected
     def create_user(options = {})

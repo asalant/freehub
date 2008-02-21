@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 3) do
     t.integer  "organization_id"
   end
 
-  add_index "people", ["organization_id"], :name => "fk_people_organization"
+  add_index "people", ["organization_id"], :name => "fk_users_organization"
 
   create_table "users", :force => true do |t|
     t.string   "login"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(:version => 3) do
     t.string   "salt",                      :limit => 40
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
+    t.string   "activation_code",           :limit => 40
+    t.datetime "activated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"
