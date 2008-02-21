@@ -1,15 +1,19 @@
+h1 'Log In'
+
 form_tag session_path do
-  labeled_input 'Login', :for => :login do
-    text_field_tag 'login'
-  end
-  labeled_input 'Password', :for => :password do
-    text_field_tag 'password'
-  end
-  p do
-    label 'Remember me:', :for => :remember_me
-    check_box_tag 'remember_me'
-  end
-  p do
-    submit_tag 'Log in'
+  capture do
+    labeled_input 'Login', :for => :login do
+      text_field_tag 'login'
+    end
+    labeled_input 'Password', :for => :password do
+      text_field_tag 'password'
+    end
+    p do
+      label 'Remember me:', :for => :remember_me
+      check_box_tag 'remember_me'
+    end
+    p do
+      submit_tag 'Log in'
+    end
   end
 end
