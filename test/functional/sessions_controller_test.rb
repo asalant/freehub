@@ -1,6 +1,17 @@
 require File.dirname(__FILE__) + '/../test_helper'
+require 'sessions_controller'
 
-class SessionsControllerTest < ActionController::TestCase
+# Re-raise errors caught by the controller.
+class SessionsController; def rescue_action(e) raise e end; end
+
+class SessionsControllerTest < Test::Unit::TestCase
+  fixtures :users
+
+  def setup
+    @controller = SessionsController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+  end
 
   def test_should_login_and_redirect
     post :create, :login => 'greeter', :password => 'test'

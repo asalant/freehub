@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
 
   # Authenticate
-  #before_filter :login_from_cookie, :login_required, :store_current_user
+  before_filter :login_from_cookie, :login_required
+  #before_filter :store_current_user
 
   # Root object for nested resources
   before_filter :resolve_organization

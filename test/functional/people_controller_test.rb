@@ -1,6 +1,19 @@
 require File.dirname(__FILE__) + '/../test_helper'
+require 'people_controller'
 
-class PeopleControllerTest < ActionController::TestCase
+# Re-raise errors caught by the controller.
+class PeopleController; def rescue_action(e) raise e end; end
+
+class PeopleControllerTest < Test::Unit::TestCase
+  fixtures :organizations, :people
+
+  def setup
+    @controller = PeopleController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    login_as 'greeter'
+  end
+
   def test_should_get_index
     get :index, :organization_key => 'sfbk'
     assert_response :success

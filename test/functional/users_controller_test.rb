@@ -1,6 +1,18 @@
 require File.dirname(__FILE__) + '/../test_helper'
+require 'users_controller'
 
-class UsersControllerTest < ActionController::TestCase
+# Re-raise errors caught by the controller.
+class UsersController; def rescue_action(e) raise e end; end
+
+class UsersControllerTest < Test::Unit::TestCase
+  fixtures :users
+
+  def setup
+    @controller = UsersController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+    login_as 'greeter'
+  end
 
   def test_should_allow_signup
     assert_difference 'User.count' do
