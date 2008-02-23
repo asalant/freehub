@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  skip_before_filter :login_required, :only => [:new, :create, :activate]
+  
   # render new.rhtml
   def new
   end
@@ -29,6 +31,7 @@ class UsersController < ApplicationController
     end
     redirect_back_or_default('/')
   end
+
   # GET /users
   # GET /users.xml
   def index

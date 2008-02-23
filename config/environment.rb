@@ -59,4 +59,6 @@ Rails::Initializer.run do |config|
 
   # Observer for user activation emails
   config.active_record.observers = :user_observer
+
+  SITE_URL = "http://localhost:3000"
 end

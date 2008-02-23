@@ -5,6 +5,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
 
   map.resource :session
+  
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
 
   map.connect ':organization_key', :controller => 'organizations', :action => 'show'
   map.connect ':organization_key/edit', :controller => 'organizations', :action => 'edit'

@@ -1,7 +1,7 @@
 text <<EOF
-{@user.login}, welcome to Freehub!
+#{@user.login}, welcome to Freehub!
 
 Your account has been activated.
 
-@url
+#{@url}
 EOF
