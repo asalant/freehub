@@ -1,0 +1,10 @@
+#organization_header {
+}
+#application_header {
+  border-bottom: 1px solid black;
+}
+
+#user_status {
+  padding-bottom: 2px;
+  text-align: right;
+}

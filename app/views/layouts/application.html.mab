@@ -2,13 +2,17 @@ html do
   head do
     title "#{controller.controller_name.singularize.titleize} #{action_name.titleize} on Freehub"
     stylesheet_link_tag 'scaffold'
+    stylesheet_link_tag 'application'
   end
   body do
-    h1 do
-      link_to @organization.name, organization_path(:id => @organization)
-      text " on Freehub"
-    end if @organization && !@organization.new_record?
-    hr
+    div.application_header! do
+      if @organization && !@organization.new_record?
+        organization_header @organization
+      else
+        h1 "Welcome to Freehub"
+      end
+      user_status(current_user) if logged_in?
+    end
     p flash[:notice], :style => "color: green"
     self << content_for_layout
   end

@@ -1,4 +1,7 @@
 class OrganizationsController < ApplicationController
+
+  before_filter :find_id_by_key
+  
   # GET /organizations
   # GET /organizations.xml
   def index
@@ -80,6 +83,14 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(organizations_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  private
+
+  def find_id_by_key
+    if params[:organization_key]
+      params[:id] = Organization.find_by_key(params[:organization_key]).id
     end
   end
 end

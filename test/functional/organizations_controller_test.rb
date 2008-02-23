@@ -27,7 +27,7 @@ class OrganizationsControllerTest < Test::Unit::TestCase
 
   def test_should_create_organization
     assert_difference('Organization.count') do
-      post :create, :organization => { :name => 'SFBK'}
+      post :create, :organization => { :name => 'Davis Bike Church', :key => 'dbc'}
     end
 
     assert_equal 'Pacific', assigns(:organization).timezone
@@ -37,6 +37,11 @@ class OrganizationsControllerTest < Test::Unit::TestCase
 
   def test_should_show_organization
     get :show, :id => organizations(:sfbk).id
+    assert_response :success
+  end
+
+  def test_should_show_organization_by_key
+    get :show, :organization_key => 'sfbk'
     assert_response :success
   end
 
