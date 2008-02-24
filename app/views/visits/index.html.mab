@@ -10,7 +10,7 @@ table do
     tr do
       td { visit.datetime }
       td { visit.note }
-      td { link_to 'Show', visit_pathX(:id => visit) }
+      td { link_to 'Show', visit_path(:id => visit) }
       td { link_to 'Edit', edit_visit_path(:id => visit) }
       td { link_to 'Destroy', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete }
     end
