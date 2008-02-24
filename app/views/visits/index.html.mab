@@ -20,6 +20,11 @@ table do
   end
 end
 
+div.paginating_links do
+  text 'More: '
+  paginating_links(@visits)
+end
+
 br
 
 link_to 'New visit', new_visit_path

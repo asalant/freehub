@@ -1,8 +1,15 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class VisitTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+
+  def test_find_by_person
+    assert_equal 2, Visit.find_by_person(people(:mary)).size
+    assert_equal visits(:mary_2), Visit.find_by_person(people(:mary)).to_a[0]
+    assert_equal visits(:mary_1), Visit.find_by_person(people(:mary)).to_a[1]
+  end
+
+  def test_find_by_person_paged
+    assert_equal 100, Visit.find_by_person(people(:daryl)).size
+    assert_equal 100, Visit.find_by_person(people(:daryl), :current => 2, :size => 20).size
   end
 end
