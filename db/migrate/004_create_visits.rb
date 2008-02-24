@@ -2,6 +2,7 @@ class CreateVisits < ActiveRecord::Migration
   def self.up
     create_table :visits do |t|
       t.datetime :datetime
+      t.boolean :volunteer
       t.text :note
 
       t.timestamps

@@ -1,4 +1,5 @@
 labeled_value 'Datetime', @visit.datetime
+labeled_value 'Volunteer', @visit.volunteer?
 labeled_value 'Note', @visit.note
 labeled_value 'Person', @visit.person.name
 

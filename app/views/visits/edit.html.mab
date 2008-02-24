@@ -6,6 +6,9 @@ form_for @visit, :url => visit_path do |f|
   labeled_input'Datetime', :for => :datetime do
     f.datetime_select :datetime
   end
+  labeled_input'Volunteer', :for => :volunteer do
+    f.check_box :volunteer
+  end
   labeled_input'Note', :for => :note do
     f.text_area :note
   end

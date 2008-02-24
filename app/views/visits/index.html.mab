@@ -6,12 +6,14 @@ end
 table do
   tr do
     th { 'Datetime' }
+    th { 'Volunteer' }
     th { 'Note' }
   end
 
   for visit in @visits
     tr do
       td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+      td { visit.volunteer? }
       td.note { visit.note }
       td { link_to 'Show', visit_path(:id => visit) }
       td { link_to 'Edit', edit_visit_path(:id => visit) }

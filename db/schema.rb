@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 4) do
 
   create_table "visits", :force => true do |t|
     t.datetime "datetime"
+    t.boolean  "volunteer"
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
