@@ -20,9 +20,9 @@ h2 'Visits History'
 
 visits = Visit.find_by_person(@person, :size => 4)
 if visits.empty?
-  text 'No past visits.'
+  div.list_status 'No past visits.'
 else
-  text "Showing #{visits.to_a.size} of #{visits.size} total visits."
+  div.list_status "Showing #{visits.to_a.size} of #{visits.size} total visits."
   table do
     for visit in visits
       tr do

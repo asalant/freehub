@@ -6,6 +6,10 @@ td.note {
   width: 300px;
 }
 
+.list_status {
+  font-style: italic;
+}
+
 #organization_header {
 }
 
