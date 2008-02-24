@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+mary_1:
+  datetime: 2008-02-01 18:01:00
+  note:
+  person: mary
+
+mary_2:
+  datetime: 2008-02-02 18:02:00
+  note: 
+  person: mary

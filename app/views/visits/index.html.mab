@@ -1,0 +1,22 @@
+h1 "Listing visits for #{@person.name}"
+
+table do
+  tr do
+    th { 'Datetime' }
+    th { 'Note' }
+  end
+
+  for visit in @visits
+    tr do
+      td { visit.datetime }
+      td { visit.note }
+      td { link_to 'Show', visit_pathX(:id => visit) }
+      td { link_to 'Edit', edit_visit_path(:id => visit) }
+      td { link_to 'Destroy', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete }
+    end
+  end
+end
+
+br
+
+link_to 'New visit', new_visit_path
