@@ -18,11 +18,11 @@ link_to 'Back', people_path
 
 h2 'Visits History'
 
-if @person.visits.empty?
+visits = Visit.find_by_person(@person, :size => 4)
+if visits.empty?
   text 'No past visits.'
 else
-  visits = @person.visits.first(4)
-  text "Showing #{visits.size} of #{@person.visits.size} total visits."
+  text "Showing #{visits.to_a.size} of #{visits.size} total visits."
   table do
     for visit in visits
       tr do
