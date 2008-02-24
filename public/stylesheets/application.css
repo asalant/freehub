@@ -1,5 +1,14 @@
+tr {
+  vertical-align: top;
+}
+
+td.note {
+  width: 300px;
+}
+
 #organization_header {
 }
+
 #application_header {
   border-bottom: 1px solid black;
 }

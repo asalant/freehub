@@ -8,8 +8,8 @@ table do
 
   for visit in @visits
     tr do
-      td { visit.datetime }
-      td { visit.note }
+      td { "#{time_ago_in_words(visit.datetime)} ago (#{datetime_short(visit.datetime)})"  }
+      td.note { visit.note }
       td { link_to 'Show', visit_path(:id => visit) }
       td { link_to 'Edit', edit_visit_path(:id => visit) }
       td { link_to 'Destroy', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete }

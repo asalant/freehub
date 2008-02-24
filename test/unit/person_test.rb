@@ -11,4 +11,9 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 'greeter', person.created_by.login
     assert_equal 'greeter', person.updated_by.login
   end
+
+  def test_visits_order
+    assert_equal visits(:mary_2), people(:mary).visits[0]
+    assert_equal visits(:mary_1), people(:mary).visits[1]
+  end
 end

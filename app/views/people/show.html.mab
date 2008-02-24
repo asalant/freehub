@@ -1,5 +1,5 @@
-labeled_value 'First name', @person.first_name
-labeled_value 'Last name', @person.last_name
+h1 @person.name
+
 labeled_value 'Street1', @person.street1
 labeled_value 'Street2', @person.street2
 labeled_value 'City', @person.city
@@ -15,5 +15,16 @@ labeled_value 'Updated by', @person.updated_by.nil? ? '' : link_to(@person.updat
 link_to 'Edit', edit_person_path(:id => @person)
 text ' | '
 link_to 'Back', people_path
-text ' | '
-link_to 'Visits', visits_path(:organization_key => @organization.key, :person_id => @person)
+
+h2 'Latest Visits'
+
+table do
+  for visit in @person.visits.last(4)
+    tr do
+      td { "#{time_ago_in_words(visit.datetime)} ago (#{datetime_short(visit.datetime)})"  }
+      td.note { visit.note }
+    end
+  end
+end
+
+link_to 'All visits', visits_path(:organization_key => @organization.key, :person_id => @person)
