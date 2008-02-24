@@ -18,6 +18,7 @@ class VisitsControllerTest < Test::Unit::TestCase
     get :index, :organization_key => 'sfbk', :person_id => people(:mary)
     assert_response :success
     assert_not_nil assigns(:visits)
+    assert_equal 2, assigns(:visits).size
   end
 
   def test_should_get_new

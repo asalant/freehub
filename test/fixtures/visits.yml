@@ -10,3 +10,9 @@ mary_2:
   datetime: 2008-02-02 18:02:00
   note: 
   person: mary
+  
+<% (1..100).each do |count| %>
+daryl_<%= count %>:
+  datetime: <%= DateTime.parse('2008-02-02 18:02:00').advance(:hours => count * -16) %>
+  person: daryl
+<% end %>
