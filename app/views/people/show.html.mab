@@ -19,9 +19,9 @@ link_to 'Back', people_path
 h2 'Latest Visits'
 
 table do
-  for visit in @person.visits.last(4)
+  for visit in @person.visits.first(4)
     tr do
-      td { "#{time_ago_in_words(visit.datetime)} ago (#{datetime_short(visit.datetime)})"  }
+      td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
       td.note { visit.note }
     end
   end

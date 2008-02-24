@@ -11,7 +11,7 @@ table do
 
   for visit in @visits
     tr do
-      td { "#{time_ago_in_words(visit.datetime)} ago (#{datetime_short(visit.datetime)})"  }
+      td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
       td.note { visit.note }
       td { link_to 'Show', visit_path(:id => visit) }
       td { link_to 'Edit', edit_visit_path(:id => visit) }
