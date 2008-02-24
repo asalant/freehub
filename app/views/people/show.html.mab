@@ -15,3 +15,5 @@ labeled_value 'Updated by', @person.updated_by.nil? ? '' : link_to(@person.updat
 link_to 'Edit', edit_person_path(:id => @person)
 text ' | '
 link_to 'Back', people_path
+text ' | '
+link_to 'Visits', visits_path(:organization_key => @organization.key, :person_id => @person)

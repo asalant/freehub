@@ -15,12 +15,16 @@ class ApplicationController < ActionController::Base
   before_filter :login_from_cookie, :login_required, :store_current_user
 
   # Root object for nested resources
-  before_filter :resolve_organization
+  before_filter :resolve_organization, :resolve_person
 
   private
 
   def resolve_organization
     @organization = Organization.find_by_key(params[:organization_key]) if params[:organization_key]
+  end
+
+  def resolve_person
+    @person = Person.find(params[:person_id]) if params[:person_id]
   end
 
   def store_current_user

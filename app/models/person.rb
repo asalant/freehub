@@ -5,4 +5,8 @@ class Person < ActiveRecord::Base
   
   validates_presence_of :first_name, :organization_id
   #todo: validate unique shop_id, first name, last name, email
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

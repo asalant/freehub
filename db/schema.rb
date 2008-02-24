@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(:version => 4) do
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
@@ -60,5 +60,19 @@ ActiveRecord::Schema.define(:version => 3) do
   end
 
   add_index "users", ["organization_id"], :name => "fk_users_organization"
+
+  create_table "visits", :force => true do |t|
+    t.datetime "datetime"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.integer  "person_id"
+  end
+
+  add_index "visits", ["created_by_id"], :name => "fk_visits_created_by"
+  add_index "visits", ["updated_by_id"], :name => "fk_visits_updated_by"
+  add_index "visits", ["person_id"], :name => "fk_visits_person"
 
 end
