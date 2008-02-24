@@ -35,10 +35,14 @@ ActiveRecord::Schema.define(:version => 3) do
     t.boolean  "staff"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
     t.integer  "organization_id"
   end
 
-  add_index "people", ["organization_id"], :name => "fk_users_organization"
+  add_index "people", ["created_by_id"], :name => "fk_people_created_by"
+  add_index "people", ["updated_by_id"], :name => "fk_people_updated_by"
+  add_index "people", ["organization_id"], :name => "fk_people_organization"
 
   create_table "users", :force => true do |t|
     t.string   "login"
@@ -54,5 +58,7 @@ ActiveRecord::Schema.define(:version => 3) do
     t.datetime "updated_at"
     t.integer  "organization_id"
   end
+
+  add_index "users", ["organization_id"], :name => "fk_users_organization"
 
 end

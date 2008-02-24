@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_filter :login_required, :only => [:new, :create, :activate]
+  skip_before_filter :login_from_cookie, :login_required, :only => [:new, :create, :activate]
   
   # render new.rhtml
   def new

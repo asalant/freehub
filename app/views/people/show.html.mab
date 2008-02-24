@@ -9,6 +9,8 @@ labeled_value 'Country', @person.country
 labeled_value 'Email', @person.email
 labeled_value 'Phone', @person.phone
 labeled_value 'Staff', @person.staff
+labeled_value 'Created by', @person.created_by.nil? ? '' : link_to(@person.created_by.login, user_path(@person.created_by))
+labeled_value 'Updated by', @person.updated_by.nil? ? '' : link_to(@person.updated_by.login, user_path(@person.updated_by))
 
 link_to 'Edit', edit_person_path(:id => @person)
 text ' | '

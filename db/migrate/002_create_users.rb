@@ -16,11 +16,11 @@ class CreateUsers < ActiveRecord::Migration
       t.references :organization      
     end
 
-    execute "ALTER TABLE people ADD CONSTRAINT fk_users_organization FOREIGN KEY (organization_id) REFERENCES users(id)"
+    execute "ALTER TABLE users ADD CONSTRAINT fk_users_organization FOREIGN KEY (organization_id) REFERENCES users(id)"
   end
 
   def self.down
-    execute "ALTER TABLE people DROP FOREIGN KEY fk_users_organization"
+    execute "ALTER TABLE users DROP FOREIGN KEY fk_users_organization"
     drop_table "users"
   end
 end

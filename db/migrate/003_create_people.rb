@@ -14,14 +14,21 @@ class CreatePeople < ActiveRecord::Migration
       t.boolean :staff
 
       t.timestamps
-
+      t.references :created_by
+      t.references :updated_by
       t.references :organization
     end
 
+    execute "ALTER TABLE people ADD CONSTRAINT fk_people_created_by FOREIGN KEY (created_by_id) REFERENCES users(id)"
+    execute "ALTER TABLE people ADD CONSTRAINT fk_people_updated_by FOREIGN KEY (updated_by_id) REFERENCES users(id)"
     execute "ALTER TABLE people ADD CONSTRAINT fk_people_organization FOREIGN KEY (organization_id) REFERENCES organizations(id)"
   end
 
   def self.down
+    execute "ALTER TABLE people DROP FOREIGN KEY fk_people_created_by"
+    execute "ALTER TABLE people DROP FOREIGN KEY fk_people_updated_by"
+    execute "ALTER TABLE people DROP FOREIGN KEY fk_people_organization"
+
     drop_table :people
   end
 end
