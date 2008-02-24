@@ -1,4 +1,7 @@
-h1 "Listing visits for #{@person.name}"
+h1 do
+  text "Listing visits for "
+  link_to @person.name, person_path(:id => @person)
+end
 
 table do
   tr do
