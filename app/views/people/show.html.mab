@@ -16,15 +16,21 @@ link_to 'Edit', edit_person_path(:id => @person)
 text ' | '
 link_to 'Back', people_path
 
-h2 'Latest Visits'
+h2 'Visits History'
 
-table do
-  for visit in @person.visits.first(4)
-    tr do
-      td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
-      td.note { visit.note }
+if @person.visits.empty?
+  text 'No past visits.'
+else
+  visits = @person.visits.first(4)
+  text "Showing #{visits.size} of #{@person.visits.size} total visits."
+  table do
+    for visit in visits
+      tr do
+        td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+        td.note { visit.note }
+      end
     end
   end
-end
 
-link_to 'All visits', visits_path(:organization_key => @organization.key, :person_id => @person)
+  link_to 'All visits', visits_path(:organization_key => @organization.key, :person_id => @person)
+end
