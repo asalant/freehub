@@ -2,6 +2,6 @@
 module ApplicationHelper
 
   def datetime_short(datetime)
-    datetime.strftime("%Y-%m-%d %I:%M %p")
+    datetime.strftime("%a %b %d %Y %I:%M %p")
   end
 end

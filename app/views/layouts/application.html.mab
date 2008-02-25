@@ -6,12 +6,12 @@ html do
   end
   body do
     div.application_header! do
+      user_status(current_user) if logged_in?
       if @organization && !@organization.new_record?
         organization_header @organization
       else
         h1 "Welcome to Freehub"
       end
-      user_status(current_user) if logged_in?
     end
     p flash[:notice], :style => "color: green"
     self << content_for_layout

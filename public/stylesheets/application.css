@@ -18,6 +18,5 @@ td.note {
 }
 
 #user_status {
-  padding-bottom: 2px;
-  text-align: right;
+  float: right;
 }
