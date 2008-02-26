@@ -34,8 +34,23 @@ class ReportsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_report
-    get :show, :organization_key => 'sfbk', :id => reports(:visit).id
+    get :show, :organization_key => 'sfbk', :id => reports(:visit).id, :page => 2
     assert_response :success
+    assert_not_nil assigns(:visits)
+    assert_equal 102, assigns(:visits).size
+    assert_equal 10, assigns(:visits).to_a.size
+    assert_equal 2, assigns(:visits).page
+  end
+
+
+  def test_should_show_visits
+    get :visits, :organization_key => 'sfbk', :page => 2
+    assert_response :success
+    assert_not_nil assigns(:report)
+    assert_not_nil assigns(:visits)
+    assert_equal 102, assigns(:visits).size
+    assert_equal 10, assigns(:visits).to_a.size
+    assert_equal 2, assigns(:visits).page
   end
 
   def test_should_get_edit

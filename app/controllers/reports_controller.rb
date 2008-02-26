@@ -15,9 +15,24 @@ class ReportsController < ApplicationController
   def show
     @report = Report.find(params[:id])
 
+    if @report.target == 'Visit'
+      visits
+      return
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @report }
+    end
+  end
+
+  def visits
+    @report ||= Report.new(:target => 'Visit')
+    @visits = Visit.for_organization(@organization).paginated(:page => params[:page])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @visits }
     end
   end
 

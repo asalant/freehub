@@ -2,20 +2,26 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class VisitTest < ActiveSupport::TestCase
 
-  def test_find_by_person
-    assert_equal 2, Visit.find_by_person(people(:mary)).size
-    assert_equal visits(:mary_2), Visit.find_by_person(people(:mary)).to_a[0]
-    assert_equal visits(:mary_1), Visit.find_by_person(people(:mary)).to_a[1]
+  def test_for_person
+    assert_equal 2, Visit.for_person(people(:mary)).size
+    assert_equal visits(:mary_2), Visit.for_person(people(:mary))[0]
+    assert_equal visits(:mary_1), Visit.for_person(people(:mary))[1]
   end
 
-  def test_find_by_person_paged
-    assert_equal 100, Visit.find_by_person(people(:daryl)).size
-    assert_equal 100, Visit.find_by_person(people(:daryl), :current => 2, :size => 20).size
+  def test_for_person_paged
+    assert_equal 100, Visit.for_person(people(:daryl)).size
+    assert_equal 100, Visit.for_person(people(:daryl)).paginated(:current => 2, :size => 20).size
   end
 
-  def test_find_by_organization_paged
-    assert_equal 102, Visit.find_by_organization(organizations(:sfbk)).size
-    assert_equal 102, Visit.find_by_organization(organizations(:sfbk), :current => 2, :size => 20).size
-    assert_equal 20, Visit.find_by_organization(organizations(:sfbk), :current => 2, :size => 20).to_a.size
+  def test_for_organization_paged
+    assert_equal 102, Visit.for_organization(organizations(:sfbk)).paginated.size
+    assert_equal 102, Visit.for_organization(organizations(:sfbk)).paginated(:current => 2, :size => 20).size
+    assert_equal 20, Visit.for_organization(organizations(:sfbk)).paginated(:current => 2, :size => 20).to_a.size
+  end
+
+  def test_for_organization_in_date_range
+    from, to = Date.new(2008,2,1), Date.new(2008,2,3)
+    visits = Visit.for_organization(organizations(:sfbk)).in_date_range(from, to)
+    assert_equal 4, visits.size
   end
 end

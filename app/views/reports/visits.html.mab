@@ -1,0 +1,27 @@
+labeled_value 'Target', @report.target
+labeled_value 'Date from', @report.date_from
+labeled_value 'Date to', @report.date_to
+
+table do
+  tr do
+    th { 'Person' }
+    th { 'Datetime' }
+    th { 'Volunteer' }
+    th { 'Note' }
+  end
+
+  for visit in @visits
+    tr do
+      td { link_to(visit.person.name, person_path(:id => visit.person))  }
+      td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+      td { visit.volunteer? }
+      td.note { visit.note }
+      #td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit), :confirm => 'Are you sure?', :method => :delete }
+    end
+  end
+end
+
+div.paginating_links do
+  text 'More: '
+  paginating_links(@visits)
+end

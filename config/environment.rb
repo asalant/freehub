@@ -27,6 +27,9 @@ Rails::Initializer.run do |config|
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  config.load_paths += Dir["#{RAILS_ROOT}/vendor/gems/**"].map do |dir|
+    File.directory?(lib = "#{dir}/lib") ? lib : dir
+  end
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
@@ -60,5 +63,8 @@ Rails::Initializer.run do |config|
   # Observer for user activation emails
   config.active_record.observers = :user_observer
 
+
   SITE_URL = "http://localhost:3000"
 end
+
+require 'has_finder'

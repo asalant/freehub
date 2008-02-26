@@ -10,11 +10,14 @@ td.note {
   font-style: italic;
 }
 
+#application_header {
+  border-bottom: 1px solid black;
+}
+
 #organization_header {
 }
 
-#application_header {
-  border-bottom: 1px solid black;
+#organization_nav {
 }
 
 #user_status {
