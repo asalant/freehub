@@ -2,7 +2,7 @@ h1 'Editing person'
 
 error_messages_for :person
 
-form_for @person, :url => person_path do |f|
+form_for @person, :url => person_path(:id => @person) do |f|
   labeled_input'First name', :for => :first_name do
     f.text_field :first_name
   end

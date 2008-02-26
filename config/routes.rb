@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :organizations
 
+  map.resources :reports, :path_prefix => '/:organization_key'
   map.resources :people, :path_prefix => '/:organization_key'
   map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
 
