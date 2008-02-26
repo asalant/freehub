@@ -1,0 +1,24 @@
+h1 "Listing reports"
+
+table do
+  tr do
+    th { 'Target' }
+    th { 'Date from' }
+    th { 'Date to' }
+  end
+
+  for report in @reports
+    tr do
+      td { report.target }
+      td { report.date_from }
+      td { report.date_to }
+      td { link_to 'Show', report_path(:id => report) }
+      td { link_to 'Edit', edit_report_path(:id => report) }
+      td { link_to 'Destroy', report_path(:id => report), :confirm => 'Are you sure?', :method => :delete }
+    end
+  end
+end
+
+br
+
+link_to 'New report', new_report_path

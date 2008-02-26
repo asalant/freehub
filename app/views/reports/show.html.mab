@@ -1,0 +1,7 @@
+labeled_value 'Target', @report.target
+labeled_value 'Date from', @report.date_from
+labeled_value 'Date to', @report.date_to
+
+link_to 'Edit', edit_report_path(:id => @report)
+text ' | '
+link_to 'Back', reports_path
