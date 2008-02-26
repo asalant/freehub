@@ -14,14 +14,14 @@ class VisitsControllerTest < Test::Unit::TestCase
     login_as 'greeter'
   end
 
-  def test_should_get_index
+  def test_should_get_index_for_person
     get :index, :organization_key => 'sfbk', :person_id => people(:mary)
     assert_response :success
     assert_not_nil assigns(:visits)
     assert_equal 2, assigns(:visits).size
   end
 
-  def test_should_get_index_paged
+  def test_should_get_index_for_person_paged
     get :index, :organization_key => 'sfbk', :person_id => people(:daryl), :page => 2
     assert_response :success
     assert_not_nil assigns(:visits)

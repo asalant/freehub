@@ -2,7 +2,11 @@ class VisitsController < ApplicationController
   # GET /visits
   # GET /visits.xml
   def index
-    @visits = Visit.find_by_person(@person.id, :current => params[:page])
+    if @person
+      @visits = Visit.find_by_person(@person.id, :current => params[:page])
+    else
+      @visits = Visit.find_by_organization(@organization.id, :current => params[:page])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
