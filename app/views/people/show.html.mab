@@ -18,7 +18,7 @@ link_to 'Back', people_path
 
 h2 'Visits History'
 
-visits = Visit.find_by_person(@person, :size => 4)
+visits = Visit.for_person(@person).paginated(:size => 4)
 if visits.empty?
   div.list_status 'No past visits.'
 else
