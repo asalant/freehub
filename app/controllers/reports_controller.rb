@@ -28,7 +28,7 @@ class ReportsController < ApplicationController
 
   def visits
     @report ||= Report.new(:target => 'Visit')
-    @visits = Visit.for_organization(@organization).paginated(:page => params[:page])
+    @visits = Visit.for_organization(@organization).paginated(params)
 
     respond_to do |format|
       format.html # show.html.erb

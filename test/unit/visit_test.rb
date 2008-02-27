@@ -24,4 +24,9 @@ class VisitTest < ActiveSupport::TestCase
     visits = Visit.for_organization(organizations(:sfbk)).in_date_range(from, to)
     assert_equal 4, visits.size
   end
+
+  def test_paginated_association
+    assert_equal 20, people(:daryl).visits.paginated.to_a.size
+    assert_equal 4, people(:daryl).visits.paginated(:size => 4).to_a.size
+  end
 end
