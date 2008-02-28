@@ -2,7 +2,7 @@ class VisitsController < ApplicationController
   # GET /visits
   # GET /visits.xml
   def index
-    @visits = Visit.for_person(@person).paginated(:page => params[:page])
+    @visits = Visit.for_person(@person).paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

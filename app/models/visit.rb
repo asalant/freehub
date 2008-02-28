@@ -1,7 +1,7 @@
 class Visit < ActiveRecord::Base
   belongs_to :person
 
-  acts_as_paginated :size => 20
+  acts_as_paginated
   
   has_finder :for_person, lambda { |person| {
       :conditions => { :person_id => person},
@@ -17,5 +17,4 @@ class Visit < ActiveRecord::Base
   has_finder :in_date_range, lambda { |from,to| {
       :conditions => [ "visits.datetime >= ? and visits.datetime <= ?", from, to ]
   } }
-  
 end
