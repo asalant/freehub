@@ -1,8 +1,13 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
 
+  belongs_to :organization
+  
   # Authenticated user
   cattr_accessor :current_user
+
+  # Authorization plugin
+  acts_as_authorized_user
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password

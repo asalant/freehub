@@ -5,6 +5,9 @@
 #   acts_as_paginated
 #   acts_as_paginated :page => 2, size => 10
 #
+# Install:
+#   Save this file as lib/acts_as_paginated.rb and require 'acts_as_paginated'
+#   in environment.rb.
 module HasFinder
   module PaginatingFind #:nodoc:
 
