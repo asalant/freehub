@@ -10,7 +10,7 @@ mary:
   email: mary@example.com
   phone: 
   staff: false
-  organization: sfbk
+  organization_id: 1
 
 daryl:
   first_name: Daryl
@@ -24,7 +24,7 @@ daryl:
   email:
   phone:
   staff: false
-  organization: sfbk
+  organization_id: 1
 
 victor:
   first_name: Victor
@@ -38,4 +38,4 @@ victor:
   email:
   phone:
   staff: false
-  organization: sfbk
+  organization_id: 1

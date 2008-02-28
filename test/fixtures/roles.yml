@@ -1,4 +1,9 @@
-first:
+admin:
   id: 1
-another:
+  name: admin
+  
+sfbk_manager:
   id: 2
+  name: manager
+  authorizable_Type: Organization
+  authorizable_id: 1

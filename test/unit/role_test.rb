@@ -1,10 +1,16 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class RoleTest < Test::Unit::TestCase
-  fixtures :roles
+class RoleTest < ActiveSupport::TestCase
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_admin_role
+    assert users(:admin).is_admin?
+    assert !users(:sfbk).is_admin?
   end
+
+  def test_manager_role
+    assert users(:sfbk).is_manager?
+    assert users(:sfbk).is_manager_of?(organizations(:sfbk))
+    assert !users(:sfbk).is_manager_of?(organizations(:scbc))
+  end
+
 end

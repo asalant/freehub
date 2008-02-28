@@ -13,12 +13,14 @@ class VisitTest < ActiveSupport::TestCase
     assert_equal 100, Visit.for_person(people(:daryl)).paginate(:current => 2, :size => 20).size
   end
 
+
   def test_for_organization_paged
     assert_equal 102, Visit.for_organization(organizations(:sfbk)).paginate.size
     assert_equal 20, Visit.for_organization(organizations(:sfbk)).paginate.to_a.size
     assert_equal 102, Visit.for_organization(organizations(:sfbk)).paginate(:current => 2, :size => 10).size
     assert_equal 10, Visit.for_organization(organizations(:sfbk)).paginate(:current => 2, :size => 10).to_a.size
   end
+
 
   def test_for_organization_in_date_range
     from, to = Date.new(2008,2,1), Date.new(2008,2,3)
@@ -30,4 +32,5 @@ class VisitTest < ActiveSupport::TestCase
     assert_equal 20, people(:daryl).visits.paginate.to_a.size
     assert_equal 4, people(:daryl).visits.paginate(:size => 4).to_a.size
   end
+
 end
