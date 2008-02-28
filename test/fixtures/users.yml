@@ -1,5 +1,4 @@
 greeter:
-  id: 1
   login: greeter
   email: greeter@example.com
   name: Gary Greeter
@@ -10,7 +9,6 @@ greeter:
   activated_at: <%= 5.days.ago.to_s :db %>
 
 sfbk:
-  id: 2
   login: sfbk
   email: sfbk@example.com
   name: SFBK Admin
@@ -20,9 +18,9 @@ sfbk:
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
   activated_at: <%= 5.days.ago.to_s :db %>
   organization: sfbk
+  roles: sfbk_manager
 
 mechanic:
-  id: 3
   login: mechanic
   email: mechanic@example.com
   name: Marty Mechanic
@@ -32,7 +30,6 @@ mechanic:
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9a
 
 admin:
-  id: 4
   login: admin
   email: admin@example.com
   name: Freehub Admin
@@ -41,5 +38,6 @@ admin:
   created_at: <%= 1.days.ago.to_s :db %>
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
   activated_at: <%= 5.days.ago.to_s :db %>
+  roles: admin
 
 

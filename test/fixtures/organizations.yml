@@ -1,11 +1,9 @@
 sfbk:
-  id: 1
   name: San Francisco Bike Kitchen
   key: sfbk
   timezone: Pacific
 
 scbc:
-  id: 2
   name: Santa Cruz Bike Church
   key: scbc
   timezone: Pacific

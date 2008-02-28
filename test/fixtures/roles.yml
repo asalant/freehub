@@ -1,9 +1,6 @@
 admin:
-  id: 1
   name: admin
   
 sfbk_manager:
-  id: 2
   name: manager
-  authorizable_Type: Organization
-  authorizable_id: 1
+  authorizable: sfbk (Organization)
