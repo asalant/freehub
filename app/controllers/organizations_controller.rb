@@ -1,7 +1,7 @@
 class OrganizationsController < ApplicationController
 
   before_filter :find_id_by_key
-  
+    
   # GET /organizations
   # GET /organizations.xml
   def index

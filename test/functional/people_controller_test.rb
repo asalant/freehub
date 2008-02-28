@@ -48,7 +48,7 @@ class PeopleControllerTest < Test::Unit::TestCase
   def test_should_update_person
     put :update, :organization_key => 'sfbk', :id => people(:mary).id, :person => { }
 
-    assert_equal organizations(:sfbk), assigns(:person).reload.organization
+    assert_equal organizations(:sfbk), assigns(:person).organization
     
     assert_redirected_to person_path(:organization_key => 'sfbk', :id => assigns(:person))
   end
@@ -59,5 +59,12 @@ class PeopleControllerTest < Test::Unit::TestCase
     end
 
     assert_redirected_to people_path
+  end
+
+  def test_requires_manager
+    login_as 'scbc'
+    get :show, :organization_key => 'sfbk', :id => people(:mary).id
+
+    assert_redirected_to new_session_path
   end
 end

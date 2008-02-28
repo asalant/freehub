@@ -1,4 +1,7 @@
 class PeopleController < ApplicationController
+
+  permit "manager of :organization"
+
   # GET /people
   # GET /people.xml
   def index
