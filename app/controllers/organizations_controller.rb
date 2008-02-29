@@ -2,7 +2,8 @@ class OrganizationsController < ApplicationController
 
   before_filter :assign_id_param, :resolve_organization_by_id, :except => [ :index, :new, :create ] 
 
-  permit "manager of :organization", :except => [ :index, :show, :new, :create ] 
+  permit "admin", :only => [ :destroy ]
+  permit "manager of :organization", :only => [ :edit, :update ] 
     
   # GET /organizations
   # GET /organizations.xml
@@ -18,8 +19,6 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.xml
   def show
-    @organization = Organization.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @organization }
@@ -39,7 +38,6 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1/edit
   def edit
-    @organization = Organization.find(params[:id])
   end
 
   # POST /organizations
@@ -62,8 +60,6 @@ class OrganizationsController < ApplicationController
   # PUT /organizations/1
   # PUT /organizations/1.xml
   def update
-    @organization = Organization.find(params[:id])
-
     respond_to do |format|
       if @organization.update_attributes(params[:organization])
         flash[:notice] = 'Organization was successfully updated.'
@@ -79,7 +75,6 @@ class OrganizationsController < ApplicationController
   # DELETE /organizations/1
   # DELETE /organizations/1.xml
   def destroy
-    @organization = Organization.find(params[:id])
     @organization.destroy
 
     respond_to do |format|
@@ -91,7 +86,7 @@ class OrganizationsController < ApplicationController
   private
 
   def resolve_organization_by_id
-    @organization ||= Organization.find(params[:id]) if params[:id]
+    @organization = Organization.find(params[:id]) if params[:id]
   end
 
   def assign_id_param

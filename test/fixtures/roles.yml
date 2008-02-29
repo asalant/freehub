@@ -1,6 +1,18 @@
 admin:
   name: admin
-  
+
 sfbk_manager:
   name: manager
   authorizable: sfbk (Organization)
+
+sfbk_user:
+  name: user
+  authorizable: sfbk (Organization)
+
+scbc_manager:
+  name: manager
+  authorizable: scbc (Organization)
+
+scbc_user:
+  name: user
+  authorizable: scbc (Organization)

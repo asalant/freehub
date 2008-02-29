@@ -7,7 +7,7 @@ greeter:
   created_at: <%= 5.days.ago.to_s :db %>
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
   activated_at: <%= 5.days.ago.to_s :db %>
-  roles: sfbk_manager
+  roles: sfbk_user
 
 sfbk:
   login: sfbk
@@ -19,7 +19,7 @@ sfbk:
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9b
   activated_at: <%= 5.days.ago.to_s :db %>
   organization: sfbk
-  roles: sfbk_manager
+  roles: sfbk_user, sfbk_manager
 
 mechanic:
   login: mechanic
@@ -29,6 +29,7 @@ mechanic:
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.days.ago.to_s :db %>
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9a
+  roles: sfbk_user
 
 scbc:
   login: scbc
@@ -38,6 +39,7 @@ scbc:
   crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at: <%= 1.days.ago.to_s :db %>
   activation_code: 8f24789ae988411ccf33ab0c30fe9106fab32e9a
+  roles: scbc_manager
 
 admin:
   login: admin

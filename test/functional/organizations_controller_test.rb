@@ -11,7 +11,7 @@ class OrganizationsControllerTest < Test::Unit::TestCase
     @controller = OrganizationsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    login_as 'greeter'
+    login_as 'sfbk'
   end
       
   def test_should_get_index
@@ -56,6 +56,7 @@ class OrganizationsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_destroy_organization
+    login_as 'admin'
     assert_difference('Organization.count', -1) do
       delete :destroy, :id => organizations(:sfbk)
     end
@@ -65,7 +66,6 @@ class OrganizationsControllerTest < Test::Unit::TestCase
 
   def test_authorization
     login_as 'scbc'
-    
     [:index, :new, :show].each do |action|
       get action, :id => organizations(:sfbk)
       assert_response :success
