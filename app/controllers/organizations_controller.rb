@@ -1,6 +1,8 @@
 class OrganizationsController < ApplicationController
 
-  before_filter :find_id_by_key
+  before_filter :assign_id_param, :resolve_organization_by_id, :except => [ :index, :new, :create ] 
+
+  permit "manager of :organization", :except => [ :index, :show, :new, :create ] 
     
   # GET /organizations
   # GET /organizations.xml
@@ -88,9 +90,11 @@ class OrganizationsController < ApplicationController
 
   private
 
-  def find_id_by_key
-    if params[:organization_key]
-      params[:id] = Organization.find_by_key(params[:organization_key]).id
-    end
+  def resolve_organization_by_id
+    @organization ||= Organization.find(params[:id]) if params[:id]
+  end
+
+  def assign_id_param
+    params[:id] ||= @organization.id if @organization
   end
 end

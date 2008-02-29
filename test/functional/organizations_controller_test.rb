@@ -5,7 +5,7 @@ require 'organizations_controller'
 class OrganizationsController; def rescue_action(e) raise e end; end
 
 class OrganizationsControllerTest < Test::Unit::TestCase
-  fixtures :organizations
+  fixtures :users, :roles, :organizations
 
   def setup
     @controller = OrganizationsController.new
@@ -36,7 +36,7 @@ class OrganizationsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_organization
-    get :show, :id => organizations(:sfbk).id
+    get :show, :id => organizations(:sfbk)
     assert_response :success
   end
 
@@ -46,20 +46,33 @@ class OrganizationsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_edit
-    get :edit, :id => organizations(:sfbk).id
+    get :edit, :id => organizations(:sfbk)
     assert_response :success
   end
 
   def test_should_update_organization
-    put :update, :id => organizations(:sfbk).id, :organization => { }
+    put :update, :id => organizations(:sfbk), :organization => { }
     assert_redirected_to organization_path(assigns(:organization))
   end
 
   def test_should_destroy_organization
     assert_difference('Organization.count', -1) do
-      delete :destroy, :id => organizations(:sfbk).id
+      delete :destroy, :id => organizations(:sfbk)
     end
 
     assert_redirected_to organizations_path
+  end
+
+  def test_authorization
+    login_as 'scbc'
+    
+    [:index, :new, :show].each do |action|
+      get action, :id => organizations(:sfbk)
+      assert_response :success
+    end
+    [:edit].each do |action|
+      get action, :id => organizations(:sfbk)
+      assert_redirected_to new_session_path
+    end
   end
 end
