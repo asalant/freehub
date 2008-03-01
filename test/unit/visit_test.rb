@@ -31,7 +31,6 @@ class VisitTest < ActiveSupport::TestCase
     assert_equal 4, people(:daryl).visits.paginate(:size => 4).to_a.size
   end
 
-
   def test_chain_finders
     finder_chain = { :for_organization => organizations(:sfbk),
                      :after => Date.new(2008,2,1),
@@ -40,5 +39,7 @@ class VisitTest < ActiveSupport::TestCase
     assert_equal 4, Visit.chain_finders(finder_chain).paginate.size
   end
 
-
+  def test_to_csv
+    assert_equal 'Mary,Member,mary@example.com,,,Fri Feb 01 18:01:00 -0800 2008,', visits(:mary_1).to_csv
+  end
 end
