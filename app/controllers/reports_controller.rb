@@ -27,9 +27,15 @@ class ReportsController < ApplicationController
   end
 
   def visits
-    @report ||= Report.new(:target => 'Visit')
-    @visits = Visit.for_organization(@organization).paginate(params)
-
+    @report ||= params[:report].nil? ?
+            Report.new(:target => 'Visit', :date_from => Date.today, :date_to => Date.tomorrow) : 
+            Report.new(params[:report])
+    if (@report.date_from && @report.date_to)
+      @visits = Visit.for_organization(@organization).after(@report.date_from).before(@report.date_to).paginate(params)
+    else
+      @visits = Visit.for_organization(@organization).paginate(params)
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @visits }

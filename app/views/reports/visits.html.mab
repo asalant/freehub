@@ -1,27 +1,40 @@
-labeled_value 'Target', @report.target
-labeled_value 'Date from', @report.date_from
-labeled_value 'Date to', @report.date_to
+h1 'Listing visits'
 
-table do
-  tr do
-    th { 'Person' }
-    th { 'Datetime' }
-    th { 'Volunteer' }
-    th { 'Note' }
+form_for @report, :url => visits_report_path, :method => :get  do |f|
+  labeled_input'Date from', :for => :date_from do
+    f.date_select :date_from
   end
+  labeled_input'Date to', :for => :date_to do
+    f.date_select :date_to
+  end
+  p { f.submit "Update"  }
+end
 
-  for visit in @visits
+if @visits.empty?
+  div.list_status 'No visits for date range.'
+else
+  table do
     tr do
-      td { link_to(visit.person.name, person_path(:id => visit.person))  }
-      td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
-      td { visit.volunteer? }
-      td.note { visit.note }
-      #td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit), :confirm => 'Are you sure?', :method => :delete }
+      th { 'Person' }
+      th { 'Datetime' }
+      th { 'Volunteer' }
+      th { 'Note' }
+    end
+
+    for visit in @visits
+      tr do
+        td { link_to(visit.person.name, person_path(:id => visit.person))  }
+        td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+        td { visit.volunteer? }
+        td.note { visit.note }
+        #td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit), :confirm => 'Are you sure?', :method => :delete }
+      end
     end
   end
+
+  div.paginating_links do
+    text 'More: '
+    paginating_links(@visits)
+  end
 end
 
-div.paginating_links do
-  text 'More: '
-  paginating_links(@visits)
-end

@@ -22,13 +22,30 @@ class VisitTest < ActiveSupport::TestCase
 
   def test_for_organization_in_date_range
     from, to = Date.new(2008,2,1), Date.new(2008,2,3)
-    visits = Visit.for_organization(organizations(:sfbk)).in_date_range(from, to)
-    assert_equal 4, visits.size
+    assert_equal 98, Visit.for_organization(organizations(:sfbk)).before(from).size
+    assert_equal 4, Visit.for_organization(organizations(:sfbk)).after(from).before(to).size
   end
 
   def test_paginated_association
     assert_equal 20, people(:daryl).visits.paginate.to_a.size
     assert_equal 4, people(:daryl).visits.paginate(:size => 4).to_a.size
   end
+
+
+=begin
+
+  def test_finder_chain
+    finder_chain = { :for_organization => organizations(:sfbk),
+                     :after => Date.new(2008,2,1),
+                     :before => Date.new(2008,2,3) }
+    target = Visit
+    visits = finder_chain.each do |name, arg|
+      target = target.send name, arg
+    end
+
+    assert_equal 4, visits.size
+  end
+=end
+
 
 end

@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :people, :path_prefix => '/:organization_key'
   map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
 
-  map.connect ':organization_key/reports/visits', :controller => 'reports', :action => 'visits'
+  map.visits_report ':organization_key/reports/visits', :controller => 'reports', :action => 'visits'
   map.resources :reports, :path_prefix => '/:organization_key'
   
   map.resources :users

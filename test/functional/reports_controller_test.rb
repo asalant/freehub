@@ -34,7 +34,7 @@ class ReportsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_report
-    get :show, :organization_key => 'sfbk', :id => reports(:visit).id, :page => 2, :size => 10
+    get :show, :organization_key => 'sfbk', :id => reports(:visit), :page => 2, :size => 10
     assert_response :success
     assert_not_nil assigns(:visits)
     assert_equal 102, assigns(:visits).size
@@ -44,7 +44,9 @@ class ReportsControllerTest < Test::Unit::TestCase
 
 
   def test_should_show_visits
-    get :visits, :organization_key => 'sfbk', :page => 2
+    get :visits, :organization_key => 'sfbk',
+            :report => { :target => 'Visit', :date_from => Date.new(2007,1,1), :date_to => Date.new(2009,1,1) },
+            :page => 2
     assert_response :success
     assert_not_nil assigns(:report)
     assert_not_nil assigns(:visits)
@@ -54,18 +56,18 @@ class ReportsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_edit
-    get :edit, :organization_key => 'sfbk', :id => reports(:visit).id
+    get :edit, :organization_key => 'sfbk', :id => reports(:visit)
     assert_response :success
   end
 
   def test_should_update_report
-    put :update, :organization_key => 'sfbk', :id => reports(:visit).id, :report => { }
+    put :update, :organization_key => 'sfbk', :id => reports(:visit), :report => { }
     assert_redirected_to report_path(:id => assigns(:report))
   end
 
   def test_should_destroy_report
     assert_difference('Report.count', -1) do
-      delete :destroy, :organization_key => 'sfbk', :id => reports(:visit).id
+      delete :destroy, :organization_key => 'sfbk', :id => reports(:visit)
     end
 
     assert_redirected_to reports_path

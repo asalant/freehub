@@ -14,7 +14,11 @@ class Visit < ActiveRecord::Base
       :order => 'datetime DESC'
   } }
 
-  has_finder :in_date_range, lambda { |from,to| {
-      :conditions => [ "visits.datetime >= ? and visits.datetime <= ?", from, to ]
+  has_finder :after, lambda { |date| {
+      :conditions => [ "visits.datetime >= ?", date ]
+  } }
+
+  has_finder :before, lambda { |date| {
+      :conditions => [ "visits.datetime <= ?", date ]
   } }
 end
