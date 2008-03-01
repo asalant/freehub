@@ -31,9 +31,8 @@ class Visit < ActiveRecord::Base
   end
 
   # todo: http://wiki.rubyonrails.org/rails/pages/HowtoExportDataAsCSV
-  def to_csv(options={ :person => { :include => [ :first_name, :last_name, :email, :phone, :postal_code ] },
-                       :visit => { :include => [ :datetime, :volunteered ] }})
-    CSV.generate_line(person.attributes.values_at(*options[:person][:include].collect { |entry| entry.to_s }) +
-                      attributes.values_at(*options[:visit][:include].collect { |entry| entry.to_s }))
+  def to_csv
+    CSV.generate_line(person.attributes.values_at(*%w{first_name last_name email phone postal_code}) +
+                      attributes.values_at(*%w{datetime volunteered}))
   end
 end
