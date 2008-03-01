@@ -30,11 +30,11 @@ class ReportsController < ApplicationController
     @report ||= params[:report].nil? ?
             Report.new(:target => 'Visit', :date_from => Date.today, :date_to => Date.tomorrow) : 
             Report.new(params[:report])
-    if (@report.date_from && @report.date_to)
-      @visits = Visit.for_organization(@organization).after(@report.date_from).before(@report.date_to).paginate(params)
-    else
-      @visits = Visit.for_organization(@organization).paginate(params)
-    end
+    
+    finders = { :for_organization => @organization }
+    finders[:after] = @report.date_from if @report.date_from
+    finders[:before] = @report.date_to if @report.date_to
+    @visits = Visit.chain_finders(finders).paginate(params)
     
     respond_to do |format|
       format.html # show.html.erb

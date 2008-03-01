@@ -32,20 +32,13 @@ class VisitTest < ActiveSupport::TestCase
   end
 
 
-=begin
-
-  def test_finder_chain
+  def test_chain_finders
     finder_chain = { :for_organization => organizations(:sfbk),
                      :after => Date.new(2008,2,1),
                      :before => Date.new(2008,2,3) }
-    target = Visit
-    visits = finder_chain.each do |name, arg|
-      target = target.send name, arg
-    end
 
-    assert_equal 4, visits.size
+    assert_equal 4, Visit.chain_finders(finder_chain).paginate.size
   end
-=end
 
 
 end

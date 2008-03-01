@@ -21,4 +21,12 @@ class Visit < ActiveRecord::Base
   has_finder :before, lambda { |date| {
       :conditions => [ "visits.datetime <= ?", date ]
   } }
+
+  def self.chain_finders(finders={})
+    target = self
+    finders.each do |name, args|
+      target = target.send name, args
+    end
+    target
+  end
 end

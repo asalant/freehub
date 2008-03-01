@@ -1,6 +1,6 @@
 h1 'Listing visits'
 
-form_for @report, :url => visits_report_path, :method => :get  do |f|
+form_for @report, :url => visits_report_path, :html => { :method => :get } do |f|
   labeled_input'Date from', :for => :date_from do
     f.date_select :date_from
   end
@@ -27,7 +27,7 @@ else
         td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
         td { visit.volunteer? }
         td.note { visit.note }
-        #td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit), :confirm => 'Are you sure?', :method => :delete }
+        td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit), :confirm => 'Are you sure?', :method => :delete }
       end
     end
   end
