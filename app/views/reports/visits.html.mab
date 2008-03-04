@@ -34,11 +34,11 @@ else
       td :colspan => 5 do
         div.paginating_links do
           text 'More: '
-          paginating_links(@visits)
+          paginating_links(@visits, :params => { :report => params[:report] } )
         end
 
         div.export do
-          link_to_function 'Export all', "window.location = '#{visits_report_path}?' + $('new_report').serialize() + '&format=csv'"
+          link_to 'Export all', visits_report_path(:params => { :report => params[:report], :format => 'csv' })
         end
       end
     end
