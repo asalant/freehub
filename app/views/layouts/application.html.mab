@@ -1,6 +1,7 @@
 html do
   head do
     title "#{controller.controller_name.singularize.titleize} #{action_name.titleize} on Freehub"
+    javascript_include_tag :all
     stylesheet_link_tag 'scaffold'
     stylesheet_link_tag 'application'
   end

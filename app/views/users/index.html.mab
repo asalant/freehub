@@ -8,7 +8,7 @@ table do
   end
 
   for user in @users
-    tr do
+    tr :class => cycle('odd','even') do
       td { user.name }
       td { user.email }
       td { user.login }

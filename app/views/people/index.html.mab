@@ -13,7 +13,7 @@ table do
   end
 
   for person in @people
-    tr do
+    tr :class => cycle('odd','even') do
       td { person.first_name }
       td { person.last_name }
       td { person.city }

@@ -7,7 +7,7 @@ table do
   end
 
   for organization in @organizations
-    tr do
+    tr :class => cycle('odd','even') do
       td { organization.name }
       td { organization.timezone }
       td { link_to 'Show', organization }

@@ -45,14 +45,30 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_should_show_visits
     get :visits, :organization_key => 'sfbk',
-            :report => { :target => 'Visit', :date_from => Date.new(2007,1,1), :date_to => Date.new(2009,1,1) },
-            :page => 2
+        :report => { :target => 'Visit', :date_from => Date.new(2007,1,1), :date_to => Date.new(2009,1,1) },
+        :page => 2
     assert_response :success
     assert_not_nil assigns(:report)
     assert_not_nil assigns(:visits)
     assert_equal 102, assigns(:visits).size
     assert_equal 20, assigns(:visits).to_a.size
     assert_equal 2, assigns(:visits).page
+  end
+
+  def test_visits_csv
+    get :visits, :organization_key => 'sfbk',
+        :report => { :target => 'Visit', :date_from => Date.new(2007,1,1), :date_to => Date.new(2009,1,1) },
+        :format => 'csv'
+    assert_response :success
+    assert_not_nil assigns(:visits)
+    assert_equal 102, assigns(:visits).size
+
+    output = StringIO.new
+    output.binmode
+    assert_nothing_raised { @response.body.call(@response, output) }
+    lines = output.string.split("\n")
+    assert_equal assigns(:visits).size + 1, lines.size
+    assert_equal 'first_name,last_name,email,phone,postal_code,datetime,volunteered', lines[0]
   end
 
   def test_should_get_edit

@@ -25,7 +25,7 @@ else
   div.list_status "Showing #{visits.to_a.size} of #{visits.size} total visits."
   table do
     for visit in visits
-      tr do
+      tr :class => cycle('odd','even') do
         td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
         td.note { visit.note }
       end

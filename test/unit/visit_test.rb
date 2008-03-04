@@ -40,6 +40,6 @@ class VisitTest < ActiveSupport::TestCase
   end
 
   def test_to_csv
-    assert_equal 'Mary,Member,mary@example.com,,,Fri Feb 01 18:01:00 -0800 2008,', visits(:mary_1).to_csv
+    assert_equal 'Mary,Member,mary@example.com,,,2008-02-01 18:01,', visits(:mary_1).to_csv
   end
 end

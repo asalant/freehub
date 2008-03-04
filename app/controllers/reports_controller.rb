@@ -1,3 +1,5 @@
+require 'csv'
+
 class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.xml
@@ -34,11 +36,19 @@ class ReportsController < ApplicationController
     finders = { :for_organization => @organization }
     finders[:after] = @report.date_from if @report.date_from
     finders[:before] = @report.date_to if @report.date_to
-    @visits = Visit.chain_finders(finders).paginate(params)
+    @visits = Visit.chain_finders(finders)
     
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { @visits = @visits.paginate(params) }
       format.xml  { render :xml => @visits }
+      format.csv do
+        stream_csv (params[:action] + ".csv") do |output|
+          output << CSV.generate_line(Visit::CSV_FIELDS[:person] + Visit::CSV_FIELDS[:self])
+          @visits.each do |visit|
+            output << "\n#{visit.to_csv}" 
+          end
+        end
+      end
     end
   end
 
@@ -102,5 +112,25 @@ class ReportsController < ApplicationController
       format.html { redirect_to(reports_url) }
       format.xml  { head :ok }
     end
+  end
+
+   private
+  
+  # http://wiki.rubyonrails.org/rails/pages/HowtoExportDataAsCSV
+  def stream_csv(filename)
+    if request.env['HTTP_USER_AGENT'] =~ /msie/i
+      headers['Pragma'] = 'public'
+      headers["Content-type"] = "text/plain"
+      headers['Cache-Control'] = 'no-cache, must-revalidate, post-check=0, pre-check=0'
+      headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
+      headers['Expires'] = "0"
+    else
+      headers["Content-Type"] ||= 'text/csv'
+      headers["Content-Disposition"] = "attachment; filename=\"#{filename}\""
+    end
+
+    render :text => lambda { |response, output|
+      yield output
+    }
   end
 end

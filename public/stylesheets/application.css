@@ -23,3 +23,22 @@ td.note {
 #user_status {
   float: right;
 }
+
+.list_controls {
+  background-color: lightgray;
+}
+
+tr.even { background: #ffffff; }
+tr.odd  { background: #efefef; }
+
+
+
+.paginating_links {
+  float: left;
+  padding: 3px;
+}
+
+.export {
+  text-align: right;
+  padding: 3px;
+}
