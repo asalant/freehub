@@ -42,7 +42,7 @@ class ReportsController < ApplicationController
       format.html { @visits = @visits.paginate(params) }
       format.xml  { render :xml => @visits }
       format.csv do
-        stream_csv (params[:action] + ".csv") do |output|
+        stream_csv(params[:action] + ".csv") do |output|
           output << CSV.generate_line(Visit::CSV_FIELDS[:person] + Visit::CSV_FIELDS[:self])
           @visits.each do |visit|
             output << "\n#{visit.to_csv}" 
