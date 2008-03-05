@@ -40,7 +40,7 @@ class VisitsControllerTest < Test::Unit::TestCase
     end
     assert_equal people(:mary), assigns(:visit).person
 
-    assert_redirected_to visit_path(:organization_key => 'sfbk', :person_id => people(:mary), :id => assigns(:visit))
+    assert_redirected_to visits_path(:organization_key => 'sfbk', :person_id => people(:mary))
   end
 
   def test_should_show_visit

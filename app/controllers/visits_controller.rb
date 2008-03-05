@@ -46,7 +46,7 @@ class VisitsController < ApplicationController
     respond_to do |format|
       if @visit.save
         flash[:notice] = 'Visit was successfully created.'
-        format.html { redirect_to(visit_path(:id => @visit)) }
+        format.html { redirect_to(visits_path) }
         format.xml  { render :xml => @visit, :status => :created, :location => @visit }
       else
         format.html { render :action => "new" }

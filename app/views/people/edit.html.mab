@@ -9,6 +9,12 @@ form_for @person, :url => person_path(:id => @person) do |f|
   labeled_input'Last name', :for => :last_name do
     f.text_field :last_name
   end
+  labeled_input'Email', :for => :email do
+    f.text_field :email
+  end
+  labeled_input'Phone', :for => :phone do
+    f.text_field :phone
+  end
   labeled_input'Street1', :for => :street1 do
     f.text_field :street1
   end
@@ -26,12 +32,6 @@ form_for @person, :url => person_path(:id => @person) do |f|
   end
   labeled_input'Country', :for => :country do
     f.text_field :country
-  end
-  labeled_input'Email', :for => :email do
-    f.text_field :email
-  end
-  labeled_input'Phone', :for => :phone do
-    f.text_field :phone
   end
   labeled_input'Staff', :for => :staff do
     f.check_box :staff

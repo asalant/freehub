@@ -24,7 +24,6 @@ module MarkabyHelper
     markaby do
       p do
         label label_value, attributes
-        br
         markaby(&block)
       end
     end
@@ -33,10 +32,9 @@ module MarkabyHelper
   # Markaby helper for model values (show)
   def labeled_value(label_value, value)
     markaby do
-      p do
-        b label_value + ': '
-        text value
-      end
+      div.label { "#{label_value} " }
+      span.value { text value }
+      br
     end
   end
 

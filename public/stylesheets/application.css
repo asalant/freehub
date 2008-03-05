@@ -1,3 +1,11 @@
+label, div.label {
+  width: 100px;
+  float:left;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 6px;
+}
+
 tr {
   vertical-align: top;
 }
@@ -41,4 +49,9 @@ tr.odd  { background: #efefef; }
 .export {
   text-align: right;
   padding: 3px;
+}
+
+#signin_form {
+  padding-bottom: 1px;
+  border-bottom: 1px black solid;
 }
