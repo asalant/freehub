@@ -67,4 +67,11 @@ class PeopleControllerTest < Test::Unit::TestCase
 
     assert_redirected_to new_session_path
   end
+
+  def test_auto_complete
+    get :auto_complete_for_person_full_name, :organization_key => 'sfbk', :person => { :full_name => 'ma' }
+    assert_response :success
+    assert_not_nil assigns(:items)
+    assert_equal 1, assigns(:items).size
+  end
 end

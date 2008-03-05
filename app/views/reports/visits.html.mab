@@ -23,7 +23,7 @@ else
 
     for visit in @visits
       tr :class => cycle('odd','even') do
-        td { link_to(visit.person.name, person_path(:id => visit.person))  }
+        td { link_to(visit.person.full_name, person_path(:id => visit.person))  }
         td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
         td { visit.volunteer? }
         td.note { visit.note }

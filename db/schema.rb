@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 6) do
   create_table "people", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "full_name"
     t.string   "street1"
     t.string   "street2"
     t.string   "city"

@@ -1,6 +1,7 @@
 mary:
   first_name: Mary
   last_name: Member
+  full_name: Mary Member
   street1:
   street2:
   city:
@@ -15,6 +16,7 @@ mary:
 daryl:
   first_name: Daryl
   last_name: Dayuse
+  full_name: Daryl Dayuse
   street1: 
   street2:
   city:
@@ -29,6 +31,7 @@ daryl:
 victor:
   first_name: Victor
   last_name: Volunteer
+  full_name: Victor Volunteer
   street1:
   street2:
   city:
@@ -39,3 +42,18 @@ victor:
   phone:
   staff: false
   organization: sfbk
+
+mary_scbc:
+  first_name: Mary
+  last_name: SCBC
+  full_name: Mary SCBC
+  street1:
+  street2:
+  city:
+  state:
+  postal_code:
+  country:
+  email:
+  phone:
+  staff: false
+  organization: scbc

@@ -1,4 +1,4 @@
-h1 @person.name
+h1 @person.full_name
 
 form_for Visit.new, :url => visits_path(:person_id => @person.id), :html => { :id => 'signin_form'} do |f|
   labeled_input 'Note', :for => :visit_note do

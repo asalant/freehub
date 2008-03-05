@@ -86,4 +86,10 @@ class PeopleController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def auto_complete_for_person_full_name
+    @items = Person.for_organization_matching_name(@organization, params[:person][:full_name])
+
+    render :inline => "<%= auto_complete_result @items, 'full_name' %>"
+  end
 end

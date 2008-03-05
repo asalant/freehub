@@ -5,9 +5,20 @@ class Person < ActiveRecord::Base
   has_many :visits, :order => "datetime DESC"
   
   validates_presence_of :first_name, :organization_id
-  #todo: validate unique shop_id, first name, last name, email
+  #todo: should we check for duplicates by validating unique shop_id, first name, last name, email?
 
-  def name
-    "#{first_name} #{last_name}"
+  before_save :update_full_name
+
+  has_finder :for_organization_matching_name, lambda { |organization, name| {
+      :conditions => [ "LOWER(full_name) LIKE :name AND organization_id = :organization",
+              { :name => "%#{name.downcase}%", :organization => organization } ], 
+      :order => "full_name ASC",
+      :limit => 15
+  } }
+
+  private
+
+  def update_full_name
+    self.full_name = [first_name, last_name].reject{|e| e.nil? || e.empty?}.join(' ')
   end
 end
