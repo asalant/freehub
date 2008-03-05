@@ -1,6 +1,6 @@
 h1 @person.full_name
 
-form_for Visit.new, :url => visits_path(:person_id => @person.id), :html => { :id => 'signin_form'} do |f|
+form_for Visit.new, :url => visits_path(:person_id => @person.id) do |f|
   labeled_input 'Note', :for => :visit_note do
     f.text_area :note, :rows => 1
   end
@@ -11,6 +11,8 @@ form_for Visit.new, :url => visits_path(:person_id => @person.id), :html => { :i
     f.submit "Sign In!"
   end
 end
+
+h2 'Person Details'
 
 labeled_value 'Email', @person.email
 labeled_value 'Phone', @person.phone

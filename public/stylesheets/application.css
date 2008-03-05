@@ -50,8 +50,3 @@ tr.odd  { background: #efefef; }
   text-align: right;
   padding: 3px;
 }
-
-#signin_form {
-  padding-bottom: 1px;
-  border-bottom: 1px black solid;
-}
