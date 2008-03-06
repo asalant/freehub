@@ -1,0 +1,11 @@
+membership:
+  name: Membership
+  description: Membership for this shop.
+
+class:
+  name: Class
+  description: A class run by this shop.
+
+digging_rights:
+  name: Digging Rights
+  description: One of everything you can find in the shop to build or fix one bike.

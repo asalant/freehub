@@ -1,0 +1,32 @@
+h1 "Listing services"
+
+table do
+  tr do
+    th { 'Start date' }
+    th { 'End date' }
+    th { 'Paid' }
+    th { 'Volunteered' }
+    th { 'Note' }
+    th { 'Service type' }
+    th { 'Person' }
+  end
+
+  for service in @services
+    tr do
+      td { service.start_date }
+      td { service.end_date }
+      td { service.paid }
+      td { service.volunteered }
+      td { service.note }
+      td { service.service_type }
+      td { service.person }
+      td { link_to 'Show', service }
+      td { link_to 'Edit', edit_service_path(service) }
+      td { link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete }
+    end
+  end
+end
+
+br
+
+link_to 'New service', new_service_path

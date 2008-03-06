@@ -3,6 +3,7 @@ class Person < ActiveRecord::Base
   belongs_to :created_by, :class_name => "User", :foreign_key => "created_by_id"
   belongs_to :updated_by, :class_name => "User", :foreign_key => "updated_by_id"
   has_many :visits, :order => "datetime DESC"
+  has_many :services, :order => "start_date DESC"
   
   validates_presence_of :first_name, :organization_id
   #todo: should we check for duplicates by validating unique shop_id, first name, last name, email?

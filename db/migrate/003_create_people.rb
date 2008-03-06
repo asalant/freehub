@@ -15,9 +15,8 @@ class CreatePeople < ActiveRecord::Migration
       t.boolean :staff
 
       t.timestamps
-      t.references :created_by
-      t.references :updated_by
-      t.references :organization
+      t.references :created_by, :updated_by
+      t.references :organization, :nil => false
     end
 
     execute "ALTER TABLE people ADD CONSTRAINT fk_people_created_by FOREIGN KEY (created_by_id) REFERENCES users(id)"

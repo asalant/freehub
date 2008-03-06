@@ -1,0 +1,6 @@
+labeled_value 'Name', @service_type.name
+labeled_value 'Description', @service_type.description
+
+link_to 'Edit', edit_service_type_path(@service_type)
+text ' | '
+link_to 'Back', service_types_path

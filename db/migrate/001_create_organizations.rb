@@ -1,8 +1,8 @@
 class CreateOrganizations < ActiveRecord::Migration
   def self.up
     create_table :organizations do |t|
-      t.string :name
-      t.string :key
+      t.string :name, :nil => false
+      t.string :key, :nil => false
       t.string :timezone
 
       t.timestamps

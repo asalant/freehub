@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 6) do
+ActiveRecord::Schema.define(:version => 7) do
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
@@ -68,6 +68,32 @@ ActiveRecord::Schema.define(:version => 6) do
     t.datetime "updated_at"
   end
 
+  create_table "service_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "services", :force => true do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "paid"
+    t.boolean  "volunteered"
+    t.text     "note"
+    t.integer  "service_type_id"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+  end
+
+  add_index "services", ["created_by_id"], :name => "fk_services_created_by"
+  add_index "services", ["updated_by_id"], :name => "fk_services_updated_by"
+  add_index "services", ["service_type_id"], :name => "fk_services_service_type"
+  add_index "services", ["person_id"], :name => "fk_services_person"
+
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"
@@ -80,14 +106,11 @@ ActiveRecord::Schema.define(:version => 6) do
     t.datetime "activated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "organization_id"
   end
-
-  add_index "users", ["organization_id"], :name => "fk_users_organization"
 
   create_table "visits", :force => true do |t|
     t.datetime "datetime"
-    t.boolean  "volunteer"
+    t.boolean  "volunteer",     :default => false
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
