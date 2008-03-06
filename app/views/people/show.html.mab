@@ -38,6 +38,10 @@ if visits.empty?
 else
   div.list_status "Showing #{visits.to_a.size} of #{visits.size} total visits."
   table do
+    tr do
+      th { 'When' }
+      th { 'Note' }
+    end
     for visit in visits
       tr :class => cycle('odd','even') do
         td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
@@ -47,4 +51,31 @@ else
   end
 
   link_to 'All visits', visits_path(:organization_key => @organization.key, :person_id => @person)
+end
+
+h2 'Services History'
+
+services = @person.services.paginate(:size => 4)
+if services.empty?
+  div.list_status 'No past services.'
+else
+  div.list_status "Showing #{services.to_a.size} of #{services.size} total services."
+  table do
+    tr do
+      th { 'Service type' }
+      th { 'Start date' }
+      th { 'End date' }
+      th { 'Note' }
+    end
+    for service in services
+      tr :class => cycle('odd','even') do
+        td { service.service_type.name }
+        td { service.start_date }
+        td { service.end_date }
+        td { service.note }
+      end
+    end
+  end
+
+  link_to 'All services', services_path(:organization_key => @organization.key, :person_id => @person)
 end

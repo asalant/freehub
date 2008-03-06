@@ -2,27 +2,25 @@ h1 "Listing services"
 
 table do
   tr do
+    th { 'Service type' }
     th { 'Start date' }
     th { 'End date' }
     th { 'Paid' }
     th { 'Volunteered' }
     th { 'Note' }
-    th { 'Service type' }
-    th { 'Person' }
   end
 
   for service in @services
     tr do
+      td { service.service_type.name }
       td { service.start_date }
       td { service.end_date }
       td { service.paid }
       td { service.volunteered }
       td { service.note }
-      td { service.service_type }
-      td { service.person }
-      td { link_to 'Show', service }
-      td { link_to 'Edit', edit_service_path(service) }
-      td { link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete }
+      td { link_to 'Show', service_path(:id => service) }
+      td { link_to 'Edit', edit_service_path(:id => service) }
+      td { link_to 'Destroy', service_path(:id => service), :confirm => 'Are you sure?', :method => :delete }
     end
   end
 end

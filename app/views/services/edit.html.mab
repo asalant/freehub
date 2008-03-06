@@ -2,7 +2,11 @@ h1 'Editing service'
 
 error_messages_for :service
 
-form_for @service do |f|
+form_for @service, :url => service_path do |f|
+  labeled_input 'Service type', :for => :service_type_id do
+    @service_types = ServiceType.find(:all, :order => "name").map { |type| [type.name, type.id]}
+    f.select(:service_type_id, @service_types)
+  end
   labeled_input'Start date', :for => :start_date do
     f.date_select :start_date
   end
@@ -16,17 +20,11 @@ form_for @service do |f|
     f.check_box :volunteered
   end
   labeled_input'Note', :for => :note do
-    f.text_area :note
-  end
-  labeled_input'Service type', :for => :service_type do
-    f.text_field :service_type
-  end
-  labeled_input'Person', :for => :person do
-    f.text_field :person
+    f.text_area :note, :rows => 2
   end
   p { f.submit "Update"  }
 end
 
-link_to 'Show', @service
+link_to 'Show', service_path(:id => @service)
 text ' | '
 link_to 'Back', services_path

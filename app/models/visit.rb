@@ -1,7 +1,7 @@
 class Visit < ActiveRecord::Base
   belongs_to :person
 
-  validates_presence_of :person, :datetime
+  validates_presence_of :person_id, :datetime
 
   acts_as_paginated
   

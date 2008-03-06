@@ -6,6 +6,6 @@ labeled_value 'Note', @service.note
 labeled_value 'Service type', @service.service_type
 labeled_value 'Person', @service.person
 
-link_to 'Edit', edit_service_path(@service)
+link_to 'Edit', edit_service_path(:id => @service)
 text ' | '
 link_to 'Back', services_path

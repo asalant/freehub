@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :people, :path_prefix => '/:organization_key', :collection => { :auto_complete_for_person_full_name => :get }
   map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
-  map.resources :services
+  map.resources :services, :path_prefix => '/:organization_key/people/:person_id'
 
   map.visits_report ':organization_key/reports/visits', :controller => 'reports', :action => 'visits'
   map.resources :reports, :path_prefix => '/:organization_key'
