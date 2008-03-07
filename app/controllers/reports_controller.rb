@@ -53,7 +53,7 @@ class ReportsController < ApplicationController
   end
 
   def signin
-    @day = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    @day = parse_date_params(params.values_at(:year, :month, :day))
     @visits = Visit.for_organization(@organization).after(@day).before(@day.tomorrow)
 
     respond_to do |format|
@@ -142,5 +142,10 @@ class ReportsController < ApplicationController
     render :text => lambda { |response, output|
       yield output
     }
+  end
+
+  # year, month, day
+  def parse_date_params(args)
+    Date.new args[0].to_i, args[1].to_i, args[2].to_i
   end
 end
