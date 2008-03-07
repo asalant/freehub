@@ -1,3 +1,7 @@
+body {
+  width: 1000px;
+}
+
 label, div.label {
   width: 100px;
   float:left;
@@ -47,4 +51,10 @@ tr.odd  { background: #efefef; }
 .export {
   text-align: right;
   padding: 3px;
+}
+
+#notice {
+  color:green;
+  padding: 3px;
+  float: right;
 }

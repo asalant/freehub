@@ -9,7 +9,7 @@ module ApplicationHelper
         end
       div.organization_nav! do
         b 'Report: '
-        link_to('Today', signin_path(:organization_key => @organization.key))
+        link_to('Today', signin_today_path(:organization_key => @organization.key))
         text ' | '
         link_to('Visits', visits_report_path(:organization_key => @organization.key))
         text ' | '
@@ -52,5 +52,9 @@ END
 
   def date_long(datetime)
     datetime.strftime("%a %B %d %Y")
+  end
+
+  def signin_today_path(options={})
+    signin_path({:year => Date.today.year, :month => Date.today.month, :day => Date.today.day}.merge(options))
   end
 end

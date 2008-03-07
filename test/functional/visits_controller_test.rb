@@ -45,33 +45,44 @@ class VisitsControllerTest < Test::Unit::TestCase
 
   def test_should_create_visit_with_destination
     assert_difference('Visit.count') do
-      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :visit => { }, :destination => 'signin'
+      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :visit => { },
+              :destination => "/sfbk/signin/#{Date.today.year}/#{Date.today.month}/#{Date.today.day}"
     end
     assert_equal people(:mary), assigns(:visit).person
 
-    assert_redirected_to signin_path
+    assert_redirected_to "/sfbk/signin/#{Date.today.year}/#{Date.today.month}/#{Date.today.day}"
   end
 
   def test_should_show_visit
-    get :show, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1).id
+    get :show, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1)
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1).id
+    get :edit, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1)
     assert_response :success
   end
 
   def test_should_update_visit
-    put :update, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1).id, :visit => { }
+    put :update, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1), :visit => { }
     assert_redirected_to visit_path(:id => assigns(:visit))
   end
 
   def test_should_destroy_visit
     assert_difference('Visit.count', -1) do
-      delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1).id
+      delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1)
     end
 
     assert_redirected_to visits_path
+  end
+
+  def test_should_destroy_visit_with_destination
+    visit = visits(:mary_1)
+    assert_difference('Visit.count', -1) do
+      delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => visit,
+              :destination => "/sfbk/signin/#{visit.datetime.year}/#{visit.datetime.month}/#{visit.datetime.day}"
+    end
+
+    assert_redirected_to signin_path(:year => visit.datetime.year, :month => visit.datetime.month, :day => visit.datetime.day)
   end
 end

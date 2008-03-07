@@ -46,14 +46,7 @@ class VisitsController < ApplicationController
     respond_to do |format|
       if @visit.save
         flash[:notice] = 'Visit was successfully created.'
-        format.html do
-          case params[:destination]
-          when 'signin'
-            redirect_to(signin_path)
-          else
-            redirect_to(visits_path)
-          end
-        end
+        format.html { redirect_to(params[:destination] || visits_path) }
         format.xml  { render :xml => @visit, :status => :created, :location => @visit }
       else
         format.html { render :action => "new" }
@@ -84,9 +77,10 @@ class VisitsController < ApplicationController
   def destroy
     @visit = Visit.find(params[:id])
     @visit.destroy
+    flash[:notice] = 'Visit was successfully removed.'
 
     respond_to do |format|
-      format.html { redirect_to(visits_url) }
+      format.html { redirect_to(params[:destination] || visits_path) }
       format.xml  { head :ok }
     end
   end

@@ -14,7 +14,15 @@ html do
         h1 "Welcome to Freehub"
       end
     end
-    p flash[:notice], :style => "color: green"
+    if flash[:notice]
+      p.notice! flash[:notice]
+      script <<END
+Event.observe(window,'load',function()
+{
+   new Effect.Highlight('notice', { duration: 1 });
+});
+END
+    end
     self << content_for_layout
   end
 end
