@@ -34,7 +34,7 @@ else
         div.paginating_links do
           text 'More: '
           paginating_links(@visits, :params => { :report => params[:report] } )
-        end
+        end if @visits.next_page?
 
         div.export do
           link_to 'Export all', visits_report_path(:params => { :report => params[:report], :format => 'csv' })

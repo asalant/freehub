@@ -69,6 +69,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     lines = output.string.split("\n")
     assert_equal assigns(:visits).size + 1, lines.size
     assert_equal 'first_name,last_name,email,phone,postal_code,datetime,volunteered', lines[0]
+    assert_equal "attachment; filename=\"sfbk_visits_2007-01-01_2009-01-01.csv\"", @response.headers['Content-Disposition']
   end
 
   def test_signin
