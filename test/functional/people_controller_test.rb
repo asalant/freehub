@@ -18,6 +18,7 @@ class PeopleControllerTest < Test::Unit::TestCase
     get :index, :organization_key => 'sfbk'
     assert_response :success
     assert_not_nil assigns(:people)
+    assert_equal 4, assigns(:people).size
   end
 
   def test_should_get_new
@@ -69,7 +70,7 @@ class PeopleControllerTest < Test::Unit::TestCase
   end
 
   def test_auto_complete
-    get :auto_complete_for_person_full_name, :organization_key => 'sfbk', :person => { :full_name => 'ma' }
+    get :auto_complete_for_person_full_name, :organization_key => 'sfbk', :person => { :full_name => 'memb' }
     assert_response :success
     assert_not_nil assigns(:items)
     assert_equal 1, assigns(:items).size

@@ -26,6 +26,6 @@ class PersonTest < ActiveSupport::TestCase
 
   def test_for_organization_matching_name
     people = Person.for_organization_matching_name(organizations(:sfbk), 'ma')
-    assert_equal 1, people.size
+    assert_equal 2, people.size
   end
 end

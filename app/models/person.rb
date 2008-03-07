@@ -10,6 +10,11 @@ class Person < ActiveRecord::Base
 
   before_save :update_full_name
 
+  has_finder :for_organization, lambda { |organization| {
+      :conditions => { :organization_id => organization },
+      :order => 'last_name ASC'
+  } }
+
   has_finder :for_organization_matching_name, lambda { |organization, name| {
       :conditions => [ "LOWER(full_name) LIKE :name AND organization_id = :organization",
               { :name => "%#{name.downcase}%", :organization => organization } ], 

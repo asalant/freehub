@@ -30,14 +30,14 @@ class ReportsController < ApplicationController
 
   def visits
     @report ||= params[:report].nil? ?
-            Report.new(:target => 'Visit', :date_from => Date.today, :date_to => Date.tomorrow) : 
+            Report.new(:target => 'Visit', :date_from => Date.today, :date_to => Date.tomorrow) :
             Report.new(params[:report])
-    
+
     finders = { :for_organization => @organization }
     finders[:after] = @report.date_from if @report.date_from
     finders[:before] = @report.date_to if @report.date_to
     @visits = Visit.chain_finders(finders)
-    
+
     respond_to do |format|
       format.html { @visits = @visits.paginate(params) }
       format.xml  { render :xml => @visits }
@@ -45,10 +45,20 @@ class ReportsController < ApplicationController
         stream_csv(params[:action] + ".csv") do |output|
           output << CSV.generate_line(Visit::CSV_FIELDS[:person] + Visit::CSV_FIELDS[:self])
           @visits.each do |visit|
-            output << "\n#{visit.to_csv}" 
+            output << "\n#{visit.to_csv}"
           end
         end
       end
+    end
+  end
+
+  def signin
+    @day = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    @visits = Visit.for_organization(@organization).after(@day).before(@day.tomorrow)
+
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @visits }
     end
   end
 

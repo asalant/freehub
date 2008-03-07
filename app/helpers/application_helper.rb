@@ -8,20 +8,26 @@ module ApplicationHelper
         text " on Freehub"
         end
       div.organization_nav! do
-          link_to('Visits', :controller => 'reports', :action => 'visits', :organization_key => @organization.key)
-          text ' | '
-          link_to('People', people_path(:organization_key => organization.key))
-          text ' | Find person: '
-          text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },
-                  :url => auto_complete_for_person_full_name_people_path(:organization_key => organization.key) ,
-                  :method => :get, :min_chars => 2,
-                  :indicator => 'search_status',
-                  :after_update_element => <<END
+        b 'Report: '
+        link_to('Today', signin_path(:organization_key => @organization.key))
+        text ' | '
+        link_to('Visits', visits_report_path(:organization_key => @organization.key))
+        text ' | '
+        b 'People: '
+        link_to('List', people_path(:organization_key => organization.key))
+        text ' | '
+        link_to('Add', new_person_path(:organization_key => organization.key))
+        text ' | Find: '
+        text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },
+                :url => auto_complete_for_person_full_name_people_path(:organization_key => organization.key) ,
+                :method => :get, :min_chars => 2,
+                :indicator => 'search_status',
+                :after_update_element => <<END
 function(element, value) {
   window.location = '#{people_path(:organization_key => organization.key)}/' + value.id;
 }
 END
-        image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'  
+        image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'
       end
     end
   end
@@ -35,8 +41,16 @@ END
       end
     end
   end
-  
+
+  def time_short(datetime)
+    datetime.strftime("%I:%M %p")
+  end
+
   def datetime_short(datetime)
     datetime.strftime("%a %b %d %Y %I:%M %p")
+  end
+
+  def date_long(datetime)
+    datetime.strftime("%a %B %d %Y")
   end
 end

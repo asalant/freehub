@@ -1,0 +1,28 @@
+h1 "Visits for #{Date.today == @day ? 'today' :date_long(@day)}" 
+
+if @visits.empty?
+  div.list_status "No visits for #{@day.to_s(:db)}."
+else
+  table do
+    tr do
+      th { 'Name' }
+      th { 'Type' }
+      th { 'Volunteer' }
+      th { 'Time' }
+      th { 'Note' }
+    end
+
+    for visit in @visits
+      tr :class => cycle('odd','even') do
+        td { link_to(visit.person.full_name, person_path(:id => visit.person))  }
+        td { visit.person.staff? ? 'Staff' : 'Patron'  }
+        td { visit.volunteer? }
+        td { "#{time_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+        td.note { visit.note }
+        td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit), :confirm => 'Are you sure?', :method => :delete }
+      end
+    end
+  end
+
+end
+

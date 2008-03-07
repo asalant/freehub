@@ -9,8 +9,23 @@ mary:
   postal_code:
   country:
   email: mary@example.com
-  phone: 
+  phone:
   staff: false
+  organization: sfbk
+
+marty:
+  first_name: Marty
+  last_name: Mechanic
+  full_name: Marty Mechanic
+  street1:
+  street2:
+  city:
+  state:
+  postal_code:
+  country:
+  email: marty@example.com
+  phone:
+  staff: true
   organization: sfbk
 
 daryl:

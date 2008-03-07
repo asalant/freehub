@@ -43,6 +43,15 @@ class VisitsControllerTest < Test::Unit::TestCase
     assert_redirected_to visits_path
   end
 
+  def test_should_create_visit_with_destination
+    assert_difference('Visit.count') do
+      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :visit => { }, :destination => 'signin'
+    end
+    assert_equal people(:mary), assigns(:visit).person
+
+    assert_redirected_to signin_path
+  end
+
   def test_should_show_visit
     get :show, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1).id
     assert_response :success

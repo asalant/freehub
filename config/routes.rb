@@ -7,6 +7,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :services, :path_prefix => '/:organization_key/people/:person_id'
 
   map.visits_report ':organization_key/reports/visits', :controller => 'reports', :action => 'visits'
+  map.signin ':organization_key/signin/:year/:month/:day',
+          :controller => 'reports', :action => 'signin',
+          :year => Time.now.year, :month => Time.now.month, :day => Time.now.day,
+          :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
   map.resources :reports, :path_prefix => '/:organization_key'
 
   map.connect ':organization_key', :controller => 'organizations', :action => 'show'

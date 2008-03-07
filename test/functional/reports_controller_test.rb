@@ -71,6 +71,14 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_equal 'first_name,last_name,email,phone,postal_code,datetime,volunteered', lines[0]
   end
 
+  def test_signin
+    get :signin, :organization_key => 'sfbk', :year => 2008, :month => 2, :day => 1
+    assert_response :success
+    assert_not_nil assigns(:visits)
+    assert_equal 3, assigns(:visits).size
+    assert_equal Date.new(2008,2,1), assigns(:day)
+  end
+
   def test_should_get_edit
     get :edit, :organization_key => 'sfbk', :id => reports(:visit)
     assert_response :success

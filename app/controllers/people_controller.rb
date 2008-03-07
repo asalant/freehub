@@ -5,7 +5,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    @people = Person.find(:all)
+    @people = Person.for_organization(@organization)
 
     respond_to do |format|
       format.html # index.html.erb
