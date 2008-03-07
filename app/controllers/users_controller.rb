@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  permit "admin or (user of :organization)"
+
   skip_before_filter :login_from_cookie, :login_required, :only => [:new, :create, :activate]
   
   # render new.rhtml

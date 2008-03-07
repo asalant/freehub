@@ -5,7 +5,7 @@ require 'reports_Controller'
 class ReportsController; def rescue_action(e) raise e end; end
 
 class ReportsControllerTest < Test::Unit::TestCase
-  fixtures :organizations, :people, :visits, :reports
+  fixtures :organizations, :people, :visits
 
   def setup
     @controller = ReportsController.new
@@ -14,38 +14,16 @@ class ReportsControllerTest < Test::Unit::TestCase
     login_as 'greeter'
   end
 
-  def test_should_get_index
+  def test_index
     get :index, :organization_key => 'sfbk'
     assert_response :success
-    assert_not_nil assigns(:reports)
   end
 
-  def test_should_get_new
-    get :new, :organization_key => 'sfbk'
-    assert_response :success
-  end
-
-  def test_should_create_report
-    assert_difference('Report.count') do
-      post :create, :organization_key => 'sfbk', :report => { }
-    end
-
-    assert_redirected_to report_path(:id => assigns(:report))
-  end
-
-  def test_should_show_report
-    get :show, :organization_key => 'sfbk', :id => reports(:visit), :page => 2, :size => 10
-    assert_response :success
-    assert_not_nil assigns(:visits)
-    assert_equal 102, assigns(:visits).size
-    assert_equal 10, assigns(:visits).to_a.size
-    assert_equal 2, assigns(:visits).page
-  end
-
-
-  def test_should_show_visits
+  def test_visits_report
     get :visits, :organization_key => 'sfbk',
-        :report => { :target => 'Visit', :date_from => Date.new(2007,1,1), :date_to => Date.new(2009,1,1) },
+        :report => { :target => 'Visit',
+                     :date_from => { :year => 2007, :month => 1, :day => 1 },
+                     :date_to => { :year => 2009, :month => 1, :day => 1 } },
         :page => 2
     assert_response :success
     assert_not_nil assigns(:report)
@@ -55,9 +33,11 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_equal 2, assigns(:visits).page
   end
 
-  def test_visits_csv
+  def test_visits_report_csv
     get :visits, :organization_key => 'sfbk',
-        :report => { :target => 'Visit', :date_from => Date.new(2007,1,1), :date_to => Date.new(2009,1,1) },
+        :report => { :target => 'Visit',
+                     :date_from => { :year => 2007, :month => 1, :day => 1 },
+                     :date_to => { :year => 2009, :month => 1, :day => 1 } },
         :format => 'csv'
     assert_response :success
     assert_not_nil assigns(:visits)
@@ -72,7 +52,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_equal "attachment; filename=\"sfbk_visits_2007-01-01_2009-01-01.csv\"", @response.headers['Content-Disposition']
   end
 
-  def test_signin
+  def test_signin_report
     get :signin, :organization_key => 'sfbk', :year => 2008, :month => 2, :day => 1
     assert_response :success
     assert_not_nil assigns(:visits)
@@ -80,21 +60,4 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_equal Date.new(2008,2,1), assigns(:day)
   end
 
-  def test_should_get_edit
-    get :edit, :organization_key => 'sfbk', :id => reports(:visit)
-    assert_response :success
-  end
-
-  def test_should_update_report
-    put :update, :organization_key => 'sfbk', :id => reports(:visit), :report => { }
-    assert_redirected_to report_path(:id => assigns(:report))
-  end
-
-  def test_should_destroy_report
-    assert_difference('Report.count', -1) do
-      delete :destroy, :organization_key => 'sfbk', :id => reports(:visit)
-    end
-
-    assert_redirected_to reports_path
-  end
 end

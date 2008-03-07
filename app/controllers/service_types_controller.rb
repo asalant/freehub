@@ -1,4 +1,5 @@
 class ServiceTypesController < ApplicationController
+  
   permit 'admin'
   
   # GET /service_types

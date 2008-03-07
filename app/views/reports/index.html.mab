@@ -1,24 +1,10 @@
 h1 "Listing reports"
 
-table do
-  tr do
-    th { 'Target' }
-    th { 'Date from' }
-    th { 'Date to' }
-  end
+h2 'Visits'
 
-  for report in @reports
-    tr :class => cycle('odd','even') do
-      td { report.target }
-      td { report.date_from }
-      td { report.date_to }
-      td { link_to 'Show', report_path(:id => report) }
-      td { link_to 'Edit', edit_report_path(:id => report) }
-      td { link_to 'Destroy', report_path(:id => report), :confirm => 'Are you sure?', :method => :delete }
-    end
-  end
+p do <<END
+The #{link_to 'Visits Report', visits_report_path} lists visits in a date range,
+provides a summary of the visits in that date range and can be exported as CSV
+for use in a spreadsheet program.
+END
 end
-
-br
-
-link_to 'New report', new_report_path

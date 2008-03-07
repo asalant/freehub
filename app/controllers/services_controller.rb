@@ -1,4 +1,7 @@
 class ServicesController < ApplicationController
+
+  permit "admin or (user of :organization)"
+  
   # GET /services
   # GET /services.xml
   def index

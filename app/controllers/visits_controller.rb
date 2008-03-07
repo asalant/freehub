@@ -1,4 +1,7 @@
 class VisitsController < ApplicationController
+
+  permit "admin or (user of :organization)"
+  
   # GET /visits
   # GET /visits.xml
   def index

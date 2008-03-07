@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  permit "user of :organization"
+  permit "admin or (user of :organization)"
 
   # GET /people
   # GET /people.xml

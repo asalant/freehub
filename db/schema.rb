@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 7) do
+ActiveRecord::Schema.define(:version => 6) do
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
@@ -44,14 +44,6 @@ ActiveRecord::Schema.define(:version => 7) do
   add_index "people", ["created_by_id"], :name => "fk_people_created_by"
   add_index "people", ["updated_by_id"], :name => "fk_people_updated_by"
   add_index "people", ["organization_id"], :name => "fk_people_organization"
-
-  create_table "reports", :force => true do |t|
-    t.string   "target"
-    t.date     "date_from"
-    t.date     "date_to"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "roles", :force => true do |t|
     t.string   "name",              :limit => 40

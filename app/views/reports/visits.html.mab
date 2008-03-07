@@ -1,13 +1,15 @@
 h1 'Visits Report'
 
-form_for @report, :url => visits_report_path, :html => { :method => :get } do |f|
-  labeled_input'Date from', :for => :date_from do
-    f.date_select :date_from
+form_tag visits_report_path, :method => :get do
+  capture do
+    labeled_input 'Date from', :for => :date_from do
+      select_date @report.date_from, :prefix => 'report[date_from]'
+    end
+    labeled_input 'Date to', :for => :date_to do
+      select_date @report.date_to, :prefix => 'report[date_to]'
+    end
+    p { submit_tag "Update"  }
   end
-  labeled_input'Date to', :for => :date_to do
-    f.date_select :date_to
-  end
-  p { f.submit "Update"  }
 end
 
 if @visits.empty?
