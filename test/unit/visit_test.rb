@@ -2,17 +2,6 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class VisitTest < ActiveSupport::TestCase
 
-  def test_for_person
-    assert_equal 2, Visit.for_person(people(:mary)).size
-    assert_equal visits(:mary_2), Visit.for_person(people(:mary))[0]
-    assert_equal visits(:mary_1), Visit.for_person(people(:mary))[1]
-  end
-
-  def test_for_person_paged
-    assert_equal 100, Visit.for_person(people(:daryl)).size
-    assert_equal 100, Visit.for_person(people(:daryl)).paginate(:current => 2, :size => 20).size
-  end
-
   def test_for_organization_paged
     assert_equal 102, Visit.for_organization(organizations(:sfbk)).paginate.size
     assert_equal 20, Visit.for_organization(organizations(:sfbk)).paginate.to_a.size
@@ -40,7 +29,7 @@ class VisitTest < ActiveSupport::TestCase
   end
 
   def test_to_csv
-    assert_equal 'Mary,Member,mary@example.com,,,2008-02-01 18:01:00,', visits(:mary_1).to_csv
+    assert_match /^Mary,Member,mary@example.com,,,2008-02-01 18:01:00,false,.+/, visits(:mary_1).to_csv
   end
 
   def test_create_defaults

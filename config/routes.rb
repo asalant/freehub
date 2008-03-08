@@ -6,11 +6,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
   map.resources :services, :path_prefix => '/:organization_key/people/:person_id'
 
-  map.visits_report ':organization_key/reports/visits', :controller => 'reports', :action => 'visits'
+  map.report ':organization_key/reports/:action', :controller => 'reports'
   map.signin ':organization_key/signin/:year/:month/:day',
           :controller => 'reports', :action => 'signin',
           :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
-  map.resources :reports, :path_prefix => '/:organization_key'
 
   map.connect ':organization_key', :controller => 'organizations', :action => 'show'
   map.connect ':organization_key/edit', :controller => 'organizations', :action => 'edit'

@@ -1,12 +1,12 @@
 h1 'Visits Report'
 
-form_tag visits_report_path, :method => :get do
+form_tag report_path(:action => 'visits'), :method => :get do
   capture do
     labeled_input 'Date from', :for => :date_from do
-      select_date @report.date_from, :prefix => 'report[date_from]'
+      select_date @report[:after], :prefix => 'report[after]'
     end
     labeled_input 'Date to', :for => :date_to do
-      select_date @report.date_to, :prefix => 'report[date_to]'
+      select_date @report[:before], :prefix => 'report[before]'
     end
     p { submit_tag "Update"  }
   end
@@ -26,7 +26,7 @@ else
     for visit in @visits
       tr :class => cycle('odd','even') do
         td { link_to(visit.person.full_name, person_path(:id => visit.person))  }
-        td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+        td { "#{datetime_short(visit.datetime)}"  }
         td { visit.volunteer? }
         td.note { visit.note }
       end
@@ -36,10 +36,10 @@ else
         div.paginating_links do
           text 'More: '
           paginating_links(@visits, :params => { :report => params[:report] } )
-        end if @visits.next_page?
+        end if @visits.next_page? || @visits.previous_page?
 
         div.export do
-          link_to 'Export all', visits_report_path(:params => { :report => params[:report], :format => 'csv' })
+          link_to 'Export all', report_path(:action => 'visits', :params => { :report => params[:report], :format => 'csv' })
         end
       end
     end

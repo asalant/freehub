@@ -3,7 +3,7 @@ h1 "Listing reports"
 h2 'Visits'
 
 p do <<END
-The #{link_to 'Visits Report', visits_report_path} lists visits in a date range,
+The #{link_to 'Visits Report', report_path(:action => 'visits', :organization_key => @organization.key)} lists visits in a date range,
 provides a summary of the visits in that date range and can be exported as CSV
 for use in a spreadsheet program.
 END

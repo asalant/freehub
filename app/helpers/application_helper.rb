@@ -11,7 +11,9 @@ module ApplicationHelper
         b 'Report: '
         link_to('Today', signin_today_path(:organization_key => @organization.key))
         text ' | '
-        link_to('Visits', visits_report_path(:organization_key => @organization.key))
+        link_to('Visits', report_path(:action => 'visits', :organization_key => @organization.key))
+        text ' | '
+        link_to('Services', report_path(:action => 'services', :organization_key => @organization.key))
         text ' | '
         b 'People: '
         link_to('List', people_path(:organization_key => organization.key))
@@ -50,8 +52,12 @@ END
     datetime.strftime("%a %b %d %Y %I:%M %p")
   end
 
-  def date_long(datetime)
-    datetime.strftime("%a %B %d %Y")
+  def date_long(date)
+    date.strftime("%a %B %d %Y")
+  end
+
+  def date_short(date)
+    date.to_s(:db)
   end
 
   def signin_today_path(options={})

@@ -10,8 +10,8 @@ class CreateServices < ActiveRecord::Migration
     create_table :services do |t|
       t.date :start_date
       t.date :end_date
-      t.boolean :paid
-      t.boolean :volunteered
+      t.boolean :paid, :default => false
+      t.boolean :volunteered, :default => false
       t.text :note
       t.references :service_type, :nil => false
       t.references :person, :nil => false

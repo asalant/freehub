@@ -18,7 +18,7 @@ class PeopleControllerTest < Test::Unit::TestCase
     get :index, :organization_key => 'sfbk'
     assert_response :success
     assert_not_nil assigns(:people)
-    assert_equal 4, assigns(:people).size
+    assert_equal 5, assigns(:people).size
   end
 
   def test_should_get_new

@@ -1,0 +1,61 @@
+h1 'Services Report'
+
+form_tag report_path(:action => 'services'), :method => :get do
+  capture do
+    labeled_input 'Service type', :for => :service_type do
+      @service_types.each do |service_type|
+        check_box_tag 'report[for_service_types][]', service_type.id, @report[:for_service_types].include?(service_type.id)
+        text service_type.name
+      end
+    end
+    labeled_input 'Start after', :for => :date_from do
+      select_date @report[:after], :prefix => 'report[after]'
+    end
+    labeled_input 'End before', :for => :date_to do
+      select_date @report[:before], :prefix => 'report[before]'
+    end
+    p { submit_tag "Update"  }
+  end
+end
+
+if @services.empty?
+  div.list_status 'No services for date range.'
+else
+  table do
+    tr do
+      th { 'Name' }
+      th { 'Service type' }
+      th { 'Start date' }
+      th { 'End date' }
+      th { 'Paid' }
+      th { 'Volunteered' }
+      th { 'Note' }
+    end
+
+    for service in @services
+      tr :class => cycle('odd','even') do
+        td { link_to(service.person.full_name, person_path(:id => service.person))  }
+        td { service.service_type.name }
+        td { date_short(service.start_date)  }
+        td { date_short(service.end_date)  }
+        td { service.paid }
+        td { service.volunteered }
+        td { service.note }
+      end
+    end
+    tr.list_controls do
+      td :colspan => 7 do
+        div.paginating_links do
+          text 'More: '
+          paginating_links(@services, :params => { :report => params[:report] } )
+        end if @services.next_page? || @services.previous_page?
+
+        div.export do
+          link_to 'Export all', report_path(:action => 'services', :params => { :report => params[:report], :format => 'csv' })
+        end
+      end
+    end
+  end
+
+end
+

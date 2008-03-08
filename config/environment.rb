@@ -72,4 +72,4 @@ Rails::Initializer.run do |config|
 end
 
 require 'has_finder'
-require 'acts_as_paginated'
+require 'has_finder_extensions'

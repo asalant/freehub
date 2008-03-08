@@ -58,6 +58,21 @@ victor:
   staff: false
   organization: sfbk
 
+carrie:
+  first_name: Carrie
+  last_name: Classlover
+  full_name: Carrie Classlover
+  street1:
+  street2:
+  city:
+  state:
+  postal_code:
+  country:
+  email:
+  phone:
+  staff: false
+  organization: sfbk
+
 mary_scbc:
   first_name: Mary
   last_name: SCBC
