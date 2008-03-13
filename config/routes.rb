@@ -1,18 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :delete_mes
+
 
   map.resources :organizations
 
   map.resources :people, :path_prefix => '/:organization_key', :collection => { :auto_complete_for_person_full_name => :get }
   map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
   map.resources :services, :path_prefix => '/:organization_key/people/:person_id'
-
-  map.report ':organization_key/reports/:action', :controller => 'reports'
-  map.signin ':organization_key/signin/:year/:month/:day',
-          :controller => 'reports', :action => 'signin',
-          :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
-
-  map.connect ':organization_key', :controller => 'organizations', :action => 'show'
-  map.connect ':organization_key/edit', :controller => 'organizations', :action => 'edit'
 
   # Authentication
   map.resources :users
@@ -21,6 +15,15 @@ ActionController::Routing::Routes.draw do |map|
 
   # Admininstration
   map.resources :service_types
+
+  # Organization mappings go last so they don't take precedence'
+  map.report ':organization_key/reports/:action', :controller => 'reports'
+  map.signin ':organization_key/signin/:year/:month/:day',
+          :controller => 'reports', :action => 'signin',
+          :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
+
+  map.connect ':organization_key', :controller => 'organizations', :action => 'show'
+  map.connect ':organization_key/edit', :controller => 'organizations', :action => 'edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
 
