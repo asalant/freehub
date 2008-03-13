@@ -21,7 +21,7 @@ class ServiceTest < ActiveSupport::TestCase
   end
   
   def test_to_csv
-    assert_match /^Mary,Member,mary@example.com,,,Membership,2008-02-07,2009-02-07,false,true,/, services(:mary_membership).to_csv
+    assert_match /^Mary,Member,mary@example.com,,,Membership,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},false,true,/, services(:mary_membership).to_csv
   end
 
 end
