@@ -1,7 +1,9 @@
 h1 do
-  text "Listing visits for "
   link_to @person.full_name, person_path(:id => @person)
+  text " : Visits"
 end
+
+link_to 'New visit', new_visit_path
 
 table do
   tr do
@@ -20,13 +22,12 @@ table do
       td { link_to 'Destroy', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete }
     end
   end
+  tr.list_controls do
+    td :colspan => 6 do
+      div.paginating_links do
+        text 'More: '
+        paginating_links(@visits)
+      end if @visits.next_page? || @visits.previous_page?
+    end
+  end
 end
-
-div.paginating_links do
-  text 'More: '
-  paginating_links(@visits)
-end
-
-br
-
-link_to 'New visit', new_visit_path

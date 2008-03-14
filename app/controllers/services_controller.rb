@@ -5,7 +5,7 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.xml
   def index
-    @services = Service.find(:all)
+    @services = @person.services.paginate(:page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

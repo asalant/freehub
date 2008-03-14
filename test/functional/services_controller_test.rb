@@ -13,11 +13,20 @@ class ServicesControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
     login_as 'greeter'
   end
-
-  def test_should_get_index
+  
+  def test_should_get_index_for_person
     get :index, :organization_key => 'sfbk', :person_id => people(:mary)
     assert_response :success
     assert_not_nil assigns(:services)
+    assert_equal 3, assigns(:services).size
+  end
+
+  def test_should_get_index_for_person_paged
+    get :index, :organization_key => 'sfbk', :person_id => people(:carrie), :page => 2
+    assert_response :success
+    assert_not_nil assigns(:services)
+    assert_equal 61, assigns(:services).size
+    assert_equal 2, assigns(:services).page
   end
 
   def test_should_get_new

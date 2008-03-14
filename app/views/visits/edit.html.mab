@@ -1,4 +1,9 @@
-h1 'Editing visit'
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text ' : '
+  link_to 'Visits', visits_path(:person_id => @person)
+  text ' : Edit'
+end
 
 error_messages_for :visit
 

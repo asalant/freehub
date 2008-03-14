@@ -28,37 +28,10 @@ labeled_value 'Created by', @person.created_by.nil? ? '' : link_to(@person.creat
 labeled_value 'Updated by', @person.updated_by.nil? ? '' : link_to(@person.updated_by.login, user_path(@person.updated_by))
 
 link_to 'Edit', edit_person_path(:id => @person)
-text ' | '
-link_to 'Back', people_path
-
-h2 'Visits History'
-
-visits = @person.visits.paginate(:size => 4)
-if visits.empty?
-  div.list_status 'No past visits.'
-else
-  div.list_status "Showing #{visits.to_a.size} of #{visits.size} total visits."
-  table do
-    tr do
-      th { 'When' }
-      th { '' }
-      th { 'Note' }
-    end
-    for visit in visits
-      tr :class => cycle('odd','even') do
-        td { datetime_short(visit.datetime) }
-        td { "(#{time_ago_in_words(visit.datetime)} ago)"  }
-        td.note { visit.note }
-      end
-    end
-  end
-
-  link_to 'All visits', visits_path(:organization_key => @organization.key, :person_id => @person)
-end
 
 h2 'Services History'
 
-services = @person.services.paginate(:size => 4)
+services = @person.services.paginate(:size => 3)
 if services.empty?
   div.list_status 'No past services.'
 else
@@ -81,4 +54,29 @@ else
   end
 
   link_to 'All services', services_path(:organization_key => @organization.key, :person_id => @person)
+end
+
+h2 'Visits History'
+
+visits = @person.visits.paginate(:size => 3)
+if visits.empty?
+  div.list_status 'No past visits.'
+else
+  div.list_status "Showing #{visits.to_a.size} of #{visits.size} total visits."
+  table do
+    tr do
+      th { 'When' }
+      th { '' }
+      th { 'Note' }
+    end
+    for visit in visits
+      tr :class => cycle('odd','even') do
+        td { datetime_short(visit.datetime) }
+        td { "(#{time_ago_in_words(visit.datetime)} ago)"  }
+        td.note { visit.note }
+      end
+    end
+  end
+
+  link_to 'All visits', visits_path(:organization_key => @organization.key, :person_id => @person)
 end

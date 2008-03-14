@@ -1,6 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  def breadcrumb(*items)
+    items.join ' : '
+  end
   def organization_header(organization)
     markaby do
       h1.organization_header! do

@@ -1,4 +1,9 @@
-h1 'Editing service'
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text ' : '
+  link_to 'Services', services_path(:person_id => @person)
+  text ' : Edit'
+end
 
 error_messages_for :service
 
@@ -8,5 +13,3 @@ form_for @service, :url => service_path do |f|
 end
 
 link_to 'Show', service_path(:id => @service)
-text ' | '
-link_to 'Back', services_path

@@ -1,4 +1,7 @@
-h1 'Editing person'
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text " : Edit"
+end
 
 error_messages_for :person
 
@@ -8,5 +11,3 @@ form_for @person, :url => person_path(:id => @person) do |f|
 end
 
 link_to 'Show', person_path(:id => @person)
-text ' | '
-link_to 'Back', people_path

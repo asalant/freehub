@@ -1,3 +1,10 @@
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text ' : '
+  link_to 'Visits', visits_path(:person_id => @person)
+  text ' : Detail'
+end
+
 labeled_value 'Datetime', @visit.datetime
 labeled_value 'Volunteer', @visit.volunteer?
 labeled_value 'Note', @visit.note
