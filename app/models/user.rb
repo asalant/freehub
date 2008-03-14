@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
 
   # Authorization plugin
   acts_as_authorized_user
+  
+  def accepts_role?(role, user)
+    'owner' == role && self == user
+  end
 
   # Virtual attribute for the unencrypted password
   attr_accessor :password

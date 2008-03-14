@@ -2,7 +2,7 @@ require 'csv'
 
 class ReportsController < ApplicationController
 
-  permit "admin or (user of :organization)"
+  permit "admin or (manager of :organization)"
 
   def index
   end

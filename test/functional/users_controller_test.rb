@@ -11,7 +11,7 @@ class UsersControllerTest < Test::Unit::TestCase
     @controller = UsersController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    login_as 'admin'
+    login_as :admin
   end
 
   def test_should_allow_signup
@@ -87,16 +87,24 @@ class UsersControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_user
+    login_as :sfbk
     get :show, :id => users(:greeter).id
     assert_response :success
+    assert assigns(:user)
+    assert assigns(:organization)
+    assert_equal organizations(:sfbk), assigns(:organization)
   end
 
   def test_should_get_edit
-    get :edit, :id => users(:greeter).id
+    login_as :sfbk
+    get :edit, :id => users(:sfbk).id
     assert_response :success
+    assert assigns(:user)
+    assert assigns(:organization)
   end
 
   def test_should_update_user
+    login_as :greeter
     put :update, :id => users(:greeter).id, :user => { }
     assert_redirected_to user_path(assigns(:user))
   end

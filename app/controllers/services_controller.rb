@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
 
-  permit "admin or (user of :organization)"
+  permit "admin or (manager of :organization)"
   
   # GET /services
   # GET /services.xml
