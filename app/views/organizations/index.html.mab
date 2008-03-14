@@ -10,7 +10,7 @@ table do
     tr :class => cycle('odd','even') do
       td { organization.name }
       td { organization.timezone }
-      td { link_to 'Show', organization }
+      td { link_to 'Show', organization_key_path(:organization_key => organization.key) }
       td { link_to 'Edit', edit_organization_path(organization) }
       td { link_to 'Destroy', organization, :confirm => 'Are you sure?', :method => :delete }
     end

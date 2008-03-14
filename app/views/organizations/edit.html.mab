@@ -16,5 +16,3 @@ form_for @organization do |f|
 end
 
 link_to 'Show', @organization
-text ' | '
-link_to 'Back', organizations_path

@@ -22,8 +22,7 @@ ActionController::Routing::Routes.draw do |map|
           :controller => 'reports', :action => 'signin',
           :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
 
-  map.connect ':organization_key', :controller => 'organizations', :action => 'show'
-  map.connect ':organization_key/edit', :controller => 'organizations', :action => 'edit'
+  map.organization_key ':organization_key', :controller => 'organizations', :action => 'show'
 
   # The priority is based upon order of creation: first created -> highest priority.
 

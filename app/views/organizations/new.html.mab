@@ -3,17 +3,17 @@ h1 'New organization'
 error_messages_for :organization
 
 form_for @organization do |f|
-  labeled_input'Name', :for => :name do
+  labeled_input 'Name', :for => :name do
     f.text_field :name
   end
-  labeled_input'Key', :for => :key do
+  labeled_input 'Key', :for => :key do
     f.text_field :key
   end
-  labeled_input'Timezone', :for => :timezone do
+  labeled_input 'Timezone', :for => :timezone do
     f.text_field :timezone
   end
   p do
-    f.submit"Create"
+    f.submit 'Create'
   end
 end
 
