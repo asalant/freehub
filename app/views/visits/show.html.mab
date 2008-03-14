@@ -11,5 +11,3 @@ labeled_value 'Note', @visit.note
 labeled_value 'Person', @visit.person.full_name
 
 link_to 'Edit', edit_visit_path(:id => @visit)
-text ' | '
-link_to 'Back', visits_path
