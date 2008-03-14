@@ -21,5 +21,3 @@ form_for @visit, :url => visit_path do |f|
 end
 
 link_to 'Show', visit_path(:id => @visit)
-text ' | '
-link_to 'Back', visits_path
