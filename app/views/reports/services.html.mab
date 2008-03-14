@@ -1,4 +1,7 @@
-h1 'Services Report'
+h1 do
+  link_to 'Reports', reports_path
+  text ' : Services'
+end
 
 form_tag report_path(:action => 'services'), :method => :get do
   capture do

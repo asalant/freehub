@@ -2,6 +2,14 @@ body {
   width: 1000px;
 }
 
+h1 {
+  font-size: 22px;
+}
+
+h2 {
+  font-size: 18px;
+}
+
 label, div.label {
   width: 100px;
   float:left;
@@ -14,6 +22,13 @@ tr {
   vertical-align: top;
 }
 
+th {
+  font-family:verdana,arial,helvetica,sans-serif;
+  font-size:13px;
+  line-height:18px;
+  font-weight: bold;
+}
+
 td.note {
   width: 300px;
 }
@@ -24,6 +39,10 @@ td.note {
 
 #application_header {
   border-bottom: 1px solid black;
+}
+
+#application_header h1 {
+  font-size: 24px;
 }
 
 #organization_header {

@@ -1,4 +1,4 @@
-h1 "Listing organizations"
+h1 "Organizations"
 
 table do
   tr do

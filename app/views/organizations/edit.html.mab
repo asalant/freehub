@@ -1,4 +1,4 @@
-h1 'Editing organization'
+h1 "#{@organization.name} : Edit"
 
 error_messages_for :organization
 

@@ -1,4 +1,4 @@
-h1 "#{@organization.name} Profile"
+h1 "#{@organization.name} : Profile"
 
 labeled_value 'Name', @organization.name
 labeled_value 'Key', @organization.key

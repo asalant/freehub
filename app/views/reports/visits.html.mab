@@ -1,4 +1,7 @@
-h1 'Visits Report'
+h1 do
+  link_to 'Reports', reports_path
+  text ' : Visits'
+end
 
 form_tag report_path(:action => 'visits'), :method => :get do
   capture do

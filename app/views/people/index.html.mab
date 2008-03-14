@@ -1,4 +1,4 @@
-h1 "Listing people"
+h1 "People"
 
 table do
   tr do
