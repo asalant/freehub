@@ -23,4 +23,3 @@ form_for @user do |f|
   end
 end
 
-link_to 'Back', users_path

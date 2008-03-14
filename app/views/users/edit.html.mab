@@ -22,5 +22,3 @@ form_for @user do |f|
 end
 
 link_to 'Show', @user
-text ' | '
-link_to 'Back', users_path
