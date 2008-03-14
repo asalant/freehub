@@ -5,7 +5,7 @@ mary_membership:
   volunteered: false
   note:
   person: mary
-  service_type: membership
+  service_type_id: MEMBERSHIP
 
 mary_membership_expired:
   start_date: 2006-03-05
@@ -14,7 +14,7 @@ mary_membership_expired:
   volunteered: true
   note: Mary volunteered 3 hours and paid $15 for this membership.
   person: mary
-  service_type: membership
+  service_type_id: MEMBERSHIP
 
 mary_class:
   start_date: 2008-03-05
@@ -23,7 +23,7 @@ mary_class:
   volunteered: false
   note:
   person: mary
-  service_type: class
+  service_type_id: CLASS
 
 carrie_membership:
   start_date: <%= 1.month.ago.to_date %>
@@ -32,7 +32,7 @@ carrie_membership:
   volunteered: true
   note: Carrie volunteered 6 hours for her membership.
   person: carrie
-  service_type: membership
+  service_type_id: MEMBERSHIP
 
 <% (1..60).each do |count| %>
 carrie_class<%= count %>:
@@ -42,5 +42,5 @@ carrie_class<%= count %>:
   volunteered: false
   note:
   person: carrie
-  service_type: class
+  service_type_id: CLASS
 <% end %>

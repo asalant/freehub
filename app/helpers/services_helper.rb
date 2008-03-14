@@ -2,7 +2,7 @@ module ServicesHelper
   def service_form_fields(form)
     markaby do
       labeled_input 'Service type', :for => :service_type_id do
-        @service_types = ServiceType.find(:all, :order => "name").map { |type| [type.name, type.id]}
+        @service_types = ServiceType.find_all.map { |type| [type.name, type.id]}
         form.select(:service_type_id, @service_types)
       end
       labeled_input 'Start date', :for => :start_date do

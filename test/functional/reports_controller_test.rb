@@ -61,7 +61,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     get :services, :organization_key => 'sfbk',
             :report => {  :after => { :year => 2006, :month => 1, :day => 1 },
                           :before => { :year => 2009, :month => 1, :day => 1 },
-                          :for_service_types => [ service_types(:membership).id, service_types(:class).id] },
+                          :for_service_types => ['MEMBERSHIP', 'CLASS'] },
             :page => 2
     assert_response :success
     assert_not_nil assigns(:report)
@@ -84,7 +84,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     get :services, :organization_key => 'sfbk',
             :report => {  :after => { :year => 2006, :month => 1, :day => 1 },
                           :before => { :year => 2009, :month => 1, :day => 1 },
-                          :for_service_types => [ service_types(:membership).id, service_types(:class).id] },
+                          :for_service_types => ['MEMBERSHIP', 'CLASS'] },
             :format => 'csv'
     assert_response :success
     assert_not_nil assigns(:services)
@@ -95,7 +95,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_nothing_raised { @response.body.call(@response, output) }
     lines = output.string.split("\n")
     assert_equal assigns(:services).size + 1, lines.size
-    assert_equal 'first_name,last_name,email,phone,postal_code,service_type,start_date,end_date,volunteered,paid,note', lines[0]
+    assert_equal 'first_name,last_name,email,phone,postal_code,service_type_id,start_date,end_date,volunteered,paid,note', lines[0]
     assert_equal "attachment; filename=\"sfbk_services_2006-01-01_2009-01-01.csv\"", @response.headers['Content-Disposition']
   end
 

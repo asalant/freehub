@@ -13,9 +13,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
 
-  # Admininstration
-  map.resources :service_types
-
   # Organization mappings go last so they don't take precedence'
   map.report ':organization_key/reports/:action', :controller => 'reports'
   map.signin ':organization_key/signin/:year/:month/:day',

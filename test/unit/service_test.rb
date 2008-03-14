@@ -16,12 +16,12 @@ class ServiceTest < ActiveSupport::TestCase
   end
 
   def test_for_service_types
-    assert_equal 3, Service.for_service_types(service_types(:membership).id).size
-    assert_equal 64, Service.for_service_types([service_types(:membership).id, service_types(:class).id]).size
+    assert_equal 3, Service.for_service_types('MEMBERSHIP').size
+    assert_equal 64, Service.for_service_types(['MEMBERSHIP', 'CLASS']).size
   end
   
   def test_to_csv
-    assert_match /^Mary,Member,mary@example.com,,,Membership,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},false,true,/, services(:mary_membership).to_csv
+    assert_match /^Mary,Member,mary@example.com,,,MEMBERSHIP,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},false,true,/, services(:mary_membership).to_csv
   end
 
 end

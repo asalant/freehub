@@ -240,6 +240,34 @@
     <RUBY_DOC NAME="DEFAULTS" VALUE="TRUE" />
     <RUBY_DOC NAME="NUMBER" VALUE="0" />
   </component>
+  <component name="RailsProjectViewPane">
+    <subPane>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsProjectRootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="freehub_for_all" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsProjectModuleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsProjectRootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="freehub_for_all" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsProjectModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Controllers" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsControllersFolderNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </subPane>
+  </component>
   <component name="ResourceManagerContainer">
     <option name="myResourceBundles">
       <value>

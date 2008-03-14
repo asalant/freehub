@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 7) do
+ActiveRecord::Schema.define(:version => 6) do
 
   create_table "delete_mes", :force => true do |t|
     t.string   "foo"
@@ -66,20 +66,13 @@ ActiveRecord::Schema.define(:version => 7) do
     t.datetime "updated_at"
   end
 
-  create_table "service_types", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "services", :force => true do |t|
     t.date     "start_date"
     t.date     "end_date"
-    t.boolean  "paid"
-    t.boolean  "volunteered"
+    t.boolean  "paid",            :default => false
+    t.boolean  "volunteered",     :default => false
     t.text     "note"
-    t.integer  "service_type_id"
+    t.string   "service_type_id"
     t.integer  "person_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -89,7 +82,6 @@ ActiveRecord::Schema.define(:version => 7) do
 
   add_index "services", ["created_by_id"], :name => "fk_services_created_by"
   add_index "services", ["updated_by_id"], :name => "fk_services_updated_by"
-  add_index "services", ["service_type_id"], :name => "fk_services_service_type"
   add_index "services", ["person_id"], :name => "fk_services_person"
 
   create_table "users", :force => true do |t|

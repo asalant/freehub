@@ -5,7 +5,7 @@ require 'services_controller'
 class ServicesController; def rescue_action(e) raise e end; end
 
 class ServicesControllerTest < Test::Unit::TestCase
-  fixtures :users, :roles, :service_types, :organizations, :people, :services
+  fixtures :users, :roles, :organizations, :people, :services
 
   def setup
     @controller = ServicesController.new
@@ -27,7 +27,7 @@ class ServicesControllerTest < Test::Unit::TestCase
 
   def test_should_create_service
     assert_difference('Service.count') do
-      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :service => { :service_type_id => service_types(:class) }
+      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :service => { :service_type_id => 'CLASS' }
     end
 
     assert_redirected_to services_path

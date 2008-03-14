@@ -1,5 +1,4 @@
 class Service < ActiveRecord::Base
-  belongs_to :service_type
   belongs_to :person
 
   validates_presence_of :person_id, :service_type_id
@@ -23,13 +22,18 @@ class Service < ActiveRecord::Base
 
   has_finder :for_service_types, lambda { |service_types| {
       :conditions => [ "services.service_type_id IN (?)", service_types ]
+      #:conditions => [ "services.service_type_id IN (?)", service_types.collect{|type| "'#{type}"}.join(',') ]
   } }
 
+  def service_type
+    ServiceType[service_type_id]
+  end
+
   CSV_FIELDS = { :person => %w{first_name last_name email phone postal_code},
-                 :self => %w{service_type start_date end_date volunteered paid note} }
+                 :self => %w{service_type_id start_date end_date volunteered paid note} }
   def to_csv
     values = person.attributes.values_at(*CSV_FIELDS[:person])
-    values << service_type.name
+    values << service_type_id
     values << start_date ? nil : start_date.to_s(:db)
     values << end_date ? nil : end_date.to_s(:db)
     values << volunteered

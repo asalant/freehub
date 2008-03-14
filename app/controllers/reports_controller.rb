@@ -33,12 +33,12 @@ class ReportsController < ApplicationController
   end
 
   def services
-    @service_types = ServiceType.find(:all, :order => "name")
+    @service_types = ServiceType.find_all
     if (params[:report])
       @report = { :for_organization => @organization,
                   :after => date_from_params(params[:report][:after]),
                   :before => date_from_params(params[:report][:before]),
-                  :for_service_types => params[:report][:for_service_types].collect {|type| type.to_i} }
+                  :for_service_types => params[:report][:for_service_types].collect {|type| type} }
     else
       @report = { :for_organization => @organization,
                   :after => Date.today, :before => Date.tomorrow,
