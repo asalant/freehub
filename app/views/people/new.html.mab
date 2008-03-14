@@ -3,42 +3,8 @@ h1 'New person'
 error_messages_for :person
 
 form_for @person do |f|
-  labeled_input'First name', :for => :first_name do
-    f.text_field :first_name
-  end
-  labeled_input'Last name', :for => :last_name do
-    f.text_field :last_name
-  end
-  labeled_input'Email', :for => :email do
-    f.text_field :email
-  end
-  labeled_input'Phone', :for => :phone do
-    f.text_field :phone
-  end
-  labeled_input'Street1', :for => :street1 do
-    f.text_field :street1
-  end
-  labeled_input'Street2', :for => :street2 do
-    f.text_field :street2
-  end
-  labeled_input'City', :for => :city do
-    f.text_field :city
-  end
-  labeled_input'State', :for => :state do
-    f.text_field :state
-  end
-  labeled_input'Postal code', :for => :postal_code do
-    f.text_field :postal_code
-  end
-  labeled_input'Country', :for => :country do
-    f.text_field :country
-  end
-  labeled_input'Staff', :for => :staff do
-    f.check_box :staff
-  end
-  p do
-    f.submit"Create"
-  end
+  person_form_fields(f)
+  p { f.submit "Create" }
 end
 
 link_to 'Back', people_path

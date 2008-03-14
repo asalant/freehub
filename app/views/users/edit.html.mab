@@ -3,22 +3,8 @@ h1 'Editing user'
 error_messages_for :user
 
 form_for @user do |f|
-  labeled_input'Name', :for => :name do
-    f.text_field :name
-  end
-  labeled_input'Email', :for => :email do
-    f.text_field :email
-  end
-  labeled_input'Login', :for => :login do
-    f.text_field :login
-  end
-  labeled_input 'Password', :for => :password do
-    f.password_field :password
-  end
-  labeled_input 'Confirm Password', :for => :password_confirmation do
-    f.password_field :password_confirmation
-  end
-  p { f.submit "Update"  }
+  user_form_fields(f)
+  p { f.submit 'Update'  }
 end
 
 link_to 'Show', @user
