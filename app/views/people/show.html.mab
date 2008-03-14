@@ -41,11 +41,13 @@ else
   table do
     tr do
       th { 'When' }
+      th { '' }
       th { 'Note' }
     end
     for visit in visits
       tr :class => cycle('odd','even') do
-        td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+        td { datetime_short(visit.datetime) }
+        td { "(#{time_ago_in_words(visit.datetime)} ago)"  }
         td.note { visit.note }
       end
     end
@@ -73,7 +75,7 @@ else
         td { service.service_type.name }
         td { service.start_date }
         td { service.end_date }
-        td { service.note }
+        td.note { service.note }
       end
     end
   end
