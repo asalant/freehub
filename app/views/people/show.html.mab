@@ -33,9 +33,15 @@ h2 'Services History'
 
 services = @person.services.paginate(:size => 3)
 if services.empty?
-  div.list_status 'No past services.'
+  div.list_status do
+    text 'No past services. '
+    link_to 'Add service.', new_service_path(:person_id => @person)
+  end
 else
-  div.list_status "Showing #{services.to_a.size} of #{services.size} total services."
+  div.list_status do
+    text "Showing #{services.to_a.size} of #{services.size} total services. "
+    link_to 'See all services.', services_path(:organization_key => @organization.key, :person_id => @person)
+  end
   table do
     tr do
       th { 'Service type' }
@@ -53,16 +59,21 @@ else
     end
   end
 
-  link_to 'All services', services_path(:organization_key => @organization.key, :person_id => @person)
 end
 
 h2 'Visits History'
 
 visits = @person.visits.paginate(:size => 3)
 if visits.empty?
-  div.list_status 'No past visits.'
+  div.list_status do
+    text 'No past visits. '
+    link_to 'Add visit.', new_visit_path(:person_id => @person)
+  end
 else
-  div.list_status "Showing #{visits.to_a.size} of #{visits.size} total visits."
+  div.list_status do
+    text "Showing #{visits.to_a.size} of #{visits.size} total visits. "
+    link_to 'See all visits.', visits_path(:organization_key => @organization.key, :person_id => @person)
+  end
   table do
     tr do
       th { 'When' }
@@ -78,5 +89,4 @@ else
     end
   end
 
-  link_to 'All visits', visits_path(:organization_key => @organization.key, :person_id => @person)
 end
