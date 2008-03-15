@@ -6,20 +6,20 @@ class Person < ActiveRecord::Base
   has_many :services, :dependent => :destroy,  :order => "start_date DESC"
   
   validates_presence_of :first_name, :organization_id
-  #todo: should we check for duplicates by validating unique shop_id, first name, last name, email?
+  validates_uniqueness_of :email, :scope => :organization_id, :case_sensitive => false, :allow_nil => true, :allow_blank => true
+  validates_email_veracity_of :email
 
   before_save :update_full_name
+  
+  acts_as_paginated
 
   has_finder :for_organization, lambda { |organization| {
-      :conditions => { :organization_id => organization },
-      :order => 'last_name ASC'
+      :conditions => { :organization_id => organization }
   } }
 
-  has_finder :for_organization_matching_name, lambda { |organization, name| {
-      :conditions => [ "LOWER(full_name) LIKE :name AND organization_id = :organization",
-              { :name => "%#{name.downcase}%", :organization => organization } ], 
-      :order => "full_name ASC",
-      :limit => 15
+  has_finder :matching_name, lambda { |name| {
+      :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ], 
+      :order => "full_name ASC"
   } }
 
   private

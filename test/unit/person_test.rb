@@ -24,8 +24,14 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal visits(:mary_1), people(:mary).visits[1]
   end
 
-  def test_for_organization_matching_name
-    people = Person.for_organization_matching_name(organizations(:sfbk), 'ma')
-    assert_equal 2, people.size
+  def test_matching_name
+    assert_equal 3, Person.matching_name('ma').size
+    assert_equal 2, Person.for_organization(organizations(:sfbk)).matching_name('ma').size
+  end
+
+  def test_email_validation
+    assert Person.create(:organization => organizations(:sfbk), :email => 'mary@example.com').errors.invalid?(:email)
+    assert Person.create(:organization => organizations(:sfbk), :email => 'mary@example').errors.invalid?(:email)
+    assert !Person.create(:organization => organizations(:sfbk), :email => 'mary@foo.com').errors.invalid?(:email)
   end
 end
