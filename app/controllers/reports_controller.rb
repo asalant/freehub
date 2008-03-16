@@ -23,7 +23,7 @@ class ReportsController < ApplicationController
       format.xml  { render :xml => @visits }
       format.csv do
         stream_csv("#{@organization.key}_visits_#{@report[:after].to_s(:db)}_#{@report[:before].to_s(:db)}.csv") do |output|
-          output << CSV.generate_line(Visit::CSV_FIELDS[:person] + Visit::CSV_FIELDS[:self])
+          output << Visit.csv_header
           @visits.each do |visit|
             output << "\n#{visit.to_csv}"
           end
@@ -55,6 +55,33 @@ class ReportsController < ApplicationController
           output << CSV.generate_line(Service::CSV_FIELDS[:person] + Service::CSV_FIELDS[:self])
           @services.each do |service|
             output << "\n#{service.to_csv}"
+          end
+        end
+      end
+    end
+  end
+
+  def people
+    if (params[:report])
+      @report = params[:report].merge :for_organization => @organization,
+                  :after => date_from_params(params[:report][:after]),
+                  :before => date_from_params(params[:report][:before]) 
+      @report.delete(:matching_name) if @report[:matching_name] && @report[:matching_name].length < 3
+    else
+      @report = { :for_organization => @organization,
+                  :after => Date.today, :before => Date.tomorrow }
+    end
+
+    @people = Person.chain_finders(@report)
+
+    respond_to do |format|
+      format.html { @people = @people.paginate(params) }
+      format.xml  { render :xml => @people }
+      format.csv do
+        stream_csv("#{@organization.key}_people_#{@report[:after].to_s(:db)}_#{@report[:before].to_s(:db)}.csv") do |output|
+          output << CSV.generate_line(Person::CSV_FIELDS[:self])
+          @people.each do |person|
+            output << "\n#{person.to_csv}"
           end
         end
       end

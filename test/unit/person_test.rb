@@ -29,9 +29,23 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 2, Person.for_organization(organizations(:sfbk)).matching_name('ma').size
   end
 
+  def test_in_date_range
+    from, to = Date.new(2007,1,1), Date.new(2008,1,3)
+    assert_equal 6, Person.after(from).size
+    assert_equal 2, Person.after(from).before(to).size
+  end
+
   def test_email_validation
     assert Person.create(:organization => organizations(:sfbk), :email => 'mary@example.com').errors.invalid?(:email)
     assert Person.create(:organization => organizations(:sfbk), :email => 'mary@example').errors.invalid?(:email)
     assert !Person.create(:organization => organizations(:sfbk), :email => 'mary@foo.com').errors.invalid?(:email)
+  end
+
+  def test_csv_header
+    assert_equal 'first_name,last_name,staff,email,phone,postal_code,street1,street2,city,state,postal_code,country,created_at', Person.csv_header
+  end
+
+  def test_to_csv
+    assert_match /^Mary,Member,false,mary@example.com,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,2008-01-02 00:00:00/, people(:mary).to_csv
   end
 end

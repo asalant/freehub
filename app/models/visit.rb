@@ -28,6 +28,11 @@ class Visit < ActiveRecord::Base
 
   CSV_FIELDS = { :person => %w{first_name last_name email phone postal_code},
                  :self => %w{datetime volunteer note} }
+
+  def self.csv_header
+    CSV.generate_line(CSV_FIELDS[:person] + CSV_FIELDS[:self])
+  end
+
   def to_csv
     values = person.attributes.values_at(*CSV_FIELDS[:person])
     values << (datetime.nil? ? nil : datetime.to_s(:db))

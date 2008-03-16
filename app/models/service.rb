@@ -31,6 +31,11 @@ class Service < ActiveRecord::Base
 
   CSV_FIELDS = { :person => %w{first_name last_name email phone postal_code},
                  :self => %w{service_type_id start_date end_date volunteered paid note} }
+
+  def self.csv_header
+    CSV.generate_line(CSV_FIELDS[:person] + CSV_FIELDS[:self])
+  end
+  
   def to_csv
     values = person.attributes.values_at(*CSV_FIELDS[:person])
     values << service_type_id

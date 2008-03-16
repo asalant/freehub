@@ -33,7 +33,7 @@ td.note {
   width: 300px;
 }
 
-.list_status {
+.list_status, .instructions {
   font-style: italic;
 }
 

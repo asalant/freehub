@@ -32,6 +32,10 @@ class VisitTest < ActiveSupport::TestCase
     assert_match /^Mary,Member,mary@example.com,,,2008-02-01 18:01:00,false,.+/, visits(:mary_1).to_csv
   end
 
+  def test_csv_header
+    assert_equal 'first_name,last_name,email,phone,postal_code,datetime,volunteer,note', Visit.csv_header
+  end
+
   def test_create_defaults
     assert_equal Date.today, Visit.create!(:person => people(:mary)).datetime.to_date
     assert_equal Time.local(2008,1,1), Visit.create!(:person => people(:mary), :datetime => Time.local(2008,1,1)).datetime

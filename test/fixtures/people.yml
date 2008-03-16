@@ -2,15 +2,16 @@ mary:
   first_name: Mary
   last_name: Member
   full_name: Mary Member
-  street1:
+  street1: 123 Street St
   street2:
-  city:
-  state:
-  postal_code:
-  country:
+  city: San Francisco
+  state: CA
+  postal_code: 95105
+  country: USA
   email: mary@example.com
-  phone:
+  phone: 415 123-1234
   staff: false
+  created_at: 2008-01-02
   organization: sfbk
 
 marty:
@@ -26,6 +27,7 @@ marty:
   email: marty@example.com
   phone:
   staff: true
+  created_at: 2008-01-03
   organization: sfbk
 
 daryl:
@@ -41,6 +43,7 @@ daryl:
   email:
   phone:
   staff: false
+  created_at: 2008-01-04
   organization: sfbk
 
 victor:
@@ -56,6 +59,7 @@ victor:
   email:
   phone:
   staff: false
+  created_at: 2008-01-05
   organization: sfbk
 
 carrie:
@@ -71,6 +75,7 @@ carrie:
   email:
   phone:
   staff: false
+  created_at: 2008-01-06
   organization: sfbk
 
 mary_scbc:
@@ -86,4 +91,5 @@ mary_scbc:
   email:
   phone:
   staff: false
+  created_at: 2008-01-07
   organization: scbc

@@ -12,15 +12,36 @@ class Person < ActiveRecord::Base
   before_save :update_full_name
   
   acts_as_paginated
+  chains_finders
 
   has_finder :for_organization, lambda { |organization| {
       :conditions => { :organization_id => organization }
+  } }
+
+  has_finder :after, lambda { |date| {
+      :conditions => [ "people.created_at >= ?", date ]
+  } }
+
+  has_finder :before, lambda { |date| {
+      :conditions => [ "people.created_at <= ?", date ]
   } }
 
   has_finder :matching_name, lambda { |name| {
       :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ], 
       :order => "full_name ASC"
   } }
+
+  CSV_FIELDS = { :self => %w{first_name last_name staff email phone postal_code street1 street2 city state postal_code country created_at} }
+
+  def self.csv_header
+    CSV.generate_line(CSV_FIELDS[:self])
+  end
+
+  def to_csv
+    values = self.attributes.values_at(*CSV_FIELDS[:self])
+    values[values.size - 1] = created_at.nil? ? nil : created_at.to_s(:db)
+    CSV.generate_line values
+  end
 
   private
 

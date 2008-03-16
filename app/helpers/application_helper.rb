@@ -19,9 +19,9 @@ module ApplicationHelper
         text ' | '
         link_to('Services', report_path(:action => 'services', :organization_key => @organization.key))
         text ' | '
-        b 'People: '
-        link_to('List', people_path(:organization_key => organization.key))
+        link_to('People', report_path(:action => 'people', :organization_key => @organization.key))
         text ' | '
+        b 'People: '
         link_to('Add', new_person_path(:organization_key => organization.key))
         text ' | Find: '
         text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },

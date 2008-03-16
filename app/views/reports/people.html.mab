@@ -1,0 +1,65 @@
+h1 do
+  link_to 'Reports', reports_path
+  text ' : People'
+end
+
+form_tag report_path(:action => 'people'), :method => :get do
+  capture do
+    labeled_input 'Matching name', :for => 'report[matching_name]' do
+      text_field_tag 'report[matching_name]', @report[:matching_name]
+      br
+      span.instructions "Match 3 or more letters in a person's first and last name."
+    end
+    labeled_input 'Created after', :for => 'report[after]' do
+      select_date @report[:after], :prefix => 'report[after]'
+    end
+    labeled_input 'Created before', :for => 'report[before]' do
+      select_date @report[:before], :prefix => 'report[before]'
+    end
+    p { submit_tag "Update"  }
+  end
+end
+
+if @people.empty?
+  div.list_status 'No people for date range.'
+else
+  table do
+    tr do
+    th { 'Name' }
+    th { 'Staff' }
+    th { 'Email' }
+    th { 'Phone' }
+    th { 'City' }
+    th { 'State' }
+    th { 'Postal code' }
+    th { 'Created' }
+    end
+
+    for person in @people
+      tr :class => cycle('odd','even') do
+        td { link_to(person.full_name, person_path(:id => person))  }
+        td { person.staff }
+        td { person.email }
+        td { person.phone }
+        td { person.city }
+        td { person.state }
+        td { person.postal_code }
+        td { datetime_short(person.created_at)  }
+      end
+    end
+    tr.list_controls do
+      td :colspan => 8 do
+        div.paginating_links do
+          text 'More: '
+          paginating_links(@people, :params => { :report => params[:report] } )
+        end if @people.next_page? || @people.previous_page?
+
+        div.export do
+          link_to 'Export all', report_path(:action => 'people', :params => { :report => params[:report], :format => 'csv' })
+        end
+      end
+    end
+  end
+
+end
+

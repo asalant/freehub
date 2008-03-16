@@ -19,9 +19,13 @@ class ServiceTest < ActiveSupport::TestCase
     assert_equal 3, Service.for_service_types('MEMBERSHIP').size
     assert_equal 64, Service.for_service_types(['MEMBERSHIP', 'CLASS']).size
   end
+
+  def test_csv_header
+    assert_equal 'first_name,last_name,email,phone,postal_code,service_type_id,start_date,end_date,volunteered,paid,note', Service.csv_header
+  end
   
   def test_to_csv
-    assert_match /^Mary,Member,mary@example.com,,,MEMBERSHIP,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},false,true,/, services(:mary_membership).to_csv
+    assert_match /^Mary,Member,mary@example.com,415 123-1234,95105,MEMBERSHIP,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},false,true,/, services(:mary_membership).to_csv
   end
 
 end

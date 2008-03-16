@@ -4,24 +4,24 @@ table do
   tr do
     th { 'First name' }
     th { 'Last name' }
+    th { 'Staff' }
+    th { 'Email' }
+    th { 'Phone' }
     th { 'City' }
     th { 'State' }
     th { 'Postal code' }
-    th { 'Email' }
-    th { 'Phone' }
-    th { 'Staff' }
   end
 
   for person in @people
     tr :class => cycle('odd','even') do
       td { person.first_name }
       td { person.last_name }
+      td { person.staff }
+      td { person.email }
+      td { person.phone }
       td { person.city }
       td { person.state }
       td { person.postal_code }
-      td { person.email }
-      td { person.phone }
-      td { person.staff }
       td { link_to 'Show', person_path(:id => person) }
       td { link_to 'Edit', edit_person_path(:id => person) }
       td { link_to 'Destroy', person_path(:id => person), :confirm => 'Are you sure?', :method => :delete }

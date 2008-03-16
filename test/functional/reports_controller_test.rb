@@ -53,7 +53,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_nothing_raised { @response.body.call(@response, output) }
     lines = output.string.split("\n")
     assert_equal assigns(:visits).size + 1, lines.size
-    assert_equal 'first_name,last_name,email,phone,postal_code,datetime,volunteer,note', lines[0]
+    assert_equal Visit.csv_header, lines[0]
     assert_equal "attachment; filename=\"sfbk_visits_2007-01-01_2009-01-01.csv\"", @response.headers['Content-Disposition']
   end
 
@@ -95,8 +95,46 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_nothing_raised { @response.body.call(@response, output) }
     lines = output.string.split("\n")
     assert_equal assigns(:services).size + 1, lines.size
-    assert_equal 'first_name,last_name,email,phone,postal_code,service_type_id,start_date,end_date,volunteered,paid,note', lines[0]
+    assert_equal Service.csv_header, lines[0]
     assert_equal "attachment; filename=\"sfbk_services_2006-01-01_2009-01-01.csv\"", @response.headers['Content-Disposition']
+  end
+
+  def test_people_report
+    get :people, :organization_key => 'sfbk',
+            :report => {  :after => { :year => 2008, :month => 1, :day => 1 },
+                          :before => { :year => 2008, :month => 1, :day => 5 } }
+    assert_response :success
+    assert_not_nil assigns(:report)
+    assert_not_nil assigns(:people)
+    assert_equal 4, assigns(:people).size
+    assert_equal 4, assigns(:people).to_a.size
+    assert_equal 1, assigns(:people).page
+  end
+
+  def test_people_report_default
+    get :people, :organization_key => 'sfbk'
+    assert_response :success
+    assert_not_nil assigns(:report)
+    assert_not_nil assigns(:people)
+  end
+
+  def test_people_report_csv
+    get :people, :organization_key => 'sfbk',
+            :report => {  :after => { :year => 2008, :month => 1, :day => 1 },
+                          :before => { :year => 2008, :month => 1, :day => 5 },
+                          :matching_name => 'mar' },
+            :format => 'csv'
+    assert_response :success
+    assert_not_nil assigns(:people)
+    assert_equal 2, assigns(:people).size
+
+    output = StringIO.new
+    output.binmode
+    assert_nothing_raised { @response.body.call(@response, output) }
+    lines = output.string.split("\n")
+    assert_equal assigns(:people).size + 1, lines.size
+    assert_equal Person.csv_header, lines[0]
+    assert_equal "attachment; filename=\"sfbk_people_2008-01-01_2008-01-05.csv\"", @response.headers['Content-Disposition']
   end
 
   def test_signin_report
