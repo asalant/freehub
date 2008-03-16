@@ -13,13 +13,14 @@ module ApplicationHelper
         end
       div.organization_nav! do
         b 'Report: '
-        link_to('Today', signin_today_path(:organization_key => @organization.key))
-        text ' | '
         link_to('Visits', report_path(:action => 'visits', :organization_key => @organization.key))
         text ' | '
         link_to('Services', report_path(:action => 'services', :organization_key => @organization.key))
         text ' | '
         link_to('People', report_path(:action => 'people', :organization_key => @organization.key))
+        text ' | '
+        b 'Visits: '
+        link_to('Today', signin_today_path(:organization_key => @organization.key))
         text ' | '
         b 'People: '
         link_to('Add', new_person_path(:organization_key => organization.key))
