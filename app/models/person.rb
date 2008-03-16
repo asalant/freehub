@@ -3,7 +3,11 @@ class Person < ActiveRecord::Base
   belongs_to :created_by, :class_name => "User", :foreign_key => "created_by_id"
   belongs_to :updated_by, :class_name => "User", :foreign_key => "updated_by_id"
   has_many :visits, :dependent => :destroy, :order => "datetime DESC"
-  has_many :services, :dependent => :destroy,  :order => "start_date DESC"
+  has_many :services, :dependent => :destroy,  :order => "end_date DESC" do
+    def last(service_type)
+      for_service_types(ServiceType[service_type].id).first
+    end
+  end
   
   validates_presence_of :first_name, :organization_id
   validates_uniqueness_of :email, :scope => :organization_id, :case_sensitive => false, :allow_nil => true, :allow_blank => true

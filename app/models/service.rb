@@ -22,8 +22,11 @@ class Service < ActiveRecord::Base
 
   has_finder :for_service_types, lambda { |service_types| {
       :conditions => [ "services.service_type_id IN (?)", service_types ]
-      #:conditions => [ "services.service_type_id IN (?)", service_types.collect{|type| "'#{type}"}.join(',') ]
   } }
+
+  def current?
+    (start_date.nil? || Date.today >= start_date) && (end_date.nil? || Date.today <= end_date)
+  end
 
   def service_type
     ServiceType[service_type_id]

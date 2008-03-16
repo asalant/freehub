@@ -45,6 +45,7 @@ else
   table do
     tr do
       th { 'Service type' }
+      th { 'Status' }
       th { 'Start date' }
       th { 'End date' }
       th { 'Note' }
@@ -52,6 +53,7 @@ else
     for service in services
       tr :class => cycle('odd','even') do
         td { service.service_type.name }
+        td { service.current? ? 'Current' : 'Expired' }
         td { service.start_date }
         td { service.end_date }
         td.note { service.note }

@@ -66,8 +66,8 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_response :success
     assert_not_nil assigns(:report)
     assert_not_nil assigns(:services)
-    assert_equal 28, assigns(:services).size
-    assert_equal 8, assigns(:services).to_a.size
+    assert_equal 29, assigns(:services).size
+    assert_equal 9, assigns(:services).to_a.size
     assert_equal 2, assigns(:services).page
     assert_select "input[type=checkbox]", 3
     assert_select "input[type=checkbox][checked=checked]", 2
@@ -88,7 +88,7 @@ class ReportsControllerTest < Test::Unit::TestCase
             :format => 'csv'
     assert_response :success
     assert_not_nil assigns(:services)
-    assert_equal 28, assigns(:services).size
+    assert_equal 29, assigns(:services).size
 
     output = StringIO.new
     output.binmode

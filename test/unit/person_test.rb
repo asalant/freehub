@@ -41,6 +41,14 @@ class PersonTest < ActiveSupport::TestCase
     assert !Person.create(:organization => organizations(:sfbk), :email => 'mary@foo.com').errors.invalid?(:email)
   end
 
+  def test_membership
+    assert_not_nil people(:mary).services.last(:membership)
+    assert people(:mary).services.last(:membership).current?
+
+    assert_not_nil people(:carrie).services.last(:membership)
+    assert !people(:carrie).services.last(:membership).current?
+  end
+
   def test_csv_header
     assert_equal 'first_name,last_name,staff,email,phone,postal_code,street1,street2,city,state,postal_code,country,created_at', Person.csv_header
   end

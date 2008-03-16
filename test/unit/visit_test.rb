@@ -29,7 +29,7 @@ class VisitTest < ActiveSupport::TestCase
   end
 
   def test_to_csv
-    assert_match /^Mary,Member,mary@example.com,,,2008-02-01 18:01:00,false,.+/, visits(:mary_1).to_csv
+    assert_match /^Mary,Member,mary@example.com,415 123-1234,95105,2008-02-01 18:01:00,false,.+/, visits(:mary_1).to_csv
   end
 
   def test_csv_header
