@@ -1,0 +1,10 @@
+h1 'User: Send password reset'
+
+error_messages_for :user
+
+form_for @user, :url => forgot_path do |f|
+  labeled_input 'Email', :for => :email do
+    f.text_field :email
+  end
+  p { submit_tag 'Submit' }
+end
