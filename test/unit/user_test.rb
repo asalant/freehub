@@ -96,6 +96,17 @@ class UserTest < Test::Unit::TestCase
     assert users(:greeter).remember_token_expires_at.between?(before, after)
   end
 
+  def test_reset
+    users(:sfbk).create_reset_code
+    assert !users(:sfbk).reset_code.nil?
+    assert users(:sfbk).recently_forgot_password?
+    users(:sfbk).reset_password(:password => 'new_password', :password_confirmation => 'bad')
+    assert !users(:sfbk).recently_reset_password?
+    users(:sfbk).reset_password(:password => 'new_password', :password_confirmation => 'new_password')
+    assert users(:sfbk).recently_reset_password?
+    assert User.authenticate('sfbk', 'new_password')
+  end
+
 protected
   def create_user(options = {})
     User.create({ :name => 'Quire', :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))

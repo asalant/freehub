@@ -11,12 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 6) do
 
-  create_table "delete_mes", :force => true do |t|
-    t.string   "foo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.string   "key"
@@ -94,6 +88,7 @@ ActiveRecord::Schema.define(:version => 6) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
+    t.string   "reset_code",                :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
   end

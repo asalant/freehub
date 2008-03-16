@@ -11,7 +11,6 @@ class UsersControllerTest < Test::Unit::TestCase
     @controller = UsersController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    login_as :admin
   end
 
   def test_should_allow_signup
@@ -75,7 +74,44 @@ class UsersControllerTest < Test::Unit::TestCase
     # well played, sir
   end
 
+  def test_should_show_forgot
+    get :forgot
+    assert_response :success
+  end
+
+  def test_should_show_forget_for_nonexisting_user
+    post :forgot, :user => { :email => 'foo@bar.com' }
+    assert_response :success
+    assert_equal 'foo@bar.com does not exist in system', @response.flash[:notice]
+  end
+
+  def test_should_send_reset_code_for_known_user
+    post :forgot, :user => { :email => 'sfbk@example.com' }
+    assert_redirected_to new_session_path
+  end
+
+  def test_should_show_reset
+    users(:sfbk).create_reset_code
+    get :reset, :reset_code => users(:sfbk).reset_code
+    assert_response :success
+  end
+
+  def test_should_not_reset_with_errors
+    users(:sfbk).create_reset_code
+    post :reset, :reset_code => users(:sfbk).reset_code, :user => { :password => '' , :password_confirmation => '' }
+    assert_response :success
+    assert !assigns(:user).errors.empty?
+  end
+
+  def test_should_reset_password
+    users(:sfbk).create_reset_code
+    post :reset, :reset_code => users(:sfbk).reset_code, :user => { :password => 'new_password' , :password_confirmation => 'new_password' }
+    assert_redirected_to user_path(:id => users(:sfbk))
+    assert User.authenticate('sfbk', 'new_password')
+  end
+
   def test_should_get_index
+    login_as :admin
     get :index
     assert_response :success
     assert_not_nil assigns(:users)
@@ -110,6 +146,7 @@ class UsersControllerTest < Test::Unit::TestCase
   end
 
   def test_should_destroy_user
+    login_as :admin
     assert_difference('User.count', -1) do
       delete :destroy, :id => users(:greeter).id
     end

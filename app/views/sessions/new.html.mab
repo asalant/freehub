@@ -17,3 +17,5 @@ form_tag session_path do
     end
   end
 end
+
+link_to 'Forgot login?', forgot_path

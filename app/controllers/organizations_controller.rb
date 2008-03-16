@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
 
+  skip_before_filter :login_required, :only => [:index, :show, :new, :create]
   before_filter :assign_id_param, :resolve_organization_by_id, :except => [ :index, :new, :create ] 
 
   permit "admin", :only => [ :destroy ]

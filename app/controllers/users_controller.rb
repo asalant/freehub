@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :resolve_user_by_id
-  skip_before_filter :login_from_cookie, :login_required, :only => [:new, :create, :activate]
+  skip_before_filter :login_from_cookie, :login_required, :only => [:new, :create, :activate, :reset, :forgot]
 
   permit "admin or (owner of :user)", :only => [:edit, :update, :destroy]
   
@@ -33,6 +33,34 @@ class UsersController < ApplicationController
       flash[:notice] = "Signup complete!"
     end
     redirect_back_or_default('/')
+  end
+
+  def forgot
+    if request.post?
+      @user = User.find_by_email(params[:user][:email]) || User.new
+      if !@user.new_record?
+        @user.create_reset_code
+        flash[:notice] = "Reset code sent to #{@user.email}"
+        redirect_to new_session_path
+      else
+        flash[:notice] = "#{params[:user][:email]} does not exist in system"
+      end
+    else
+      @user = User.new
+    end
+  end
+
+  def reset
+    @user = User.find_by_reset_code(params[:reset_code]) unless params[:reset_code].nil?
+    if request.post?
+      if @user.reset_password(:password => params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
+        self.current_user = @user
+        flash[:notice] = "Password reset successfully for #{@user.email}"
+        redirect_to user_path(:id => @user)
+      else
+        render :action => :reset
+      end
+    end
   end
 
   # GET /users

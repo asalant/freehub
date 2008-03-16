@@ -11,7 +11,6 @@ class OrganizationsControllerTest < Test::Unit::TestCase
     @controller = OrganizationsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
-    login_as 'sfbk'
   end
       
   def test_should_get_index
@@ -46,11 +45,13 @@ class OrganizationsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_edit
+    login_as 'sfbk'
     get :edit, :id => organizations(:sfbk)
     assert_response :success
   end
 
   def test_should_update_organization
+    login_as 'sfbk'
     put :update, :id => organizations(:sfbk), :organization => { }
     assert_redirected_to organization_path(assigns(:organization))
   end

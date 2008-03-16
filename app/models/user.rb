@@ -48,6 +48,30 @@ class User < ActiveRecord::Base
     @activated
   end
 
+  def create_reset_code
+    @forgotten_password = true
+    self.reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    save(false)
+  end
+
+  def reset_password(attributes)
+    if update_attributes(attributes)
+      update_attribute :reset_code, nil
+      @reset_password = true
+    else
+      false
+    end
+  end
+
+  # used in user_observer
+  def recently_forgot_password?
+    @forgotten_password
+  end
+
+  def recently_reset_password?
+    @reset_password
+  end 
+
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
     u = find :first, :conditions => ['login = ? and activated_at IS NOT NULL', login] # need to get the salt
@@ -102,7 +126,7 @@ class User < ActiveRecord::Base
     end
       
     def password_required?
-      crypted_password.blank? || !password.blank?
+      crypted_password.blank? || !password.blank? || reset_code
     end
     
     def make_activation_code

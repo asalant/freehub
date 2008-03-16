@@ -11,7 +11,12 @@ ActionController::Routing::Routes.draw do |map|
   # Authentication
   map.resources :users
   map.resource :session
-  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
+  map.activate '/activate/:activation_code',  :controller => 'users', :action => 'activate'
+  map.forgot   '/forgot',            :controller => 'users',     :action => 'forgot'
+  map.reset    '/reset/:reset_code', :controller => 'users',     :action => 'reset',
+                                     :requirements => { :reset_code => /\w+/ }
+
+
 
   # Organization mappings go last so they don't take precedence'
   map.reports ':organization_key/reports', :controller => 'reports', :action => 'index'
