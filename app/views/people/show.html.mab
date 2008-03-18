@@ -98,7 +98,7 @@ end
 h2 'Notes History'
 
 notes = @person.notes
-if visits.empty?
+if notes.empty?
   div.list_status do
     text 'No past notes. '
     link_to 'Add note.', new_note_path(:person_id => @person)

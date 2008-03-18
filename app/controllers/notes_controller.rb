@@ -5,7 +5,7 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.xml
   def index
-    @notes = Note.find(:all)
+    @notes = @person.notes
 
     respond_to do |format|
       format.html # index.html.erb
