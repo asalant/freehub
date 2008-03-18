@@ -79,10 +79,18 @@ tr.odd  { background: #efefef; }
 }
 
 div.note {
-  margin: 2px;
-  padding: 3px;
+  margin-bottom: 4px;
+  padding: 2px;
   background: #efefef;
+  width: 600px;
 }
-.note_status {
+
+div.note .note_status {
   font-style: italic;
+  font-size: 12px;
+}
+
+div.note .note_text {
+  padding: 3px;
+  background: #ffffff;
 }
