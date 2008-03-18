@@ -17,8 +17,10 @@ module ServicesHelper
       labeled_input 'Volunteered', :for => :volunteered do
         form.check_box :volunteered
       end
-      labeled_input 'Note', :for => :note do
-        form.text_area :note, :rows => 2
+      fields_for :note do |note|
+        labeled_input 'Note', :for => :visit_note do
+          note.text_area :text, :rows => 6
+        end
       end
     end
   end

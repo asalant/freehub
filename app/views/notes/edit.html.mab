@@ -1,0 +1,20 @@
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text ' : '
+  link_to 'Notes', notes_path(:person_id => @person)
+  text ' : Edit'
+end
+
+error_messages_for :note
+
+form_for @note, :url => note_path do |f|
+  labeled_input 'Notable', :for => :notable do
+    "#{@note.notable_type} (#{@note.notable_id})"
+  end
+  labeled_input 'Text', :for => :text do
+    f.text_area :text, :rows => 6
+  end
+  p { f.submit "Update"  }
+end
+
+link_to 'Show', note_path(:id => @note)

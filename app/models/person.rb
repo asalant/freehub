@@ -1,13 +1,33 @@
 class Person < ActiveRecord::Base
   belongs_to :organization
-  belongs_to :created_by, :class_name => "User", :foreign_key => "created_by_id"
-  belongs_to :updated_by, :class_name => "User", :foreign_key => "updated_by_id"
-  has_many :visits, :dependent => :destroy, :order => "datetime DESC"
-  has_many :services, :dependent => :destroy,  :order => "end_date DESC" do
+  has_many :visits, :include => :note, :dependent => :destroy, :order => "datetime DESC"
+  has_many :services, :include => :note, :dependent => :destroy,  :order => "end_date DESC" do
     def last(service_type)
       for_service_types(ServiceType[service_type].id).first
     end
   end
+  has_many :notes, :as => :notable, :dependent => :destroy,
+          :finder_sql => 'SELECT * FROM notes
+            WHERE (notes.notable_type = \'Person\' AND notes.notable_id = #{id})
+            OR  (notes.notable_type = \'Service\' AND notes.notable_id IN (SELECT services.id FROM services WHERE services.person_id = #{id}))
+            OR  (notes.notable_type = \'Visit\' AND notes.notable_id IN (SELECT visits.id FROM visits WHERE visits.person_id = #{id}))
+            ORDER BY notes.created_at DESC',
+          :counter_sql => 'SELECT COUNT(*) FROM notes
+            WHERE (notes.notable_type = \'Person\' AND notes.notable_id = #{id})
+            OR  (notes.notable_type = \'Service\' AND notes.notable_id IN (SELECT services.id FROM services WHERE services.person_id = #{id}))
+            OR  (notes.notable_type = \'Visit\' AND notes.notable_id IN (SELECT visits.id FROM visits WHERE visits.person_id = #{id}))'
+
+=begin
+TODO: optimize the above
+          :finder_sql => 'SELECT * FROM notes
+                         LEFT OUTER JOIN services ON services.person_id = #{id}
+                         LEFT OUTER JOIN visits ON visits.person_id = #{id}
+                         WHERE ((notes.notable_type = \'Person\' and notes.notable_id = #{id})
+                         OR  (notes.notable_type = \'Service\' and notes.notable_id = services.id)
+                         OR  (notes.notable_type = \'Visit\' and notes.notable_id = visits.id))'
+=end
+
+  has_userstamps
   
   validates_presence_of :first_name, :organization_id
   validates_uniqueness_of :email, :scope => :organization_id, :case_sensitive => false, :allow_nil => true, :allow_blank => true
@@ -19,7 +39,7 @@ class Person < ActiveRecord::Base
   chains_finders
 
   has_finder :for_organization, lambda { |organization| {
-      :conditions => { :organization_id => organization }
+      :conditions => { :organization_id => organization },
   } }
 
   has_finder :after, lambda { |date| {

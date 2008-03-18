@@ -40,4 +40,12 @@ class VisitTest < ActiveSupport::TestCase
     assert_equal Date.today, Visit.create!(:person => people(:mary)).datetime.to_date
     assert_equal Time.local(2008,1,1), Visit.create!(:person => people(:mary), :datetime => Time.local(2008,1,1)).datetime
   end
+
+  def test_note_association
+    visit = Visit.create!(:person => people(:mary), :note => Note.new(:text => "test"))
+    assert !visit.note.new_record?
+    assert_not_nil visit.note.created_at
+    assert_equal people(:mary), visit.note.notable.person
+  end
+
 end

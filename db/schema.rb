@@ -9,7 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 6) do
+ActiveRecord::Schema.define(:version => 7) do
+
+  create_table "delete_mes", :force => true do |t|
+    t.string   "foo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notes", :force => true do |t|
+    t.text     "text"
+    t.integer  "notable_id"
+    t.string   "notable_type"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notes", ["created_by_id"], :name => "fk_notes_created_by"
+  add_index "notes", ["updated_by_id"], :name => "fk_notes_updated_by"
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
@@ -65,7 +84,6 @@ ActiveRecord::Schema.define(:version => 6) do
     t.date     "end_date"
     t.boolean  "paid",            :default => false
     t.boolean  "volunteered",     :default => false
-    t.text     "note"
     t.string   "service_type_id"
     t.integer  "person_id"
     t.datetime "created_at"
@@ -96,7 +114,6 @@ ActiveRecord::Schema.define(:version => 6) do
   create_table "visits", :force => true do |t|
     t.datetime "datetime"
     t.boolean  "volunteer",     :default => false
-    t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_id"

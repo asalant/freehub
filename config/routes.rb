@@ -1,12 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :delete_mes
-
-
   map.resources :organizations
 
   map.resources :people, :path_prefix => '/:organization_key', :collection => { :auto_complete_for_person_full_name => :get }
   map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
   map.resources :services, :path_prefix => '/:organization_key/people/:person_id'
+  map.resources :notes, :path_prefix => '/:organization_key/people/:person_id'
 
   # Authentication
   map.resources :users

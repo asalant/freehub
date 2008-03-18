@@ -5,7 +5,6 @@ class CreateServices < ActiveRecord::Migration
       t.date :end_date
       t.boolean :paid, :default => false
       t.boolean :volunteered, :default => false
-      t.text :note
       t.string :service_type_id, :nil => false
       t.references :person, :nil => false
 

@@ -49,6 +49,11 @@ END
     end
   end
 
+
+  def user_link(user)
+    user.nil? ? '' : link_to(user.login, user_path(user))
+  end
+
   def time_short(datetime)
     datetime.strftime("%I:%M %p")
   end
@@ -63,6 +68,10 @@ END
 
   def date_short(date)
     date.to_s(:db)
+  end
+
+  def note_text(note)
+    note.text if note
   end
 
   def signin_today_path(options={})

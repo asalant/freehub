@@ -1,5 +1,7 @@
 class Service < ActiveRecord::Base
   belongs_to :person
+  has_one :note, :as => :notable, :dependent => :destroy
+  has_userstamps
 
   validates_presence_of :person_id, :service_type_id
   
@@ -7,9 +9,9 @@ class Service < ActiveRecord::Base
   chains_finders
 
   has_finder :for_organization, lambda { |organization| {
-      :conditions => [ "services.person_id in (select people.id from people where people.organization_id = ?)", organization ],
-      :include => [ :person ],
-      :order => 'end_date DESC'
+      :conditions => [ "people.organization_id = ?", organization ],
+      :include => [ :person, :note ],
+      :order => 'services.end_date DESC'
   } }
 
   has_finder :after, lambda { |date| {
@@ -46,7 +48,7 @@ class Service < ActiveRecord::Base
     values << end_date ? nil : end_date.to_s(:db)
     values << volunteered
     values << paid
-    values << note
+    values << note.nil? ? nil : note.text
     CSV.generate_line values
   end
 end

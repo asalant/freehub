@@ -26,7 +26,7 @@ else
         td { visit.person.staff? ? 'Staff' : 'Patron'  }
         td { visit.volunteer? }
         td { "#{time_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
-        td.note { visit.note }
+        td.note { note_text(visit.note) }
         td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit, :destination => signin_path),
                 :confirm => 'Are you sure?', :method => :delete }
       end

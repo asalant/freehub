@@ -22,7 +22,7 @@ table do
       td { service.end_date }
       td { service.paid }
       td { service.volunteered }
-      td.note { service.note }
+      td.note { note_text(service.note) }
       td { link_to 'Show', service_path(:id => service) }
       td { link_to 'Edit', edit_service_path(:id => service) }
       td { link_to 'Destroy', service_path(:id => service), :confirm => 'Are you sure?', :method => :delete }

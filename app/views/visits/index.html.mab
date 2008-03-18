@@ -16,7 +16,7 @@ table do
     tr :class => cycle('odd','even') do
       td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
       td { visit.volunteer? }
-      td.note { visit.note }
+      td.note { note_text(visit.note) }
       td { link_to 'Show', visit_path(:id => visit) }
       td { link_to 'Edit', edit_visit_path(:id => visit) }
       td { link_to 'Destroy', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete }

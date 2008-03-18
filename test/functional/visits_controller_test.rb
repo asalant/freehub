@@ -5,7 +5,7 @@ require 'visits_controller'
 class VisitsController; def rescue_action(e) raise e end; end
 
 class VisitsControllerTest < Test::Unit::TestCase
-  fixtures :organizations, :people, :visits
+  fixtures :organizations, :people, :visits, :notes
 
   def setup
     @controller = VisitsController.new
@@ -36,9 +36,10 @@ class VisitsControllerTest < Test::Unit::TestCase
 
   def test_should_create_visit
     assert_difference('Visit.count') do
-      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :visit => { }
+      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :visit => { }, :note => { :text => 'test' }
     end
     assert_equal people(:mary), assigns(:visit).person
+    assert_equal 'test', assigns(:visit).note.text
 
     assert_redirected_to visits_path
   end
@@ -64,8 +65,9 @@ class VisitsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_update_visit
-    put :update, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1), :visit => { }
+    put :update, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1), :visit => { }, :note => { :text => 'test' }
     assert_redirected_to visit_path(:id => assigns(:visit))
+    assert_equal 'test', assigns(:visit).note.text
   end
 
   def test_should_destroy_visit

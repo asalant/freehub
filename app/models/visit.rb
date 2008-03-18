@@ -1,5 +1,7 @@
 class Visit < ActiveRecord::Base
   belongs_to :person
+  has_one :note, :as => :notable, :dependent => :destroy
+  has_userstamps
 
   validates_presence_of :person_id, :datetime
 
@@ -7,8 +9,8 @@ class Visit < ActiveRecord::Base
   chains_finders
 
   has_finder :for_organization, lambda { |organization| {
-      :conditions => [ "visits.person_id in (select people.id from people where people.organization_id = ?)", organization ],
-      :include => [ :person ],
+      :conditions => [ "people.organization_id = ?", organization ],
+      :include => [ :person, :note ],
       :order => 'datetime DESC'
   } }
 
@@ -37,7 +39,7 @@ class Visit < ActiveRecord::Base
     values = person.attributes.values_at(*CSV_FIELDS[:person])
     values << (datetime.nil? ? nil : datetime.to_s(:db))
     values << volunteer
-    values << note
+    values << note.nil? ? nil : note.text
     CSV.generate_line values
   end
 end

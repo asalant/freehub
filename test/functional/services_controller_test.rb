@@ -5,7 +5,7 @@ require 'services_controller'
 class ServicesController; def rescue_action(e) raise e end; end
 
 class ServicesControllerTest < Test::Unit::TestCase
-  fixtures :users, :roles, :organizations, :people, :services
+  fixtures :users, :roles, :organizations, :people, :services, :notes
 
   def setup
     @controller = ServicesController.new
@@ -36,10 +36,11 @@ class ServicesControllerTest < Test::Unit::TestCase
 
   def test_should_create_service
     assert_difference('Service.count') do
-      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :service => { :service_type_id => 'CLASS' }
+      post :create, :organization_key => 'sfbk', :person_id => people(:mary), :service => { :service_type_id => 'CLASS' }, :note => { :text => 'test' }
     end
 
     assert_redirected_to services_path
+    assert_equal 'test', assigns(:service).note.text
   end
 
   def test_should_show_service
@@ -53,8 +54,9 @@ class ServicesControllerTest < Test::Unit::TestCase
   end
 
   def test_should_update_service
-    put :update, :organization_key => 'sfbk', :person_id => people(:mary), :id => services(:mary_membership), :service => { }
+    put :update, :organization_key => 'sfbk', :person_id => people(:mary), :id => services(:mary_membership), :service => { }, :note => { :text => 'test' }
     assert_redirected_to service_path(:id => assigns(:service))
+    assert_equal 'test', assigns(:service).note.text
   end
 
   def test_should_destroy_service

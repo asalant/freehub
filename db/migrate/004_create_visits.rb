@@ -3,7 +3,6 @@ class CreateVisits < ActiveRecord::Migration
     create_table :visits do |t|
       t.datetime :datetime, :nil => false
       t.boolean :volunteer, :nil => false, :default => false
-      t.text :note
 
       t.timestamps
       t.references :created_by, :updated_by

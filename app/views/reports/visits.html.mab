@@ -31,7 +31,7 @@ else
         td { link_to(visit.person.full_name, person_path(:id => visit.person))  }
         td { "#{datetime_short(visit.datetime)}"  }
         td { visit.volunteer? }
-        td.note { visit.note }
+        td.note { note_text(visit.note) }
       end
     end
     tr.list_controls do

@@ -56,4 +56,10 @@ class PersonTest < ActiveSupport::TestCase
   def test_to_csv
     assert_match /^Mary,Member,false,mary@example.com,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,2008-01-02 00:00:00/, people(:mary).to_csv
   end
+
+  def test_notes
+    assert_equal 4, people(:mary).notes.size
+    people(:mary).notes << Note.new(:text => 'test')
+    assert_equal 5, people(:mary).notes.size
+  end
 end

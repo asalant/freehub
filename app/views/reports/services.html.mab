@@ -43,7 +43,7 @@ else
         td { date_short(service.end_date)  }
         td { service.paid }
         td { service.volunteered }
-        td { service.note }
+        td { note_text(service.note) }
       end
     end
     tr.list_controls do

@@ -2,8 +2,10 @@ h1 @person.full_name
 
 form_for Visit.new, :url => visits_path(:person_id => @person.id) do |f|
   hidden_field_tag :destination, signin_today_path
-  labeled_input 'Note', :for => :visit_note do
-    f.text_area :note, :rows => 1
+  fields_for :note do |note|
+    labeled_input 'Note', :for => :visit_note do
+      note.text_area :text, :rows => 1
+    end
   end
   labeled_input 'Volunteer', :for => :visit_volunteer do
     f.check_box :volunteer
@@ -24,8 +26,8 @@ labeled_value 'State', @person.state
 labeled_value 'Postal code', @person.postal_code
 labeled_value 'Country', @person.country
 labeled_value 'Staff', @person.staff
-labeled_value 'Created by', @person.created_by.nil? ? '' : link_to(@person.created_by.login, user_path(@person.created_by))
-labeled_value 'Updated by', @person.updated_by.nil? ? '' : link_to(@person.updated_by.login, user_path(@person.updated_by))
+labeled_value 'Created by', user_link(@person.created_by)
+labeled_value 'Updated by', user_link(@person.updated_by)
 
 link_to 'Edit', edit_person_path(:id => @person)
 
@@ -56,7 +58,7 @@ else
         td { service.current? ? 'Current' : 'Expired' }
         td { service.start_date }
         td { service.end_date }
-        td.note { service.note }
+        td.note { note_text(service.note) }
       end
     end
   end
@@ -86,9 +88,30 @@ else
       tr :class => cycle('odd','even') do
         td { datetime_short(visit.datetime) }
         td { "(#{time_ago_in_words(visit.datetime)} ago)"  }
-        td.note { visit.note }
+        td.note { note_text(visit.note) }
       end
     end
   end
+end
 
+
+h2 'Notes History'
+
+notes = @person.notes
+if visits.empty?
+  div.list_status do
+    text 'No past notes. '
+    link_to 'Add note.', new_note_path(:person_id => @person)
+  end
+else
+  div.list_status do
+    text "Showing #{notes.to_a.size} of #{notes.size} total notes. "
+    link_to 'See all notes.', notes_path(:organization_key => @organization.key, :person_id => @person)
+  end
+  for note in notes
+    div.note do
+      div.note_status { "#{note.notable_type} note from #{datetime_short(note.created_at)} by #{user_link(note.created_by)}" }
+      div.note_text { note.text }
+    end
+  end
 end

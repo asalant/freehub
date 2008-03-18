@@ -1,0 +1,11 @@
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text ' : '
+  link_to 'Notes', notes_path(:person_id => @person)
+  text ' : Detail'
+end
+
+labeled_value 'Notable', "#{@note.notable_type} (#{@note.notable_id})"
+labeled_value 'Text', @note.text
+
+link_to 'Edit', edit_note_path(:id => @note)

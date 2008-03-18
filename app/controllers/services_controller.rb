@@ -43,7 +43,7 @@ class ServicesController < ApplicationController
   # POST /services
   # POST /services.xml
   def create
-    @service = Service.new(params[:service])
+    @service = Service.new(params[:service].merge(:note => Note.new(params[:note])))
     @service.person = @person
 
     respond_to do |format|
@@ -62,6 +62,7 @@ class ServicesController < ApplicationController
   # PUT /services/1.xml
   def update
     @service = Service.find(params[:id])
+    @service.note = Note.new(params[:note]) if params[:note]
 
     respond_to do |format|
       if @service.update_attributes(params[:service])

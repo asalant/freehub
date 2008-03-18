@@ -37,4 +37,11 @@ class ServiceTest < ActiveSupport::TestCase
     assert_match /^Mary,Member,mary@example.com,415 123-1234,95105,MEMBERSHIP,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},false,true,/, services(:mary_membership).to_csv
   end
 
+  def test_note_association
+    service = Service.create!(:person => people(:mary), :service_type_id => 'MEMBERSHIP', :note => Note.new(:text => "test"))
+    assert !service.note.new_record?
+    assert_not_nil service.note.created_at
+    assert_equal people(:mary), service.note.notable.person
+  end
+
 end

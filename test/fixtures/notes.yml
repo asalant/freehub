@@ -1,0 +1,30 @@
+mary_1:
+  text: Mary is a fine patron. Do what you can to keep her coming back.
+  created_at: 2008-02-04 18:45:00
+  created_by: sfbk
+  notable: mary (Person)
+
+mary_visit_1:
+  text: Mary came in with a total beater and wanted to trade it for the new XTR wheels than someone dropped off yesterday.
+        I told her she could fix her bike or leave.
+  created_at: 2008-02-01 18:01:00
+  created_by: sfbk
+  notable: mary_1 (Visit)
+
+mary_visit_2:
+  text: Mary did two hours volunteering toward a membership today.
+  created_at: 2008-02-02 18:02:00
+  created_by: sfbk
+  notable: mary_2 (Visit)
+
+mary_membership_expired:
+  text: Mary did two hours volunteering toward a membership today.
+  created_at: 2006-03-05 18:34:00
+  created_by: sfbk
+  notable: mary_membership_expired (Service)
+
+carrie_membership_expired:
+  text: Carrie volunteered 6 hours for her membership.
+  created_at: 2008-02-02 18:54:00
+  created_by: sfbk
+  notable: carrie_membership_expired (Service)

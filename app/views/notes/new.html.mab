@@ -1,0 +1,19 @@
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text ' : '
+  link_to 'Notes', visits_path(:person_id => @person)
+  text ' : New'
+end
+
+error_messages_for :note
+
+form_for @note do |f|
+  labeled_input 'Text', :for => :text do
+    f.text_area :text, :rows => 6
+  end
+  p do
+    f.submit"Create"
+  end
+end
+
+link_to 'Back', notes_path

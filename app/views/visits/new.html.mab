@@ -8,15 +8,7 @@ end
 error_messages_for :visit
 
 form_for @visit do |f|
-  labeled_input 'Datetime', :for => :visit_datetime do
-    f.datetime_select :datetime
-  end
-  labeled_input 'Volunteer', :for => :visit_volunteer do
-    f.check_box :volunteer
-  end
-  labeled_input 'Note', :for => :visit_note do
-    f.text_area :note
-  end
+  visit_form_fields(f)
   p do
     f.submit"Create"
   end
