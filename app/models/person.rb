@@ -6,16 +6,7 @@ class Person < ActiveRecord::Base
       for_service_types(ServiceType[service_type].id).first
     end
   end
-  has_many :notes, :as => :notable, :dependent => :destroy,
-          :finder_sql => 'SELECT * FROM notes
-            WHERE (notes.notable_type = \'Person\' AND notes.notable_id = #{id})
-            OR  (notes.notable_type = \'Service\' AND notes.notable_id IN (SELECT services.id FROM services WHERE services.person_id = #{id}))
-            OR  (notes.notable_type = \'Visit\' AND notes.notable_id IN (SELECT visits.id FROM visits WHERE visits.person_id = #{id}))
-            ORDER BY notes.created_at DESC',
-          :counter_sql => 'SELECT COUNT(*) FROM notes
-            WHERE (notes.notable_type = \'Person\' AND notes.notable_id = #{id})
-            OR  (notes.notable_type = \'Service\' AND notes.notable_id IN (SELECT services.id FROM services WHERE services.person_id = #{id}))
-            OR  (notes.notable_type = \'Visit\' AND notes.notable_id IN (SELECT visits.id FROM visits WHERE visits.person_id = #{id}))'
+  has_many :notes, :as => :notable, :dependent => :destroy
 
   has_userstamps
   

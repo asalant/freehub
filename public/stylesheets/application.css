@@ -85,12 +85,21 @@ div.note {
   width: 600px;
 }
 
-div.note .note_status {
+.note_subject, .note_status {
   font-style: italic;
   font-size: 12px;
 }
 
+.note_subject {
+  float: left;
+}
+
+.note_status {
+  float: right;
+}
+
 div.note .note_text {
+  clear: both;
   padding: 3px;
   background: #ffffff;
 }

@@ -97,7 +97,7 @@ end
 
 h2 'Notes History'
 
-notes = @person.notes
+notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
 if notes.empty?
   div.list_status do
     text 'No past notes. '
@@ -105,12 +105,13 @@ if notes.empty?
   end
 else
   div.list_status do
-    text "Showing #{notes.to_a.size} of #{notes.size} total notes. "
+    text "Showing #{notes.size} of #{notes_count} total notes. "
     link_to 'See all notes.', notes_path(:organization_key => @organization.key, :person_id => @person)
   end
   for note in notes
     div.note do
-      div.note_status { "#{note.notable_type} note from #{datetime_short(note.created_at)} by #{user_link(note.created_by)}" }
+      div.note_subject { "Re: #{labeled_link(note.notable)}" }
+      div.note_status { "#{datetime_short(note.created_at)} by #{user_link(note.created_by)}" }
       div.note_text { note.text }
     end
   end
