@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 7) do
     t.datetime "updated_at"
   end
 
+  add_index "notes", ["notable_type", "notable_id"], :name => "index_notes_type_id"
   add_index "notes", ["created_by_id"], :name => "fk_notes_created_by"
   add_index "notes", ["updated_by_id"], :name => "fk_notes_updated_by"
 

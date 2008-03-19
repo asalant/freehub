@@ -17,16 +17,6 @@ class Person < ActiveRecord::Base
             OR  (notes.notable_type = \'Service\' AND notes.notable_id IN (SELECT services.id FROM services WHERE services.person_id = #{id}))
             OR  (notes.notable_type = \'Visit\' AND notes.notable_id IN (SELECT visits.id FROM visits WHERE visits.person_id = #{id}))'
 
-=begin
-TODO: optimize the above
-          :finder_sql => 'SELECT * FROM notes
-                         LEFT OUTER JOIN services ON services.person_id = #{id}
-                         LEFT OUTER JOIN visits ON visits.person_id = #{id}
-                         WHERE ((notes.notable_type = \'Person\' and notes.notable_id = #{id})
-                         OR  (notes.notable_type = \'Service\' and notes.notable_id = services.id)
-                         OR  (notes.notable_type = \'Visit\' and notes.notable_id = visits.id))'
-=end
-
   has_userstamps
   
   validates_presence_of :first_name, :organization_id
