@@ -1,14 +1,4 @@
 module PeopleHelper
-  
-  def labeled_link(model)
-    if model.is_a? Visit
-      link_to "Visit on #{date_long(model.datetime)}", visit_path(:person_id => @person, :id => model)
-    elsif model.is_a? Person
-      link_to "Person named #{model.full_name}", person_path(:id => model)
-    elsif model.is_a? Service
-      link_to "#{ServiceType[model.service_type_id].name} ending #{date_long(model.end_date)}", service_path(:person_id => @person, :id => model)
-    end
-  end
 
   def person_form_fields(form)
     markaby do

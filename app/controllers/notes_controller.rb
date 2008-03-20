@@ -49,7 +49,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.save
         flash[:notice] = 'Note was successfully created.'
-        format.html { redirect_to(note_path(:id => @note)) }
+        format.html { redirect_to(notes_path) }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
       else
         format.html { render :action => "new" }

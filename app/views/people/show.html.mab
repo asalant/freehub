@@ -97,6 +97,13 @@ end
 
 h2 'Notes History'
 
+form_for Note.new, :url => notes_path(:person_id => @person) do |f|
+    text f.text_area(:text, :rows => 3, :cols => 60)
+    p do
+      f.submit "Add note"
+    end  
+end
+
 notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
 if notes.empty?
   div.list_status do
@@ -110,7 +117,7 @@ else
   end
   for note in notes
     div.note do
-      div.note_subject { "Re: #{labeled_link(note.notable)}" }
+      div.note_subject { "Re: #{notable_link(note.notable)}" }
       div.note_status { "#{datetime_short(note.created_at)} by #{user_link(note.created_by)}" }
       div.note_text { note.text }
     end

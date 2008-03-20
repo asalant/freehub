@@ -31,7 +31,7 @@ class NotesControllerTest < Test::Unit::TestCase
       post :create, :organization_key => 'sfbk', :person_id => people(:mary), :note => { :text => 'New note'}
     end
 
-    assert_redirected_to note_path(:id => assigns(:note))
+    assert_redirected_to notes_path
   end
 
   def test_should_show_note
