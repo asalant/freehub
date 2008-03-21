@@ -11,8 +11,9 @@ class CreatePeople < ActiveRecord::Migration
       t.string :postal_code
       t.string :country
       t.string :email
+      t.boolean :email_opt_out, :nil => false, :default => false
       t.string :phone
-      t.boolean :staff
+      t.boolean :staff, :nil => false, :default => false
 
       t.timestamps
       t.references :created_by, :updated_by

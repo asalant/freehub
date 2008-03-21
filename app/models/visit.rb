@@ -30,7 +30,7 @@ class Visit < ActiveRecord::Base
     self.volunteer ||= false
   end
 
-  CSV_FIELDS = { :person => %w{first_name last_name email phone postal_code},
+  CSV_FIELDS = { :person => %w{first_name last_name email email_opt_out phone postal_code},
                  :self => %w{datetime volunteer note} }
 
   def self.csv_header

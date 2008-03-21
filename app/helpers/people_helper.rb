@@ -11,6 +11,9 @@ module PeopleHelper
       labeled_input 'Email', :for => :email do
         form.text_field :email
       end
+      labeled_input 'Email opt out', :for => :email_opt_out do
+        form.check_box :email_opt_out
+      end
       labeled_input 'Phone', :for => :phone do
         form.text_field :phone
       end

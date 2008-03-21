@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 7) do
     t.datetime "updated_at"
   end
 
-  add_index "notes", ["notable_type", "notable_id"], :name => "index_notes_type_id"
+  add_index "notes", ["notable_type", "notable_id"], :name => "index_notes_on_notable_type_and_notable_id"
   add_index "notes", ["created_by_id"], :name => "fk_notes_created_by"
   add_index "notes", ["updated_by_id"], :name => "fk_notes_updated_by"
 
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 7) do
     t.datetime "updated_at"
   end
 
-  add_index "organizations", ["key"], :name => "index_organizations_key", :unique => true
+  add_index "organizations", ["key"], :name => "index_organizations_on_key", :unique => true
 
   create_table "people", :force => true do |t|
     t.string   "first_name"
@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(:version => 7) do
     t.string   "postal_code"
     t.string   "country"
     t.string   "email"
+    t.boolean  "email_opt_out",   :default => false
     t.string   "phone"
-    t.boolean  "staff"
+    t.boolean  "staff",           :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_id"

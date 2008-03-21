@@ -3,7 +3,7 @@ class CreateOrganizations < ActiveRecord::Migration
     create_table :organizations do |t|
       t.string :name, :nil => false
       t.string :key, :nil => false
-      t.string :timezone
+      t.string :timezone, :nil => false
 
       t.timestamps
     end

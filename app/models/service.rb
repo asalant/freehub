@@ -42,7 +42,7 @@ class Service < ActiveRecord::Base
     ServiceType[service_type_id]
   end
 
-  CSV_FIELDS = { :person => %w{first_name last_name email phone postal_code},
+  CSV_FIELDS = { :person => %w{first_name last_name email email_opt_out phone postal_code},
                  :self => %w{service_type_id start_date end_date volunteered paid note} }
 
   def self.csv_header

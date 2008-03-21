@@ -370,6 +370,24 @@
           <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsProjectModuleNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="Model" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsModelFolderNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Migrations" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.MigrationsFolder" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsProjectRootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="freehub_for_all" />
+          <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.RailsProjectModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="Controllers" />
           <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.module.view.nodes.folders.RailsControllersFolderNode" />
         </PATH_ELEMENT>

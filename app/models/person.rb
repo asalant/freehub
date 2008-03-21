@@ -38,7 +38,7 @@ class Person < ActiveRecord::Base
       :order => "full_name ASC"
   } }
 
-  CSV_FIELDS = { :self => %w{first_name last_name staff email phone postal_code street1 street2 city state postal_code country created_at} }
+  CSV_FIELDS = { :self => %w{first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country created_at} }
 
   def self.csv_header
     CSV.generate_line(CSV_FIELDS[:self])

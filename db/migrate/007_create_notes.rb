@@ -2,7 +2,7 @@ class CreateNotes < ActiveRecord::Migration
   def self.up
     create_table :notes do |t|
       t.text :text
-      t.references :notable, :polymorphic => true
+      t.references :notable, :polymorphic => true, :nil => false
 
       t.references :created_by, :updated_by
       t.timestamps

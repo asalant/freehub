@@ -18,6 +18,7 @@ end
 h2 'Person Details'
 
 labeled_value 'Email', @person.email
+labeled_value 'Email opt out', @person.email_opt_out
 labeled_value 'Phone', @person.phone
 labeled_value 'Street1', @person.street1
 labeled_value 'Street2', @person.street2
