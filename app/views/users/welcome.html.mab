@@ -11,6 +11,9 @@ p "Welcome to Freehub. Here's some info on what you can do here."
 p { link_to "Edit your personal setting", edit_user_path(@user) }
 
 if @organization
+
+  p { "Bookmark #{link_to(url = organization_key_url(:organization_key => @organization.key), url)} to return to Freehub." }
+
   p do <<END
 Sign someone in by searching for their name above or
 #{link_to "browse today's visits", report_path(:action => 'visits', :organization_key => @organization.key)}.

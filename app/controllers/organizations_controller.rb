@@ -4,7 +4,7 @@ class OrganizationsController < ApplicationController
   before_filter :assign_id_param, :resolve_organization_by_id, :except => [ :index, :new, :create ] 
 
   permit "admin", :only => [ :destroy ]
-  permit "manager of :organization", :only => [ :edit, :update, :welcome ] 
+  permit "admin or (manager of :organization)", :only => [ :show, :edit, :update, :welcome ] 
     
   # GET /organizations
   # GET /organizations.xml

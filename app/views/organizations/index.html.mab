@@ -3,16 +3,15 @@ h1 "Organizations"
 table do
   tr do
     th { 'Name' }
-    th { 'Timezone' }
+    th { 'Members' }
+    th { 'Last visit' }
   end
 
   for organization in @organizations
     tr :class => cycle('odd','even') do
-      td { organization.name }
-      td { organization.timezone }
-      td { link_to 'Show', organization_key_path(:organization_key => organization.key) }
-      td { link_to 'Edit', edit_organization_path(organization) }
-      td { link_to 'Destroy', organization, :confirm => 'Are you sure?', :method => :delete }
+      td { link_to organization.name, organization_key_path(:organization_key => organization.key) }
+      td { organization.member_count }
+      td { organization.last_visit.nil? ? 'never' : datetime_long(organization.last_visit.datetime) }
     end
   end
 end

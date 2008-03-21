@@ -25,10 +25,8 @@ END
     end
     self << content_for_layout
 
-    if @organization
-      div.footer! do
-          text "All times shown in #{@organization.timezone} timezone."
-      end
+    div.footer! do
+        text "Times shown are #{TzTime.zone.name} timezone."
     end
   end
 end

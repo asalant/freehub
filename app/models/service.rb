@@ -17,11 +17,11 @@ class Service < ActiveRecord::Base
   } }
 
   has_finder :after, lambda { |date| {
-      :conditions => [ "services.start_date >= ?", date ]
+      :conditions => [ "services.end_date >= ?", date ]
   } }
 
   has_finder :before, lambda { |date| {
-      :conditions => [ "services.end_date <= ?", date ]
+      :conditions => [ "services.start_date <= ?", date ]
   } }
 
   has_finder :for_service_types, lambda { |service_types| {
