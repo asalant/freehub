@@ -28,6 +28,12 @@ class Service < ActiveRecord::Base
       :conditions => [ "services.service_type_id IN (?)", service_types ]
   } }
 
+  def initialize(params={})
+    super
+    self.start_date ||= Date.today
+    self.end_date ||= Date.today.next_year
+  end
+
   def current?
     (start_date.nil? || Date.today >= start_date) && (end_date.nil? || Date.today <= end_date)
   end

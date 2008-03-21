@@ -8,4 +8,6 @@ end
 labeled_value 'Notable', "#{@note.notable_type} (#{@note.notable_id})"
 labeled_value 'Text', @note.text
 
+userstamp_labeled_values @note
+
 link_to 'Edit', edit_note_path(:id => @note)

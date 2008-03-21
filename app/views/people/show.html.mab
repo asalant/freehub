@@ -26,8 +26,8 @@ labeled_value 'State', @person.state
 labeled_value 'Postal code', @person.postal_code
 labeled_value 'Country', @person.country
 labeled_value 'Staff', @person.staff
-labeled_value 'Created by', user_link(@person.created_by)
-labeled_value 'Updated by', user_link(@person.updated_by)
+
+userstamp_labeled_values @person
 
 link_to 'Edit', edit_person_path(:id => @person)
 

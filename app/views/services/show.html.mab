@@ -12,4 +12,6 @@ labeled_value 'Paid', @service.paid
 labeled_value 'Volunteered', @service.volunteered
 labeled_value 'Note', note_text(@service.note)
 
+userstamp_labeled_values @service
+
 link_to 'Edit', edit_service_path(:id => @service)

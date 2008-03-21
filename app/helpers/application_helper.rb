@@ -54,25 +54,31 @@ END
     end
   end
 
+  def userstamp_labeled_values(model)
+    markaby do
+      labeled_value 'Created', "#{datetime_short(model.created_at)} by #{user_link(model.created_by)}"
+      labeled_value 'Updated', "#{datetime_short(model.updated_at)} by #{user_link(model.updated_by)}"
+    end
+  end
 
   def user_link(user)
-    user.nil? ? '' : link_to(user.login, user_path(user))
+    link_to(user.login, user_path(user)) if user
   end
 
   def time_short(datetime)
-    datetime.strftime("%I:%M %p")
+    datetime.strftime("%I:%M %p") if datetime
   end
 
   def datetime_short(datetime)
-    datetime.strftime("%a %b %d %Y %I:%M %p")
+    datetime.strftime("%a %b %d %Y %I:%M %p") if datetime
   end
 
   def date_long(date)
-    date.strftime("%a %B %d %Y")
+    date.strftime("%a %B %d %Y") if date
   end
 
   def date_short(date)
-    date.to_s(:db)
+    date.to_s(:db) if date
   end
 
   # Override ActionView::Helpers::DateHelper#time_ago_in_words to handle timezone conversions
