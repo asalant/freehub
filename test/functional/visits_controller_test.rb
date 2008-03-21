@@ -44,6 +44,17 @@ class VisitsControllerTest < Test::Unit::TestCase
     assert_redirected_to visits_path
   end
 
+  def test_should_create_visit_in_eastern_timezone
+    login_as :pbc
+    assert_difference('Visit.count') do
+      post :create, :organization_key => 'pbc', :person_id => people(:penny), :visit => { }
+    end
+    assert_equal people(:penny), assigns(:visit).person
+    assert_equal TimeZone["Eastern Time (US & Canada)"].utc_to_local(Time.now.utc).hour, assigns(:visit).datetime.hour
+
+    assert_redirected_to visits_path
+  end
+
   def test_should_create_visit_with_destination
     assert_difference('Visit.count') do
       post :create, :organization_key => 'sfbk', :person_id => people(:mary), :visit => { },
@@ -82,9 +93,9 @@ class VisitsControllerTest < Test::Unit::TestCase
     visit = visits(:mary_1)
     assert_difference('Visit.count', -1) do
       delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => visit,
-              :destination => "/sfbk/signin/#{visit.datetime.year}/#{visit.datetime.month}/#{visit.datetime.day}"
+              :destination => "/sfbk/signin/2008/02/01"
     end
 
-    assert_redirected_to signin_path(:year => visit.datetime.year, :month => visit.datetime.month, :day => visit.datetime.day)
+    assert_redirected_to '/sfbk/signin/2008/02/01'
   end
 end

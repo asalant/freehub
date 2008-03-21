@@ -9,3 +9,7 @@ scbc_manager:
   name: manager
   authorizable: scbc (Organization)
 
+pbc_manager:
+  name: manager
+  authorizable: pbc (Organization)
+

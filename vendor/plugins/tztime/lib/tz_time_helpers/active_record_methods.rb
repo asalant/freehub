@@ -12,7 +12,7 @@ module TzTimeHelpers
         attributes.each do |attribute|
           define_method attribute do
             time = read_attribute(attribute)
-            if (time.acts_like?(:time) || time.acts_like?(:date)) && time.utc?
+            if (time.acts_like?(:time) || time.acts_like?(:date)) && time && time.utc?
               write_attribute(attribute, TzTime.at(Time.at(TzTime.zone.utc_to_local(time))))
             else
               time

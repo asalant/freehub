@@ -1,4 +1,6 @@
 class Note < ActiveRecord::Base
+  tz_time_attributes :created_at, :updated_at
+
   belongs_to :notable, :polymorphic => true
   has_userstamps
 

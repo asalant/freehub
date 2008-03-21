@@ -5,7 +5,7 @@ h1 do
   text ' : Detail'
 end
 
-labeled_value 'Datetime', @visit.datetime
+labeled_value 'Datetime', date_long(@visit.datetime)
 labeled_value 'Volunteer', @visit.volunteer?
 labeled_value 'Note', note_text(@visit.note)
 labeled_value 'Person', @visit.person.full_name

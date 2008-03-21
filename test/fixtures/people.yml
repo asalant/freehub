@@ -93,3 +93,19 @@ mary_scbc:
   staff: false
   created_at: 2008-01-07
   organization: scbc
+
+penny:
+  first_name: Penny
+  last_name: PBC
+  full_name: Penny SCBC
+  street1:
+  street2:
+  city:
+  state:
+  postal_code:
+  country:
+  email:
+  phone:
+  staff: false
+  created_at: 2008-03-07
+  organization: pbc

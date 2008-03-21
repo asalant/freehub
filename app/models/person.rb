@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  tz_time_attributes :created_at, :updated_at
+  
   belongs_to :organization
   has_many :visits, :include => :note, :dependent => :destroy, :order => "datetime DESC"
   has_many :services, :include => :note, :dependent => :destroy,  :order => "end_date DESC" do

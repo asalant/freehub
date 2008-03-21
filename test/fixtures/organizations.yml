@@ -1,9 +1,14 @@
 sfbk:
   name: San Francisco Bike Kitchen
   key: sfbk
-  timezone: Pacific
+  timezone: Pacific Time (US & Canada)
 
 scbc:
   name: Santa Cruz Bike Church
   key: scbc
-  timezone: Pacific
+  timezone: Pacific Time (US & Canada)
+
+pbc:
+  name: Philadelphia Bike Church
+  key: pbc
+  timezone: Eastern Time (US & Canada)

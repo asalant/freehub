@@ -62,13 +62,14 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
 
   # Make Active Record use UTC-base instead of local time
-  # config.active_record.default_timezone = :utc
+  config.active_record.default_timezone = :utc
 
   # Observer for user activation emails
   config.active_record.observers = :user_observer
 
 
-  SITE_URL = "http://localhost:3000"
+  SITE_URL = 'http://localhost:3000'
+  ENV['TIMEZONE_DEFAULT'] = 'Pacific Time (US & Canada)'
 end
 
 require 'has_finder'

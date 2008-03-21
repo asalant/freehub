@@ -24,6 +24,12 @@ Event.observe(window,'load',function()
 END
     end
     self << content_for_layout
+
+    if @organization
+      div.footer! do
+          text "All times shown in #{@organization.timezone} timezone."
+      end
+    end
   end
 end
 

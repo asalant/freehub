@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
   # Root object for nested resources
   before_filter :resolve_organization, :resolve_person
 
+  # Timezone of the organization or default
+  around_filter :set_timezone
+
   private
 
   def resolve_organization
@@ -29,6 +32,12 @@ class ApplicationController < ActionController::Base
 
   def store_current_user
     User.current_user = current_user
+  end
+
+  def set_timezone
+    TzTime.zone =  @organization ? TimeZone[@organization.timezone] : TimeZone[ENV['TIMEZONE_DEFAULT']]
+    yield
+    TzTime.reset!
   end
 
 end

@@ -34,8 +34,6 @@ class OrganizationsControllerTest < Test::Unit::TestCase
     assert assigns(:organization)
     assert assigns(:user)
     assert assigns(:user).is_manager_of?(assigns(:organization))
-    
-    assert_equal 'Pacific', assigns(:organization).timezone
 
     assert_redirected_to welcome_user_path(assigns(:user))
   end

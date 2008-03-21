@@ -8,7 +8,7 @@ module OrganizationsHelper
         form.text_field :key
       end
       labeled_input 'Timezone', :for => :timezone do
-        form.text_field :timezone
+        time_zone_select :organization, :timezone
       end
     end
   end

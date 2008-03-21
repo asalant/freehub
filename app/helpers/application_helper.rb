@@ -75,6 +75,11 @@ END
     date.to_s(:db)
   end
 
+  # Override ActionView::Helpers::DateHelper#time_ago_in_words to handle timezone conversions
+  def time_ago_in_words(from_time, include_seconds=false)
+    distance_of_time_in_words(from_time, TzTime.now, include_seconds)
+  end
+
   def note_text(note)
     note.text if note
   end

@@ -1,4 +1,6 @@
 class Service < ActiveRecord::Base
+  tz_time_attributes :created_at, :updated_at
+  
   belongs_to :person
   has_one :note, :as => :notable, :dependent => :destroy
   has_userstamps

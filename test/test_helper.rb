@@ -38,4 +38,6 @@ class Test::Unit::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  TzTime.zone = TimeZone[ENV['TIMEZONE_DEFAULT']]
 end

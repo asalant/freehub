@@ -51,6 +51,13 @@ td.note {
 #organization_nav {
 }
 
+#footer {
+  border-top: 1px solid black;
+  margin-top: 10px;
+  padding: 4px;
+  font-style: italic;
+}
+
 #user_status {
   float: right;
 }

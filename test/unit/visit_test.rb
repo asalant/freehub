@@ -38,7 +38,7 @@ class VisitTest < ActiveSupport::TestCase
 
   def test_create_defaults
     assert_equal Date.today, Visit.create!(:person => people(:mary)).datetime.to_date
-    assert_equal Time.local(2008,1,1), Visit.create!(:person => people(:mary), :datetime => Time.local(2008,1,1)).datetime
+    assert_equal Time.local(2008,1,1), Visit.create!(:person => people(:mary), :datetime => Time.local(2008,1,1)).datetime.time
   end
 
   def test_note_association
