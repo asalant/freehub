@@ -8,13 +8,13 @@ class CreateNotes < ActiveRecord::Migration
       t.timestamps
     end
 
-    execute "ALTER TABLE notes ADD INDEX index_notes_type_id (notable_type, notable_id)"
+    add_index :notes, [ :notable_type, :notable_id ]
+
     execute "ALTER TABLE notes ADD CONSTRAINT fk_notes_created_by FOREIGN KEY (created_by_id) REFERENCES users(id)"
     execute "ALTER TABLE notes ADD CONSTRAINT fk_notes_updated_by FOREIGN KEY (updated_by_id) REFERENCES users(id)"
   end
 
   def self.down
-    execute "ALTER TABLE notes DROP INDEX index_notes_type_id"
     execute "ALTER TABLE notes DROP FOREIGN KEY fk_notes_created_by"
     execute "ALTER TABLE notes DROP FOREIGN KEY fk_notes_updated_by"
 
