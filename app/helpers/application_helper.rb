@@ -4,6 +4,7 @@ module ApplicationHelper
   def breadcrumb(*items)
     items.join ' : '
   end
+  
   def organization_header(organization)
     markaby do
       h1.organization_header! do
@@ -39,12 +40,16 @@ END
     end
   end
 
-  def user_status(user)
+  def user_status
     markaby do
       div.user_status! do
-        text "Logged in as #{link_to current_user.login, edit_user_path(user)}"
-        text "&nbsp;|&nbsp;"
-        link_to 'Logout', session_path, :method => :delete
+        if logged_in?
+          text "Logged in as #{link_to current_user.login, edit_user_path(current_user)}"
+          text "&nbsp;|&nbsp;"
+          link_to 'Log out', session_path, :method => :delete
+        else
+          link_to 'Log in', new_session_path
+        end
       end
     end
   end

@@ -78,6 +78,11 @@ tr.odd  { background: #efefef; }
   float: right;
 }
 
+.warn {
+  border: 1px solid orange;
+  padding: 3px;
+}
+
 div.note {
   margin-bottom: 4px;
   padding: 2px;

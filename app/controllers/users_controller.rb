@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user.save
     if @user.errors.empty?
       self.current_user = @user
-      redirect_back_or_default('/')
+      redirect_back_or_default(welcome_user_path(self.current_user))
       flash[:notice] = "Thanks for signing up!"
     else
       render :action => 'new'
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       current_user.activate
       flash[:notice] = "Signup complete!"
     end
-    redirect_back_or_default('/')
+    redirect_back_or_default(welcome_user_path(self.current_user))
   end
 
   def forgot
@@ -83,6 +83,10 @@ class UsersController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @user }
     end
+  end
+
+  # GET /organizations/1/welcome
+  def welcome
   end
 
   # GET /users/new

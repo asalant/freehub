@@ -16,7 +16,8 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_allow_signup
     assert_difference 'User.count' do
       create_user
-      assert_response :redirect
+      assert assigns(:user)
+      assert_redirected_to welcome_user_path(assigns(:user))
     end
   end
 
@@ -55,7 +56,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_activate_user
     assert_nil User.authenticate('mechanic', 'test')
     get :activate, :activation_code => users(:mechanic).activation_code
-    assert_redirected_to '/'
+    assert_redirected_to welcome_user_path(users(:mechanic))
     assert_not_nil flash[:notice]
     assert_equal users(:mechanic), User.authenticate('mechanic', 'test')
   end
@@ -124,7 +125,16 @@ class UsersControllerTest < Test::Unit::TestCase
 
   def test_should_show_user
     login_as :sfbk
-    get :show, :id => users(:greeter).id
+    get :show, :id => users(:greeter)
+    assert_response :success
+    assert assigns(:user)
+    assert assigns(:organization)
+    assert_equal organizations(:sfbk), assigns(:organization)
+  end
+
+  def test_should_show_welcome
+    login_as :sfbk
+    get :welcome, :id => users(:greeter)
     assert_response :success
     assert assigns(:user)
     assert assigns(:organization)
@@ -133,7 +143,7 @@ class UsersControllerTest < Test::Unit::TestCase
 
   def test_should_get_edit
     login_as :sfbk
-    get :edit, :id => users(:sfbk).id
+    get :edit, :id => users(:sfbk)
     assert_response :success
     assert assigns(:user)
     assert assigns(:organization)
@@ -141,14 +151,14 @@ class UsersControllerTest < Test::Unit::TestCase
 
   def test_should_update_user
     login_as :greeter
-    put :update, :id => users(:greeter).id, :user => { }
+    put :update, :id => users(:greeter), :user => { }
     assert_redirected_to user_path(assigns(:user))
   end
 
   def test_should_destroy_user
     login_as :admin
     assert_difference('User.count', -1) do
-      delete :destroy, :id => users(:greeter).id
+      delete :destroy, :id => users(:greeter)
     end
 
     assert_redirected_to users_path

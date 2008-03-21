@@ -4,7 +4,7 @@ class OrganizationsController < ApplicationController
   before_filter :assign_id_param, :resolve_organization_by_id, :except => [ :index, :new, :create ] 
 
   permit "admin", :only => [ :destroy ]
-  permit "manager of :organization", :only => [ :edit, :update ] 
+  permit "manager of :organization", :only => [ :edit, :update, :welcome ] 
     
   # GET /organizations
   # GET /organizations.xml
@@ -45,11 +45,14 @@ class OrganizationsController < ApplicationController
   # POST /organizations.xml
   def create
     @organization = Organization.new(params[:organization])
+    @user = User.new(params[:user])
 
     respond_to do |format|
-      if @organization.save
+      if @organization.valid? && @user.valid? && @organization.save && @user.save
+        @user.has_role 'manager', @organization
+        self.current_user = @user
         flash[:notice] = 'Organization was successfully created.'
-        format.html { redirect_to(@organization) }
+        format.html { redirect_to(welcome_user_path(@user)) }
         format.xml  { render :xml => @organization, :status => :created, :location => @organization }
       else
         format.html { render :action => "new" }

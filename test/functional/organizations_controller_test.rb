@@ -26,12 +26,18 @@ class OrganizationsControllerTest < Test::Unit::TestCase
 
   def test_should_create_organization
     assert_difference('Organization.count') do
-      post :create, :organization => { :name => 'Davis Bike Church', :key => 'dbc'}
+      post :create, :organization => { :name => 'Davis Bike Church', :key => 'dbc'},
+                    :user => { :name => 'New User', :login => 'newuser', :email => 'newuser@example.com',
+                               :password => 'password', :password_confirmation => 'password' }
     end
 
+    assert assigns(:organization)
+    assert assigns(:user)
+    assert assigns(:user).is_manager_of?(assigns(:organization))
+    
     assert_equal 'Pacific', assigns(:organization).timezone
 
-    assert_redirected_to organization_path(assigns(:organization))
+    assert_redirected_to welcome_user_path(assigns(:user))
   end
 
   def test_should_show_organization
@@ -41,7 +47,6 @@ class OrganizationsControllerTest < Test::Unit::TestCase
 
   def test_should_show_organization_by_key
     get :show, :organization_key => 'sfbk'
-    assert_response :success
   end
 
   def test_should_get_edit

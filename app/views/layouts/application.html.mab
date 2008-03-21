@@ -7,7 +7,7 @@ html do
   end
   body do
     div.application_header! do
-      user_status(current_user) if logged_in?
+      user_status
       if @organization && !@organization.new_record?
         organization_header @organization
       else

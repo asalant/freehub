@@ -4,7 +4,12 @@ error_messages_for :organization
 
 form_for @organization do |f|
   organization_form_fields(f)
-  p { f.submit 'Create'  }
+  h2 'User account settings'
+  error_messages_for :user
+  fields_for :user do |user|
+    user_form_fields(user)
+  end
+  p { f.submit 'Sign Up'  }
 end
 
 link_to 'Back', organizations_path
