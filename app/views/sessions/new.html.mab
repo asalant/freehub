@@ -6,7 +6,7 @@ form_tag session_path do
       text_field_tag 'login'
     end
     labeled_input 'Password', :for => :password do
-      text_field_tag 'password'
+      password_field_tag 'password'
     end
     p do
       label 'Remember me:', :for => :remember_me

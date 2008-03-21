@@ -5,6 +5,8 @@ table do
     th { 'Name' }
     th { 'Email' }
     th { 'Login' }
+    th { 'Activated at' }
+    th { 'Created at' }
   end
 
   for user in @users
@@ -12,6 +14,8 @@ table do
       td { user.name }
       td { user.email }
       td { user.login }
+      td { user.activated_at.nil? ? 'Not yet activated' : datetime_short(user.activated_at) }
+      td { datetime_short(user.created_at) }
       td { link_to 'Show', user }
       td { link_to 'Edit', edit_user_path(user) }
       td { link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete }

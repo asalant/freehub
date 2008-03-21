@@ -14,7 +14,7 @@ table do
 
   for visit in @visits
     tr :class => cycle('odd','even') do
-      td { "#{datetime_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+      td { "#{datetime_long(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
       td { visit.volunteer? }
       td.note { note_text(visit.note) }
       td { link_to 'Show', visit_path(:id => visit) }

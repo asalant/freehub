@@ -3,5 +3,6 @@ h1 "#{@user.name} Profile"
 labeled_value 'Name', @user.name
 labeled_value 'Email', @user.email
 labeled_value 'Login', @user.login
+labeled_value 'Activated at', @user.activated_at.nil? ? 'Not yet activated' : datetime_long(@user.activated_at)
 
 link_to 'Edit', edit_user_path(@user) if permit?('owner of :user')

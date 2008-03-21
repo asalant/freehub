@@ -70,6 +70,10 @@ END
   end
 
   def datetime_short(datetime)
+    datetime.to_s(:db) if datetime
+  end
+
+  def datetime_long(datetime)
     datetime.strftime("%a %b %d %Y %I:%M %p") if datetime
   end
 

@@ -44,7 +44,7 @@ else
         td { person.city }
         td { person.state }
         td { person.postal_code }
-        td { datetime_short(person.created_at)  }
+        td { datetime_long(person.created_at)  }
       end
     end
     tr.list_controls do
