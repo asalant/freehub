@@ -8,7 +8,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :organizations, :key , :name => 'index_organizations_key', :unique => true
+    add_index :organizations, :key , :unique => true
   end
 
   def self.down

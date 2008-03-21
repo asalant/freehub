@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 7) do
     t.datetime "updated_at"
   end
 
-  add_index "organizations", ["key"], :name => "index_organizations_key", :unique => true
+  add_index "organizations", ["key"], :name => "index_organizations_on_key", :unique => true
 
   create_table "people", :force => true do |t|
     t.string   "first_name"
