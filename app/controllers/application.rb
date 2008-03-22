@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   before_filter :resolve_organization, :resolve_person
 
   # Timezone of the organization or default
-  around_filter :set_timezone
+  before_filter :set_timezone
 
   private
 
@@ -36,8 +36,6 @@ class ApplicationController < ActionController::Base
 
   def set_timezone
     TzTime.zone =  @organization ? TimeZone[@organization.timezone] : TimeZone[ENV['TIMEZONE_DEFAULT']]
-    yield
-    TzTime.reset!
   end
 
 end

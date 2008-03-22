@@ -20,17 +20,19 @@ if @visits.empty?
 else
   table do
     tr do
-      th { 'Person' }
-      th { 'Datetime' }
+      th { 'Name' }
+      th { 'Type' }
       th { 'Volunteer' }
+      th { 'Datetime' }
       th { 'Note' }
     end
 
     for visit in @visits
       tr :class => cycle('odd','even') do
         td { link_to(visit.person.full_name, person_path(:id => visit.person))  }
-        td { "#{datetime_long(visit.datetime)}"  }
+        td { visit.person.staff? ? 'Staff' : 'Patron'  }
         td { visit.volunteer? }
+        td { "#{datetime_long(visit.datetime)}"  }
         td.note { note_text(visit.note) }
       end
     end

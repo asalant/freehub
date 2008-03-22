@@ -48,8 +48,6 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_not_nil assigns(:visits)
     assert_equal 102, assigns(:visits).size
 
-    TzTime.zone = TimeZone[ENV['TIMEZONE_DEFAULT']]
-    
     output = StringIO.new
     output.binmode
     assert_nothing_raised { @response.body.call(@response, output) }

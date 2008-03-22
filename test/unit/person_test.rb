@@ -55,10 +55,10 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   def test_csv_header
-    assert_equal 'first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,created_at', Person.csv_header
+    assert_equal 'first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,created_at,membership_expires_on', Person.csv_header
   end
 
   def test_to_csv
-    assert_match /^Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,2008-01-02 00:00:00/, people(:mary).to_csv
+    assert_match /^Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,2008-01-02 00:00:00,\d{4}-\d{2}-\d{2}$/, people(:mary).to_csv
   end
 end

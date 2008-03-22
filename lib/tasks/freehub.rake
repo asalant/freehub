@@ -37,6 +37,7 @@ namespace :db do
         new_person.country = 'US'
 
         # Data scrubbing
+        new_person.phone = nil if new_person.phone = '(415) 000-0000'
         if new_person.first_name.blank?
           next if new_person.last_name.blank?
           new_person.first_name = new_person.last_name
