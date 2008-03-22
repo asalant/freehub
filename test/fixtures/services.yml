@@ -33,7 +33,7 @@ carrie_membership_expired:
 <% (1..60).each do |count| %>
 carrie_class<%= count %>:
   start_date: <%= Date.new(2008,3,2).advance(:months => count * -1) %>
-  end_date: <%= Date.new(2008,3,2).advance(:months => count * -1) %>
+  end_date: <%= Date.new(2009,3,2).advance(:months => count * -1) %>
   paid: true
   volunteered: false
   person: carrie

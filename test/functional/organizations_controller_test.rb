@@ -39,12 +39,15 @@ class OrganizationsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_organization
+    login_as 'sfbk'
     get :show, :id => organizations(:sfbk)
     assert_response :success
   end
 
   def test_should_show_organization_by_key
+    login_as 'sfbk'
     get :show, :organization_key => 'sfbk'
+    assert_response :success
   end
 
   def test_should_get_edit
@@ -70,11 +73,11 @@ class OrganizationsControllerTest < Test::Unit::TestCase
 
   def test_authorization
     login_as 'scbc'
-    [:index, :new, :show].each do |action|
+    [:index, :new].each do |action|
       get action, :id => organizations(:sfbk)
       assert_response :success
     end
-    [:edit].each do |action|
+    [:show, :edit].each do |action|
       get action, :id => organizations(:sfbk)
       assert_redirected_to new_session_path
     end
