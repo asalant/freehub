@@ -14,9 +14,9 @@ class Person < ActiveRecord::Base
   
   validates_presence_of :first_name, :organization_id
   validates_uniqueness_of :email, :scope => :organization_id, :case_sensitive => false, :allow_nil => true, :allow_blank => true
-  validates_email_veracity_of :email
+  validates_email_veracity_of :email, :domain_check => false
 
-  before_save :update_full_name
+  before_save :titleize_name, :update_full_name
   
   acts_as_paginated
   chains_finders
@@ -51,6 +51,15 @@ class Person < ActiveRecord::Base
   end
 
   private
+
+  def titleize_name
+    self.first_name = self.first_name.titleize if !self.first_name.blank?
+    if !self.last_name.blank?
+      parts = self.last_name.split " "
+      parts << parts.pop.titleize
+      self.last_name = parts.join " "
+    end
+  end
 
   def update_full_name
     self.full_name = [first_name, last_name].reject{|e| e.nil? || e.empty?}.join(' ')

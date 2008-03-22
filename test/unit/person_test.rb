@@ -19,6 +19,11 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 'First', person.full_name
   end
 
+  def test_titleize_name
+    assert_equal 'First Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'last').full_name
+    assert_equal 'First de Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'de last').full_name
+  end
+
   def test_visits_order
     assert_equal visits(:mary_2), people(:mary).visits[0]
     assert_equal visits(:mary_1), people(:mary).visits[1]
