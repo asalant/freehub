@@ -11,7 +11,7 @@ html do
       if @organization && !@organization.new_record?
         organization_header @organization
       else
-        h1 "Welcome to Freehub"
+        h1 { text "Welcome to #{link_to 'Freehub', root_path}" }
       end
     end
     if flash[:notice]

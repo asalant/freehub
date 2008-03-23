@@ -1,4 +1,15 @@
-h1 "Organizations"
+h1 'Welcome'
+
+p "Here's some information about Freehub, what it's for and what it's not for."
+
+h2 "Sign Up"
+
+p { text "Information on #{link_to 'signing up', new_organization_path} now for the free service." }
+
+h2 "Organizations"
+
+p "These organization have signed up to use Freehub. Some are playing with it to see if they can use it.
+   Click the organization name to log in."
 
 table do
   tr do
@@ -15,7 +26,3 @@ table do
     end
   end
 end
-
-br
-
-link_to 'New organization', new_organization_path

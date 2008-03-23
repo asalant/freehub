@@ -1,11 +1,22 @@
-h1 'Organizations : New'
+h1 "Register"
+
+p "Sign up for a new Freehub account."
+
+p "After you submit this form you will be able to start using Freehub while your account is pending activation.
+   You will receive an email shortly with a link to permanently activate your account."
+
+
+h2 'Organization settings'
 
 error_messages_for :organization
 
 form_for @organization do |f|
   organization_form_fields(f)
-  h2 'User account settings'
+
+  h2 'Manager account settings'
+
   error_messages_for :user
+
   fields_for :user do |user|
     user_form_fields(user)
   end
