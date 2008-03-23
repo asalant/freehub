@@ -4,6 +4,7 @@ class Organization < ActiveRecord::Base
   has_many :people, :dependent => :destroy
 
   validates_presence_of :name, :key, :timezone
+  validates_length_of :name, :within => 3..40
   validates_uniqueness_of :key
   validates_length_of :key, :within => 3..20
   validates_format_of :key, :with => /\A\w+\Z/i
