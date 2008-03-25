@@ -31,6 +31,8 @@ labeled_value 'Staff', @person.staff
 userstamp_labeled_values @person
 
 link_to 'Edit', edit_person_path(:id => @person)
+text ' | '
+link_to 'Destroy', person_path(:id => person), :confirm => 'Are you sure?', :method => :delete
 
 h2 'Services History'
 
