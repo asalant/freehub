@@ -39,6 +39,11 @@ class Person < ActiveRecord::Base
       :order => "full_name ASC"
   } }
 
+  def initialize(params={})
+    super
+    self.country ||= 'US'
+  end
+
   CSV_FIELDS = { :self => %w{first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country created_at membership_expires_on} }
 
   def self.csv_header
