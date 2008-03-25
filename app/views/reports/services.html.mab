@@ -24,6 +24,7 @@ end
 if @services.empty?
   div.list_status 'No services for date range.'
 else
+  div.list_status "#{@services.to_a.size} of #{@services.size} services shown."
   table do
     tr do
       th { 'Name' }

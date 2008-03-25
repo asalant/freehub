@@ -23,6 +23,7 @@ end
 if @people.empty?
   div.list_status 'No people for date range.'
 else
+  div.list_status "#{@people.to_a.size} of #{@people.size} people shown."
   table do
     tr do
     th { 'Name' }

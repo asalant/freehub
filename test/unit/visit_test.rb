@@ -11,8 +11,8 @@ class VisitTest < ActiveSupport::TestCase
 
   def test_for_organization_in_date_range
     from, to = Date.new(2008,2,1), Date.new(2008,2,3)
-    assert_equal 98, Visit.for_organization(organizations(:sfbk)).before(from).size
-    assert_equal 4, Visit.for_organization(organizations(:sfbk)).after(from).before(to).size
+    assert_equal 99, Visit.for_organization(organizations(:sfbk)).before(from).size
+    assert_equal 3, Visit.for_organization(organizations(:sfbk)).after(from).before(to).size
   end
 
   def test_paginated_association
@@ -25,7 +25,7 @@ class VisitTest < ActiveSupport::TestCase
                      :after => Date.new(2008,2,1),
                      :before => Date.new(2008,2,3) }
 
-    assert_equal 4, Visit.chain_finders(finder_chain).paginate.size
+    assert_equal 3, Visit.chain_finders(finder_chain).paginate.size
   end
 
   def test_to_csv

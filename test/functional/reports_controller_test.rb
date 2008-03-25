@@ -143,7 +143,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     get :signin, :organization_key => 'sfbk', :year => 2008, :month => 2, :day => 1
     assert_response :success
     assert_not_nil assigns(:visits)
-    assert_equal 3, assigns(:visits).size
+    assert_equal 2, assigns(:visits).size
     assert_equal Date.new(2008,2,1), assigns(:day)
   end
 

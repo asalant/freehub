@@ -11,6 +11,7 @@ end
 if @visits.empty?
   div.list_status "No visits for #{@day.to_s(:db)}."
 else
+  div.list_status "#{@visits.size} visits."
   table do
     tr do
       th { 'Name' }
