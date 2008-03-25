@@ -24,6 +24,19 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 'First de Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'de last').full_name
   end
 
+  def test_titleize_address
+    person = Person.create!(:organization => organizations(:sfbk), :first_name => "first",
+                            :street1 => "street1 st.", :street2 => "street2 st.",
+                            :city => "city", :state => "st");
+    assert_equal "Street1 St.", person.street1
+    assert_equal "Street2 St.", person.street2
+    assert_equal "City", person.city
+    assert_equal "ST", person.state
+
+    person.update_attributes!(:state => 'State')
+    assert_equal "State", person.state
+  end
+
   def test_visits_order
     assert_equal visits(:mary_2), people(:mary).visits[0]
     assert_equal visits(:mary_1), people(:mary).visits[1]

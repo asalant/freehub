@@ -17,7 +17,7 @@ class Person < ActiveRecord::Base
   validates_length_of :first_name, :last_name, :street1, :street2, :city, :state, :postal_code, :country, :within => 1..40, :allow_blank => true
   validates_email_veracity_of :email, :domain_check => false
 
-  before_save :titleize_name, :update_full_name
+  before_save :titleize_name, :update_full_name, :titleize_address
   
   acts_as_paginated
   chains_finders
@@ -61,6 +61,13 @@ class Person < ActiveRecord::Base
       parts << parts.pop.titleize
       self.last_name = parts.join " "
     end
+  end
+
+  def titleize_address
+    self.street1 = self.street1.titleize if !self.street1.blank?
+    self.street2 = self.street2.titleize if !self.street2.blank?
+    self.city = self.city.titleize if !self.city.blank?
+    self.state = self.state.upcase if !self.state.blank? && self.state != self.state.titleize 
   end
 
   def update_full_name
