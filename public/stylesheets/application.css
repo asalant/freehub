@@ -1,21 +1,83 @@
+a {
+  color: #0088eb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffbf00;
+  text-decoration: underline;
+}
+
+body, legend, select, input, textarea, th, td {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+}
+
 body {
-  width: 1000px;
+  background: #e5e5e5;
+}
+
+html {
+  text-align: center;
 }
 
 h1 {
-  font-size: 22px;
+  font-size: 24px;
+  margin: 0 0 12px 0;
 }
 
 h2 {
   font-size: 18px;
+  margin: 0 0 6px 0;
 }
 
-label, div.label {
+h3 {
+  font-size: 16px;
+  margin: 0 0 4px 0;
+}
+
+p, ul {
+  margin: 0 0 12px 0;
+}
+
+label, .label {
   width: 100px;
-  float:left;
+  float: left;
   font-weight: bold;
   text-align: right;
   padding-right: 6px;
+}
+
+#application_header,
+#application_body,
+#application_footer {
+  width: 952px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 12px;
+}
+
+#application_body {
+  background: url('../images/body_bg.png') repeat-y;
+}
+
+#application_footer {
+  background: url('../images/footer_bg.png') no-repeat;
+  font-style: italic;
+}
+
+#user_status {
+  float: right;
+}
+
+.list_controls {
+  background-color: #f2f2f2;
+}
+
+table {
+  margin: 0 0 15px 0;
 }
 
 tr {
@@ -23,10 +85,11 @@ tr {
 }
 
 th {
-  font-family:verdana,arial,helvetica,sans-serif;
-  font-size:13px;
-  line-height:18px;
   font-weight: bold;
+}
+
+th, td {
+  padding: 6px;
 }
 
 td.note {
@@ -37,37 +100,8 @@ td.note {
   font-style: italic;
 }
 
-#application_header {
-  border-bottom: 1px solid black;
-}
-
-#application_header h1 {
-  font-size: 24px;
-}
-
-#organization_header {
-}
-
-#organization_nav {
-}
-
-#footer {
-  border-top: 1px solid black;
-  margin-top: 10px;
-  padding: 4px;
-  font-style: italic;
-}
-
-#user_status {
-  float: right;
-}
-
-.list_controls {
-  background-color: lightgray;
-}
-
 tr.even { background: #ffffff; }
-tr.odd  { background: #efefef; }
+tr.odd  { background: #f2f2f2; }
 
 .paginating_links {
   float: left;
@@ -93,13 +127,12 @@ tr.odd  { background: #efefef; }
 div.note {
   margin-bottom: 4px;
   padding: 2px;
-  background: #efefef;
+  background: #e5e5e5;
   width: 600px;
 }
 
 .note_subject, .note_status {
   font-style: italic;
-  font-size: 12px;
 }
 
 .note_subject {

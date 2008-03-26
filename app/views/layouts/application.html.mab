@@ -2,7 +2,8 @@ html do
   head do
     title "#{controller.controller_name.singularize.titleize} #{action_name.titleize} on Freehub"
     javascript_include_tag :all
-    stylesheet_link_tag 'scaffold'
+    stylesheet_link_tag 'reset-min'
+#    stylesheet_link_tag 'scaffold'
     stylesheet_link_tag 'application'
   end
   body do
@@ -11,22 +12,23 @@ html do
       if @organization && !@organization.new_record?
         organization_header @organization
       else
-        h1 { text "Welcome to #{link_to 'Freehub', root_path}" }
+        h2 { text "Welcome to #{link_to 'Freehub', root_path}" }
       end
     end
-    if flash[:notice]
-      p.notice! flash[:notice]
-      script <<END
+    div.application_body! do
+      if flash[:notice]
+        p.notice! flash[:notice]
+        script <<END
 Event.observe(window,'load',function()
 {
    new Effect.Highlight('notice', { duration: 1 });
 });
 END
+      end
+      self << content_for_layout
     end
-    self << content_for_layout
-
-    div.footer! do
-        text "Times shown are #{TzTime.zone.name} timezone."
+    div.application_footer! do
+      text "Times shown are #{TzTime.zone.name} timezone."
     end
   end
 end

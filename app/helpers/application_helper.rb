@@ -7,7 +7,7 @@ module ApplicationHelper
   
   def organization_header(organization)
     markaby do
-      h1.organization_header! do
+      h2.organization_header! do
         link_to organization.name, organization_key_path(:organization_key => organization.key)
         text ' on '
         link_to 'Freehub', root_path
