@@ -30,7 +30,7 @@ h1 {
 
 h2 {
   font-size: 18px;
-  margin: 0 0 6px 0;
+  margin: 14px 0 6px 0;
 }
 
 h3 {
@@ -72,12 +72,14 @@ label, .label {
   float: right;
 }
 
-.list_controls {
+.list_controls, .list_controls td {
   background-color: #f2f2f2;
+  border: 1px solid #C9C9C9;
+  padding: 0;
 }
 
 table {
-  margin: 0 0 15px 0;
+  margin: 0 0 0 0;
 }
 
 tr {

@@ -18,7 +18,7 @@ end
 if @visits.empty?
   div.list_status 'No visits for date range.'
 else
-  div.list_status "#{@visits.to_a.size} of #{@visits.size} services shown."
+  div.list_status "#{@visits.to_a.size} of #{@visits.size} visits shown."
   table do
     tr do
       th { 'Name' }
