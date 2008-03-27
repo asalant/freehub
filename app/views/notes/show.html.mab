@@ -6,7 +6,7 @@ h1 do
 end
 
 labeled_value 'Notable', "#{@note.notable_type} (#{@note.notable_id})"
-labeled_value 'Text', @note.text
+labeled_value 'Text', note_text(@note)
 
 userstamp_labeled_values @note
 

@@ -1,5 +1,8 @@
 module NotesHelper
 
+  def note_text(note)
+    h(note.text).gsub(/\n/,'<br>') if note
+  end
 
   def notable_link(model)
     if model.is_a? Visit

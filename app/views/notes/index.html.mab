@@ -16,7 +16,7 @@ table do
   for note in @notes
     tr :class => cycle('odd','even') do
       td { notable_link(note.notable) }
-      td.note { note.text }
+      td.note { note_text(note) }
       td { datetime_long(note.created_at) }
       td { user_link(note.created_by) }
       td { link_to 'Show', note_path(:id => note) }

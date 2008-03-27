@@ -90,10 +90,6 @@ END
     distance_of_time_in_words(from_time, TzTime.now, include_seconds)
   end
 
-  def note_text(note)
-    note.text if note
-  end
-
   def signin_today_path(options={})
     signin_path({:year => Date.today.year, :month => Date.today.month, :day => Date.today.day}.merge(options))
   end

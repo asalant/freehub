@@ -122,7 +122,7 @@ else
     div.note do
       div.note_subject { "Re: #{notable_link(note.notable)}" }
       div.note_status { "#{datetime_long(note.created_at)} by #{user_link(note.created_by)}" }
-      div.note_text { note.text }
+      div.note_text { note_text(note) }
     end
   end
 end
