@@ -85,12 +85,14 @@ else
     tr do
       th { 'When' }
       th { '' }
+      th { 'Volunteer' }
       th { 'Note' }
     end
     for visit in visits
       tr :class => cycle('odd','even') do
         td { datetime_long(visit.datetime) }
         td { "(#{time_ago_in_words(visit.datetime)} ago)"  }
+        td { visit.volunteer? }
         td.note { note_text(visit.note) }
       end
     end

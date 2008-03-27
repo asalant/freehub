@@ -6,5 +6,3 @@ form_for @person do |f|
   person_form_fields(f)
   p { f.submit "Create" }
 end
-
-link_to 'Back', people_path
