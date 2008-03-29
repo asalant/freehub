@@ -96,9 +96,10 @@ div.progressBar {
 }
 
 #application_header,
+#application_nav,
 #application_body,
 #application_footer {
-  width: 952px;
+  width: 960px;
   margin: 0 auto;
   text-align: left;
   padding: 12px;

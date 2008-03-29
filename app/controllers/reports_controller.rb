@@ -88,7 +88,7 @@ class ReportsController < ApplicationController
     end
   end
 
-  def signin
+  def sign_in
     @day = date_from_params(params)
     @visits = Visit.for_organization(@organization).after(@day).before(@day.tomorrow)
 

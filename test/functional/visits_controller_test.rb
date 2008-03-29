@@ -58,11 +58,11 @@ class VisitsControllerTest < Test::Unit::TestCase
   def test_should_create_visit_with_destination
     assert_difference('Visit.count') do
       post :create, :organization_key => 'sfbk', :person_id => people(:mary), :visit => { },
-              :destination => "/sfbk/signin/#{Date.today.year}/#{Date.today.month}/#{Date.today.day}"
+              :destination => "/sfbk/sign_in/#{Date.today.year}/#{Date.today.month}/#{Date.today.day}"
     end
     assert_equal people(:mary), assigns(:visit).person
 
-    assert_redirected_to "/sfbk/signin/#{Date.today.year}/#{Date.today.month}/#{Date.today.day}"
+    assert_redirected_to "/sfbk/sign_in/#{Date.today.year}/#{Date.today.month}/#{Date.today.day}"
   end
 
   def test_should_show_visit
@@ -93,9 +93,9 @@ class VisitsControllerTest < Test::Unit::TestCase
     visit = visits(:mary_1)
     assert_difference('Visit.count', -1) do
       delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => visit,
-              :destination => "/sfbk/signin/2008/02/01"
+              :destination => "/sfbk/sign_in/2008/02/01"
     end
 
-    assert_redirected_to '/sfbk/signin/2008/02/01'
+    assert_redirected_to '/sfbk/sign_in/2008/02/01'
   end
 end

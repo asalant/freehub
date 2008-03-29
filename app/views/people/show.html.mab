@@ -1,7 +1,7 @@
 h1 @person.full_name
 
 form_for Visit.new, :url => visits_path(:person_id => @person.id) do |f|
-  hidden_field_tag :destination, signin_today_path
+  hidden_field_tag :destination, sign_in_today_path
   fields_for :note do |note|
     labeled_input 'Note', :for => :visit_note do
       note.text_area :text, :rows => 1

@@ -19,8 +19,8 @@ ActionController::Routing::Routes.draw do |map|
   # Organization mappings go last so they don't take precedence'
   map.reports ':organization_key/reports', :controller => 'reports', :action => 'index'
   map.report ':organization_key/reports/:action', :controller => 'reports'
-  map.signin ':organization_key/signin/:year/:month/:day',
-          :controller => 'reports', :action => 'signin',
+  map.sign_in ':organization_key/sign_in/:year/:month/:day',
+          :controller => 'reports', :action => 'sign_in',
           :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
 
   map.organization_key ':organization_key', :controller => 'organizations', :action => 'show'

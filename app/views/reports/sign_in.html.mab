@@ -1,11 +1,11 @@
 h1 "Visits for #{Date.today == @day ? 'today' :date_long(@day)}" 
 
 link_to "&lt; #{@day.yesterday.strftime("%a")}",
-        signin_path(:year => @day.yesterday.year, :month => @day.yesterday.month, :day => @day.yesterday.day)
+        sign_in_path(:year => @day.yesterday.year, :month => @day.yesterday.month, :day => @day.yesterday.day)
 unless @day == Date.today
   text ' | '
   link_to "#{@day.tomorrow.strftime("%a")} >",
-          signin_path(:year => @day.tomorrow.year, :month => @day.tomorrow.month, :day => @day.tomorrow.day)
+          sign_in_path(:year => @day.tomorrow.year, :month => @day.tomorrow.month, :day => @day.tomorrow.day)
 end
 
 if @visits.empty?
@@ -28,7 +28,7 @@ else
         td { visit.volunteer? }
         td { "#{time_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
         td.note { note_text(visit.note) }
-        td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit, :destination => signin_path),
+        td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit, :destination => sign_in_path),
                 :confirm => 'Are you sure?', :method => :delete }
       end
     end
