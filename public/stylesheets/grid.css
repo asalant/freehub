@@ -1,0 +1,142 @@
+body {
+  background-color: lightgray;
+  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+
+.page {
+  margin: 0pt auto;
+  padding: 12px;
+  text-align: left;
+  width: 960px;
+  height: 800px;
+}
+
+.logo {
+  background-color: lightgoldenrodyellow;
+  height: 64px;
+  width: 160px;
+  float: left;
+  padding-top: 16px;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.header
+{
+  background-color: #CCDDFF;
+  float: left;
+  height: 28px;
+  width: 792px;
+  padding: 12px 0 0 8px;
+}
+
+.header h2 {
+  margin-top: 4px;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: bold;
+}
+
+.navigation {
+  background-color: #CCDDFF;
+  float: left;
+  height: 40px;
+  width: 800px;
+}
+
+.navigation ul {
+}
+
+.navigation ul li {
+  background-color: lightgreen;
+  width: 159px;
+  height: 24px;
+  float: left;
+  padding-top: 8px;
+  margin-top: 8px;
+  border-left: 1px solid black;
+  text-align: center;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: bold;
+}
+
+.navigation ul li.last {
+  border-right: 1px solid black;
+}
+
+.navigation ul li.selected {
+  height: 23px;
+  border-top: 1px solid black;
+  background-color: white;
+}
+
+.sidebar {
+  background-color: lightgoldenrodyellow;
+  width: 160px;
+  height: 400px;
+  float: right;
+}
+
+.sub_navigation {
+  background-color: #CCDDFF;
+  width: 160px;
+  height: 400px;
+  float: left;
+}
+
+.sub_navigation ul {
+  margin: 40px 0 0 30px;
+}
+
+.sub_navigation ul li {
+  background-color: lightskyblue;
+  height: 28px;
+  padding: 12px 0 0 24px;
+  border-top: 1px solid black;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.sub_navigation ul li.last {
+  border-bottom: 1px solid black;
+}
+
+.sub_navigation ul li.selected {
+  border-left: 1px solid black;
+  background-color: white;
+}
+
+.content {
+  background-color: white;
+  float: left;
+  height: 600px;
+  width: 628px;
+  padding: 12px 0 0 12px;
+}
+
+.content h1 {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: bold;
+}
+
+.footer
+{
+  clear: both;
+  background-color: lightgoldenrodyellow;
+  height: 80px;
+}
+
+.column {
+  border-right: 1px solid gray;
+  width: 159px;
+  height: 700px;
+  float: left;
+}
+
+.even { background: #ffffff; }
+.odd  { background: #f2f2f2; }

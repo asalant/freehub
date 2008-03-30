@@ -1,0 +1,41 @@
+html do
+  head do
+    stylesheet_link_tag 'reset-min'
+    stylesheet_link_tag 'grid'
+  end
+  body do
+    div.page do
+      div.logo do
+        text 'Freehub'
+      end
+      div.header do
+        h2 'San Francisco Bike Kitchen'
+      end
+      div.navigation do
+        ul do
+          li 'Sign In'
+          li.selected 'People'
+          li 'Reports', :class => 'last'
+        end
+      end
+      div.sidebar do
+
+      end
+      div.sub_navigation do
+        ul do
+          li.selected 'Sign In'
+          li 'Detail'
+          li 'Services'
+          li 'Visits', :class => 'last'
+        end
+      end
+      div.content do
+        h1 'Mary Member: Sign In'
+        self << content_for_layout
+      end
+      div.footer do
+
+      end
+    end
+  end
+end
