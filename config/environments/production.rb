@@ -23,4 +23,4 @@ ActionMailer::Base.smtp_settings = {
   :port               => 25
 }
 
-SITE_URL = 'http://65.74.180.97'
+SITE_URL = 'http://freehubforall.bikekitchen.org'
