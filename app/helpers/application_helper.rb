@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def datetime_short(datetime)
-    datetime.to_s(:db) if datetime
+    datetime.strftime("%Y-%m-%d %H:%M") if datetime
   end
 
   def datetime_long(datetime)
