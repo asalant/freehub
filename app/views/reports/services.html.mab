@@ -11,10 +11,10 @@ form_tag report_path(:action => 'services'), :method => :get do
         text service_type.name
       end
     end
-    labeled_input 'Start after', :for => :date_from do
+    labeled_input 'End after', :for => :date_from do
       select_date @report[:after], :prefix => 'report[after]'
     end
-    labeled_input 'End before', :for => :date_to do
+    labeled_input 'Start before', :for => :date_to do
       select_date @report[:before], :prefix => 'report[before]'
     end
     p { submit_tag "Update"  }
