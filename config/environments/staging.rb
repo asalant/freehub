@@ -15,6 +15,10 @@ config.action_view.cache_template_loading            = true
 # Enable serving of images, stylesheets, and javascripts from an asset server
 # config.action_controller.asset_host                  = "http://assets.example.com"
 
-# Disable delivery errors, bad email addresses will be ignored
-config.action_mailer.raise_delivery_errors = true
-config.action_mailer.smtp_settings = { :address => "smtp.ey02.engineyard.com", :port => 25 }
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :domain             => "example.com",
+  :perform_deliveries => true,
+  :address            => 'smtp.ey02.engineyard.com',
+  :port               => 25
+}
