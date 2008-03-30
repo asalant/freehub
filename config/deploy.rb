@@ -16,7 +16,6 @@ set :repository,    'http://bikekitchen-svn.cvsdude.com/membership/freehub_for_a
 set :scm_username,  ''
 set :scm_password,  ''
 set :user,          'freehub'
-set :password,      'iv2ly4ue'
 set :deploy_to,     "/data/#{application}"
 set :deploy_via,    :filtered_remote_cache
 set :repository_cache,    "/var/cache/engineyard/#{application}"
