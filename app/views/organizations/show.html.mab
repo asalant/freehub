@@ -4,4 +4,4 @@ labeled_value 'Name', @organization.name
 labeled_value 'Key', @organization.key
 labeled_value 'Timezone', @organization.timezone
 
-link_to 'Edit', edit_organization_path(@organization) if permit? "manager of :organization"
+link_to 'Edit', edit_organization_path(@organization) if permit? "admin or (manager of :organization)"
