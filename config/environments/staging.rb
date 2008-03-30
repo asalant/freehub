@@ -17,8 +17,10 @@ config.action_view.cache_template_loading            = true
 
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-  :domain             => "example.com",
+  :domain             => "bikekitchen.org",
   :perform_deliveries => true,
   :address            => 'smtp.ey02.engineyard.com',
   :port               => 25
 }
+
+SITE_URL = 'http://65.74.180.98'
