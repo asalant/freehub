@@ -19,7 +19,7 @@ form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id 
   end
 end
 
-p do
+div.subnav do
   link_to 'Summary', person_path(:id => @person), :class => ('selected' if params[:controller] == 'people' && params[:action] == 'show')
   text ' | '
   link_to 'Detail', edit_person_path(:id => @person), :class => ('selected' if params[:controller] == 'people' && params[:action] == 'edit')

@@ -177,6 +177,7 @@ div.row {
 #notice {
   color:green;
   padding: 3px;
+  margin-right: 8px;
   float: right;
 }
 
@@ -213,5 +214,5 @@ div.note .note_text {
 #sign_in_form {
   background: #f2f2f2;
   border: 1px solid lightgray;
-  margin: 0 12px 8px 0;
+  margin: 6px 12px 8px 0;
 }
