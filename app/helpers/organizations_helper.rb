@@ -9,14 +9,14 @@ module OrganizationsHelper
         end
       div.organization_nav! do
         b 'Report: '
-        link_to('Visits', report_path(:action => 'visits', :organization_key => @organization.key))
+        link_to('Visits', report_path(:action => 'visits', :organization_key => organization.key))
         text ' | '
-        link_to('Services', report_path(:action => 'services', :organization_key => @organization.key))
+        link_to('Services', report_path(:action => 'services', :organization_key => organization.key))
         text ' | '
-        link_to('People', report_path(:action => 'people', :organization_key => @organization.key))
+        link_to('People', report_path(:action => 'people', :organization_key => organization.key))
         text ' | '
         b 'Visits: '
-        link_to('Today', sign_in_today_path(:organization_key => @organization.key))
+        link_to('Today', sign_in_today_path(:organization_key => organization.key))
         text ' | '
         b 'People: '
         link_to('Add', new_person_path(:organization_key => organization.key))
@@ -27,7 +27,7 @@ module OrganizationsHelper
                 :indicator => 'search_status',
                 :after_update_element => <<END
 function(element, value) {
-  window.location = '#{people_path(:organization_key => organization.key)}/' + value.id;
+  window.location = $(value).readAttribute('url');
 }
 END
         image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'

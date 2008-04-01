@@ -59,7 +59,7 @@ class PeopleControllerTest < Test::Unit::TestCase
       delete :destroy, :organization_key => 'sfbk', :id => people(:mary).id
     end
 
-    assert_redirected_to people_path
+    assert_redirected_to organization_key_path
   end
 
   def test_requires_manager

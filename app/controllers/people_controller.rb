@@ -80,15 +80,16 @@ class PeopleController < ApplicationController
   def destroy
     @person = Person.find(params[:id])
     @person.destroy
+    flash[:notice] = 'Person was successfully removed.'
 
     respond_to do |format|
-      format.html { redirect_to(people_path) }
+      format.html { redirect_to(organization_key_path) }
       format.xml  { head :ok }
     end
   end
 
   def auto_complete_for_person_full_name
     @items = Person.for_organization(@organization).matching_name(params[:person][:full_name]).paginate(:size => 15)
-    render :inline => "<%= auto_complete_result @items, 'full_name' %>"
+    render :inline => "<%= auto_complete_result_with_add_person @items, 'full_name' %>"
   end
 end
