@@ -80,6 +80,7 @@ class NotesController < ApplicationController
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
+    flash[:notice] = 'Note was successfully removed.'
 
     respond_to do |format|
       format.html { redirect_to(notes_url) }

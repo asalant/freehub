@@ -1,0 +1,32 @@
+h1 @person.full_name
+
+labeled_value 'Email', @person.email
+labeled_value 'Postal code', @person.postal_code
+labeled_value 'Staff', @person.staff
+
+form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id => @person.id) , :html => { :id => 'sign_in_form' } do |f|
+  hidden_field_tag :destination, sign_in_today_path
+  fields_for :note do |note|
+    labeled_input 'Note', :for => :visit_note do
+      note.text_area :text, :rows => 1
+    end
+  end
+  labeled_input 'Volunteer', :for => :visit_volunteer do
+    f.check_box :volunteer
+  end
+  labeled_input '-' do
+    f.submit "Sign In!"
+  end
+end
+
+p do
+  link_to 'Summary', person_path(:id => @person), :class => ('selected' if params[:controller] == 'people' && params[:action] == 'show')
+  text ' | '
+  link_to 'Detail', edit_person_path(:id => @person), :class => ('selected' if params[:controller] == 'people' && params[:action] == 'edit')
+  text ' | '
+  link_to 'Services', services_path(:person_id => @person), :class => ('selected' if params[:controller] == 'services')
+  text ' | '
+  link_to 'Visits', visits_path(:person_id => @person), :class => ('selected' if params[:controller] == 'visits')
+  text ' | '
+  link_to 'Notes', notes_path(:person_id => @person), :class => ('selected' if params[:controller] == 'notes')
+end

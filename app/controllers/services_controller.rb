@@ -81,6 +81,7 @@ class ServicesController < ApplicationController
   def destroy
     @service = Service.find(params[:id])
     @service.destroy
+    flash[:notice] = 'Service was successfully removed.'
 
     respond_to do |format|
       format.html { redirect_to(services_url) }

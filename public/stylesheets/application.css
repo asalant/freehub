@@ -8,6 +8,10 @@ a:hover {
   text-decoration: underline;
 }
 
+a.selected {
+  color: #666;
+}
+
 body, legend, select, input, textarea, th, td {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 12px;
@@ -39,7 +43,7 @@ h3 {
 }
 
 p, ul {
-  margin: 0 0 12px 0;
+  margin: 6px 0;
 }
 
 label, .label {
@@ -151,6 +155,15 @@ td.note {
 tr.even { background: #ffffff; }
 tr.odd  { background: #f2f2f2; }
 
+div.column {
+  width: 400px;
+  float: left;
+}
+
+div.row {
+  clear: both;
+}
+
 .paginating_links {
   float: left;
   padding: 3px;
@@ -195,4 +208,10 @@ div.note .note_text {
   clear: both;
   padding: 3px;
   background: #ffffff;
+}
+
+#sign_in_form {
+  background: #f2f2f2;
+  border: 1px solid lightgray;
+  margin: 0 12px 8px 0;
 }

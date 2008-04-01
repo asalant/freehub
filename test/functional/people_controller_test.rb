@@ -39,6 +39,7 @@ class PeopleControllerTest < Test::Unit::TestCase
   def test_should_show_person
     get :show, :organization_key => 'sfbk', :id => people(:mary).id
     assert_response :success
+    assert_template 'show'
   end
 
   def test_should_get_edit

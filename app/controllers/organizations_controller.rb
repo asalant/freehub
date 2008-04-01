@@ -80,6 +80,7 @@ class OrganizationsController < ApplicationController
   # DELETE /organizations/1.xml
   def destroy
     @organization.destroy
+    flash[:notice] = 'Organization was successfully removed.'
 
     respond_to do |format|
       format.html { redirect_to(organizations_url) }

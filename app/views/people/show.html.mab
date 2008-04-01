@@ -1,40 +1,6 @@
-h1 @person.full_name
+render :partial => 'summary'
 
-form_for Visit.new, :url => visits_path(:person_id => @person.id) do |f|
-  hidden_field_tag :destination, sign_in_today_path
-  fields_for :note do |note|
-    labeled_input 'Note', :for => :visit_note do
-      note.text_area :text, :rows => 1
-    end
-  end
-  labeled_input 'Volunteer', :for => :visit_volunteer do
-    f.check_box :volunteer
-  end
-  labeled_input '-' do
-    f.submit "Sign In!"
-  end
-end
-
-h2 'Person Details'
-
-labeled_value 'Email', @person.email
-labeled_value 'Email opt out', @person.email_opt_out
-labeled_value 'Phone', @person.phone
-labeled_value 'Street1', @person.street1
-labeled_value 'Street2', @person.street2
-labeled_value 'City', @person.city
-labeled_value 'State', @person.state
-labeled_value 'Postal code', @person.postal_code
-labeled_value 'Country', @person.country
-labeled_value 'Staff', @person.staff
-
-userstamp_labeled_values @person
-
-link_to 'Edit', edit_person_path(:id => @person)
-text ' | '
-link_to 'Destroy', person_path(:id => person), :confirm => 'Are you sure?', :method => :delete
-
-h2 'Services History'
+h2 'Current Services'
 
 services = @person.services.paginate(:size => 3)
 if services.empty?
@@ -45,7 +11,7 @@ if services.empty?
 else
   div.list_status do
     text "Showing #{services.to_a.size} of #{services.size} total services. "
-    link_to 'See all services.', services_path(:organization_key => @organization.key, :person_id => @person)
+    link_to 'Add service.', new_service_path(:person_id => @person)
   end
   table do
     tr do
@@ -68,7 +34,7 @@ else
 
 end
 
-h2 'Visits History'
+h2 'Recent Visits'
 
 visits = @person.visits.paginate(:size => 3)
 if visits.empty?
@@ -79,7 +45,7 @@ if visits.empty?
 else
   div.list_status do
     text "Showing #{visits.to_a.size} of #{visits.size} total visits. "
-    link_to 'See all visits.', visits_path(:organization_key => @organization.key, :person_id => @person)
+    link_to 'Add visit.', new_visit_path(:person_id => @person)
   end
   table do
     tr do
@@ -100,7 +66,7 @@ else
 end
 
 
-h2 'Notes History'
+h2 'Recent Notes'
 
 form_for Note.new, :url => notes_path(:person_id => @person) do |f|
     text f.text_area(:text, :rows => 3, :cols => 60)
