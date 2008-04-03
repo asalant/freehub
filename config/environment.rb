@@ -10,6 +10,7 @@ RAILS_GEM_VERSION = '2.0.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# Authorization plugin
 AUTHORIZATION_MIXIN = 'object roles'
 DEFAULT_REDIRECTION_HASH = { :controller => 'sessions', :action => 'new' }
 STORE_LOCATION_METHOD = :store_return_location
@@ -68,9 +69,14 @@ Rails::Initializer.run do |config|
   config.active_record.observers = :user_observer
 
 
+  # Global constants
   SITE_URL = 'http://localhost:3000'
   ENV['TIMEZONE_DEFAULT'] = 'Pacific Time (US & Canada)'
+
 end
+
+# Date picker control
+CalendarDateSelect.format = :hyphen_ampm # or :natural
 
 require 'has_finder'
 require 'has_finder_extensions'

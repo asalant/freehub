@@ -6,10 +6,10 @@ end
 form_tag report_path(:action => 'visits'), :method => :get do
   capture do
     labeled_input 'Date from', :for => :date_from do
-      select_date @report[:after], :prefix => 'report[after]'
+      calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
     end
     labeled_input 'Date to', :for => :date_to do
-      select_date @report[:before], :prefix => 'report[before]'
+      calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
     end
     p { submit_tag "Update"  }
   end

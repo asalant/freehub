@@ -2,6 +2,7 @@ html do
   head do
     title @title || "#{controller.controller_name.singularize.titleize} #{action_name.titleize} on Freehub"
     javascript_include_tag :all
+    calendar_date_select_includes 'silver'
     stylesheet_link_tag 'reset-min'
     stylesheet_link_tag 'application'
   end

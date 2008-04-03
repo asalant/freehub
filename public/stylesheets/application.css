@@ -216,3 +216,33 @@ div.note .note_text {
   border: 1px solid lightgray;
   margin: 6px 12px 8px 0;
 }
+
+/** CalendarDateSelect **/
+
+.calendar_date_select {
+  width: 180px;
+}
+.calendar_date_select .cds_header a {
+  width: 18px;
+}
+
+.calendar_date_select td,
+.calendar_date_select th {
+  padding: 2px;
+}
+
+.calendar_date_select select {
+  font-size: 12px;
+}
+
+.calendar_date_select .cds_buttons {
+  padding: 2px;
+}
+
+.calendar_date_select .cds_buttons a {
+  font-size: 10px;
+}
+
+.calendar_date_select .cds_header select.month {
+  width: 80px;
+}

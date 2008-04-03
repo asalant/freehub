@@ -10,8 +10,8 @@ class ReportsController < ApplicationController
   def visits
     if (params[:report])
       @report = { :for_organization => @organization,
-                  :after => date_from_params(params[:report][:after]),
-                  :before => date_from_params(params[:report][:before]) }
+                  :after => params[:report][:after],
+                  :before => params[:report][:before] }
     else
       @report = { :for_organization => @organization, :after => Date.today, :before => Date.tomorrow }
     end
