@@ -63,7 +63,7 @@ class ServicesController < ApplicationController
   # PUT /services/1.xml
   def update
     @service = Service.find(params[:id])
-    @service.note.update_attributes(params[:note]) if params[:note]
+    @service.note = Note.new(params[:note]) if params[:note]
 
     respond_to do |format|
       if @service.update_attributes(params[:service])

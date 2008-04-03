@@ -20,6 +20,7 @@ module TzTimeHelpers
           end
 
           define_method "#{attribute}=" do |local_time|
+            local_time = Time.parse(local_time) if local_time.kind_of?(String)
             fixed = (local_time.acts_like?(:time) || local_time.acts_like?(:date)) ? TzTime.at(local_time) : nil 
             write_attribute attribute, fixed
           end

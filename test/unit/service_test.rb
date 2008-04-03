@@ -45,7 +45,7 @@ class ServiceTest < ActiveSupport::TestCase
 
     service.note.text = ''
     service.save!
-    assert_nil service.note
+    assert_nil service.reload.note
   end
 
 end

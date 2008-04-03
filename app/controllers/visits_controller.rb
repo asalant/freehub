@@ -63,7 +63,7 @@ class VisitsController < ApplicationController
   # PUT /visits/1.xml
   def update
     @visit = Visit.find(params[:id])
-    @visit.note.update_attributes(params[:note]) if params[:note]
+    @visit.note = Note.new(params[:note]) if params[:note]
 
     respond_to do |format|
       if @visit.update_attributes(params[:visit])
