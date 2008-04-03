@@ -43,7 +43,8 @@ class VisitsController < ApplicationController
   # POST /visits
   # POST /visits.xml
   def create
-    @visit = Visit.new(params[:visit].merge(:note => Note.new(params[:note])))
+    @visit = Visit.new(params[:visit])
+    @visit.note = Note.new(params[:note]) if params[:note]
     @visit.person = @person
 
     respond_to do |format|
@@ -62,7 +63,7 @@ class VisitsController < ApplicationController
   # PUT /visits/1.xml
   def update
     @visit = Visit.find(params[:id])
-    @visit.note = Note.new(params[:note]) if params[:note]
+    @visit.note.update_attributes(params[:note]) if params[:note]
 
     respond_to do |format|
       if @visit.update_attributes(params[:visit])

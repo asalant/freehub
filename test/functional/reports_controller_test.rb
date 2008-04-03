@@ -21,8 +21,7 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_visits_report
     get :visits, :organization_key => 'sfbk',
-            :report => { :after => { :year => 2007, :month => 1, :day => 1 },
-                         :before => { :year => 2009, :month => 1, :day => 1 } },
+            :report => { :after => '2007-01-01', :before => '2009-01-01'},
             :page => 2
     assert_response :success
     assert_not_nil assigns(:report)
@@ -41,8 +40,7 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_visits_report_csv
     get :visits, :organization_key => 'sfbk',
-            :report => { :after => { :year => 2007, :month => 1, :day => 1 },
-                         :before => { :year => 2009, :month => 1, :day => 1 } },
+            :report => { :after => '2007-01-01', :before => '2009-01-01' },
             :format => 'csv'
     assert_response :success
     assert_not_nil assigns(:visits)
@@ -59,15 +57,14 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_services_report
     get :services, :organization_key => 'sfbk',
-            :report => {  :after => { :year => 2006, :month => 1, :day => 1 },
-                          :before => { :year => 2009, :month => 1, :day => 1 },
+            :report => {  :end_after => '2006-01-01', :end_before => '2009-01-01',
                           :for_service_types => ['MEMBERSHIP', 'CLASS'] },
             :page => 2
     assert_response :success
     assert_not_nil assigns(:report)
     assert_not_nil assigns(:services)
-    assert_equal 42, assigns(:services).size
-    assert_equal 20, assigns(:services).to_a.size
+    assert_equal 39, assigns(:services).size
+    assert_equal 19, assigns(:services).to_a.size
     assert_equal 2, assigns(:services).page
     assert_select "input[type=checkbox]", 3
     assert_select "input[type=checkbox][checked=checked]", 2
@@ -82,13 +79,12 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_services_report_csv
     get :services, :organization_key => 'sfbk',
-            :report => {  :after => { :year => 2006, :month => 1, :day => 1 },
-                          :before => { :year => 2009, :month => 1, :day => 1 },
+            :report => {  :end_after => '2006-01-01', :end_before => '2009-01-01',
                           :for_service_types => ['MEMBERSHIP', 'CLASS'] },
             :format => 'csv'
     assert_response :success
     assert_not_nil assigns(:services)
-    assert_equal 42, assigns(:services).size
+    assert_equal 39, assigns(:services).size
 
     output = StringIO.new
     output.binmode
@@ -101,8 +97,7 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_people_report
     get :people, :organization_key => 'sfbk',
-            :report => {  :after => { :year => 2008, :month => 1, :day => 1 },
-                          :before => { :year => 2008, :month => 1, :day => 5 } }
+            :report => {  :after => '2008-01-01', :before => '2008-01-05' }
     assert_response :success
     assert_not_nil assigns(:report)
     assert_not_nil assigns(:people)
@@ -120,8 +115,7 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_people_report_csv
     get :people, :organization_key => 'sfbk',
-            :report => {  :after => { :year => 2008, :month => 1, :day => 1 },
-                          :before => { :year => 2008, :month => 1, :day => 5 },
+            :report => {  :after => '2008-01-01', :before => '2008-01-05',
                           :matching_name => 'mar' },
             :format => 'csv'
     assert_response :success

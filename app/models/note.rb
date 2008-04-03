@@ -15,6 +15,10 @@ class Note < ActiveRecord::Base
     count_by_sql for_person_sql(person, options.merge(:select => 'COUNT(*)'))
   end
 
+  def empty?
+    self.text.nil? || self.text.empty?
+  end
+
   private
 
   def self.for_person_sql(person, options={})

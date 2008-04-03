@@ -2,6 +2,11 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class VisitTest < ActiveSupport::TestCase
 
+  def test_datetime_conversion
+    assert visits(:mary_1).update_attributes(:datetime => Time.parse('2008-04-02 7:05 PM'))
+    assert visits(:mary_1).update_attributes(:datetime => '2008-04-02 19:05 PM')
+  end
+
   def test_for_organization_paged
     assert_equal 102, Visit.for_organization(organizations(:sfbk)).paginate.size
     assert_equal 20, Visit.for_organization(organizations(:sfbk)).paginate.to_a.size
@@ -38,7 +43,8 @@ class VisitTest < ActiveSupport::TestCase
 
   def test_create_defaults
     assert_equal Date.today, Visit.create!(:person => people(:mary)).datetime.to_date
-    assert_equal Time.local(2008,1,1), Visit.create!(:person => people(:mary), :datetime => Time.local(2008,1,1)).datetime.time
+    assert_equal Time.local(2008,1,1), Visit.create!(:person => people(:mary), :datetime => Time.local(2008,1,1)).datetime.to_time
+    assert_not_nil Visit.new.note
   end
 
   def test_note_association

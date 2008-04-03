@@ -10,6 +10,8 @@ class Visit < ActiveRecord::Base
   acts_as_paginated
   chains_finders
 
+  before_validation :remove_empty_note
+
   has_finder :for_organization, lambda { |organization| {
       :conditions => [ "people.organization_id = ?", organization ],
       :include => [ :person, :note ],
@@ -24,10 +26,22 @@ class Visit < ActiveRecord::Base
       :conditions => [ "visits.datetime < ?", TzTime.at(date) ]
   } }
 
-  def initialize(params={})
-    super
+  def after_initialize
     self.datetime ||= TzTime.now
     self.volunteer ||= false
+    self.note ||= Note.new
+  end
+
+  def datetime=(value)
+    if value.kind_of? String
+      write_attribute(:datetime, Time.parse(value))
+    else
+      write_attribute(:datetime, value)
+    end
+  end
+
+  def datetime
+    read_attribute(:datetime)
   end
 
   CSV_FIELDS = { :person => %w{first_name last_name staff email email_opt_out phone postal_code},
@@ -44,4 +58,11 @@ class Visit < ActiveRecord::Base
     values << note.nil? ? nil : note.text
     CSV.generate_line values
   end
+
+  private
+
+  def remove_empty_note
+    self.note = nil if self.note && self.note.empty?
+  end
+
 end

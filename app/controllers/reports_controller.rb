@@ -12,6 +12,7 @@ class ReportsController < ApplicationController
       @report = { :for_organization => @organization,
                   :after => params[:report][:after],
                   :before => params[:report][:before] }
+      @report.delete_if {|key,value| value.respond_to?(:empty?) && value.empty? }
     else
       @report = { :for_organization => @organization, :after => Date.today, :before => Date.tomorrow }
     end
@@ -22,7 +23,7 @@ class ReportsController < ApplicationController
       format.html { @visits = @visits.paginate(params) }
       format.xml  { render :xml => @visits }
       format.csv do
-        stream_csv("#{@organization.key}_visits_#{@report[:after].to_s(:db)}_#{@report[:before].to_s(:db)}.csv") do |output|
+        stream_csv("#{@organization.key}_visits_#{@report[:after]}_#{@report[:before]}.csv") do |output|
           output << Visit.csv_header
           @visits.each do |visit|
             output << "\n#{visit.to_csv}"
@@ -36,12 +37,13 @@ class ReportsController < ApplicationController
     @service_types = ServiceType.find_all
     if (params[:report])
       @report = { :for_organization => @organization,
-                  :after => date_from_params(params[:report][:after]),
-                  :before => date_from_params(params[:report][:before]),
+                  :end_after => params[:report][:end_after],
+                  :end_before => params[:report][:end_before],
                   :for_service_types => params[:report][:for_service_types].collect {|type| type} }
+      @report.delete_if {|key,value| value.respond_to?(:empty?) && value.empty? }
     else
       @report = { :for_organization => @organization,
-                  :after => Date.today, :before => Date.tomorrow,
+                  :end_after => Time.now.beginning_of_month.to_date, :end_before => Time.now.next_month.beginning_of_month.to_date,
                   :for_service_types => @service_types.collect {|service_type| service_type.id} }
     end
 
@@ -51,7 +53,7 @@ class ReportsController < ApplicationController
       format.html { @services = @services.paginate(params) }
       format.xml  { render :xml => @services }
       format.csv do
-        stream_csv("#{@organization.key}_services_#{@report[:after].to_s(:db)}_#{@report[:before].to_s(:db)}.csv") do |output|
+        stream_csv("#{@organization.key}_services_#{@report[:end_after]}_#{@report[:end_before]}.csv") do |output|
           output << CSV.generate_line(Service::CSV_FIELDS[:person] + Service::CSV_FIELDS[:self])
           @services.each do |service|
             output << "\n#{service.to_csv}"
@@ -64,9 +66,10 @@ class ReportsController < ApplicationController
   def people
     if (params[:report])
       @report = params[:report].merge :for_organization => @organization,
-                  :after => date_from_params(params[:report][:after]),
-                  :before => date_from_params(params[:report][:before]) 
+                  :after => params[:report][:after],
+                  :before => params[:report][:before] 
       @report.delete(:matching_name) if @report[:matching_name] && @report[:matching_name].length < 3
+      @report.delete_if {|key,value| value.respond_to?(:empty?) && value.empty? }
     else
       @report = { :for_organization => @organization,
                   :after => Date.today, :before => Date.tomorrow }
@@ -78,7 +81,7 @@ class ReportsController < ApplicationController
       format.html { @people = @people.paginate(params) }
       format.xml  { render :xml => @people }
       format.csv do
-        stream_csv("#{@organization.key}_people_#{@report[:after].to_s(:db)}_#{@report[:before].to_s(:db)}.csv") do |output|
+        stream_csv("#{@organization.key}_people_#{@report[:after]}_#{@report[:before]}.csv") do |output|
           output << CSV.generate_line(Person::CSV_FIELDS[:self])
           @people.each do |person|
             output << "\n#{person.to_csv}"

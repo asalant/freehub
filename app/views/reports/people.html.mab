@@ -11,10 +11,10 @@ form_tag report_path(:action => 'people'), :method => :get do
       span.instructions "Match 3 or more letters in a person's first and last name."
     end
     labeled_input 'Created after', :for => 'report[after]' do
-      select_date @report[:after], :prefix => 'report[after]'
+      calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
     end
     labeled_input 'Created before', :for => 'report[before]' do
-      select_date @report[:before], :prefix => 'report[before]'
+      calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
     end
     p { submit_tag "Update"  }
   end

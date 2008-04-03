@@ -11,8 +11,8 @@ class ServiceTest < ActiveSupport::TestCase
 
   def test_for_organization_in_date_range
     from, to = Date.new(2007,8,1), Date.new(2008,2,3)
-    assert_equal 55, Service.for_organization(organizations(:sfbk)).before(from).size
-    assert_equal 19, Service.for_organization(organizations(:sfbk)).after(from).before(to).size
+    assert_equal 43, Service.for_organization(organizations(:sfbk)).end_before(from).size
+    assert_equal 7, Service.for_organization(organizations(:sfbk)).end_after(from).end_before(to).size
   end
 
   def test_for_service_types
@@ -42,6 +42,10 @@ class ServiceTest < ActiveSupport::TestCase
     assert !service.note.new_record?
     assert_not_nil service.note.created_at
     assert_equal people(:mary), service.note.notable.person
+
+    service.note.text = ''
+    service.save!
+    assert_nil service.note
   end
 
 end

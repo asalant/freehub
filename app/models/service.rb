@@ -10,28 +10,30 @@ class Service < ActiveRecord::Base
   acts_as_paginated
   chains_finders
 
+  before_validation :remove_empty_note
+
   has_finder :for_organization, lambda { |organization| {
       :conditions => [ "people.organization_id = ?", organization ],
       :include => [ :person, :note ],
       :order => 'services.end_date DESC'
   } }
 
-  has_finder :after, lambda { |date| {
-      :conditions => [ "services.end_date >= ?", date ]
+  has_finder :end_after, lambda { |date| {
+      :conditions => [ "services.end_date > ?", date ]
   } }
 
-  has_finder :before, lambda { |date| {
-      :conditions => [ "services.start_date < ?", date ]
+  has_finder :end_before, lambda { |date| {
+      :conditions => [ "services.end_date < ?", date ]
   } }
 
   has_finder :for_service_types, lambda { |service_types| {
       :conditions => [ "services.service_type_id IN (?)", service_types ]
   } }
 
-  def initialize(params={})
-    super
+  def after_initialize
     self.start_date ||= Date.today
     self.end_date ||= Date.today.next_year
+    self.note ||= Note.new
   end
 
   def current?
@@ -58,5 +60,11 @@ class Service < ActiveRecord::Base
     values << paid
     values << note.nil? ? nil : note.text
     CSV.generate_line values
+  end
+
+  private
+
+  def remove_empty_note
+    self.note = nil if self.note && self.note.empty?
   end
 end
