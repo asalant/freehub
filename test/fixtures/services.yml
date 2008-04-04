@@ -1,3 +1,21 @@
+# == Schema Information
+# Schema version: 7
+#
+# Table name: services
+#
+#  id              :integer(11)     not null, primary key
+#  start_date      :date            
+#  end_date        :date            
+#  paid            :boolean(1)      
+#  volunteered     :boolean(1)      
+#  service_type_id :string(255)     
+#  person_id       :integer(11)     
+#  created_at      :datetime        
+#  updated_at      :datetime        
+#  created_by_id   :integer(11)     
+#  updated_by_id   :integer(11)     
+#
+
 mary_membership:
   start_date: <%= 1.month.ago.to_date %>
   end_date: <%= 11.months.from_now.to_date %>

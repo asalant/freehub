@@ -1,3 +1,16 @@
+# == Schema Information
+# Schema version: 7
+#
+# Table name: organizations
+#
+#  id         :integer(11)     not null, primary key
+#  name       :string(255)     
+#  key        :string(255)     
+#  timezone   :string(255)     
+#  created_at :datetime        
+#  updated_at :datetime        
+#
+
 class Organization < ActiveRecord::Base
   tz_time_attributes :created_at, :updated_at
   

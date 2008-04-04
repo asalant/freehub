@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 7
+#
+# Table name: notes
+#
+#  id            :integer(11)     not null, primary key
+#  text          :text            
+#  notable_id    :integer(11)     
+#  notable_type  :string(255)     
+#  created_by_id :integer(11)     
+#  updated_by_id :integer(11)     
+#  created_at    :datetime        
+#  updated_at    :datetime        
+#
+
 class Note < ActiveRecord::Base
   tz_time_attributes :created_at, :updated_at
 

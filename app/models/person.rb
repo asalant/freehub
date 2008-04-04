@@ -1,3 +1,29 @@
+# == Schema Information
+# Schema version: 7
+#
+# Table name: people
+#
+#  id              :integer(11)     not null, primary key
+#  first_name      :string(255)     
+#  last_name       :string(255)     
+#  full_name       :string(255)     
+#  street1         :string(255)     
+#  street2         :string(255)     
+#  city            :string(255)     
+#  state           :string(255)     
+#  postal_code     :string(255)     
+#  country         :string(255)     
+#  email           :string(255)     
+#  email_opt_out   :boolean(1)      
+#  phone           :string(255)     
+#  staff           :boolean(1)      
+#  created_at      :datetime        
+#  updated_at      :datetime        
+#  created_by_id   :integer(11)     
+#  updated_by_id   :integer(11)     
+#  organization_id :integer(11)     
+#
+
 class Person < ActiveRecord::Base
   tz_time_attributes :created_at, :updated_at
   
