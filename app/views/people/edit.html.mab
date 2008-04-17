@@ -1,7 +1,7 @@
-
-render :partial => 'people/summary'
-
-h2 'Detail'
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text " : Detail"
+end
 
 error_messages_for :person
 

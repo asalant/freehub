@@ -1,7 +1,7 @@
-
-render :partial => 'people/summary'
-
-h2 'Notes'
+h1 do
+  link_to @person.full_name, person_path(:id => @person)
+  text " : Notes"
+end
 
 link_to 'New note', new_note_path
 

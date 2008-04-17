@@ -1,7 +1,23 @@
-h1 "#{@organization.name} : Profile"
+h1 "#{@organization.name}"
 
 labeled_value 'Name', @organization.name
 labeled_value 'Key', @organization.key
 labeled_value 'Timezone', @organization.timezone
 
 link_to 'Edit', edit_organization_path(@organization) if permit? "admin or (manager of :organization)"
+
+h2 "Sign In"
+
+p do <<END
+#{link_to 'Sign in', sign_in_today_path(:organization_key => @organization.key)} shop patrons,
+#{link_to 'add new people', new_person_path(:organization_key => @organization.key)} to the system,
+and manage their membership and service information.
+END
+end
+
+h2 "Reports"
+
+p do <<END
+#{link_to('Run reports', report_path(:organization_key => @organization.key, :action => 'index'))} and export data for people, services and shop visits.
+END
+end

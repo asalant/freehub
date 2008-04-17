@@ -49,7 +49,7 @@ class VisitsController < ApplicationController
 
     respond_to do |format|
       if @visit.save
-        flash[:notice] = 'Visit was successfully created.'
+        flash[:notice] = "Visit for #{@person.full_name} was successfully created."
         format.html { redirect_to(params[:destination] || visits_path) }
         format.xml  { render :xml => @visit, :status => :created, :location => @visit }
       else
@@ -82,7 +82,7 @@ class VisitsController < ApplicationController
   def destroy
     @visit = Visit.find(params[:id])
     @visit.destroy
-    flash[:notice] = 'Visit was successfully removed.'
+    flash[:notice] = "Visit for #{@visit.person.full_name} was successfully removed."
 
     respond_to do |format|
       format.html { redirect_to(params[:destination] || visits_path) }

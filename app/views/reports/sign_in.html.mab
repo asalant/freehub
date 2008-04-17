@@ -1,4 +1,25 @@
-h1 "Visits for #{Date.today == @day ? 'today' :date_long(@day)}" 
+h1 "Sign In"
+
+if @day  == Date.today
+  h2 "Find Person"
+
+  label 'Name', :style => 'text-align:left; width: 40px;'
+  text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },
+          :url => auto_complete_for_person_full_name_people_path(:organization_key => organization.key) ,
+          :method => :get, :min_chars => 2,
+          :indicator => 'search_status',
+          :after_update_element => <<-END
+  function(element, value) {
+    window.location = $(value).readAttribute('url');
+  }
+  END
+  image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'
+
+  h2 "Visits for Today"
+else
+  h2 "Visits for #{date_long(@day)}"
+end
+
 
 link_to "&lt; #{@day.yesterday.strftime("%a")}",
         sign_in_path(:year => @day.yesterday.year, :month => @day.yesterday.month, :day => @day.yesterday.day)
@@ -9,9 +30,9 @@ unless @day == Date.today
 end
 
 if @visits.empty?
-  div.list_status "No visits for #{@day.to_s(:db)}."
+  p.list_status "No visits for #{@day.to_s(:db)}."
 else
-  div.list_status "#{@visits.size} visits."
+  p.list_status "#{@visits.size} visits."
   table do
     tr do
       th { 'Name' }
@@ -28,8 +49,8 @@ else
         td { visit.volunteer? }
         td { "#{time_short(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
         td.note { note_text(visit.note) }
-        td { link_to 'Destroy', visit_path(:person_id => visit.person, :id => visit, :destination => sign_in_path),
-                :confirm => 'Are you sure?', :method => :delete }
+        td { link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => sign_in_path),
+                :method => :delete }
       end
     end
   end

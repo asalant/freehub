@@ -15,3 +15,11 @@ The #{link_to 'Services Report', report_path(:action => 'services', :organizatio
 lists services by type (Membership, Class, Digging Rights) in a date range and can be exported as CSV for use in a spreadsheet program.
 END
 end
+
+h2 'People'
+
+p do <<END
+The #{link_to 'People Report', report_path(:action => 'people', :organization_key => @organization.key)}
+lists all people, members and non members, and can be exported as CSV for use in a spreadsheet program.
+END
+end

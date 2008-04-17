@@ -1,17 +1,39 @@
-render :partial => 'summary'
+h1 @person.full_name
 
-h2 'Current Services'
+labeled_value 'Email', @person.email
+labeled_value 'Postal code', @person.postal_code
+labeled_value 'Staff', @person.staff
+div.label "-"
+span.value do
+  link_to 'More detail...', edit_person_path(:id => @person), :class => ('selected' if params[:controller] == 'people' && params[:action] == 'edit')
+end
+
+form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id => @person.id) , :html => { :id => 'sign_in_form' } do |f|
+  hidden_field_tag :destination, sign_in_today_path
+  fields_for :note do |note|
+    labeled_input 'Note', :for => :visit_note do
+      note.text_area :text, :rows => 1
+    end
+  end
+  labeled_input 'Volunteer', :for => :visit_volunteer do
+    f.check_box :volunteer
+  end
+  labeled_input '-' do
+    f.submit "Sign In!"
+  end
+end
+
+h2 "Current Services"
 
 services = @person.services.paginate(:size => 3)
 if services.empty?
-  div.list_status do
+  p.list_status do
     text 'No past services. '
-    link_to 'Add service.', new_service_path(:person_id => @person)
   end
 else
-  div.list_status do
+  p.list_status do
     text "Showing #{services.to_a.size} of #{services.size} total services. "
-    link_to 'Add service.', new_service_path(:person_id => @person)
+    link_to 'See all services.', services_path(:organization_key => @organization.key, :person_id => @person)
   end
   table do
     tr do
@@ -33,19 +55,19 @@ else
   end
 
 end
+p { link_to 'Add service.', new_service_path(:person_id => @person) }
 
 h2 'Recent Visits'
 
 visits = @person.visits.paginate(:size => 3)
 if visits.empty?
-  div.list_status do
+  p.list_status do
     text 'No past visits. '
-    link_to 'Add visit.', new_visit_path(:person_id => @person)
   end
 else
-  div.list_status do
+  p.list_status do
     text "Showing #{visits.to_a.size} of #{visits.size} total visits. "
-    link_to 'Add visit.', new_visit_path(:person_id => @person)
+    link_to 'See all visits.', visits_path(:organization_key => @organization.key, :person_id => @person)
   end
   table do
     tr do
@@ -64,6 +86,7 @@ else
     end
   end
 end
+p { link_to 'Add visit.', new_visit_path(:person_id => @person) }
 
 
 h2 'Recent Notes'
@@ -77,9 +100,8 @@ end
 
 notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
 if notes.empty?
-  div.list_status do
+  p.list_status do
     text 'No past notes. '
-    link_to 'Add note.', new_note_path(:person_id => @person)
   end
 else
   div.list_status do
