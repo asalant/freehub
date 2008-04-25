@@ -25,6 +25,7 @@ div.page_column do
       f.submit "Sign In!"
     end
   end
+  script "$('visit_submit').focus();", :type => 'text/javascript'
 
   h2 'Recent Visits'
 

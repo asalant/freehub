@@ -14,6 +14,7 @@ if @day  == Date.today
   }
   END
   image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'
+  script "$('person_full_name').focus();", :type => 'text/javascript'
 
   h2 "Visits for Today"
 else
