@@ -8,111 +8,101 @@ span.value do
   link_to 'More detail...', edit_person_path(:id => @person), :class => ('selected' if params[:controller] == 'people' && params[:action] == 'edit')
 end
 
-form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id => @person.id) , :html => { :id => 'sign_in_form' } do |f|
-  hidden_field_tag :destination, sign_in_today_path
-  fields_for :note do |note|
-    labeled_input 'Note', :for => :visit_note do
-      note.text_area :text, :rows => 1
-    end
-  end
-  labeled_input 'Volunteer', :for => :visit_volunteer do
-    f.check_box :volunteer
-  end
-  labeled_input '-' do
-    f.submit "Sign In!"
-  end
-end
+div.page_column do
+  h2 'Sign In'
 
-h2 "Current Services"
-
-services = @person.services.paginate(:size => 3)
-if services.empty?
-  p.list_status do
-    text 'No past services. '
-  end
-else
-  p.list_status do
-    text "Showing #{services.to_a.size} of #{services.size} total services. "
-    link_to 'See all services.', services_path(:organization_key => @organization.key, :person_id => @person)
-  end
-  table do
-    tr do
-      th { 'Service type' }
-      th { 'Status' }
-      th { 'Start date' }
-      th { 'End date' }
-      th { 'Note' }
-    end
-    for service in services
-      tr :class => cycle('odd','even') do
-        td { service.service_type.name }
-        td { service.current? ? 'Current' : 'Expired' }
-        td { service.start_date }
-        td { service.end_date }
-        td.note { note_text(service.note) }
+  form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id => @person.id) , :html => { :id => 'sign_in_form' } do |f|
+    hidden_field_tag :destination, sign_in_today_path
+    fields_for :note do |note|
+      labeled_input 'Note', :for => :visit_note do
+        note.text_area :text, :rows => 1
       end
     end
+    labeled_input 'Volunteer', :for => :visit_volunteer do
+      f.check_box :volunteer
+    end
+    labeled_input '-' do
+      f.submit "Sign In!"
+    end
   end
 
-end
-p { link_to 'Add service.', new_service_path(:person_id => @person) }
+  h2 'Recent Visits'
 
-h2 'Recent Visits'
-
-visits = @person.visits.paginate(:size => 3)
-if visits.empty?
-  p.list_status do
-    text 'No past visits. '
-  end
-else
-  p.list_status do
-    text "Showing #{visits.to_a.size} of #{visits.size} total visits. "
-    link_to 'See all visits.', visits_path(:organization_key => @organization.key, :person_id => @person)
-  end
-  table do
-    tr do
-      th { 'When' }
-      th { '' }
-      th { 'Volunteer' }
-      th { 'Note' }
+  visits = @person.visits.paginate(:size => 3)
+  if visits.empty?
+    p.list_status do
+      text 'No past visits. '
+    end
+  else
+    p.list_status do
+      text "Showing #{visits.to_a.size} of #{visits.size} total visits. "
+      link_to 'See all visits.', visits_path(:organization_key => @organization.key, :person_id => @person)
     end
     for visit in visits
-      tr :class => cycle('odd','even') do
-        td { datetime_long(visit.datetime) }
-        td { "(#{time_ago_in_words(visit.datetime)} ago)"  }
-        td { visit.volunteer? }
-        td.note { note_text(visit.note) }
+      div.note do
+        div.note_subject { "#{visit.volunteer? ? 'Volunteered' : 'Visited' } #{time_ago_in_words(visit.datetime)} ago" }
+        div.note_status { "#{datetime_long(visit.datetime)}" }
+        div.note_text { note_text(visit.note) }
+      end
+    end
+  end
+  p { link_to 'Add visit.', new_visit_path(:person_id => @person) }
+
+  h2 'Recent Notes'
+
+  form_for Note.new, :url => notes_path(:person_id => @person) do |f|
+      text f.text_area(:text, :rows => 3, :cols => 60)
+      p do
+        f.submit "Add note"
+      end
+  end
+
+  notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
+  if notes.empty?
+    p.list_status do
+      text 'No past notes. '
+    end
+  else
+    div.list_status do
+      text "Showing #{notes.size} of #{notes_count} total notes. "
+      link_to 'See all notes.', notes_path(:organization_key => @organization.key, :person_id => @person)
+    end
+    for note in notes
+      div.note do
+        div.note_subject { "Re: #{notable_link(note.notable)}" }
+        div.note_status { "#{datetime_long(note.created_at)} by #{user_link(note.created_by)}" }
+        div.note_text { note_text(note) }
       end
     end
   end
 end
-p { link_to 'Add visit.', new_visit_path(:person_id => @person) }
 
+div.page_column do
+  h2 "Current Services"
 
-h2 'Recent Notes'
-
-form_for Note.new, :url => notes_path(:person_id => @person) do |f|
-    text f.text_area(:text, :rows => 3, :cols => 60)
-    p do
-      f.submit "Add note"
-    end  
-end
-
-notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
-if notes.empty?
-  p.list_status do
-    text 'No past notes. '
-  end
-else
-  div.list_status do
-    text "Showing #{notes.size} of #{notes_count} total notes. "
-    link_to 'See all notes.', notes_path(:organization_key => @organization.key, :person_id => @person)
-  end
-  for note in notes
-    div.note do
-      div.note_subject { "Re: #{notable_link(note.notable)}" }
-      div.note_status { "#{datetime_long(note.created_at)} by #{user_link(note.created_by)}" }
-      div.note_text { note_text(note) }
+  services = @person.services.paginate(:size => 3)
+  if services.empty?
+    p.list_status do
+      text 'No past services. '
     end
+  else
+    p.list_status do
+      text "Showing #{services.to_a.size} of #{services.size} total services. "
+      link_to 'See all services.', services_path(:organization_key => @organization.key, :person_id => @person)
+    end
+    for service in services do
+      div.note do
+        div.note_subject { "#{service.service_type.name} from #{service.start_date} to #{service.end_date}" }
+        div.note_status { "#{service.current? ? 'Current' : 'Expired'}" }
+        div.note_text { note_text(service.note) }
+      end
+    end
+
   end
+  p { link_to 'Add service.', new_service_path(:person_id => @person) }  
 end
+
+br :style => 'clear:both;'
+
+
+

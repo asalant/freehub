@@ -27,6 +27,12 @@ html {
   text-align: center;
 }
 
+div.page_column {
+  width: 450px;
+  float: left;
+  margin-right: 10px;
+}
+
 h1 {
   font-size: 24px;
   margin: 0 0 12px 0;
@@ -189,11 +195,13 @@ div.row {
 div.note {
   margin-bottom: 4px;
   padding: 2px;
-  background: #e5e5e5;
-  width: 600px;
+  background: #f2f2f2;
+  border: 1px solid lightgray;
 }
 
-.note_subject, .note_status {
+.note_subject {
+}
+.note_status {
   font-style: italic;
 }
 
@@ -209,6 +217,7 @@ div.note .note_text {
   clear: both;
   padding: 3px;
   background: #ffffff;
+  border-top: 1px solid lightgray;
 }
 
 #sign_in_form {

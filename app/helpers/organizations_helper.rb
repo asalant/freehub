@@ -8,7 +8,7 @@ module OrganizationsHelper
         link_to 'Freehub', root_path
         end
       div.organization_nav! do
-        link_to('Sign In', sign_in_today_path(:organization_key => organization.key))
+        link_to('Visits', sign_in_today_path(:organization_key => organization.key))
         text ' | '
         link_to('Reports', report_path(:action => 'index', :organization_key => organization.key))
       end

@@ -1,9 +1,9 @@
-h1 "Sign In"
+h1 "Visits"
 
 if @day  == Date.today
-  h2 "Find Person"
+  h2 "Sign In"
 
-  label 'Name', :style => 'text-align:left; width: 40px;'
+  label 'Find Person'
   text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },
           :url => auto_complete_for_person_full_name_people_path(:organization_key => organization.key) ,
           :method => :get, :min_chars => 2,
