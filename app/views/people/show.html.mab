@@ -9,23 +9,23 @@ span.value do
 end
 
 div.page_column do
-  h2 'Sign In'
+  h2 "Sign #{@person.first_name} In"
 
-  form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id => @person.id) , :html => { :id => 'sign_in_form' } do |f|
-    hidden_field_tag :destination, sign_in_today_path
-    fields_for :note do |note|
-      labeled_input 'Note', :for => :visit_note do
-        note.text_area :text, :rows => 1
+  div.action do
+    form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id => @person.id) do |f|
+      hidden_field_tag :destination, sign_in_today_path
+      fields_for :note do |note|
+        labeled_input 'Note', :for => :visit_note do
+          note.text_area :text, :rows => 2
+        end
       end
+      labeled_input 'Volunteer', :for => :visit_volunteer do
+        f.check_box :volunteer
+      end
+      p { f.submit "Sign In!" }
     end
-    labeled_input 'Volunteer', :for => :visit_volunteer do
-      f.check_box :volunteer
-    end
-    labeled_input '-' do
-      f.submit "Sign In!"
-    end
+    script "$('visit_submit').focus();", :type => 'text/javascript'
   end
-  script "$('visit_submit').focus();", :type => 'text/javascript'
 
   h2 'Recent Visits'
 

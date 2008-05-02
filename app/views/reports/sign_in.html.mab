@@ -1,7 +1,7 @@
 if @day  == Date.today
   h2 "Sign A Person In"
 
-  div.action.search do
+  div.action do
     label 'Name'
     text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },
             :url => auto_complete_for_person_full_name_people_path(:organization_key => organization.key) ,
