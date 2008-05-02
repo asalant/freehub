@@ -16,7 +16,6 @@ body, legend, select, input, textarea, th, td {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 16px;
-  color: #666;
 }
 
 body {
@@ -54,10 +53,9 @@ p, ul {
 
 label, .label {
   width: 100px;
-  float: left;
-  font-weight: bold;
-  text-align: right;
-  padding-right: 6px;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
 }
 
 .fieldWithErrors {
@@ -109,10 +107,10 @@ div.progressBar {
 #application_nav,
 #application_body,
 #application_footer {
-  width: 960px;
+  width: 955px;
   margin: 0 auto;
   text-align: left;
-  padding: 12px;
+  padding: 6px 40px 6px 40px;
 }
 
 #application_body {
@@ -140,6 +138,7 @@ table {
 
 tr {
   vertical-align: top;
+  border-bottom: 1px solid tan;
 }
 
 th {
@@ -159,7 +158,7 @@ td.note {
 }
 
 tr.even { background: #ffffff; }
-tr.odd  { background: #f2f2f2; }
+tr.odd  { background: lightcyan; }
 
 div.column {
   width: 400px;
@@ -168,6 +167,18 @@ div.column {
 
 div.row {
   clear: both;
+}
+
+div.action {
+  width: 360px;
+  background: lightyellow;
+  border: 1px solid tan;
+  padding: 14px 14px 30px 14px;
+}
+
+div.action #person_full_name{
+  width: 360px;
+  font-size: 14px;
 }
 
 .paginating_links {
