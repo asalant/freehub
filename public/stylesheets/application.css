@@ -1,116 +1,38 @@
-a {
-  color: #0088eb;
-  text-decoration: none;
+/** Top Level Layout **/
+
+#application{
+  width:955px;
+  margin: 0 auto;
+  text-align: left;
 }
 
-a:hover {
-  color: #ffbf00;
-  text-decoration: underline;
+#footer {
+  background:black;
+  height: 100px;
 }
 
-a.selected {
-  color: #666;
+#application_nav,
+#application_body,
+#application_footer {
+  clear:both;
 }
 
-body, legend, select, input, textarea, th, td {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  line-height: 16px;
-}
-
-body {
-  background: #e5e5e5;
-}
-
-html {
-  text-align: center;
-}
-
-div.page_column {
-  width: 450px;
-  float: left;
-  margin-right: 10px;
-}
-
-h1 {
-  font-size: 24px;
-  margin: 0 0 12px 0;
-}
-
-h2 {
-  font-size: 18px;
-  margin: 14px 0 6px 0;
-}
-
-h3 {
-  font-size: 16px;
-  margin: 0 0 4px 0;
-}
-
-p, ul {
-  margin: 6px 0;
-}
-
-label, .label {
-  width: 100px;
-  display: block;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.fieldWithErrors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-#errorExplanation {
-  width: 400px;
-  border: 2px solid #c00;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-}
-
-#errorExplanation h2 {
-  font-weight: bold;
-  margin: 0;
-  padding: 5px;
-  font-size: 12px;
-  background-color: #c00;
-  color: #fff;
-}
-
-#errorExplanation p {
-  color: #333;
-  margin-bottom: 0;
-  padding: 5px;
-}
-
-#errorExplanation ul {
-  padding-left: 2em;
-}
-
-#errorExplanation ul li {
-  font-size: 12px;
-  list-style: disc;
-}
-
-div.uploadStatus {
-  margin: 5px;
-}
-
-div.progressBar {
-  margin: 5px;
+#application_header,
+#application_nav {
+  background: #663300;
 }
 
 #application_header,
 #application_nav,
-#application_body,
-#application_footer {
-  width: 955px;
-  margin: 0 auto;
-  text-align: left;
-  padding: 6px 40px 6px 40px;
+#application_footer,
+#application_header a,
+#application_footer a {
+  color: white;
+}
+
+#application_body {
+  background: white;
+  padding: 0px 26px 26px 26px;
 }
 
 #application_body {
@@ -122,31 +44,62 @@ div.progressBar {
   font-style: italic;
 }
 
+/** Application Navigation **/
+ul.tabs {
+  float:right;
+}
+
+ul.tabs li {
+  float:left;
+  font-size: 14px;
+  padding: 6px 14px 10px 14px;
+  margin-top: 12px;
+  color: white;
+}
+
+ul.tabs li a {
+  color: white;
+}
+
+ul.tabs li.selected,
+ul.tabs li.selected a {
+  background: white;
+  color: black;
+}
+
+/** Application Header **/
+
+#application_header {
+  padding: 14px;
+}
+#application_header h2 {
+  font-size: 20px;
+}
+
+div.page_column {
+  width: 450px;
+  float: left;
+  margin-right: 10px;
+}
+
 #user_status {
-  float: right;
+  padding: 6px 4px 10px 4px;
+  float:right;
+  color: white;
+}
+
+#user_status a {
+  color: white;
+}
+
+#user_status .log_out {
+  padding-left: 4px;
 }
 
 .list_controls, .list_controls td {
   background-color: #f2f2f2;
   border: 1px solid #C9C9C9;
   padding: 0;
-}
-
-table {
-  margin: 0 0 0 0;
-}
-
-tr {
-  vertical-align: top;
-  border-bottom: 1px solid tan;
-}
-
-th {
-  font-weight: bold;
-}
-
-th, td {
-  padding: 6px;
 }
 
 td.note {
@@ -237,7 +190,78 @@ div.note .note_text {
   margin: 6px 12px 8px 0;
 }
 
-/** CalendarDateSelect **/
+/** Base HTML Styling **/
+
+a {
+  color: #0088eb;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffbf00;
+  text-decoration: underline;
+}
+
+a.selected {
+  color: #666;
+}
+
+body, legend, select, input, textarea, th, td {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /** font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif; **/
+  font-size: 12px;
+  line-height: 16px;
+}
+
+body {
+  background: #996633;
+  text-align:center;
+}
+
+#application_body h1 {
+  font-size: 24px;
+  padding: 0 0 12px 0;
+}
+
+#application_body h2 {
+  font-size: 18px;
+  padding: 26px 0 6px 0;
+}
+
+#application_body h3 {
+  font-size: 16px;
+  padding: 0 0 4px 0;
+}
+
+#application_body p, #application_body ul {
+  padding: 6px 0;
+}
+
+table {
+  margin: 0 0 0 0;
+}
+
+tr {
+  vertical-align: top;
+  border-bottom: 1px solid tan;
+}
+
+th {
+  font-weight: bold;
+}
+
+th, td {
+  padding: 6px;
+}
+
+label, .label {
+  width: 100px;
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+/** CalendarDateSelect style overrides**/
 
 .calendar_date_select {
   width: 180px;
@@ -265,4 +289,51 @@ div.note .note_text {
 
 .calendar_date_select .cds_header select.month {
   width: 80px;
+}
+
+/** Rails core styles **/
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid #c00;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  font-weight: bold;
+  margin: 0;
+  padding: 5px;
+  font-size: 12px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul {
+  padding-left: 2em;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}
+
+div.uploadStatus {
+  margin: 5px;
+}
+
+div.progressBar {
+  margin: 5px;
 }

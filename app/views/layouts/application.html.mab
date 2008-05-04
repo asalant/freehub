@@ -2,33 +2,59 @@ html do
   head do
     title @title || "#{controller.controller_name.singularize.titleize} #{action_name.titleize} on Freehub"
     javascript_include_tag :all
-    calendar_date_select_includes 'silver'
     stylesheet_link_tag 'reset-min'
+    calendar_date_select_includes 'silver'
     stylesheet_link_tag 'application'
   end
   body do
-    div.application_header! do
-      user_status
-      if @organization && !@organization.new_record?
-        organization_header @organization
-      else
-        h2 { text "Welcome to #{link_to 'Freehub', root_path}" }
+    div.application! do
+      div.user_status! do
+        if logged_in?
+          span.greeting { "Hello #{link_to b(current_user.login), edit_user_path(current_user)}" }
+          span.log_out { link_to 'Log Out', session_path, :method => :delete }
+        else
+          span.log_in { link_to 'Log In', new_session_path }
+        end
       end
-    end
-    div.application_body! do
       if flash[:notice]
         p.notice! flash[:notice]
-        script <<END
-Event.observe(window,'load',function()
-{
-   new Effect.Highlight('notice', { duration: 1 });
-});
-END
+        script <<-END
+        Event.observe(window,'load',function()
+        {
+           new Effect.Highlight('notice', { duration: 1 });
+        });
+        END
       end
-      self << content_for_layout
+
+      div.application_nav! do
+        ul.tabs do
+          if @organization && !@organization.new_record?
+            li { link_to('Home', organization_key_path(:organization_key => organization.key)) }
+            li.selected { link_to('Visits', sign_in_today_path(:organization_key => organization.key)) }
+            li { link_to('Reports', report_path(:action => 'index', :organization_key => organization.key)) }
+          else
+            li { link_to 'Home', root_path }
+            li { link_to 'Credits', root_path }
+          end
+        end
+      end
+      div.application_header! do
+        if @organization && !@organization.new_record?
+          h2 { link_to organization.name, organization_key_path(:organization_key => organization.key) }
+        else
+          h2 { text "Welcome to #{link_to 'Freehub', root_path}" }
+        end
+      end
+      div.application_body! do
+        self << content_for_layout
+      end
+      div.application_footer! do
+        text "Times shown are #{TzTime.zone.name} timezone."
+      end
     end
-    div.application_footer! do
-      text "Times shown are #{TzTime.zone.name} timezone."
+    
+    div.footer! do
+      text 'Logo and other Freehub stuff'
     end
   end
 end
