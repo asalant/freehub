@@ -1,11 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :organizations
 
-  map.resources :people, :path_prefix => '/:organization_key', :collection => { :auto_complete_for_person_full_name => :get }
-  map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
-  map.resources :services, :path_prefix => '/:organization_key/people/:person_id'
-  map.resources :notes, :path_prefix => '/:organization_key/people/:person_id'
-
   # Authentication
   map.resources :users, :member => [ :welcome ]
   map.resource :session
@@ -14,14 +9,18 @@ ActionController::Routing::Routes.draw do |map|
   map.reset    '/reset/:reset_code', :controller => 'users',     :action => 'reset',
                                      :requirements => { :reset_code => /\w+/ }
 
-
-
   # Organization mappings go last so they don't take precedence'
+  map.resources :people, :path_prefix => '/:organization_key', :collection => { :auto_complete_for_person_full_name => :get }
+  map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
+  map.resources :services, :path_prefix => '/:organization_key/people/:person_id'
+  map.resources :notes, :path_prefix => '/:organization_key/people/:person_id'
+
+  map.day_visits ':organization_key/visits/:year/:month/:day',
+          :controller => 'visits', :action => 'day',
+          :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
+
   map.reports ':organization_key/reports', :controller => 'reports', :action => 'index'
   map.report ':organization_key/reports/:action', :controller => 'reports'
-  map.sign_in ':organization_key/sign_in/:year/:month/:day',
-          :controller => 'reports', :action => 'sign_in',
-          :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
 
   map.organization_key ':organization_key', :controller => 'organizations', :action => 'show'
 

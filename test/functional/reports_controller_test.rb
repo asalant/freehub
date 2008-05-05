@@ -133,12 +133,4 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_equal "attachment; filename=\"sfbk_people_2008-01-01_2008-01-05.csv\"", @response.headers['Content-Disposition']
   end
 
-  def test_sign_in_report
-    get :sign_in, :organization_key => 'sfbk', :year => 2008, :month => 2, :day => 1
-    assert_response :success
-    assert_not_nil assigns(:visits)
-    assert_equal 2, assigns(:visits).size
-    assert_equal Date.new(2008,2,1), assigns(:day)
-  end
-
 end

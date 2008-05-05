@@ -62,9 +62,11 @@ class PersonTest < ActiveSupport::TestCase
   def test_membership
     assert_not_nil people(:mary).services.last(:membership)
     assert people(:mary).services.last(:membership).current?
+    assert people(:mary).member?
 
     assert_not_nil people(:carrie).services.last(:membership)
     assert !people(:carrie).services.last(:membership).current?
+    assert !people(:carrie).member?
   end
 
   def test_csv_header

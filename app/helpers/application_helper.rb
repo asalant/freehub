@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def time_short(datetime)
-    datetime.strftime("%I:%M %p") if datetime
+    datetime.strftime("%I:%M %p").downcase if datetime
   end
 
   def datetime_short(datetime)
@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def datetime_long(datetime)
-    datetime.strftime("%a %b %d %Y %I:%M %p") if datetime
+    datetime.strftime("%a %b %d %Y") + datetime.strftime("%I:%M %p").downcase if datetime
   end
 
   def date_long(date)
@@ -30,7 +30,14 @@ module ApplicationHelper
     distance_of_time_in_words(from_time, TzTime.now, include_seconds)
   end
 
-  def sign_in_today_path(options={})
-    sign_in_path({:year => Date.today.year, :month => Date.today.month, :day => Date.today.day}.merge(options))
+  def tab_item(label, path)
+    markaby do
+      li(:class => request.path == path ? 'selected' : '') { link_to label, path }
+    end
+  end
+
+  def today_visits_path(params={})
+    today = Date.today
+    day_visits_path params.merge(:year => today.year, :month => today.month, :day => today.day)
   end
 end

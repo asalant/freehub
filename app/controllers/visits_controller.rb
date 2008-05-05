@@ -89,4 +89,20 @@ class VisitsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def today
+    today = Date.today
+    params.merge! :year => today.year, :month => today.month, :day => today.day
+    day
+  end
+
+  def day
+    @day = date_from_params(params)
+    @visits = Visit.for_organization(@organization).after(@day).before(@day.tomorrow)
+
+    respond_to do |format|
+      format.html { render :action => :day }
+      format.xml  { render :xml => @visits }
+    end
+  end
 end

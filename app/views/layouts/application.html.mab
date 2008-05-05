@@ -8,32 +8,28 @@ html do
   end
   body do
     div.application! do
-      div.user_status! do
-        if logged_in?
-          span.greeting { "Hello #{link_to b(current_user.login), edit_user_path(current_user)}" }
-          span.log_out { link_to 'Log Out', session_path, :method => :delete }
-        else
-          span.log_in { link_to 'Log In', new_session_path }
+      div.header! do
+        div.user_status! do
+          if logged_in?
+            span.greeting { "Hello #{link_to b(current_user.login), edit_user_path(current_user)}" }
+            span.log_out { link_to 'Log Out', session_path, :method => :delete }
+          else
+            span.log_in { link_to 'Log In', new_session_path }
+          end
         end
-      end
-      if flash[:notice]
-        p.notice! flash[:notice]
-        script <<-END
-        Event.observe(window,'load',function()
-        {
-           new Effect.Highlight('notice', { duration: 1 });
-        });
-        END
+        if flash[:notice]
+          span.notice! flash[:notice]
+        end
       end
 
       div.application_nav! do
         ul.tabs do
           if @organization && !@organization.new_record?
-            li { link_to('Home', organization_key_path(:organization_key => organization.key)) }
-            li.selected { link_to('Visits', sign_in_today_path(:organization_key => organization.key)) }
-            li { link_to('Reports', report_path(:action => 'index', :organization_key => organization.key)) }
+            tab_item('Home', organization_key_path(:organization_key => organization.key))
+            tab_item('Visits', today_visits_path(:organization_key => organization.key))
+            tab_item('Reports', report_path(:action => 'index', :organization_key => organization.key))
           else
-            li { link_to 'Home', root_path }
+            li  { link_to 'Home', root_path }
             li { link_to 'Credits', root_path }
           end
         end

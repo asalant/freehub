@@ -59,7 +59,7 @@ module PeopleHelper
 
   def sign_in_form_fields(form)
     markaby do
-      hidden_field_tag :destination, sign_in_today_path
+      hidden_field_tag :destination, today_visits_path
       fields_for :note do |note|
         labeled_input 'Note', :for => :visit_note do
           note.text_area :text, :rows => 2

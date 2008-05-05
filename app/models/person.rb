@@ -31,7 +31,7 @@ class Person < ActiveRecord::Base
   has_many :visits, :include => :note, :dependent => :destroy, :order => "datetime DESC"
   has_many :services, :include => :note, :dependent => :destroy,  :order => "end_date DESC" do
     def last(service_type)
-      for_service_types(ServiceType[service_type].id).first
+      self.detect { |service| service.service_type_id == ServiceType[service_type].id }
     end
   end
   has_many :notes, :as => :notable, :dependent => :destroy
@@ -68,6 +68,11 @@ class Person < ActiveRecord::Base
   def initialize(params={})
     super
     self.country ||= 'US'
+  end
+
+  def member?
+    membership = services.last(:membership)
+    !membership.nil? && membership.current?
   end
 
   CSV_FIELDS = { :self => %w{first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country created_at membership_expires_on} }

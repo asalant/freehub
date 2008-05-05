@@ -5,7 +5,7 @@ labeled_value 'Postal code', @person.postal_code
 labeled_value 'Staff', @person.staff
 
 form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id => @person.id) , :html => { :id => 'sign_in_form' } do |f|
-  hidden_field_tag :destination, sign_in_today_path
+  hidden_field_tag :destination, today_visits_path
   fields_for :note do |note|
     labeled_input 'Note', :for => :visit_note do
       note.text_area :text, :rows => 1

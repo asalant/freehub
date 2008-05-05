@@ -120,10 +120,4 @@ class ReportsController < ApplicationController
       yield output
     }
   end
-
-  # year, month, day
-  def date_from_params(params)
-    return nil unless params[:year] && params[:month] && params[:day]
-    Date.new params[:year].to_i, params[:month].to_i, params[:day].to_i
-  end
 end

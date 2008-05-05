@@ -9,7 +9,7 @@ link_to 'Edit', edit_organization_path(@organization) if permit? "admin or (mana
 h2 "Sign In"
 
 p do <<END
-#{link_to 'Sign in', sign_in_today_path(:organization_key => @organization.key)} shop patrons,
+#{link_to 'Sign in', today_visits_path(:organization_key => @organization.key)} shop patrons,
 #{link_to 'add new people', new_person_path(:organization_key => @organization.key)} to the system,
 and manage their membership and service information.
 END
