@@ -11,12 +11,6 @@
 
 ActiveRecord::Schema.define(:version => 7) do
 
-  create_table "delete_mes", :force => true do |t|
-    t.string   "foo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "notes", :force => true do |t|
     t.text     "text"
     t.integer  "notable_id"

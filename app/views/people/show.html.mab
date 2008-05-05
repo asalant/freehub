@@ -24,10 +24,10 @@ div.sign_in! do
     hidden_field_tag :destination, today_visits_path
     ul do
       li do
-        text f.radio_button :volunteer, false
+        text f.radio_button(:volunteer, false)
         label.inline 'Visiting', :for => 'visit_volunteer_false'
 
-        text f.radio_button :volunteer, true
+        text f.radio_button(:volunteer, true)
         label.inline 'Volunteering', :for => 'visit_volunteer_true'
       end
       li do
