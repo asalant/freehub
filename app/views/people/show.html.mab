@@ -1,14 +1,13 @@
 h1 @person.full_name
 
-labeled_value 'Email', @person.email
-labeled_value 'Postal code', @person.postal_code
-labeled_value 'Staff', @person.staff
-div.label "-"
-span.value do
-  link_to 'More detail...', edit_person_path(:id => @person), :class => ('selected' if params[:controller] == 'people' && params[:action] == 'edit')
+ul.summary do
+  li { h3 @person.person_type }
+  li @person.email
+  li @person.postal_code
+  li { link_to "Edit #{@person.first_name}", edit_person_path(:id => @person) }
 end
 
-div.page_column do
+div.sign_in do
   h2 "Sign #{@person.first_name} In"
 
   div.action do
@@ -26,6 +25,9 @@ div.page_column do
     end
     script "$('visit_submit').focus();", :type => 'text/javascript'
   end
+end
+
+div :style => 'clear:both;' do
 
   h2 'Recent Visits'
 

@@ -5,6 +5,7 @@ html do
     stylesheet_link_tag 'reset-min'
     calendar_date_select_includes 'silver'
     stylesheet_link_tag 'application'
+    stylesheet_link_tag 'people' if params[:controller] == 'people'
   end
   body do
     div.application! do

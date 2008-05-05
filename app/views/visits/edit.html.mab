@@ -11,5 +11,3 @@ form_for @visit, :url => visit_path do |f|
   visit_form_fields(f)
   p { f.submit "Update"  }
 end
-
-link_to 'Show', visit_path(:id => @visit)

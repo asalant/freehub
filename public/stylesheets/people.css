@@ -1,0 +1,8 @@
+ul.summary {
+  float:right;
+  text-align: right;
+}
+
+#application_body a {
+  font-weight: bold;
+}

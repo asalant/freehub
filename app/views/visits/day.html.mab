@@ -30,16 +30,8 @@ else
       tr :class => cycle('odd','even') do
         td(:style => 'width:200px;') { link_to(visit.person.full_name, person_path(:id => visit.person))  }
         td { visit.volunteer? ? 'Volunteering' : 'Visiting' }
-        td { 
-          if visit.person.staff?
-            'Staff'
-          elsif visit.person.member?
-            'Member'
-          else
-            'Patron'
-          end
-        }
-        td { "#{time_short(visit.datetime)}"  }
+        td { visit.person.person_type }
+        td { time_short(visit.datetime) }
         td(:style => 'width:380px;') { note_text(visit.note) }
         td { link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path),
                 :method => :delete }
