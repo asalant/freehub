@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def time_short(datetime)
-    datetime.strftime("%I:%M %p").downcase if datetime
+    datetime.strftime("%I:%M %p").gsub(/^0/,'').downcase if datetime
   end
 
   def datetime_short(datetime)
@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def datetime_long(datetime)
-    datetime.strftime("%a %b %d %Y") + datetime.strftime("%I:%M %p").downcase if datetime
+    date_long(datetime) + time_short(datetime) if datetime
   end
 
   def date_long(date)
