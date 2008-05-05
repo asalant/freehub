@@ -1,33 +1,48 @@
 h1 @person.full_name
 
-ul.summary do
+ul.summary! do
   li { h3 @person.person_type }
+  if !@person.membership
+    li "Not a member"
+    li { link_to 'Create Membership', new_service_path(:person_id => @person) }
+  elsif @person.membership.current?
+    li.current "Membership expires #{date_short @person.membership.end_date}"
+    li { link_to 'Renew', new_service_path(:person_id => @person) }
+  else
+    li.expired "Membership expired #{date_short @person.membership.end_date}"
+    li { link_to 'Renew', new_service_path(:person_id => @person) }
+  end
   li @person.email
   li @person.postal_code
   li { link_to "Edit #{@person.first_name}", edit_person_path(:id => @person) }
 end
 
-div.sign_in do
+div.sign_in! do
   h2 "Sign #{@person.first_name} In"
 
-  div.action do
-    form_for Visit.new(:volunteer => @person.staff), :url => visits_path(:person_id => @person.id) do |f|
-      hidden_field_tag :destination, today_visits_path
-      fields_for :note do |note|
-        labeled_input 'Note', :for => :visit_note do
-          note.text_area :text, :rows => 2
+  form_for Visit.new(:volunteer => @person.staff?), :url => visits_path(:person_id => @person.id) do |f|
+    hidden_field_tag :destination, today_visits_path
+    ul do
+      li do
+        text f.radio_button :volunteer, false
+        label.inline 'Visiting', :for => 'visit_volunteer_false'
+
+        text f.radio_button :volunteer, true
+        label.inline 'Volunteering', :for => 'visit_volunteer_true'
+      end
+      li do
+        fields_for :note do |note|
+          note.text_area :text, :style => 'display:none;'
         end
+        link_to_function "Add Note", "Element.show('note_text');Element.hide('add_note_link')", :id => 'add_note_link'
       end
-      labeled_input 'Volunteer', :for => :visit_volunteer do
-        f.check_box :volunteer
-      end
-      p { f.submit "Sign In!" }
+      li { f.submit "Sign In" }
     end
-    script "$('visit_submit').focus();", :type => 'text/javascript'
   end
+  script "$('visit_submit').focus();", :type => 'text/javascript'
 end
 
-div :style => 'clear:both;' do
+div.visits! do
 
   h2 'Recent Visits'
 

@@ -1,8 +1,47 @@
-ul.summary {
-  float:right;
-  text-align: right;
+#application_body h1 a {
+  font-weight: normal;
 }
 
 #application_body a {
   font-weight: bold;
+}
+
+#summary {
+  float:right;
+  text-align: right;
+  font-size: 13px;
+  padding: 10px;
+}
+
+#summary .current {
+  color: green;
+}
+
+#summary .expired {
+  color: red;
+}
+
+#sign_in {
+  width: 400px;
+  padding: 10px;
+}
+
+#sign_in form {
+  background: lightyellow;
+  border: 1px solid tan;
+  padding: 14px 14px 20px 14px;
+}
+
+#note_text {
+  height: 60px;
+  width: 380px;
+}
+
+#visits {
+  float: left;
+  padding: 10px;
+}
+
+form li {
+  padding: 0 0 6px 0;
 }

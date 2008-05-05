@@ -32,7 +32,7 @@
 
 #application_body {
   background: white;
-  padding: 0px 26px 26px 26px;
+  padding: 26px;
 }
 
 #application_body {
@@ -142,6 +142,10 @@ td.note {
   font-style: italic;
 }
 
+td.time {
+  text-align: right;
+}
+
 div.column {
   width: 400px;
   float: left;
@@ -149,18 +153,6 @@ div.column {
 
 div.row {
   clear: both;
-}
-
-div.action {
-  width: 360px;
-  background: lightyellow;
-  border: 1px solid tan;
-  padding: 14px 14px 30px 14px;
-}
-
-div.action #person_full_name{
-  width: 360px;
-  font-size: 14px;
 }
 
 .paginating_links {
@@ -206,10 +198,26 @@ div.note .note_text {
   border-top: 1px solid lightgray;
 }
 
-#sign_in_form {
-  background: #f2f2f2;
-  border: 1px solid lightgray;
-  margin: 6px 12px 8px 0;
+/** visits/day.html.mab **/
+
+#sign_in {
+  width: 400px;
+  padding: 10px;
+}
+
+#sign_in form {
+  background: lightyellow;
+  border: 1px solid tan;
+  padding: 14px 14px 30px 14px;
+}
+
+#visits {
+  padding: 10px;
+}
+
+#sign_in #person_full_name{
+  width: 360px;
+  font-size: 14px;
 }
 
 /** Base HTML Styling **/
@@ -220,12 +228,7 @@ a {
 }
 
 a:hover {
-  color: #ffbf00;
   text-decoration: underline;
-}
-
-a.selected {
-  color: #666;
 }
 
 body, legend, select, input, textarea, th, td {
@@ -242,12 +245,12 @@ body {
 
 #application_body h1 {
   font-size: 24px;
-  padding: 26px 0 12px 0;
+  padding: 0 0 12px 0;
 }
 
 #application_body h2 {
   font-size: 18px;
-  padding: 26px 0 6px 0;
+  padding: 0 0 6px 0;
 }
 
 #application_body h3 {
@@ -255,7 +258,7 @@ body {
   padding: 0 0 4px 0;
 }
 
-#application_body p, #application_body ul {
+#application_body p {
   padding: 6px 0;
 }
 
@@ -280,6 +283,12 @@ label, .label {
   display: block;
   font-size: 14px;
   padding: 0 4px 4px 0;
+}
+
+label.inline {
+  display: inline;
+  font-size: 12px;
+  padding: 0 20px 0 10px;
 }
 
 /** CalendarDateSelect style overrides**/

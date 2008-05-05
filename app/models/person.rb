@@ -70,8 +70,11 @@ class Person < ActiveRecord::Base
     self.country ||= 'US'
   end
 
+  def membership
+    @membership ||= services.last(:membership)
+  end
+  
   def member?
-    membership = services.last(:membership)
     !membership.nil? && membership.current?
   end
 
