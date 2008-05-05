@@ -135,8 +135,8 @@ table.nowrap td {
   white-space: nowrap;
 }
 
-tr.even { background: #ffffff; }
-tr.odd  { background: lightcyan; }
+tr.even, li.even { background: #ffffff; }
+tr.odd, li.odd  { background: lightcyan; }
 
 td.note {
   font-style: italic;

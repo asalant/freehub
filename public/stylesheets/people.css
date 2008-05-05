@@ -21,7 +21,7 @@
   color: red;
 }
 
-#sign_in {
+#sign_in, #visits, #services {
   width: 400px;
   padding: 10px;
 }
@@ -42,6 +42,33 @@
   padding: 10px;
 }
 
+#visits li, #services li, #notes li {
+  vertical-align: top;
+  border-bottom: 1px solid tan;
+  padding: 6px 8px;
+}
+
+li .what {
+  float:left;
+  display:block;
+  width: 200px;
+  clear:both;
+}
+
+li .when {
+}
+
+li .note {
+  font-style: italic;
+  display: block;
+  clear:both;
+  padding: 3px 0;
+}
+
 form li {
   padding: 0 0 6px 0;
+}
+
+#notes {
+  padding: 10px;  
 }

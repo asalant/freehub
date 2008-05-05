@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def datetime_long(datetime)
-    date_long(datetime) + time_short(datetime) if datetime
+    "#{date_long(datetime)} #{time_short(datetime)}" if datetime
   end
 
   def date_long(date)
