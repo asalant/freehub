@@ -1,4 +1,7 @@
-h1 "#{@organization.name} : Edit"
+h1 do
+  link_to @organization.name, organization_key_path(:organization_key => @organization.key)
+  text " : Edit"
+end
 
 error_messages_for :organization
 
@@ -6,5 +9,3 @@ form_for @organization do |f|
   organization_form_fields(f)
   p { f.submit 'Update'  }
 end
-
-link_to 'Show', @organization

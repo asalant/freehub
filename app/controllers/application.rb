@@ -44,4 +44,12 @@ class ApplicationController < ActionController::Base
     Date.new params[:year].to_i, params[:month].to_i, params[:day].to_i
   end
 
+  def user_home_path(user)
+    if user.organization
+      organization_key_path user.organization.key
+    else
+      user_path :id => user
+    end
+  end
+
 end

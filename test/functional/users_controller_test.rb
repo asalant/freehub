@@ -17,7 +17,7 @@ class UsersControllerTest < Test::Unit::TestCase
     assert_difference 'User.count' do
       create_user
       assert assigns(:user)
-      assert_redirected_to welcome_user_path(assigns(:user))
+      assert_redirected_to user_path(assigns(:user))
     end
   end
 
@@ -56,7 +56,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_activate_user
     assert_nil User.authenticate('mechanic', 'test')
     get :activate, :activation_code => users(:mechanic).activation_code
-    assert_redirected_to welcome_user_path(users(:mechanic))
+    assert_redirected_to organization_key_path(:organization_key => 'sfbk')
     assert_not_nil flash[:notice]
     assert_equal users(:mechanic), User.authenticate('mechanic', 'test')
   end
@@ -126,15 +126,6 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_show_user
     login_as :sfbk
     get :show, :id => users(:greeter)
-    assert_response :success
-    assert assigns(:user)
-    assert assigns(:organization)
-    assert_equal organizations(:sfbk), assigns(:organization)
-  end
-
-  def test_should_show_welcome
-    login_as :sfbk
-    get :welcome, :id => users(:greeter)
     assert_response :success
     assert assigns(:user)
     assert assigns(:organization)

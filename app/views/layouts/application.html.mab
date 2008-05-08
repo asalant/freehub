@@ -30,8 +30,7 @@ html do
             tab_item('Visits', today_visits_path(:organization_key => organization.key))
             tab_item('Reports', report_path(:action => 'index', :organization_key => organization.key))
           else
-            li  { link_to 'Home', root_path }
-            li { link_to 'Credits', root_path }
+            tab_item('Home', root_path)
           end
         end
       end

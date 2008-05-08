@@ -1,23 +1,33 @@
 h1 "#{@organization.name}"
 
-labeled_value 'Name', @organization.name
-labeled_value 'Key', @organization.key
-labeled_value 'Timezone', @organization.timezone
+div.section do
+  p.warn do <<END
+Your account is pending activation. We've sent an activation email to #{@user.email}.
+Check that email account and your spam filter for the activation email.
+END
+  end
+end if current_user.activated_at.nil?
 
-link_to 'Edit', edit_organization_path(@organization) if permit? "admin or (manager of :organization)"
+div.section do
+  text "You have permission to #{link_to 'Edit Settings', edit_organization_path(@organization)} for #{@organization.name} including name, key and time zone"
+end if permit? "admin or (manager of :organization)"
 
-h2 "Sign In"
+div.section do
+  h2 "Sign In"
 
-p do <<END
+  p do <<-END
 #{link_to 'Sign in', today_visits_path(:organization_key => @organization.key)} shop patrons,
 #{link_to 'add new people', new_person_path(:organization_key => @organization.key)} to the system,
 and manage their membership and service information.
 END
+  end
 end
 
-h2 "Reports"
+div.section do
+  h2 "Reports"
 
-p do <<END
+  p do <<-END
 #{link_to('Run reports', report_path(:organization_key => @organization.key, :action => 'index'))} and export data for people, services and shop visits.
 END
+  end
 end

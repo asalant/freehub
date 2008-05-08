@@ -20,8 +20,8 @@ class UsersController < ApplicationController
     @user.save
     if @user.errors.empty?
       self.current_user = @user
-      redirect_back_or_default(welcome_user_path(self.current_user))
       flash[:notice] = "Thanks for signing up!"
+      redirect_back_or_default(user_home_path(self.current_user))
     else
       render :action => 'new'
     end
@@ -32,8 +32,10 @@ class UsersController < ApplicationController
     if logged_in? && !current_user.active?
       current_user.activate
       flash[:notice] = "Signup complete!"
+      redirect_back_or_default(user_home_path(self.current_user))
+    else
+      redirect_to user_path(:id => self.current_user)
     end
-    redirect_back_or_default(welcome_user_path(self.current_user))
   end
 
   def forgot
@@ -86,10 +88,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /organizations/1/welcome
-  def welcome
-  end
-
   # GET /users/new
   # GET /users/new.xml
   def new
@@ -139,6 +137,6 @@ class UsersController < ApplicationController
 
   def resolve_user_by_id
     @user = params[:id] ? User.find(params[:id]) : nil
-    @organization = @user.is_manager_for_what[0] if @user && @user.is_manager_for_what[0]
+    @organization = @user.organization if @user
   end
 end

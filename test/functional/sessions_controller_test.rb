@@ -17,7 +17,7 @@ class SessionsControllerTest < Test::Unit::TestCase
     post :create, :login => 'greeter', :password => 'test'
     assert session[:user_id]
     assert_response :redirect
-    assert_redirected_to welcome_user_path(users(:greeter))
+    assert_redirected_to organization_key_path(:organization_key => 'sfbk')
   end
 
   def test_should_fail_login_and_not_redirect

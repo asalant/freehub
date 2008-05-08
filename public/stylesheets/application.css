@@ -32,7 +32,7 @@
 }
 
 #footer ul {
-  padding-top: 32px;
+  padding-top: 26px;
 }
 
 #application_nav,
@@ -170,13 +170,8 @@ td.time {
   text-align: right;
 }
 
-div.column {
-  width: 400px;
-  float: left;
-}
-
-div.row {
-  clear: both;
+div.section {
+  padding: 10px;
 }
 
 .paginating_links {

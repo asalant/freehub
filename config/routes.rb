@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :organizations
 
   # Authentication
-  map.resources :users, :member => [ :welcome ]
+  map.resources :users
   map.resource :session
   map.activate '/activate/:activation_code',  :controller => 'users', :action => 'activate'
   map.forgot   '/forgot',            :controller => 'users',     :action => 'forgot'

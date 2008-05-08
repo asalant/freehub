@@ -35,7 +35,7 @@ class OrganizationsControllerTest < Test::Unit::TestCase
     assert assigns(:user)
     assert assigns(:user).is_manager_of?(assigns(:organization))
 
-    assert_redirected_to welcome_user_path(assigns(:user))
+    assert_redirected_to organization_key_path(:organization_key => assigns(:organization).key)
   end
 
   def test_should_show_organization

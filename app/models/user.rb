@@ -138,6 +138,10 @@ class User < ActiveRecord::Base
     save(false)
   end
 
+  def organization
+    @organization ||= self.is_manager_for_what.first
+  end
+
   protected
     # before filter 
     def encrypt_password
