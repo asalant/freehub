@@ -51,7 +51,14 @@ html do
     end
     
     div.footer! do
-      text 'Logo and other Freehub stuff'
+      div.body do
+        div.logo! { link_to 'Freehub', root_path }
+        ul do
+          li { "Check the #{link_to 'Developer Wiki', 'http://bikekitchen-trac.cvsdude.com/membership/wiki'}" }
+          li { "Thanks to #{link_to 'CVSDude', 'http://www.cvsdude.com'}"}
+          li { "Thanks to #{link_to 'EngineYard', 'http://www.engineyard.com'}"}
+        end
+      end
     end
   end
 end

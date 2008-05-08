@@ -11,6 +11,30 @@
   height: 100px;
 }
 
+#footer .body {
+  width:955px;
+  text-align: left;
+  margin: 0 auto;
+  color: white;
+  font-size: 11px;
+}
+
+#footer .body a {
+  color: pink;
+}
+
+#footer #logo {
+  float:left;
+  height: 60px;
+  text-align:center;
+  padding: 40px 40px 0 14px;
+  font-size: 30px;
+}
+
+#footer ul {
+  padding-top: 32px;
+}
+
 #application_nav,
 #application_body,
 #application_footer {
