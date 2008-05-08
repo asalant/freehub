@@ -2,7 +2,7 @@ if @day == Date.today
   div.section.sign_in! do
     h2 "Sign A Person In"
     
-    form do
+    div.form do
       label 'Name', :style => 'float:left;'
       image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'
       text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },
@@ -44,7 +44,9 @@ div.section.visits! do
       end
     end
   end
+end
 
+div.section do
   p do
     text "See "
     link_to "previous", day_visits_path(:year => @day.yesterday.year, :month => @day.yesterday.month, :day => @day.yesterday.day)
@@ -55,4 +57,3 @@ div.section.visits! do
     text " day."
   end
 end
-

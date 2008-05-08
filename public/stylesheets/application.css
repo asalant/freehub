@@ -201,7 +201,7 @@ div.section {
   width: 400px;
 }
 
-#sign_in form {
+#sign_in .form {
   background: lightyellow;
   border: 1px solid tan;
   padding: 14px 14px 30px 14px;
