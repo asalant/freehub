@@ -138,9 +138,8 @@ ul.tabs li.selected a {
 
 
 .list_controls, .list_controls td {
-  background-color: #f2f2f2;
-  border: 1px solid #C9C9C9;
-  padding: 0;
+  border: 1px solid tan;
+  padding: 3px;
 }
 
 .list_status, .instructions {
@@ -170,18 +169,25 @@ td.time {
   text-align: right;
 }
 
+div.column {
+  width: 400px;
+  float: left;
+}
+
+div.row {
+  clear: both;
+}
+
 div.section {
-  padding: 10px;
+  padding: 10px 40px 10px 10px;
 }
 
 .paginating_links {
   float: left;
-  padding: 3px;
 }
 
 .export {
-  text-align: right;
-  padding: 3px;
+  float: right;
 }
 
 .warn {
@@ -193,17 +199,12 @@ div.section {
 
 #sign_in {
   width: 400px;
-  padding: 10px;
 }
 
 #sign_in form {
   background: lightyellow;
   border: 1px solid tan;
   padding: 14px 14px 30px 14px;
-}
-
-#visits {
-  padding: 10px;
 }
 
 #sign_in #person_full_name{
@@ -241,16 +242,16 @@ body {
 
 #application_body h2 {
   font-size: 18px;
-  padding: 0 0 6px 0;
+  padding: 0 10px 10px 0;
 }
 
 #application_body h3 {
   font-size: 16px;
-  padding: 0 0 4px 0;
+  padding: 0 10px 4px 0;
 }
 
 #application_body p {
-  padding: 6px 0;
+  padding: 0 0 6px 0;
 }
 
 table {

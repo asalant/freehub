@@ -42,72 +42,57 @@ div.sign_in! do
   script "$('visit_submit').focus();", :type => 'text/javascript'
 end
 
-div.visits! do
+div.section.visits! do
 
   h2 'Recent Visits'
+  link_to 'Add a Visit', new_visit_path(:person_id => @person), :class => 'add_link'
 
   visits = @person.visits.paginate(:size => 5)
   if visits.empty?
-    p.list_status do
-      text 'No past visits. '
-    end
+    p.list_status { 'No past visits. ' }
   else
-    p.list_status do
-      text "Showing #{visits.to_a.size} of #{visits.size} total visits. "
-      link_to 'See all visits.', visits_path(:organization_key => @organization.key, :person_id => @person)
-    end
     ul do
       for visit in visits
         li :class => cycle('odd','even', :name => 'visits') do
           span.what visit.volunteer? ? 'Volunteered' : 'Visited'
-          span.when "#{time_ago_in_words(visit.datetime)} ago", :title => datetime_long(visit.datetime) #todo: why not showing up?
+          span.when "#{time_ago_in_words(visit.datetime)} ago", :title => "#{datetime_long(visit.datetime)}"
           span.note note_text(visit.note) if visit.note
         end
       end
     end
+    p { link_to "See All #{visits.size} Visits with Details", visits_path(:organization_key => @organization.key, :person_id => @person) }
   end
-  p { link_to 'Add visit.', new_visit_path(:person_id => @person) }
 end
 
-div.services! do
+div.section.services! do
   h2 "Current Services"
+  link_to 'Add A Service', new_service_path(:person_id => @person), :class => 'add_link'
 
-  services = @person.services.paginate(:size => 3)
+  services = @person.services.paginate(:size => 5)
   if services.empty?
-    p.list_status do
-      text 'No past services. '
-    end
+    p.list_status { 'No past services.' }
   else
-    p.list_status do
-      text "Showing #{services.to_a.size} of #{services.size} total services. "
-      link_to 'See all services.', services_path(:organization_key => @organization.key, :person_id => @person)
-    end
     ul do
       for service in services do
         li :class => cycle('odd','even', :name => 'services') do
           span.what "#{service.service_type.name}"
-          span.when "Ends #{date_short(service.end_date)}"
+          span.when "Ends #{date_short(service.end_date)}" #todo: handle membership, EAB, class differently
           span.note note_text(service.note) if service.note
         end
       end
     end
+    p { link_to "See All #{services.size} Services with Details", services_path(:organization_key => @organization.key, :person_id => @person) }
   end
-  p { link_to 'Add service.', new_service_path(:person_id => @person) }
 end
 
-div.notes! do
+div.section.notes! do
   h2 'Recent Notes'
+  link_to 'Add A Note', new_note_path(:person_id => @person), :class => 'add_link'
 
   notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
   if notes.empty?
-    p.list_status do
-      text 'No past notes. '
-    end
+    p.list_status {  'No past notes.' }
   else
-    div.list_status do
-      text "Showing #{notes.size} of #{notes_count} total notes. "
-      link_to 'See all notes.', notes_path(:organization_key => @organization.key, :person_id => @person)
-    end
     ul do
       for note in notes
         li :class => cycle('odd','even', :name => notes) do
@@ -116,13 +101,7 @@ div.notes! do
         end
       end
     end
-  end
-
-  form_for Note.new, :url => notes_path(:person_id => @person) do |f|
-      text f.text_area(:text, :rows => 3, :cols => 60)
-      p do
-        f.submit "Add note"
-      end
+    p { link_to "See All #{notes_count} Notes.", notes_path(:organization_key => @organization.key, :person_id => @person) }
   end
 end
 

@@ -20,7 +20,7 @@ div.section do
         td { link_to organization.name, organization_key_path(:organization_key => organization.key) }
         td { organization.member_count }
         td { organization.last_visit.nil? ? 'never' : datetime_long(organization.last_visit.datetime) }
-        td { link_to 'Destroy', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'
+        td { link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'
       end
     end
   end

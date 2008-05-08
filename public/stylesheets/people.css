@@ -1,11 +1,3 @@
-#application_body h1 a {
-  font-weight: normal;
-}
-
-#application_body a {
-  font-weight: bold;
-}
-
 #summary {
   float:right;
   text-align: right;
@@ -21,9 +13,21 @@
   color: red;
 }
 
+.section h2 {
+  float:left;
+}
+
+.section ul, .section .list_status {
+  clear: both;
+}
+
+.section .add_link {
+  float: left;
+  padding-top: 3px;
+}
+
 #sign_in, #visits, #services {
   width: 400px;
-  padding: 10px;
 }
 
 #sign_in form {
@@ -37,15 +41,18 @@
   width: 380px;
 }
 
-#visits {
+#visits, #services {
   float: left;
-  padding: 10px;
 }
 
 #visits li, #services li, #notes li {
   vertical-align: top;
   border-bottom: 1px solid tan;
   padding: 6px 8px;
+}
+
+#notes {
+  clear: both;
 }
 
 li .what {
@@ -67,8 +74,4 @@ li .note {
 
 form li {
   padding: 0 0 6px 0;
-}
-
-#notes {
-  padding: 10px;  
 }

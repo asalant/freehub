@@ -7,6 +7,7 @@ link_to 'New visit', new_visit_path
 
 table do
   tr do
+    th { 'When' }
     th { 'Datetime' }
     th { 'Volunteer' }
     th { 'Note' }
@@ -14,16 +15,17 @@ table do
 
   for visit in @visits
     tr :class => cycle('odd','even') do
-      td { "#{datetime_long(visit.datetime)} (#{time_ago_in_words(visit.datetime)} ago)"  }
+      td { "#{time_ago_in_words(visit.datetime)} ago"  }
+      td { "#{datetime_long(visit.datetime)}"  }
       td { visit.volunteer? }
-      td.note { note_text(visit.note) }
+      td.note(:style => 'width:360px;') { note_text(visit.note) }
       td { link_to 'Show', visit_path(:id => visit) }
       td { link_to 'Edit', edit_visit_path(:id => visit) }
-      td { link_to 'Destroy', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete }
+      td { link_to 'Remove', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete }
     end
   end
   tr.list_controls do
-    td :colspan => 6 do
+    td :colspan => 7 do
       div.paginating_links do
         text 'More: '
         paginating_links(@visits)

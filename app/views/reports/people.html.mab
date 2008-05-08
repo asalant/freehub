@@ -38,9 +38,9 @@ else
 
     for person in @people
       tr :class => cycle('odd','even') do
-        td { link_to(person.full_name, person_path(:id => person))  }
+        td(:style => 'width:200px;') { link_to(person.full_name, person_path(:id => person))  }
         td { person.staff }
-        td { person.email }
+        td(:style => 'width:200px;') { person.email }
         td { person.phone }
         td { person.city }
         td { person.state }

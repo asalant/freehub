@@ -18,7 +18,7 @@ table do
       td { datetime_short(user.created_at) }
       td { link_to 'Show', user }
       td { link_to 'Edit', edit_user_path(user) }
-      td { link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete }
+      td { link_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete }
     end
   end
 end

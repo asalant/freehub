@@ -30,11 +30,11 @@ else
 
     for visit in @visits
       tr :class => cycle('odd','even') do
-        td { link_to(visit.person.full_name, person_path(:id => visit.person))  }
+        td(:style => 'width:200px;') { link_to(visit.person.full_name, person_path(:id => visit.person))  }
         td { visit.person.staff? ? 'Staff' : 'Patron'  }
         td { visit.volunteer? }
         td { "#{datetime_long(visit.datetime)}"  }
-        td.note { note_text(visit.note) }
+        td.note(:style => 'width:360px;') { note_text(visit.note) }
       end
     end
     tr.list_controls do

@@ -3,6 +3,13 @@ h1 do
   text " : Detail"
 end
 
+p do <<-END
+If this record is a mistake you can
+#{link_to "remove #{@person.first_name}", person_path(:id => person), :confirm => 'Are you sure?', :method => :delete}
+from the system.
+END
+end
+
 error_messages_for :person
 
 form_for @person, :url => person_path(:id => @person) do |f|
@@ -11,4 +18,3 @@ form_for @person, :url => person_path(:id => @person) do |f|
   p { f.submit 'Update'  }
 end
 
-link_to 'Destroy', person_path(:id => person), :confirm => 'Are you sure?', :method => :delete

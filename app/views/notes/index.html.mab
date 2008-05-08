@@ -21,7 +21,7 @@ table do
       td { user_link(note.created_by) }
       td { link_to 'Show', note_path(:id => note) }
       td { link_to 'Edit', edit_note_path(:id => note) }
-      td { link_to 'Destroy', note_path(:id => note), :confirm => 'Are you sure?', :method => :delete }
+      td { link_to 'Remove', note_path(:id => note), :confirm => 'Are you sure?', :method => :delete }
     end
   end
 end

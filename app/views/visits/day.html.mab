@@ -1,5 +1,5 @@
 if @day == Date.today
-  div.sign_in! do
+  div.section.sign_in! do
     h2 "Sign A Person In"
     
     form do
@@ -19,7 +19,7 @@ if @day == Date.today
   end
 end
 
-div.visits! do
+div.section.visits! do
   if @day == Date.today
     h2 "In the Shop Today!"
   else
