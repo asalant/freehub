@@ -44,6 +44,12 @@ class OrganizationsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
 
+  def test_should_show_organization_for_unactivated_user
+    login_as 'mechanic'
+    get :show, :id => organizations(:sfbk)
+    assert_response :success
+  end
+
   def test_should_show_organization_by_key
     login_as 'sfbk'
     get :show, :organization_key => 'sfbk'

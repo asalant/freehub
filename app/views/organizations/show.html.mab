@@ -1,16 +1,20 @@
 h1 "#{@organization.name}"
 
 div.section do
-  p.warn do <<END
-Your account is pending activation. We've sent an activation email to #{@user.email}.
+  p.warn do <<-END
+Your account is pending activation. We've sent an activation email to #{current_user.email}.
 Check that email account and your spam filter for the activation email.
 END
   end
 end if current_user.activated_at.nil?
 
 div.section do
-  text "You have permission to #{link_to 'Edit Settings', edit_organization_path(@organization)} for #{@organization.name} including name, key and time zone"
-end if permit? "admin or (manager of :organization)"
+  p do <<-END
+You have permission to #{link_to 'Edit Settings', edit_organization_path(@organization)} for #{@organization.name}
+including name, key and time zone
+END
+  end if permit? "admin or (manager of :organization)"
+end
 
 div.section do
   h2 "Sign In"
