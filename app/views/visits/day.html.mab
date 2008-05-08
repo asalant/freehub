@@ -37,7 +37,7 @@ div.section.visits! do
           td { visit.volunteer? ? 'Volunteering' : 'Visiting' }
           td { visit.person.person_type }
           td.time { time_short(visit.datetime) }
-          td.note(:style => 'width:360px;') { note_text(visit.note) }
+          td.note(:style => 'width:300px;') { note_text(visit.note) }
           td { link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path),
                   :method => :delete }
         end
