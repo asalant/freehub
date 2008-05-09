@@ -20,7 +20,7 @@ module PeopleHelper
                 text form.text_field(:email, :class => 'text short')
               end
               span do
-                text form.check_box :email_opt_out, :class => 'checkbox'
+                text form.check_box(:email_opt_out, :class => 'checkbox')
                 label.choice "Don't send emails", :for => 'person_email_opt_out'
               end
             end
@@ -28,9 +28,9 @@ module PeopleHelper
               form.text_field(:phone, :class => 'text short')
             end
             labeled_input 'Role' do
-              text form.radio_button :staff, false, :class => 'radio'
+              text form.radio_button(:staff, false, :class => 'radio')
               label.choice 'Patron', :for => 'person_staff_false'
-              text form.radio_button :staff, true, :class => 'radio'
+              text form.radio_button(:staff, true, :class => 'radio')
               label.choice 'Staff', :for => 'person_staff_true'
             end
             li { form.submit @person.new_record? ? "Create" : "Update" }
