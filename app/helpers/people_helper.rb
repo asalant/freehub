@@ -7,17 +7,17 @@ module PeopleHelper
           ul do
             labeled_input 'Name', :required => true, :for => 'person_first_name' do
               span do
-                text form.text_field :first_name, :class => 'text'
+                text form.text_field(:first_name, :class => 'text short')
                 label 'First', :for => 'person_first_name'
               end
               span do
-                text form.text_field :last_name, :class => 'text'
+                text form.text_field(:last_name, :class => 'text short')
                 label 'Last', :for => 'person_last_name'
               end
             end
             labeled_input 'Email', :for => :person_email do
               span do
-                text form.text_field :email, :class => 'text'
+                text form.text_field(:email, :class => 'text short')
               end
               span do
                 text form.check_box :email_opt_out, :class => 'checkbox'
@@ -25,7 +25,7 @@ module PeopleHelper
               end
             end
             labeled_input 'Phone Number', :for => :person_phone do
-              form.text_field :phone
+              form.text_field(:phone, :class => 'text short')
             end
             labeled_input 'Role' do
               text form.radio_button :staff, false, :class => 'radio'
@@ -40,27 +40,27 @@ module PeopleHelper
           ul do
             labeled_input 'Address' do
               div do
-                text form.text_field :street1, :class => 'text medium'
+                text form.text_field(:street1, :class => 'text medium')
                 label 'Street Address'
               end
               div do
-                text form.text_field :street2, :class => 'text medium'
+                text form.text_field(:street2, :class => 'text medium')
                 label 'Address Line 2'
               end
               span do
-                text form.text_field :city, :class => 'text short'
+                text form.text_field(:city, :class => 'text short')
                 label 'City', :for => 'person_city'
               end
               span do
-                text form.text_field :state, :class => 'text short'
+                text form.text_field(:state, :class => 'text short')
                 label 'State / Province / Region', :for => 'person_state'
               end
               span do
-                text form.text_field :postal_code, :class => 'text short'
+                text form.text_field(:postal_code, :class => 'text short')
                 label 'Postal / Zip Code', :for => 'person_postal_code'
               end
               span do
-                text form.text_field :country, :class => 'text short'
+                text form.text_field(:country, :class => 'text short')
                 label 'Country', :for => 'person_country'
               end
             end

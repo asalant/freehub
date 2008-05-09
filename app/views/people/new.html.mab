@@ -5,3 +5,8 @@ error_messages_for :person
 form_for @person do |f|
   person_form_fields(f)
 end
+
+script do <<-END 
+$('person_first_name').focus();
+END
+end
