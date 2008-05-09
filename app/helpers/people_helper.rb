@@ -71,19 +71,6 @@ module PeopleHelper
     end
   end
 
-  def labeled_input(label_value, attributes={}, &block)
-    markaby do
-      li do
-        required = attributes.delete(:required)
-        label.desc attributes do
-          text label_value
-          span.req ' *' if required
-        end
-        markaby(&block)
-      end
-    end
-  end
-
   # See vendor/plugins/auto_complete/lib/auto_complete_macros_helper.rb
   def auto_complete_result_with_add_person(entries, field, phrase = nil)
     return unless entries

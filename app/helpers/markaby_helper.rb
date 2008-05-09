@@ -3,8 +3,12 @@ module MarkabyHelper
   # Markaby helper for model input fields (new, edit)
   def labeled_input(label_value, attributes={}, &block)
     markaby do
-      p do
-        label label_value, attributes
+      li do
+        required = attributes.delete(:required)
+        label.desc attributes do
+          text label_value
+          span.req ' *' if required
+        end
         markaby(&block)
       end
     end
