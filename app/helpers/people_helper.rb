@@ -77,7 +77,7 @@ module PeopleHelper
         required = attributes.delete(:required)
         label.desc attributes do
           text label_value
-          span.req '*' if required
+          span.req ' *' if required
         end
         markaby(&block)
       end
