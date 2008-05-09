@@ -4,5 +4,4 @@ error_messages_for :person
 
 form_for @person do |f|
   person_form_fields(f)
-  p { f.submit "Create" }
 end

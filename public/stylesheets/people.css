@@ -26,8 +26,10 @@
   padding-top: 3px;
 }
 
-#sign_in, #visits, #services {
+#sign_in {
   width: 400px;
+  float: left;
+  padding: 10px;
 }
 
 #sign_in form {
@@ -41,18 +43,10 @@
   width: 380px;
 }
 
-#visits, #services {
-  float: left;
-}
-
 #visits li, #services li, #notes li {
   vertical-align: top;
   border-bottom: 1px solid tan;
   padding: 6px 8px;
-}
-
-#notes {
-  clear: both;
 }
 
 li .what {

@@ -1,0 +1,79 @@
+
+/** Form styling based on WuFoo **/
+
+form li {
+  clear:both;
+  margin:0pt;
+  padding:4px 5px 2px 9px;
+  position:relative;
+}
+
+form li span {
+  float:left;
+}
+
+form li div,
+form li span {
+  color: #444444;
+  margin: 0pt 4px 0pt 0pt;
+  padding: 0pt 0pt 8px;
+}
+
+form li div label,
+form li span label {
+  clear: both;
+  color: #444444;
+  display: block;
+  font-size: 10px;
+  line-height: 10px;
+  margin: 0pt;
+  padding-top: 3px;
+}
+
+label.desc, .label {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 150%;
+  padding: 0pt 0pt 1px;
+}
+
+label.choice {
+  color:#444444;
+  display:block;
+  font-size:100%;
+  line-height:1.5em;
+  margin:-1.65em 0pt 0pt 25px;
+  padding:0.44em 0pt 0.5em;
+  width:90%;
+}
+
+form .req {
+  color: red !important;
+  float: none;
+  font-weight: bold;
+  margin: 0pt;
+}
+
+input.checkbox,
+input.radio {
+  display: block;
+  height: 13px;
+  line-height: 1.5em;
+  margin: 2px 0pt 0pt 3px;
+  width: 13px;
+}
+
+input.medium,
+select.medium {
+  width: 400px;
+}
+
+input.short,
+select.short {
+  width: 198px;
+}
+
+input.text,
+input.file {
+  padding: 2px 0pt;
+}

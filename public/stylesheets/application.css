@@ -60,13 +60,14 @@
 }
 
 #application_body {
-  background: url('../images/body_bg.png') repeat-y;
+  /** background: url('../images/body_bg.png') repeat-y; **/
 }
 
 #application_footer {
-  background: url('../images/footer_bg.png') no-repeat;
+  /** background: url('../images/footer_bg.png') no-repeat; **/
   font-style: italic;
   padding: 14px 14px 26px 14px;
+  clear: both;
 }
 
 /** Page Header **/
@@ -105,13 +106,6 @@
 #application_header h2 {
   font-size: 20px;
 }
-
-div.page_column {
-  width: 450px;
-  float: left;
-  margin-right: 10px;
-}
-
 
 /** Application Navigation **/
 ul.tabs {
@@ -169,17 +163,18 @@ td.time {
   text-align: right;
 }
 
-div.column {
-  width: 400px;
-  float: left;
-}
-
-div.row {
+div.section {
+  padding: 20px 0 10px 10px;
   clear: both;
 }
 
-div.section {
-  padding: 10px 40px 10px 10px;
+div.column {
+  width: 420px;
+  float: left;
+}
+
+div.section div.left {
+  margin-right: 40px;
 }
 
 .paginating_links {

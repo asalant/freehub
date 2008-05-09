@@ -2,45 +2,84 @@ module PeopleHelper
 
   def person_form_fields(form)
     markaby do
-      div.column do
-        labeled_input 'First name', :for => :first_name do
-          form.text_field :first_name
+      div.section do
+        div.column.left do
+          ul do
+            labeled_input 'Name', :required => true, :for => 'person_first_name' do
+              span do
+                text form.text_field :first_name, :class => 'text'
+                label 'First', :for => 'person_first_name'
+              end
+              span do
+                text form.text_field :last_name, :class => 'text'
+                label 'Last', :for => 'person_last_name'
+              end
+            end
+            labeled_input 'Email', :for => :person_email do
+              span do
+                text form.text_field :email, :class => 'text'
+              end
+              span do
+                text form.check_box :email_opt_out, :class => 'checkbox'
+                label.choice "Don't send emails", :for => 'person_email_opt_out'
+              end
+            end
+            labeled_input 'Phone Number', :for => :person_phone do
+              form.text_field :phone
+            end
+            labeled_input 'Role' do
+              text form.radio_button :staff, false, :class => 'radio'
+              label.choice 'Patron', :for => 'person_staff_false'
+              text form.radio_button :staff, true, :class => 'radio'
+              label.choice 'Staff', :for => 'person_staff_true'
+            end
+            p { form.submit @person.new_record? ? "Create" : "Update" }
+          end
         end
-        labeled_input 'Last name', :for => :last_name do
-          form.text_field :last_name
-        end
-        labeled_input 'Staff', :for => :staff do
-          form.check_box :staff
-        end
-        labeled_input 'Email', :for => :email do
-          form.text_field :email
-        end
-        labeled_input 'Email opt out', :for => :email_opt_out do
-          form.check_box :email_opt_out
-        end
-        labeled_input 'Phone', :for => :phone do
-          form.text_field :phone
+        div.column do
+          ul do
+            labeled_input 'Address' do
+              div do
+                text form.text_field :street1, :class => 'text medium'
+                label 'Street Address'
+              end
+              div do
+                text form.text_field :street2, :class => 'text medium'
+                label 'Address Line 2'
+              end
+              span do
+                text form.text_field :city, :class => 'text short'
+                label 'City', :for => 'person_city'
+              end
+              span do
+                text form.text_field :state, :class => 'text short'
+                label 'State / Province / Region', :for => 'person_state'
+              end
+              span do
+                text form.text_field :postal_code, :class => 'text short'
+                label 'Postal / Zip Code', :for => 'person_postal_code'
+              end
+              span do
+                text form.text_field :country, :class => 'text short'
+                label 'Country', :for => 'person_country'
+              end
+            end
+            userstamp_labeled_values(@person) if !@person.new_record?
+          end
         end
       end
-      div.column do
-        labeled_input 'Street1', :for => :street1 do
-          form.text_field :street1
+    end
+  end
+
+  def labeled_input(label_value, attributes={}, &block)
+    markaby do
+      li do
+        required = attributes.delete(:required)
+        label.desc attributes do
+          text label_value
+          span.req '*' if required
         end
-        labeled_input 'Street2', :for => :street2 do
-          form.text_field :street2
-        end
-        labeled_input 'City', :for => :city do
-          form.text_field :city
-        end
-        labeled_input 'State', :for => :state do
-          form.text_field :state
-        end
-        labeled_input 'Postal code', :for => :postal_code do
-          form.text_field :postal_code
-        end
-        labeled_input 'Country', :for => :country do
-          form.text_field :country
-        end
+        markaby(&block)
       end
     end
   end

@@ -5,6 +5,7 @@ html do
     stylesheet_link_tag 'reset-min'
     calendar_date_select_includes 'silver'
     stylesheet_link_tag 'application'
+    stylesheet_link_tag 'form'
     stylesheet_link_tag 'people' if params[:controller] == 'people'
   end
   body do
@@ -43,6 +44,7 @@ html do
       end
       div.application_body! do
         self << content_for_layout
+        div(:style => 'clear:both;') {}
       end
       div.application_footer! do
         text "Times shown are #{TzTime.zone.name} timezone."

@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def date_short(date)
-    date.strftime("%d-%B-%y") if date
+    date.strftime("%d-%b-%y") if date
   end
 
   # Override ActionView::Helpers::DateHelper#time_ago_in_words to handle timezone conversions
