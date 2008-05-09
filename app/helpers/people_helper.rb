@@ -33,7 +33,7 @@ module PeopleHelper
               text form.radio_button :staff, true, :class => 'radio'
               label.choice 'Staff', :for => 'person_staff_true'
             end
-            p { form.submit @person.new_record? ? "Create" : "Update" }
+            li { form.submit @person.new_record? ? "Create" : "Update" }
           end
         end
         div.column do
