@@ -3,9 +3,11 @@ h1 do
   text " : Edit"
 end
 
-error_messages_for :organization
+div.column.left do
+  error_messages_for :organization
 
-form_for @organization do |f|
-  organization_form_fields(f)
-  p { f.submit 'Update'  }
+  form_for @organization do |f|
+    organization_form_fields(f)
+    li { f.submit 'Update'  }
+  end
 end
