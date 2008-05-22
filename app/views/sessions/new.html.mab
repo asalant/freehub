@@ -2,7 +2,7 @@ h1 'Log In'
 
 form_tag session_path do
   capture do
-    labeled_input 'Username', :for => :login do
+    labeled_input 'Login', :for => :login do
       text_field_tag 'login'
     end
     labeled_input 'Password', :for => :password do

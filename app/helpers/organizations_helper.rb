@@ -2,7 +2,7 @@ module OrganizationsHelper
 
   def organization_form_fields(form)
     markaby do
-      labeled_input 'Name', :for => :name do
+      labeled_input 'Organization Name', :for => :name do
         div { form.text_field(:name) }
         p.instruct "For example 'San Francisco Bike Kitchen'"
       end

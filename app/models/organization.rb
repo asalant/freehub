@@ -17,10 +17,10 @@ class Organization < ActiveRecord::Base
   has_many :people, :dependent => :destroy
 
   validates_presence_of :name, :key, :timezone
-  validates_length_of :name, :within => 3..40
-  validates_uniqueness_of :key
-  validates_length_of :key, :within => 3..20
-  validates_format_of :key, :with => /\A\w+\Z/i
+  validates_length_of :name, :within => 3..40,    :unless => proc { |organization| organization.errors.on :name }
+  validates_uniqueness_of :key,                   :unless => proc { |organization| organization.errors.on :key }
+  validates_length_of :key, :within => 3..20,     :unless => proc { |organization| organization.errors.on :key }
+  validates_format_of :key, :with => /\A\w+\Z/i,  :unless => proc { |organization| organization.errors.on :key }
   validate :validate_timezone
 
   acts_as_authorizable

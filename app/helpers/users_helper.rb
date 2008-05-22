@@ -27,7 +27,7 @@ module UsersHelper
 
   def user_form_fields(form)
     markaby do
-      labeled_input 'Name', :for => :name do
+      labeled_input 'Full Name', :for => :name do
         form.text_field :name
       end
       labeled_input 'Email', :for => :email do
