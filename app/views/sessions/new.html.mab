@@ -2,20 +2,18 @@ h1 'Log In'
 
 form_tag session_path do
   capture do
-    labeled_input 'Login', :for => :login do
+    labeled_input 'Username', :for => :login do
       text_field_tag 'login'
     end
     labeled_input 'Password', :for => :password do
       password_field_tag 'password'
     end
-    p do
-      label 'Remember me:', :for => :remember_me
-      check_box_tag 'remember_me'
+    li do
+      text check_box_tag('remember_me')
+      label.choice "Remember me", :for => 'remember_me'
     end
-    p do
-      submit_tag 'Log in'
-    end
+    li { submit_tag 'Log in' }
+    li { link_to 'Forgot username or password?', forgot_path }
   end
 end
 
-link_to 'Forgot login?', forgot_path

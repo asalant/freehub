@@ -43,15 +43,20 @@
 
 #application_header,
 #application_nav {
-  background: #663300;
+  /** brown **/ /** background: #663300; **/
+  /** green **/ /** background: #99CC00; **/
+  /** grey **/  background: #CCCCCC; 
 }
 
 #application_header,
 #application_nav,
-#application_footer,
-#application_header a,
-#application_footer a {
+#application_header a {
   color: white;
+}
+
+#application_footer,
+#application_footer a {
+  color: black;
 }
 
 #application_body {
@@ -81,11 +86,11 @@
 #user_status {
   padding-top: 6px;
   float:right;
-  color: white;
 }
 
+#user_status,
 #user_status a {
-  color: white;
+  color: black;
 }
 
 #user_status .log_out {
@@ -226,7 +231,9 @@ body, legend, select, input, textarea, th, td {
 }
 
 body {
-  background: #996633;
+  /** brown **/ /** background: #996633; **/
+  /** green **/ /** background: #669900; **/
+  /** grey **/  background: #EEEEEE;
   text-align:center;
 }
 
@@ -245,7 +252,7 @@ body {
   padding: 0 10px 4px 0;
 }
 
-#application_body p {
+.content p {
   padding: 3px 0 3px 0;
 }
 

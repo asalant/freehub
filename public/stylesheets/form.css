@@ -56,6 +56,21 @@ form .req {
   margin: 0pt;
 }
 
+form .instruct {
+  background:#F5F5F5;
+  border:1px solid #E6E6E6;
+  color:#444444;
+  font-size:90%;
+  left:100%;
+  line-height:130%;
+  margin:0pt 0pt 0pt 8px;
+  padding:8px 10px 9px;
+  position:absolute;
+  top:0pt;
+  width:50%;
+  z-index:1000;
+}
+
 input.checkbox,
 input.radio {
   display: block;

@@ -42,7 +42,7 @@ html do
           h2 { text "Welcome to #{link_to 'Freehub', root_path}" }
         end
       end
-      div.application_body! do
+      div.content.application_body! do
         self << content_for_layout
         div(:style => 'clear:both;') {}
       end

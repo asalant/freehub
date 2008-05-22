@@ -1,26 +1,30 @@
 h1 "Register"
 
-p "Sign up for a new Freehub account."
+div.column.left do
+  p "Sign up for a new Freehub account."
 
-p "After you submit this form you will be able to start using Freehub while your account is pending activation.
-   You will receive an email shortly with a link to permanently activate your account."
+  p "After you submit this form you will be able to start using Freehub while your account is pending activation.
+     You will receive an email shortly with a link to permanently activate your account."
 
+  form_for @organization do |f|
 
-h2 'Organization settings'
+    div.section do
+      h2 'Organization settings'
 
-error_messages_for :organization
+      error_messages_for :organization
 
-form_for @organization do |f|
-  organization_form_fields(f)
+      organization_form_fields(f)
+    end
 
-  h2 'Manager account settings'
+    div.section do
+      h2 'Manager account settings'
 
-  error_messages_for :user
+      error_messages_for :user
 
-  fields_for :user do |user|
-    user_form_fields(user)
+      fields_for :user do |user|
+        user_form_fields(user)
+      end
+      li { f.submit 'Sign Up'  }
+    end
   end
-  p { f.submit 'Sign Up'  }
 end
-
-link_to 'Back', organizations_path
