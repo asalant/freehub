@@ -12,8 +12,7 @@ div.column.left do
       h2 'Organization settings'
 
       error_messages_for :organization
-
-      organization_form_fields(f)
+      ul { organization_form_fields(f) }
     end
 
     div.section do
@@ -21,10 +20,12 @@ div.column.left do
 
       error_messages_for :user
 
-      fields_for :user do |user|
-        user_form_fields(user)
+      ul do
+        fields_for :user do |user|
+          user_form_fields(user)
+        end
+        li { f.submit 'Sign Up'  }
       end
-      li { f.submit 'Sign Up'  }
     end
   end
 end

@@ -1,7 +1,7 @@
 h1 @person.full_name
 
   ul.summary! do
-    li { h3 @person.person_type }
+    li.person_type { @person.person_type }
     if !@person.membership
       li "Not a member"
       li { link_to 'Create Membership', new_service_path(:person_id => @person) }
@@ -57,7 +57,7 @@ div.section do
           li :class => cycle('odd','even', :name => 'visits') do
             span.what visit.volunteer? ? 'Volunteered' : 'Visited'
             span.when "#{time_ago_in_words(visit.datetime)} ago", :title => "#{datetime_long(visit.datetime)}"
-            span.note note_text(visit.note) if visit.note
+            span.note { note_text(visit.note) } if visit.note
           end
         end
       end
@@ -78,7 +78,7 @@ div.section do
           li :class => cycle('odd','even', :name => 'services') do
             span.what "#{service.service_type.name}"
             span.when "#{service.end_date >= Date.today ? 'Ends' : 'Ended'} #{date_short(service.end_date)}" #todo: handle membership, EAB, class differently
-            span.note note_text(service.note) if service.note
+            span.note { note_text(service.note) } if service.note
           end
         end
       end
@@ -99,7 +99,7 @@ div.section.notes! do
       for note in notes
         li :class => cycle('odd','even', :name => notes) do
           span.what { "#{user_link(note.created_by)} #{time_ago_in_words(note.created_at)} ago said:" }
-          span.note note_text(note)
+          span.note { note_text(note) }
         end
       end
     end

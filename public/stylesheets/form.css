@@ -30,6 +30,19 @@ form li span label {
   padding-top: 3px;
 }
 
+
+label, .label {
+  display: block;
+  font-size: 14px;
+  padding: 0 4px 4px 0;
+}
+
+label.inline {
+  display: inline;
+  font-size: 12px;
+  padding: 0 20px 0 6px;
+}
+
 label.desc, .label {
   color:#444444;
   font-weight: bold;
@@ -56,7 +69,7 @@ form .req {
   margin: 0pt;
 }
 
-form .instruct {
+form p.instruct {
   background:#F5F5F5;
   border:1px solid #E6E6E6;
   color:#444444;

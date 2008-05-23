@@ -5,13 +5,8 @@ h1 do
   text ' : New'
 end
 
-error_messages_for :visit
 
 form_for @visit do |f|
+  error_messages_for :visit
   visit_form_fields(f)
-  p do
-    f.submit"Create"
-  end
 end
-
-link_to 'Back', visits_path

@@ -5,9 +5,8 @@ h1 do
   text ' : Edit'
 end
 
-error_messages_for :visit
 
 form_for @visit, :url => visit_path do |f|
+  error_messages_for :visit
   visit_form_fields(f)
-  p { f.submit "Update"  }
 end

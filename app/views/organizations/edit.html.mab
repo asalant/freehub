@@ -7,7 +7,9 @@ div.column.left do
   error_messages_for :organization
 
   form_for @organization do |f|
-    organization_form_fields(f)
-    li { f.submit 'Update'  }
+    ul do
+      organization_form_fields(f)
+      li { f.submit 'Update'  }
+    end
   end
 end

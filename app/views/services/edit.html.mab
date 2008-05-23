@@ -5,11 +5,8 @@ h1 do
   text ' : Edit'
 end
 
-error_messages_for :service
 
 form_for @service, :url => service_path do |f|
+  error_messages_for :service
   service_form_fields(f)
-  p { f.submit 'Update'  }
 end
-
-link_to 'Show', service_path(:id => @service)

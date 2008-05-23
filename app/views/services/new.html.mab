@@ -5,9 +5,8 @@ h1 do
   text ' : New'
 end
 
-error_messages_for :service
 
 form_for @service do |f|
+  error_messages_for :service
   service_form_fields(f)
-  p { f.submit 'Create'  }
 end

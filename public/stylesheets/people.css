@@ -5,6 +5,11 @@
   padding: 10px;
 }
 
+#summary .person_type {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 #summary .current {
   color: green;
 }
@@ -23,7 +28,7 @@
 
 .section .add_link {
   float: left;
-  padding-top: 3px;
+  padding-top: 2px;
 }
 
 #sign_in {
@@ -35,7 +40,7 @@
 #sign_in form {
   background: lightyellow;
   border: 1px solid tan;
-  padding: 14px 14px 20px 14px;
+  padding: 14px 14px 10px 14px;
 }
 
 #note_text {

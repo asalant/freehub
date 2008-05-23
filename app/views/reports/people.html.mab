@@ -3,64 +3,71 @@ h1 do
   text ' : People'
 end
 
-form_tag report_path(:action => 'people'), :method => :get do
-  capture do
-    labeled_input 'Matching name', :for => 'report[matching_name]' do
-      text_field_tag 'report[matching_name]', @report[:matching_name]
-      br
-      span.instructions "Match 3 or more letters in a person's first and last name."
+div.column do
+  form_tag report_path(:action => 'people'), :method => :get do
+    ul do
+      labeled_input 'Matching name', :for => 'report[matching_name]' do
+        div { text_field_tag 'report[matching_name]', @report[:matching_name] }
+        p.instruct  "Match 3 or more letters in a person's first and last name."
+      end
+      labeled_input 'Date Range', :for => 'date_from' do
+        span do
+          calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+          label 'Created After', :for => 'report[after]'
+        end
+        span do
+          calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+          label 'Created Before', :for => 'report[before]'
+        end
+        p.instruct "Leave one or both blank to search without date constraints."
+      end
+      li { submit_tag "Update"  }
     end
-    labeled_input 'Created after', :for => 'report[after]' do
-      calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
-    end
-    labeled_input 'Created before', :for => 'report[before]' do
-      calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
-    end
-    p { submit_tag "Update"  }
   end
 end
 
-if @people.empty?
-  div.list_status 'No people for date range.'
-else
-  div.list_status "#{@people.to_a.size} of #{@people.size} people shown."
-  table do
-    tr do
-    th { 'Name' }
-    th { 'Staff' }
-    th { 'Email' }
-    th { 'Phone' }
-    th { 'City' }
-    th { 'State' }
-    th { 'Postal code' }
-    th { 'Created' }
-    end
-
-    for person in @people
-      tr :class => cycle('odd','even') do
-        td(:style => 'width:200px;') { link_to(person.full_name, person_path(:id => person))  }
-        td { person.staff }
-        td(:style => 'width:200px;') { person.email }
-        td { person.phone }
-        td { person.city }
-        td { person.state }
-        td { person.postal_code }
-        td { datetime_long(person.created_at)  }
+div.section do
+  if @people.empty?
+    div.list_status 'No people for date range.'
+  else
+    div.list_status "#{@people.to_a.size} of #{@people.size} people shown."
+    table do
+      tr do
+      th { 'Name' }
+      th { 'Staff' }
+      th { 'Email' }
+      th { 'Phone' }
+      th { 'City' }
+      th { 'State' }
+      th { 'Postal code' }
+      th { 'Created' }
       end
-    end
-    tr.list_controls do
-      td :colspan => 8 do
-        div.paginating_links do
-          text 'More: '
-          paginating_links(@people, :params => { :report => params[:report] } )
-        end if @people.next_page? || @people.previous_page?
 
-        div.export do
-          link_to 'Export all', report_path(:action => 'people', :params => { :report => params[:report], :format => 'csv' })
+      for person in @people
+        tr :class => cycle('odd','even') do
+          td(:style => 'width:200px;') { link_to(person.full_name, person_path(:id => person))  }
+          td { person.staff }
+          td(:style => 'width:200px;') { person.email }
+          td { person.phone }
+          td { person.city }
+          td { person.state }
+          td { person.postal_code }
+          td { datetime_short(person.created_at)  }
+        end
+      end
+      tr.list_controls do
+        td :colspan => 8 do
+          div.paginating_links do
+            text 'More: '
+            paginating_links(@people, :params => { :report => params[:report] } )
+          end if @people.next_page? || @people.previous_page?
+
+          div.export do
+            link_to 'Export all', report_path(:action => 'people', :params => { :report => params[:report], :format => 'csv' })
+          end
         end
       end
     end
+
   end
-
-end
-
+end  

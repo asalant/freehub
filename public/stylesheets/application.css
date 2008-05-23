@@ -273,18 +273,6 @@ th, td {
   padding: 6px 4px 6px 4px;
 }
 
-label, .label {
-  display: block;
-  font-size: 14px;
-  padding: 0 4px 4px 0;
-}
-
-label.inline {
-  display: inline;
-  font-size: 12px;
-  padding: 0 20px 0 10px;
-}
-
 /** CalendarDateSelect style overrides**/
 
 .calendar_date_select {

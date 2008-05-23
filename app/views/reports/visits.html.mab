@@ -3,53 +3,61 @@ h1 do
   text ' : Visits'
 end
 
-form_tag report_path(:action => 'visits'), :method => :get do
-  capture do
-    labeled_input 'Date from', :for => :date_from do
-      calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+div.column do
+  form_tag report_path(:action => 'visits'), :method => :get do
+    ul do
+      labeled_input 'Date Range', :for => 'date_from' do
+        span do
+          calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+          label 'Date From', :for => 'report[after]'
+        end
+        span do
+          calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+          label 'Date To', :for => 'report[before]'
+        end
+        p.instruct "Leave one or both blank to search without date constraints."
+      end
+      li { submit_tag "Update"  }
     end
-    labeled_input 'Date to', :for => :date_to do
-      calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
-    end
-    p { submit_tag "Update"  }
   end
 end
 
-if @visits.empty?
-  div.list_status 'No visits for date range.'
-else
-  div.list_status "#{@visits.to_a.size} of #{@visits.size} visits shown."
-  table do
-    tr do
-      th { 'Name' }
-      th { 'Type' }
-      th { 'Volunteer' }
-      th { 'Datetime' }
-      th { 'Note' }
-    end
-
-    for visit in @visits
-      tr :class => cycle('odd','even') do
-        td(:style => 'width:200px;') { link_to(visit.person.full_name, person_path(:id => visit.person))  }
-        td { visit.person.staff? ? 'Staff' : 'Patron'  }
-        td { visit.volunteer? }
-        td { "#{datetime_long(visit.datetime)}"  }
-        td.note(:style => 'width:360px;') { note_text(visit.note) }
+div.section do
+  if @visits.empty?
+    div.list_status 'No visits for date range.'
+  else
+    div.list_status "#{@visits.to_a.size} of #{@visits.size} visits shown."
+    table do
+      tr do
+        th { 'Name' }
+        th { 'Type' }
+        th { 'Volunteer' }
+        th { 'Datetime' }
+        th { 'Note' }
       end
-    end
-    tr.list_controls do
-      td :colspan => 5 do
-        div.paginating_links do
-          text 'More: '
-          paginating_links(@visits, :params => { :report => params[:report] } )
-        end if @visits.next_page? || @visits.previous_page?
 
-        div.export do
-          link_to 'Export all', report_path(:action => 'visits', :params => { :report => params[:report], :format => 'csv' })
+      for visit in @visits
+        tr :class => cycle('odd','even') do
+          td(:style => 'width:200px;') { link_to(visit.person.full_name, person_path(:id => visit.person))  }
+          td { visit.person.staff? ? 'Staff' : 'Patron'  }
+          td { visit.volunteer? }
+          td { "#{datetime_long(visit.datetime)}"  }
+          td.note(:style => 'width:360px;') { note_text(visit.note) }
+        end
+      end
+      tr.list_controls do
+        td :colspan => 5 do
+          div.paginating_links do
+            text 'More: '
+            paginating_links(@visits, :params => { :report => params[:report] } )
+          end if @visits.next_page? || @visits.previous_page?
+
+          div.export do
+            link_to 'Export all', report_path(:action => 'visits', :params => { :report => params[:report], :format => 'csv' })
+          end
         end
       end
     end
+
   end
-
 end
-
