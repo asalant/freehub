@@ -17,7 +17,7 @@ div.section do
 
     for organization in @organizations
       tr :class => cycle('odd','even') do
-        td { link_to organization.name, organization_key_path(:organization_key => organization.key) }
+        td { organization.name }
         td { organization.member_count }
         td { organization.last_visit.nil? ? 'never' : datetime_long(organization.last_visit.datetime) }
         td { link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'
