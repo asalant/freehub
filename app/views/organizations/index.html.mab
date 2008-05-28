@@ -26,6 +26,8 @@ In order to keep Freehub easy to use and understand we strive to keep it simple 
       li "An inventory tool - we do not track tools or parts in Freehub"
       li "An point of sale system - we do not track shop sales in Freehub"
     end
+
+    p { "For more information please see the #{link_to "project wiki", "http://bikekitchen-trac.cvsdude.com/membership/wiki/FreehubForAll"}." }
   end
 
   div.section do
