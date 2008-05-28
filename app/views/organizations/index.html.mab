@@ -2,15 +2,13 @@ div.column.left do
   div.section do
     h2 "About Freehub"
 
-    p do <<-END
+    p { <<-END
 Freehub is a system developed by the #{link_to "San Francisco Bike Kitchen", "http://www.bikekitchen.org"}
 and shared with other community bike shops to manage members and track patron visits.
     END
-    end
+    }
 
-    p <<-END
-In order to keep Freehub easy to use and understand we strive to keep it simple and focused.
-    END
+    p "In order to keep Freehub easy to use and understand we strive to keep it simple and focused."
 
     p "Freehub is:"
     ul.content do
@@ -60,7 +58,7 @@ div.column do
         li { submit_tag 'Log In' }
       end
     end
-  end
+  end if !logged_in?
 
   div.section do
     h2 "Organizations"
