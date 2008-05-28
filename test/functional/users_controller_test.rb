@@ -56,7 +56,7 @@ class UsersControllerTest < Test::Unit::TestCase
   def test_should_activate_user
     assert_nil User.authenticate('mechanic', 'test')
     get :activate, :activation_code => users(:mechanic).activation_code
-    assert_redirected_to organization_key_path(:organization_key => 'sfbk')
+    assert_redirected_to '/sfbk'
     assert_not_nil flash[:notice]
     assert_equal users(:mechanic), User.authenticate('mechanic', 'test')
   end

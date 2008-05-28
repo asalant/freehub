@@ -27,9 +27,10 @@ html do
       div.application_nav! do
         ul.tabs do
           if @organization && !@organization.new_record?
-            tab_item('Home', organization_key_path(:organization_key => organization.key))
-            tab_item('Visits', today_visits_path(:organization_key => organization.key))
-            tab_item('Reports', report_path(:action => 'index', :organization_key => organization.key))
+            tab_item('Home', organization_path(@organization))
+            tab_item('Visits', today_visits_path(:organization_key => @organization.key))
+            tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
+            tab_item('Settings', edit_organization_path(@organization)) if permit? "admin or (manager of :organization)"
           else
             tab_item('Home', root_path)
           end
@@ -37,7 +38,7 @@ html do
       end
       div.application_header! do
         if @organization && !@organization.new_record?
-          h2 { link_to organization.name, organization_key_path(:organization_key => organization.key) }
+          h2 { link_to organization.name, @organization }
         else
           h2 { text "Welcome to #{link_to 'Freehub', root_path}" }
         end

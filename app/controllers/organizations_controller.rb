@@ -52,7 +52,7 @@ class OrganizationsController < ApplicationController
         @user.has_role 'manager', @organization
         self.current_user = @user
         flash[:notice] = 'Organization was successfully created.'
-        format.html { redirect_to organization_key_path(:organization_key => @organization.key) }
+        format.html { redirect_to @organization }
         format.xml  { render :xml => @organization, :status => :created, :location => @organization }
       else
         format.html { render :action => "new" }
@@ -67,7 +67,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.update_attributes(params[:organization])
         flash[:notice] = 'Organization was successfully updated.'
-        format.html { redirect_to(@organization) }
+        format.html { redirect_to @organization }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

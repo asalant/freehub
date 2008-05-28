@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   # Include restful_authentication support
   include AuthenticatedSystem
+  include UrlHelper
 
   # Authenticate
   before_filter :login_from_cookie, :login_required, :store_current_user
@@ -23,7 +24,11 @@ class ApplicationController < ActionController::Base
   private
 
   def resolve_organization
-    @organization = Organization.find_by_key(params[:organization_key]) if params[:organization_key]
+    if params[:organization_key]
+      @organization = Organization.find_by_key(params[:organization_key])
+    elsif params[:controller] = :organizations && params[:id]
+      #@organization = Organization.find(params[:id])
+    end
   end
 
   def resolve_person
@@ -46,7 +51,7 @@ class ApplicationController < ActionController::Base
 
   def user_home_path(user)
     if user.organization
-      organization_key_path user.organization.key
+      organization_path user.organization
     else
       user_path :id => user
     end

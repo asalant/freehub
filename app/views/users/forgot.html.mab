@@ -5,7 +5,7 @@ div.column.left do
     error_messages_for :user
     ul do
       labeled_input 'Email', :for => :email do
-        text f.text_field :email
+        text f.text_field(:email)
         p.instruct "Enter the email address you signed up with."
       end
       li { submit_tag 'Submit' }

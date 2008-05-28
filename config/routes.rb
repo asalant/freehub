@@ -22,7 +22,11 @@ ActionController::Routing::Routes.draw do |map|
   map.reports ':organization_key/reports', :controller => 'reports', :action => 'index'
   map.report ':organization_key/reports/:action', :controller => 'reports'
 
-  map.organization_key ':organization_key', :controller => 'organizations', :action => 'show'
+  map.with_options :controller => 'organizations' do |organization|
+    organization.connect ':organization_key', :action => 'update', :conditions => { :method => :put }
+    organization.organization_key ':organization_key', :action => 'show'
+    organization.edit_organization_key ':organization_key/edit', :action => 'edit'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

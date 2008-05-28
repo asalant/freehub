@@ -35,7 +35,7 @@ class OrganizationsControllerTest < Test::Unit::TestCase
     assert assigns(:user)
     assert assigns(:user).is_manager_of?(assigns(:organization))
 
-    assert_redirected_to organization_key_path(:organization_key => assigns(:organization).key)
+    assert_redirected_to '/dbc'
   end
 
   def test_should_show_organization
@@ -65,7 +65,7 @@ class OrganizationsControllerTest < Test::Unit::TestCase
   def test_should_update_organization
     login_as 'sfbk'
     put :update, :id => organizations(:sfbk), :organization => { }
-    assert_redirected_to organization_path(assigns(:organization))
+    assert_redirected_to '/sfbk'
   end
 
   def test_should_destroy_organization

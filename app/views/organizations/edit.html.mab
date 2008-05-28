@@ -1,5 +1,5 @@
 h1 do
-  link_to @organization.name, organization_key_path(:organization_key => @organization.key)
+  link_to @organization.name, @organization
   text " : Edit"
 end
 

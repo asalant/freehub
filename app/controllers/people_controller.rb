@@ -83,7 +83,7 @@ class PeopleController < ApplicationController
     flash[:notice] = 'Person was successfully removed.'
 
     respond_to do |format|
-      format.html { redirect_to(organization_key_path) }
+      format.html { redirect_to @organization }
       format.xml  { head :ok }
     end
   end
