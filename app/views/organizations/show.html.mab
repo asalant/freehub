@@ -1,5 +1,3 @@
-h1 "#{@organization.name}"
-
 div.section do
   p.warn do <<-END
 Your account is pending activation. We've sent an activation email to #{current_user.email}.
@@ -8,22 +6,4 @@ END
   end
 end if current_user.activated_at.nil?
 
-div.section do
-  h2 "Sign In"
-
-  p do <<-END
-#{link_to 'Sign in', today_visits_path(:organization_key => @organization.key)} shop patrons,
-#{link_to 'add new people', new_person_path(:organization_key => @organization.key)} to the system,
-and manage their membership and service information.
-END
-  end
-end
-
-div.section do
-  h2 "Reports"
-
-  p do <<-END
-#{link_to('Run reports', report_path(:organization_key => @organization.key, :action => 'index'))} and export data for people, services and shop visits.
-END
-  end
-end
+sign_in_search_panel

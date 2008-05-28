@@ -213,7 +213,7 @@ div.left div.section {
 #sign_in .form {
   background: lightyellow;
   border: 1px solid tan;
-  padding: 14px 14px 30px 14px;
+  padding: 14px;
 }
 
 #sign_in #person_full_name{
