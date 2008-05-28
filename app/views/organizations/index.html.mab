@@ -1,33 +1,85 @@
-h1 'Welcome'
+div.column.left do
+  div.section do
+    h2 "About Freehub"
 
-p "Here's some information about Freehub, what it's for and what it's not for."
-
-div.section do
-  h2 "Organizations"
-
-  p "These organization have signed up to use Freehub. Some are playing with it to see if they can use it.
-     Click the organization name to log in."
-
-  table do
-    tr do
-      th { 'Name' }
-      th { 'Members' }
-      th { 'Last visit' }
+    p do <<-END
+Freehub is a system developed by the #{link_to "San Francisco Bike Kitchen", "http://www.bikekitchen.org"}
+and shared with other community bike shops to manage members and track patron visits.
+    END
     end
 
-    for organization in @organizations
-      tr :class => cycle('odd','even') do
-        td { organization.name }
-        td { organization.member_count }
-        td { organization.last_visit.nil? ? 'never' : datetime_long(organization.last_visit.datetime) }
-        td { link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'
-      end
+    p <<-END
+In order to keep Freehub easy to use and understand we strive to keep it simple and focused.
+    END
+
+    p "Freehub is:"
+    ul.content do
+      li "A database of members and the services they have access to"
+      li "A sign in system for use at the front desk of the shop"
+      li "A reporting tool for looking at shop use, membership status,..."
     end
+
+    p { "Freehub is <b>not</b>:" }
+    ul.content do
+      li "A broadcast emailer - Freehub will not send emails to your members or patrons"
+      li "An accounting tool - we do not track money in Freehub"
+      li "An inventory tool - we do not track tools or parts in Freehub"
+      li "An point of sale system - we do not track shop sales in Freehub"
+    end
+  end
+
+  div.section do
+    h2 "Sign Up"
+
+    p { "#{link_to 'Sign up now', new_organization_path} to try this free service." }
+
+    p "You are welcome to try Freehub for yourself. You can export your data at any time if you want to stop using Freehub."
+
+    p "Keep in mind that we are in a beta phase and can not guarantee availability or stability."
   end
 end
 
-div.section do
-  h2 "Sign Up"
+div.column do
+  div.section do
+    h2 "Log In"
 
-  p { text "#{link_to 'Sign up', new_organization_path} now for the free service." }
+    form_tag session_path, :id => 'home_login' do
+      ul do
+        labeled_input 'Login', :for => :login do
+          text_field_tag 'login'
+        end
+        labeled_input 'Password', :for => :password do
+          password_field_tag 'password'
+        end
+        li do
+          text check_box_tag('remember_me')
+          label.choice "Remember me", :for => 'remember_me'
+        end
+        li { submit_tag 'Log In' }
+      end
+    end
+  end
+
+  div.section do
+    h2 "Organizations"
+
+    p "These organization have signed up to use Freehub. Some are playing with it to see if they can use it."
+
+    table :width => "100%" do
+      tr do
+        th { 'Name' }
+        th { 'Members' }
+        th { 'Last visit' }
+      end
+
+      for organization in @organizations
+        tr :class => cycle('odd','even') do
+          td { organization.name }
+          td { organization.member_count }
+          td { organization.last_visit.nil? ? 'never' : datetime_long(organization.last_visit.datetime) }
+          td { link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'
+        end
+      end
+    end
+  end
 end

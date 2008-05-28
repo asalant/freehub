@@ -1,6 +1,14 @@
 html do
   head do
-    title @title || "#{controller.controller_name.singularize.titleize} #{action_name.titleize} on Freehub"
+    if @title #defined already
+    elsif @person && !@person.new_record?
+      @title = @person.full_name
+    elsif @organization && !@organization.new_record?
+      @title = @organization.name
+    else
+      @title = "#{params[:controller].singularize.titleize} #{params[:action].titleize}"
+    end
+    title "#{@title} on Freehub"
     javascript_include_tag :all
     stylesheet_link_tag 'reset-min'
     calendar_date_select_includes 'silver'

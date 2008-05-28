@@ -24,11 +24,7 @@ class ApplicationController < ActionController::Base
   private
 
   def resolve_organization
-    if params[:organization_key]
-      @organization = Organization.find_by_key(params[:organization_key])
-    elsif params[:controller] = :organizations && params[:id]
-      #@organization = Organization.find(params[:id])
-    end
+    @organization = Organization.find_by_key(params[:organization_key])
   end
 
   def resolve_person

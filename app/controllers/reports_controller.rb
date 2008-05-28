@@ -91,16 +91,6 @@ class ReportsController < ApplicationController
     end
   end
 
-  def sign_in
-    @day = date_from_params(params)
-    @visits = Visit.for_organization(@organization).after(@day).before(@day.tomorrow)
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @visits }
-    end
-  end
-
  private
   
   # http://wiki.rubyonrails.org/rails/pages/HowtoExportDataAsCSV

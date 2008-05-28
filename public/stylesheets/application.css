@@ -56,7 +56,7 @@
 
 #application_footer,
 #application_footer a {
-  color: black;
+  color: #555;
 }
 
 #application_body {
@@ -90,7 +90,7 @@
 
 #user_status,
 #user_status a {
-  color: black;
+  color: #555;
 }
 
 #user_status .log_out {
@@ -99,7 +99,7 @@
 
 #notice {
   background: lightcyan;
-  color: black;
+  color: #555;
   padding: 4px;
 }
 
@@ -132,7 +132,7 @@ ul.tabs li a {
 ul.tabs li.selected,
 ul.tabs li.selected a {
   background: white;
-  color: black;
+  color: #555;
 }
 
 
@@ -178,7 +178,8 @@ div.column {
   float: left;
 }
 
-div.section div.left {
+div.section div.left,
+div.left div.section {
   margin-right: 40px;
 }
 
@@ -193,6 +194,14 @@ div.section div.left {
 .warn {
   border: 1px solid orange;
   padding: 3px;
+}
+
+/** organizations/index.html.mab **/
+
+#home_login {
+  background: lightyellow;
+  border: 1px solid tan;
+  padding: 14px;
 }
 
 /** visits/day.html.mab **/
@@ -228,6 +237,7 @@ body, legend, select, input, textarea, th, td {
   /** font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif; **/
   font-size: 12px;
   line-height: 16px;
+  color: #555;
 }
 
 body {
@@ -248,12 +258,20 @@ body {
 }
 
 #application_body h3 {
-  font-size: 16px;
+  font-size: 14px;
   padding: 0 10px 4px 0;
 }
 
 .content p {
   padding: 3px 0 3px 0;
+}
+
+ul.content {
+  padding: 3px 3px 3px 20px;
+}
+
+ul.content li {
+  list-style-type: disc;
 }
 
 table {
