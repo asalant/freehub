@@ -32,8 +32,7 @@ class Service < ActiveRecord::Base
 
   has_finder :for_organization, lambda { |organization| {
       :conditions => [ "people.organization_id = ?", organization ],
-      :include => [ :person, :note ],
-      :order => 'services.end_date DESC'
+      :include => [ :person, :note ]
   } }
 
   has_finder :end_after, lambda { |date| {
@@ -46,6 +45,11 @@ class Service < ActiveRecord::Base
 
   has_finder :for_service_types, lambda { |service_types| {
       :conditions => [ "services.service_type_id IN (?)", service_types ]
+  } }
+
+  has_finder :most_recent, lambda { {
+      :group => [ "people.id, services.service_type_id" ],
+      :order => 'services.end_date DESC'
   } }
 
   def initialize(params={})
