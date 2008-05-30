@@ -45,9 +45,9 @@ class VisitsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_create_visit_in_eastern_timezone
-    login_as :pbc
+    login_as :cbi
     assert_difference('Visit.count') do
-      post :create, :organization_key => 'pbc', :person_id => people(:penny), :visit => { }
+      post :create, :organization_key => 'cbi', :person_id => people(:penny), :visit => { }
     end
     assert_equal people(:penny), assigns(:visit).person
     assert_equal TimeZone["Eastern Time (US & Canada)"].utc_to_local(Time.now.utc).hour, assigns(:visit).datetime.hour

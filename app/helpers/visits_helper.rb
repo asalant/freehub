@@ -26,7 +26,7 @@ module VisitsHelper
           label.desc 'Name', :style => 'float:left;'
           image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'
           text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },
-                  :url => auto_complete_for_person_full_name_people_path(:organization_key => organization.key) ,
+                  :url => auto_complete_for_person_full_name_people_path(:organization_key => @organization.key) ,
                   :method => :get, :min_chars => 2,
                   :indicator => 'search_status',
                   :after_update_element => <<-END
@@ -34,7 +34,7 @@ module VisitsHelper
             window.location = $(value).readAttribute('url');
           }
           END
-        p { "Start typing to find a person in the system or #{link_to "add a new person", new_person_path}." }
+        p { "Start typing to find a person in the system or #{link_to "add a new person", new_person_path(:organization_key => @organization.key)}." }
         end
         script "$('person_full_name').focus();", :type => 'text/javascript'
       end

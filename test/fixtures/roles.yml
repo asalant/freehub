@@ -22,7 +22,7 @@ scbc_manager:
   name: manager
   authorizable: scbc (Organization)
 
-pbc_manager:
+cbi_manager:
   name: manager
-  authorizable: pbc (Organization)
+  authorizable: cbi (Organization)
 

@@ -15,13 +15,16 @@ sfbk:
   name: San Francisco Bike Kitchen
   key: sfbk
   timezone: Pacific Time (US & Canada)
+  location: San Francisco, CA
 
 scbc:
   name: Santa Cruz Bike Church
   key: scbc
   timezone: Pacific Time (US & Canada)
+  location: Santa Cruz, CA
 
-pbc:
-  name: Philadelphia Bike Church
-  key: pbc
+cbi:
+  name: Campus Bike Initiative
+  key: cbi
   timezone: Eastern Time (US & Canada)
+  location: Calgary, Alberta, Canada

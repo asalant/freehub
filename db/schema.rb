@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 7) do
+ActiveRecord::Schema.define(:version => 8) do
 
   create_table "delete_mes", :force => true do |t|
     t.string   "foo"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 7) do
     t.string   "timezone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "location"
   end
 
   add_index "organizations", ["key"], :name => "index_organizations_on_key", :unique => true

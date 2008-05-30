@@ -10,6 +10,10 @@ module OrganizationsHelper
         div { form.text_field(:key) }
         p.instruct "For example 'sfbk', used for URL http://freehub.bikekitchen.org/sfbk"
       end
+      labeled_input 'Location', :for => :location do
+        div { form.text_field(:location) }
+        p.instruct "For example 'San Francisco, CA"
+      end
       labeled_input 'Timezone', :for => :timezone do
         time_zone_select :organization, :timezone
       end
