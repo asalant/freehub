@@ -21,7 +21,7 @@ module VisitsHelper
   def sign_in_search_panel
     markaby do
       div.section.sign_in! do
-        h2 "Sign A Person In"
+        h2 "Sign a Person In"
         div.form do
           label.desc 'Name', :style => 'float:left;'
           image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'
