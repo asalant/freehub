@@ -78,7 +78,7 @@ div.column do
           }
           td { link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'
           td {
-            text "#{organization.member_count} members"
+            text "#{organization.member_count} members" if organization.member_count > 0
             br
             text "last visit #{datetime_long(organization.last_visit.datetime)}" if !organization.last_visit.nil?
           }
