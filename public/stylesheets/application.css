@@ -45,7 +45,8 @@
 #application_nav {
   /** brown **/ /** background: #663300; **/
   /** green **/ /** background: #99CC00; **/
-  /** grey **/  background: #BBB; 
+  /** grey **/  /** background: #BBB; **/
+  /** darkgrey **/  background: dimgray; 
 }
 
 #application_header,
