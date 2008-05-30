@@ -66,6 +66,8 @@ div.column do
     p "These organization have signed up to use Freehub. Some are playing with it to see if they can use it."
 
     table :width => "100%" do
+      tr { th }
+
       for organization in @organizations
         row_class = cycle('odd','even')
         tr :class => row_class do
