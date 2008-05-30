@@ -34,7 +34,7 @@ module VisitsHelper
             window.location = $(value).readAttribute('url');
           }
           END
-        p { "Start typing to find a person in the system or #{link_to "add a new person", new_person_path(:organization_key => @organization.key)}." }
+        p { "Start typing to find a person or #{link_to "add a new person", new_person_path(:organization_key => @organization.key)}." }
         end
         script "$('person_full_name').focus();", :type => 'text/javascript'
       end
