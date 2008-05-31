@@ -200,7 +200,7 @@ div.left div.section {
   float: right;
 }
 
-.warn {
+p.warn {
   border: 1px solid orange;
   padding: 3px;
 }
