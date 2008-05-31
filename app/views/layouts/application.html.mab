@@ -41,6 +41,9 @@ html do
             tab_item('Settings', edit_organization_path(@organization)) if permit? "admin or (manager of :organization)"
           else
             tab_item('Home', root_path)
+            if logged_in? && !current_user.organization.nil?
+              tab_item(current_user.organization.name, organization_path(current_user.organization))
+            end
           end
         end
       end
