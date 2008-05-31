@@ -26,5 +26,13 @@ module UrlHelper
       super
     end
   end
+
+  def user_home_path(user)
+    if user.organization
+      organization_path user.organization
+    else
+      user_path :id => user.id
+    end
+  end
   
 end

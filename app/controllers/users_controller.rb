@@ -32,9 +32,9 @@ class UsersController < ApplicationController
     if logged_in? && !current_user.active?
       current_user.activate
       flash[:notice] = "Signup complete!"
-      redirect_back_or_default(user_home_path(self.current_user))
+      redirect_to user_home_path(current_user)
     else
-      redirect_to user_path(:id => self.current_user)
+      redirect_to root_path
     end
   end
 
