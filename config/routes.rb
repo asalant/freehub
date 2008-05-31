@@ -24,6 +24,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.with_options :controller => 'organizations' do |organization|
     organization.connect ':organization_key', :action => 'update', :conditions => { :method => :put }
+    organization.connect ':organization_key', :action => 'destroy', :conditions => { :method => :delete }
     organization.organization_key ':organization_key', :action => 'show'
     organization.edit_organization_key ':organization_key/edit', :action => 'edit'
   end
