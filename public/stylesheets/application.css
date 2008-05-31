@@ -27,12 +27,20 @@
   float:left;
   height: 60px;
   text-align:center;
-  padding: 40px 40px 0 14px;
+  padding: 40px 20px 0 14px;
   font-size: 30px;
 }
 
 #footer ul {
-  padding-top: 26px;
+  float: left;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+#footer .credit {
+  float: right;
+  padding-top: 14px;
+  padding-right: 40px;
 }
 
 #application_nav,

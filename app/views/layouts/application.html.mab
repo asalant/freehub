@@ -65,9 +65,13 @@ html do
         div.logo! { link_to 'Freehub', root_path }
         ul do
           li { "Check the #{link_to 'Developer Wiki', 'http://bikekitchen-trac.cvsdude.com/membership/wiki'}" }
+          li { "Report problems to #{link_to "freehub@bikekitchen.org", "mailto:freehub@bikekitchen.org"}" }
+        end
+        ul do
           li { "Thanks to #{link_to 'CVSDude', 'http://www.cvsdude.com'} for SVN and wiki"}
           li { "Thanks to #{link_to 'EngineYard', 'http://www.engineyard.com'} for hosting"}
         end
+        div.credit { image_tag("ey-logo.gif") }
       end
     end
   end
