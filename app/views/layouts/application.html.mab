@@ -67,7 +67,7 @@ html do
       div.body do
         div.logo! { link_to 'Freehub', root_path }
         ul do
-          li { "Check the #{link_to 'Project Wiki', 'http://bikekitchen-trac.cvsdude.com/membership/wiki'}" }
+          li { "Check the #{link_to 'Project Documentation', 'http://bikekitchen-trac.cvsdude.com/membership/wiki'}" }
           li { "Report problems to #{link_to "freehub@bikekitchen.org", "mailto:freehub@bikekitchen.org"}" }
         end
         ul do
