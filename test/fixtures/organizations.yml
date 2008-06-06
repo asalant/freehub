@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 7
+# Schema version: 9
 #
 # Table name: organizations
 #
@@ -9,6 +9,7 @@
 #  timezone   :string(255)     
 #  created_at :datetime        
 #  updated_at :datetime        
+#  location   :string(255)     
 #
 
 sfbk:

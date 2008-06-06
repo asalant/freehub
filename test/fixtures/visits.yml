@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 7
+# Schema version: 9
 #
 # Table name: visits
 #
@@ -11,20 +11,26 @@
 #  created_by_id :integer(11)     
 #  updated_by_id :integer(11)     
 #  person_id     :integer(11)     
+#  staff         :boolean(1)      
+#  member        :boolean(1)      
 #
 
 mary_1:
-  datetime: 2008-02-01 18:01:00
+  datetime: 2007-02-01 18:01:00
   volunteer: false
+  staff: false
+  member: true
   person: mary
 
 mary_2:
-  datetime: 2008-02-02 18:02:00
+  datetime: 2007-02-02 18:02:00
   volunteer: true
+  staff: false
+  member: true
   person: mary
   
 <% (1..100).each do |count| %>
 daryl_<%= count %>:
-  datetime: <%= DateTime.parse('2008-02-02 18:02:00').advance(:hours => count * -16) %>
+  datetime: <%= DateTime.parse('2007-02-02 18:02:00').advance(:hours => count * -16) %>
   person: daryl
 <% end %>

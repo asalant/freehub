@@ -93,17 +93,17 @@ class VisitsControllerTest < Test::Unit::TestCase
     visit = visits(:mary_1)
     assert_difference('Visit.count', -1) do
       delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => visit,
-              :destination => "/sfbk/visits/2008/02/01"
+              :destination => "/sfbk/visits/2007/02/01"
     end
 
-    assert_redirected_to '/sfbk/visits/2008/02/01'
+    assert_redirected_to '/sfbk/visits/2007/02/01'
   end
 
   def test_visits_for_day
-    get :day, :organization_key => 'sfbk', :year => 2008, :month => 2, :day => 1
+    get :day, :organization_key => 'sfbk', :year => 2007, :month => 2, :day => 1
     assert_response :success
     assert_not_nil assigns(:visits)
     assert_equal 2, assigns(:visits).size
-    assert_equal Date.new(2008,2,1), assigns(:day)
+    assert_equal Date.new(2007,2,1), assigns(:day)
   end
 end

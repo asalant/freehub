@@ -9,13 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 8) do
-
-  create_table "delete_mes", :force => true do |t|
-    t.string   "foo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "notes", :force => true do |t|
     t.text     "text"
@@ -122,6 +116,8 @@ ActiveRecord::Schema.define(:version => 8) do
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
     t.integer  "person_id"
+    t.boolean  "staff"
+    t.boolean  "member"
   end
 
   add_index "visits", ["created_by_id"], :name => "fk_visits_created_by"

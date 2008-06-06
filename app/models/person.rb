@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 7
+# Schema version: 9
 #
 # Table name: people
 #
@@ -32,6 +32,14 @@ class Person < ActiveRecord::Base
   has_many :services, :include => :note, :dependent => :destroy,  :order => "end_date DESC" do
     def last(service_type)
       self.detect { |service| service.service_type_id == ServiceType[service_type].id }
+    end
+
+    def on(service_type, time)
+      self.detect { |service|
+        service.service_type_id == ServiceType[service_type].id &&
+            (service.start_date.nil? || service.start_date <= time.to_date) &&
+            (service.end_date.nil? || service.end_date > time.to_date)
+      }
     end
   end
   has_many :notes, :as => :notable, :dependent => :destroy
@@ -76,6 +84,14 @@ class Person < ActiveRecord::Base
   
   def member?
     !membership.nil? && membership.current?
+  end
+
+  def membership_on(time)
+    services.on(:membership, time)
+  end
+
+  def member_on?(time)
+    !services.on(:membership, time).nil?
   end
 
   def person_type

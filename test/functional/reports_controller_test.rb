@@ -21,7 +21,7 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_visits_report
     get :visits, :organization_key => 'sfbk',
-            :report => { :after => '2007-01-01', :before => '2009-01-01'},
+            :report => { :after => '2006-01-01', :before => '2008-01-01'},
             :page => 2
     assert_response :success
     assert_not_nil assigns(:report)
@@ -40,7 +40,7 @@ class ReportsControllerTest < Test::Unit::TestCase
 
   def test_visits_report_csv
     get :visits, :organization_key => 'sfbk',
-            :report => { :after => '2007-01-01', :before => '2009-01-01' },
+            :report => { :after => '2006-01-01', :before => '2008-01-01' },
             :format => 'csv'
     assert_response :success
     assert_not_nil assigns(:visits)
@@ -52,7 +52,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     lines = output.string.split("\n")
     assert_equal assigns(:visits).size + 1, lines.size
     assert_equal Visit.csv_header, lines[0]
-    assert_equal "attachment; filename=\"sfbk_visits_2007-01-01_2009-01-01.csv\"", @response.headers['Content-Disposition']
+    assert_equal "attachment; filename=\"sfbk_visits_2006-01-01_2008-01-01.csv\"", @response.headers['Content-Disposition']
   end
 
   def test_services_report

@@ -69,6 +69,16 @@ class PersonTest < ActiveSupport::TestCase
     assert !people(:carrie).member?
   end
 
+  def test_membership_on
+    assert_not_nil people(:mary).services.on(:membership, TzTime.local(2006,4,1))
+    assert_not_nil people(:mary).membership_on(TzTime.local(2006,4,1))
+    assert people(:mary).member_on?(TzTime.local(2006,4,1))
+
+    assert_nil people(:mary).services.on(:membership, TzTime.local(2000,4,1))
+    assert_nil people(:mary).membership_on(TzTime.local(2000,4,1))
+    assert !people(:mary).member_on?(TzTime.local(2000,4,1))
+  end
+
   def test_csv_header
     assert_equal 'first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,created_at,membership_expires_on', Person.csv_header
   end
