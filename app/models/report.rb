@@ -1,21 +1,22 @@
 class Report
-  attr_accessor :target, :date_from, :date_to
+  attr_reader :criteria, :result
 
-  def initialize(params={})
-    params.each { |key,value| self.send("#{key}=", value) }
+  def initialize(criteria={})
+    @criteria, @result = criteria, {}
   end
 
-  def summary
+  def self.summary(criteria={})
+    
     date_condition = ""
-    date_condition += "and visits.datetime > '#{date_from.to_s(:db)}' " if date_from
-    date_condition += "and visits.datetime < '#{date_to.to_s(:db)}' " if date_to
-    connection = ActiveRecord::Base.connection
-    visits_result = connection.select_all(<<-END
-      select date(visits.datetime) as date, staff, member, volunteer, count(*) as count
+    date_condition += "and visits.datetime > '#{TzTime.at(criteria[:from]).to_s(:db)}' " if criteria[:from]
+    date_condition += "and visits.datetime < '#{TzTime.at(criteria[:to]).to_s(:db)}' " if criteria[:to]
+    visits_result = ActiveRecord::Base.connection.select_all(<<-END
+      select date(visits.datetime) as date, visits.staff, visits.member, visits.volunteer, count(*) as count
         from visits
-        where 1 = 1
+        left join people on visits.person_id = people.id
+        where people.organization_id = #{criteria[:organization_id]}
         #{date_condition}
-        group by date(visits.datetime), staff, member, volunteer
+        group by date(visits.datetime), visits.staff, visits.member, visits.volunteer
         order by visits.datetime asc
       END
       )
@@ -23,7 +24,7 @@ class Report
     visits_result.each do |row|
       date = ActiveRecord::ConnectionAdapters::Column.string_to_date(row['date'])
       if day[:date] != date
-        day = { :date => date }
+        day = { :date => date, :staff => 0, :member => 0, :volunteer => 0, :patron => 0 }
         visit_days << day
       end
       if row['staff'] == '1'
@@ -36,6 +37,10 @@ class Report
         day[:patron]  = row['count'].to_i
       end
     end
-    { :visits => visit_days }
+
+    report = Report.new(criteria)
+    report.result[:visits] = visit_days
+    report
   end
+  
 end

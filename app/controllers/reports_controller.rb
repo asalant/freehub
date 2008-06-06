@@ -67,7 +67,7 @@ class ReportsController < ApplicationController
     if (params[:report])
       @report = params[:report].merge :for_organization => @organization,
                   :after => params[:report][:after],
-                  :before => params[:report][:before] 
+                  :before => params[:report][:before]
       @report.delete(:matching_name) if @report[:matching_name] && @report[:matching_name].length < 3
       @report.delete_if {|key,value| value.respond_to?(:empty?) && value.empty? }
     else
@@ -88,6 +88,18 @@ class ReportsController < ApplicationController
           end
         end
       end
+    end
+  end
+
+  def summary
+    criteria = params[:criteria] || { :from => Time.now.beginning_of_month.to_date, :to => Time.now.next_month.beginning_of_month.to_date }
+    criteria[:organization_id] = @organization.id
+    criteria.delete_if {|key,value| value.respond_to?(:empty?) && value.empty? }
+
+    @report= Report.summary(criteria)
+
+    respond_to do |format|
+      format.html # summary.html.mab
     end
   end
 

@@ -133,4 +133,11 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_equal "attachment; filename=\"sfbk_people_2008-01-01_2008-01-05.csv\"", @response.headers['Content-Disposition']
   end
 
+  def test_summary_report
+    get :summary, :organization_key => 'sfbk',
+            :criteria => {  :from => '2006-01-01', :to => '2008-01-01' }
+    assert_response :success
+    assert assigns(:report)
+  end
+
 end

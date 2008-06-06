@@ -1,0 +1,52 @@
+h1 do
+  link_to 'Reports', reports_path
+  text ' : Summary'
+end
+
+div.column do
+  form_tag report_path(:action => 'summary'), :method => :get do
+    ul do
+      labeled_input 'Date Range', :for => 'criteria[from]' do
+        span do
+          calendar_date_select_tag "criteria[from]", @report.criteria[:from], :year_range => 3.years.ago..1.years.from_now
+          label 'Date From', :for => 'criteria[from]'
+        end
+        span do
+          calendar_date_select_tag "criteria[to]", @report.criteria[:to], :year_range => 3.years.ago..1.years.from_now
+          label 'Date To', :for => 'criteria[to]'
+        end
+        p.instruct "Leave one or both blank to search without date constraints."
+      end
+      li { submit_tag "Update"  }
+    end
+  end
+end
+
+div.section do
+  if @report.result[:visits].empty?
+    div.list_status 'No visits for date range.'
+  else
+    table do
+      tr do
+        th { 'Day' }
+        th { 'Staff' }
+        th { 'Volunteers' }
+        th { 'Members' }
+        th { 'Patrons' }
+        th { 'Total' }
+      end
+
+      for day in @report.result[:visits]
+        tr :class => cycle('odd','even') do
+          td { date_long day[:date]  }
+          td { day[:staff]  }
+          td { day[:volunteer]  }
+          td { day[:member]  }
+          td { day[:patron]  }
+          td { day[:staff] + day[:volunteer] + day[:member] + day[:patron] }
+        end
+      end
+    end
+
+  end
+end
