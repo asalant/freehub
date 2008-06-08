@@ -45,6 +45,7 @@ namespace :db do
             new_person.last_name = nil
           end
           if !new_person.valid? && new_person.errors.on(:email) == 'is invalid.'
+            puts "\nWARN: Clearing invalid email address #{new_person.email}"
             new_person.email = nil
             new_person.errors.clear
           end

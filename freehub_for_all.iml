@@ -15,16 +15,16 @@
   </component>
   <component name="RailsModuleContentRootManager">
     <TEST_URLS url="file://$MODULE_DIR$/test" />
-    <USER_URLS url="file://$MODULE_DIR$/db" />
-    file://$MODULE_DIR$/db
     <USER_URLS url="file://$MODULE_DIR$/public/javascripts" />
     file://$MODULE_DIR$/public/javascripts
-    <USER_URLS url="file://$MODULE_DIR$/vendor/plugins" />
-    file://$MODULE_DIR$/vendor/plugins
-    <USER_URLS url="file://$MODULE_DIR$/public/stylesheets" />
-    file://$MODULE_DIR$/public/stylesheets
     <USER_URLS url="file://$MODULE_DIR$/lib" />
     file://$MODULE_DIR$/lib
+    <USER_URLS url="file://$MODULE_DIR$/db" />
+    file://$MODULE_DIR$/db
+    <USER_URLS url="file://$MODULE_DIR$/public/stylesheets" />
+    file://$MODULE_DIR$/public/stylesheets
+    <USER_URLS url="file://$MODULE_DIR$/vendor/plugins" />
+    file://$MODULE_DIR$/vendor/plugins
   </component>
 </module>
 

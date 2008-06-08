@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..40,  :unless => proc { |user| user.errors.on :login }
   validates_length_of       :email,    :within => 3..100, :unless => proc { |user| user.errors.on :email }
+  validates_email_veracity_of :email, :domain_check => true, :unless => proc { |user| user.errors.on :email }
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   before_save :encrypt_password
   before_create :make_activation_code 
