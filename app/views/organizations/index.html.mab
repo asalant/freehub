@@ -33,7 +33,7 @@ and shared with other community bike shops to manage members and track patron vi
 
     p { "#{link_to 'Sign up now', new_organization_path} to try this free service." }
 
-    p "You are welcome to try Freehub for yourself. You can export your data at any time if you want to stop using Freehub."
+    p "You are welcome to try Freehub for your organization. You can export your data at any time if you want to stop using Freehub."
 
     p "Keep in mind that we are in a beta phase and can not guarantee availability or stability."
   end
