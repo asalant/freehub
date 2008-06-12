@@ -23,7 +23,7 @@ div.column do
 end
 
 div.section do
-  if @report.result[:visits].empty?
+  if @report.days.empty?
     div.list_status 'No visits for date range.'
   else
     table do
@@ -36,14 +36,14 @@ div.section do
         th { 'Total' }
       end
 
-      for day in @report.result[:visits]
+      for day in @report.days
         tr :class => cycle('odd','even') do
-          td { date_long day[:date]  }
-          td { day[:staff]  }
-          td { day[:volunteer]  }
-          td { day[:member]  }
-          td { day[:patron]  }
-          td { day[:staff] + day[:volunteer] + day[:member] + day[:patron] }
+          td { date_long day.date  }
+          td { day.staff  }
+          td { day.volunteer  }
+          td { day.member  }
+          td { day.patron  }
+          td { day.total }
         end
       end
     end

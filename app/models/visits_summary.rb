@@ -1,12 +1,15 @@
-class Report
-  attr_reader :criteria, :result
+class VisitsSummary
+  attr_reader :criteria
 
   def initialize(criteria={})
     @criteria, @result = criteria, {}
   end
 
-  def self.summary(criteria={})
-    
+  def days
+    @days ||= summarize
+  end
+
+  def summarize
     date_condition = ""
     date_condition += "and visits.datetime > '#{TzTime.at(criteria[:from]).to_s(:db)}' " if criteria[:from]
     date_condition += "and visits.datetime < '#{TzTime.at(criteria[:to]).to_s(:db)}' " if criteria[:to]
@@ -20,27 +23,38 @@ class Report
         order by visits.datetime asc
       END
       )
-    visit_days, day = [], {}
+    visit_days, day = [], nil
     visits_result.each do |row|
       date = ActiveRecord::ConnectionAdapters::Column.string_to_date(row['date'])
-      if day[:date] != date
-        day = { :date => date, :staff => 0, :member => 0, :volunteer => 0, :patron => 0 }
+      if day.nil? || day.date != date
+        day = VisitsDay.new(date)
         visit_days << day
       end
       if row['staff'] == '1'
-        day[:staff] = row['count'].to_i
+        day.staff = row['count'].to_i
       elsif row['volunteer'] == '1'
-        day[:volunteer] = row['count'].to_i
+        day.volunteer = row['count'].to_i
       elsif row['member'] == '1'
-        day[:member] = row['count'].to_i
+        day.member = row['count'].to_i
       else
-        day[:patron]  = row['count'].to_i
+        day.patron  = row['count'].to_i
       end
     end
 
-    report = Report.new(criteria)
-    report.result[:visits] = visit_days
-    report
+   visit_days
   end
   
+end
+
+class VisitsDay
+  attr_accessor :date, :staff, :member, :volunteer, :patron
+
+  def initialize(date)
+    @date = date
+    @staff, @member, @volunteer, @patron = 0, 0, 0, 0
+  end
+
+  def total
+    @total ||= @staff + @member + @volunteer + @patron
+  end
 end

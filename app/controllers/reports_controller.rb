@@ -96,7 +96,7 @@ class ReportsController < ApplicationController
     criteria[:organization_id] = @organization.id
     criteria.delete_if {|key,value| value.respond_to?(:empty?) && value.empty? }
 
-    @report= Report.summary(criteria)
+    @report= VisitsSummary.new(criteria)
 
     respond_to do |format|
       format.html # summary.html.mab
