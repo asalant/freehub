@@ -36,7 +36,7 @@ and shared with other community bike shops to manage members and track patron vi
     p "You are welcome to try Freehub for your organization. You can export your data at any time if you want to stop using Freehub."
 
     p "Keep in mind that we are in a beta phase and can not guarantee availability or stability."
-  end
+  end if !logged_in?
 end
 
 div.column do
