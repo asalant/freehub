@@ -12,9 +12,9 @@ class VisitsSummaryTest < ActiveSupport::TestCase
     assert_equal Date.new(2006,4,1), report.days.first.date
     assert_equal 1, report.days.first.staff
     assert_equal 3, report.days.first.volunteer
-    assert_equal 2, report.days.first.member
+    assert_equal 3, report.days.first.member
     assert_equal 4, report.days.first.patron
-    assert_equal 10, report.days.first.total
+    assert_equal 11, report.days.first.total
   end
 
   def test_to_csv
@@ -24,7 +24,8 @@ class VisitsSummaryTest < ActiveSupport::TestCase
   end
 
   def create_visits_fixture
-    Visit.create!(:person => people(:marty), :datetime => TzTime.local(2006,4,1,18,30))
+    Visit.create!(:person => people(:marty), :datetime => TzTime.local(2006,4,1,18,30), :volunteer => true)
+    Visit.create!(:person => people(:marty), :datetime => TzTime.local(2006,4,1,18,30), :volunteer => false) # count as member
     2.times do
       Visit.create!(:person => people(:mary), :datetime => TzTime.local(2006,4,1,18,30))
     end

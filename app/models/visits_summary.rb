@@ -30,15 +30,7 @@ class VisitsSummary
         day = VisitsDay.new(date)
         visit_days << day
       end
-      if row['staff'] == '1'
-        day.staff = row['count'].to_i
-      elsif row['volunteer'] == '1'
-        day.volunteer = row['count'].to_i
-      elsif row['member'] == '1'
-        day.member = row['count'].to_i
-      else
-        day.patron  = row['count'].to_i
-      end
+      day.add_row row
     end
 
    visit_days
@@ -52,6 +44,22 @@ class VisitsDay
   def initialize(date)
     @date = date
     @staff, @member, @volunteer, @patron = 0, 0, 0, 0
+  end
+
+  def add_row(row)
+    if row['staff'] == '1'
+      if row['volunteer'] == '1'
+        @staff += row['count'].to_i
+      else
+        @member += row['count'].to_i # we count non-volunteering staff as members
+      end
+    elsif row['volunteer'] == '1'
+      @volunteer = row['count'].to_i
+    elsif row['member'] == '1'
+      @member = row['count'].to_i
+    else
+      @patron  = row['count'].to_i
+    end
   end
 
   def total
