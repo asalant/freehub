@@ -27,7 +27,6 @@ namespace :db do
 
         puts "Migrating people"
         Legacy::Person.find(:all).each do |old_person|
-          print "."
           new_person = Person.new(:organization => sfbk)
           [:first_name, :last_name, :email, :phone,:city, :state].each do |attribute|
             new_person[attribute] = old_person[attribute]
@@ -45,12 +44,12 @@ namespace :db do
             new_person.last_name = nil
           end
           if !new_person.valid? && new_person.errors.on(:email) == 'is invalid.'
-            puts "\nWARN: Clearing invalid email address #{new_person.email}"
+            puts "\nWARN: #{new_person.first_name} #{new_person.first_name}, #{new_person.email} clearing invalid email address"
             new_person.email = nil
             new_person.errors.clear
           end
 
-          puts "\nINVALID: #{new_person.inspect} but saving anyway, email error: #{new_person.errors.on(:email)}" if !new_person.valid?
+          puts "\nWARN: #{new_person.first_name} #{new_person.first_name}, #{new_person.email}  saving with email error: #{new_person.errors.on(:email)}" if !new_person.valid?
           new_person.save(false) # Don't run validation
           new_person.services << Service.new(:service_type_id => 'MEMBERSHIP',
                                              :start_date => old_person.expiration.last_year,
@@ -62,7 +61,6 @@ namespace :db do
 
         puts "\nMigrating visits"
         Legacy::Visit.find(:all).each do |old_visit|
-          print "."
           operation = old_visit.operation_date.date
           datetime = TzTime.zone.utc_to_local(old_visit.operation_date.date)
           new_visit = Visit.new(:person_id => legacy_person_ids_to_new_person_ids[old_visit.person_id],
