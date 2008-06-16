@@ -34,5 +34,13 @@ module UrlHelper
       user_path :id => user.id
     end
   end
+
+  def day_visits_path(*args)
+    if args[0].respond_to? :to_date
+      super(:year => args[0].to_date.year, :month => args[0].to_date.month, :day => args[0].to_date.day)
+    else
+      super
+    end
+  end
   
 end

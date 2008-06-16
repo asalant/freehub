@@ -32,10 +32,10 @@ end
 div.section do
   p do
     text "See "
-    link_to "previous", day_visits_path(:year => @day.yesterday.year, :month => @day.yesterday.month, :day => @day.yesterday.day)
+    link_to "previous", day_visits_path(@day.yesterday)
     unless @day == Date.today
       text ' or '
-      link_to "next", day_visits_path(:year => @day.tomorrow.year, :month => @day.tomorrow.month, :day => @day.tomorrow.day)
+      link_to "next", day_visits_path(@day.tomorrow)
     end
     text " day."
   end

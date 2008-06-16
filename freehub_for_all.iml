@@ -21,10 +21,10 @@
     file://$MODULE_DIR$/lib
     <USER_URLS url="file://$MODULE_DIR$/db" />
     file://$MODULE_DIR$/db
-    <USER_URLS url="file://$MODULE_DIR$/public/stylesheets" />
-    file://$MODULE_DIR$/public/stylesheets
     <USER_URLS url="file://$MODULE_DIR$/vendor/plugins" />
     file://$MODULE_DIR$/vendor/plugins
+    <USER_URLS url="file://$MODULE_DIR$/public/stylesheets" />
+    file://$MODULE_DIR$/public/stylesheets
   </component>
 </module>
 

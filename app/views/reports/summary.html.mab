@@ -38,7 +38,7 @@ div.section do
 
       for day in @report.days
         tr :class => cycle('odd','even') do
-          td { date_long day.date  }
+          td { link_to date_long(day.date), day_visits_path(day.date)  }
           td { day.staff  }
           td { day.volunteer  }
           td { day.member  }

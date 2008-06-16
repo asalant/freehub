@@ -24,15 +24,15 @@ class VisitsSummaryTest < ActiveSupport::TestCase
   end
 
   def create_visits_fixture
-    Visit.create!(:person => people(:marty), :datetime => TzTime.local(2006,4,1,6,30))
+    Visit.create!(:person => people(:marty), :datetime => TzTime.local(2006,4,1,18,30))
     2.times do
-      Visit.create!(:person => people(:mary), :datetime => TzTime.local(2006,4,1,6,30))
+      Visit.create!(:person => people(:mary), :datetime => TzTime.local(2006,4,1,18,30))
     end
     3.times do
-      Visit.create!(:person => people(:mary), :datetime => TzTime.local(2006,4,1,6,30), :volunteer => true)
+      Visit.create!(:person => people(:mary), :datetime => TzTime.local(2006,4,1,18,30), :volunteer => true)
     end
     4.times do
-      Visit.create!(:person => people(:daryl), :datetime => TzTime.local(2006,4,1,6,30))
+      Visit.create!(:person => people(:daryl), :datetime => TzTime.local(2006,4,1,18,30))
     end
   end
 end
