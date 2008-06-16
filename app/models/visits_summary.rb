@@ -6,10 +6,14 @@ class VisitsSummary
   end
 
   def days
-    @days ||= summarize
+    @days ||= fill_empty_days(summarize_days)
   end
 
-  def summarize
+  def weeks
+    @weeks ||= summarize_weeks(days)
+  end
+
+  def summarize_days
     date_condition = ""
     date_condition += "and visits.datetime > '#{TzTime.at(criteria[:from]).to_s(:db)}' " if criteria[:from]
     date_condition += "and visits.datetime < '#{TzTime.at(criteria[:to]).to_s(:db)}' " if criteria[:to]
@@ -34,6 +38,36 @@ class VisitsSummary
     end
 
    visit_days
+  end
+
+  def fill_empty_days(days)
+    filled = []
+    from = criteria[:from] ? TzTime.at(criteria[:from]).to_date : days.first.date
+    to = criteria[:to] ? TzTime.at(criteria[:to]).to_date : days.last.date
+    filled << VisitsDay.new(from) if (days.first.date > from)
+    days.each do |day|
+      until filled.last.nil? || filled.last.date.tomorrow == day.date
+        filled << VisitsDay.new(filled.last.date.tomorrow)
+      end
+      filled << day
+    end
+    until filled.last.date.tomorrow >= to
+      filled << VisitsDay.new(filled.last.date.tomorrow)
+    end
+    filled
+  end
+
+  def summarize_weeks(days)
+    weeks, week = [], nil
+    days.each do |day|
+      if week.nil? || !week.contains?(day.date)
+        week = VisitsWeek.new(day.date)
+        weeks << week
+      end
+      week.add_day(day)
+    end
+    
+    weeks
   end
   
 end
@@ -64,5 +98,32 @@ class VisitsDay
 
   def total
     @total ||= @staff + @member + @volunteer + @patron
+  end
+
+  def add_values(day)
+    @staff += day.staff
+    @volunteer += day.volunteer
+    @member += day.member
+    @patron += day.patron
+  end
+end
+
+class VisitsWeek
+  attr_accessor :start, :days, :total_day
+
+  def initialize(date)
+    @start = date.advance(:days => -1 * date.wday) # Sunday
+    @days = []
+    @total_day = VisitsDay.new(nil)
+  end
+
+  def add_day(day)
+    return unless contains?(day.date)
+    @days[day.date.wday] = day
+    @total_day.add_values day
+  end
+
+  def contains?(date)
+    date >= @start && date < @start.advance(:days => 7)
   end
 end

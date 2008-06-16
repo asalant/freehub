@@ -37,6 +37,7 @@ div.section do
       end
 
       for day in @report.days
+        next if day.total == 0
         tr :class => cycle('odd','even') do
           td { link_to date_long(day.date), day_visits_path(day.date)  }
           td { day.staff  }
