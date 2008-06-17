@@ -85,7 +85,7 @@ class VisitsDay
       if row['volunteer'] == '1'
         @staff += row['count'].to_i
       else
-        @member += row['count'].to_i # we count non-volunteering staff as members
+        @member += row['count'].to_i # count non-volunteering staff as members
       end
     elsif row['volunteer'] == '1'
       @volunteer = row['count'].to_i
@@ -125,5 +125,5 @@ class VisitsWeek
 
   def contains?(date)
     date >= @start && date < @start.advance(:days => 7)
-  end
+  end 
 end

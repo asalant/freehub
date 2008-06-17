@@ -26,6 +26,13 @@ class VisitsSummaryTest < ActiveSupport::TestCase
 
     assert_not_nil report.weeks
     assert_equal 2, report.weeks.size
+    assert_equal 1, report.weeks.first.total_day.staff
+    assert_equal 3, report.weeks.first.total_day.volunteer
+    assert_equal 3, report.weeks.first.total_day.member
+    assert_equal 4, report.weeks.first.total_day.patron
+    assert_equal 11, report.weeks.first.total_day.total
+
+    assert_equal 0, report.weeks.last.total_day.total
   end
 
   def create_visits_fixture
