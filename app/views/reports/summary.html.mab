@@ -22,10 +22,10 @@ div.column do
   end
 end
 
-div.section do
-  if @report.days.empty?
-    div.list_status 'No visits for date range.'
-  else
+if @report.days.empty?
+  div.list_status 'No visits for date range.'
+else
+  div.section do
     h2 "Weeks"
     table do
       tr do
@@ -39,7 +39,7 @@ div.section do
 
       for week in @report.weeks
         tr :class => cycle('odd','even') do
-          td { date_long(week.start)  }
+          td { date_short(week.start)  }
           td { week.total_day.staff  }
           td { week.total_day.volunteer  }
           td { week.total_day.member  }
@@ -48,8 +48,9 @@ div.section do
         end
       end
     end
+  end
 
-
+  div.section do
     h2 "Days"
     table do
       tr do
