@@ -26,7 +26,7 @@ if @report.days.empty?
   div.list_status 'No visits for date range.'
 else
   div.section do
-    h2 "Weeks"
+    h2 "Visits by Week"
 
     text Gchart.line( :size => '840x120',
         :data => [ @report.weeks.collect {|week| week.total_day.total }, @report.weeks.collect {|week| week.total_day.staff },
@@ -61,7 +61,7 @@ else
   end
 
   div.section do
-    h2 "Days"
+    h2 "Visits by Day"
     table do
       tr do
         th { 'Day' }
