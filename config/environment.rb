@@ -81,3 +81,4 @@ CalendarDateSelect.format = :hyphen_ampm # or :natural
 require 'has_finder'
 require 'has_finder_extensions'
 require 'activerecord_extensions'
+require 'gchart'

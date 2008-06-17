@@ -92,7 +92,7 @@ class ReportsController < ApplicationController
   end
 
   def summary
-    criteria = params[:criteria] || { :from => Time.now.beginning_of_month.to_date, :to => Time.now.next_month.beginning_of_month.to_date }
+    criteria = params[:criteria] || { :from => Time.now.beginning_of_year.to_date }
     criteria[:organization_id] = @organization.id
     criteria.delete_if {|key,value| value.respond_to?(:empty?) && value.empty? }
 

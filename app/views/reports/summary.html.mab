@@ -27,6 +27,16 @@ if @report.days.empty?
 else
   div.section do
     h2 "Weeks"
+
+    text Gchart.line( :size => '840x120',
+        :data => [ @report.weeks.collect {|week| week.total_day.total }, @report.weeks.collect {|week| week.total_day.staff },
+                   @report.weeks.collect {|week| week.total_day.volunteer }, @report.weeks.collect {|week| week.total_day.member },
+                   @report.weeks.collect {|week| week.total_day.patron } ],
+        :line_colors => ['74A3FB','F9B639','A3FB74','FB8974','CC74FB' ],
+        :legend => ['Total','Staff','Volunteer','Member','Patron'],
+        :axis_with_labels => 'x', :axis_labels => [ [@report.weeks.first, @report.weeks.last].collect {|week| date_short(week.start) }],
+        :format => 'img_tag' )
+
     table do
       tr do
         th { 'Starting' }
