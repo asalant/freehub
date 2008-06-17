@@ -44,12 +44,12 @@ namespace :db do
             new_person.last_name = nil
           end
           if !new_person.valid? && new_person.errors.on(:email) == 'is invalid.'
-            puts "\nWARN: #{new_person.first_name} #{new_person.first_name}, #{new_person.email} clearing invalid email address"
+            puts "\nWARN: #{new_person.first_name} #{new_person.last_name}, #{new_person.email} clearing invalid email address"
             new_person.email = nil
             new_person.errors.clear
           end
 
-          puts "\nWARN: #{new_person.first_name} #{new_person.first_name}, #{new_person.email}  saving with email error: #{new_person.errors.on(:email)}" if !new_person.valid?
+          puts "\nWARN: #{new_person.first_name} #{new_person.last_name}, #{new_person.email}  saving with email error: #{new_person.errors.on(:email)}" if !new_person.valid?
           new_person.save(false) # Don't run validation
           new_person.services << Service.new(:service_type_id => 'MEMBERSHIP',
                                              :start_date => old_person.expiration.last_year,
