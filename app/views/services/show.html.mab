@@ -5,13 +5,14 @@ h1 do
   text ' : Detail'
 end
 
-labeled_value 'Service type', @service.service_type.name
-labeled_value 'Start date', @service.start_date
-labeled_value 'End date', @service.end_date
-labeled_value 'Paid', @service.paid
-labeled_value 'Volunteered', @service.volunteered
-labeled_value 'Note', note_text(@service.note)
+ul do
+  labeled_value 'Service type', @service.service_type.name
+  labeled_value 'Start date', @service.start_date
+  labeled_value 'End date', @service.end_date
+  labeled_value 'Paid', @service.paid
+  labeled_value 'Volunteered', @service.volunteered
+  labeled_value 'Note', note_text(@service.note)
 
-userstamp_labeled_values @service
-
+  userstamp_labeled_values @service
+end
 link_to 'Edit', edit_service_path(:id => @service)

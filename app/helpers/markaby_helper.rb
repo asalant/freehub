@@ -17,9 +17,10 @@ module MarkabyHelper
   # Markaby helper for model values (show)
   def labeled_value(label_value, value)
     markaby do
-      div.label { "#{label_value} " }
-      span.value { text value }
-      br
+      li do
+        div.label { "#{label_value} " }
+        div.value { text value }
+      end
     end
   end
 

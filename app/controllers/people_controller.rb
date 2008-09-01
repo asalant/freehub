@@ -48,6 +48,10 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
+        @person.services << Service.new(:service_type_id => 'MEMBERSHIP', :paid => true) if params[:membership]
+        @person.services << Service.new(:service_type_id => 'EAB', :paid => true) if params[:eab]
+        @person.visits << Visit.new if params[:visiting]
+        
         flash[:notice] = 'Person was successfully created.'
         format.html { redirect_to(person_path(:id => @person)) }
         format.xml  { render :xml => @person, :status => :created, :location => @person }

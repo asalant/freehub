@@ -39,7 +39,7 @@ class ServicesControllerTest < Test::Unit::TestCase
       post :create, :organization_key => 'sfbk', :person_id => people(:mary), :service => { :service_type_id => 'CLASS' }, :note => { :text => 'test' }
     end
 
-    assert_redirected_to services_path
+    assert_redirected_to person_path(:id => people(:mary).id)
     assert_equal 'test', assigns(:service).note.text
   end
 

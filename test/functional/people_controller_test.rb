@@ -36,6 +36,30 @@ class PeopleControllerTest < Test::Unit::TestCase
     assert_redirected_to person_path(:organization_key => 'sfbk', :id => assigns(:person))
   end
 
+  def test_should_create_membership_too
+    assert_difference('Person.count') do
+      post :create, :organization_key => 'sfbk', :person => { :first_name => "Newbie" }, :membership => 'true'
+    end
+    assert_not_nil assigns(:person).membership
+    assert assigns(:person).membership.current?
+  end
+
+  def test_should_create_eab_too
+    assert_difference('Person.count') do
+          post :create, :organization_key => 'sfbk', :person => { :first_name => "Newbie" }, :eab => 'true'
+    end
+    assert_not_nil assigns(:person).services.last(:eab)
+    assert assigns(:person).services.last(:eab).current?
+  end
+
+  def test_should_create_visit_too
+    assert_difference('Person.count') do
+          post :create, :organization_key => 'sfbk', :person => { :first_name => "Newbie" }, :visiting => 'true'
+    end
+    assert_equal 1, assigns(:person).visits.size
+    assert_equal Date.today, assigns(:person).visits.first.datetime.to_date
+  end
+
   def test_should_show_person
     get :show, :organization_key => 'sfbk', :id => people(:mary).id
     assert_response :success

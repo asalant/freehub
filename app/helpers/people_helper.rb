@@ -27,17 +27,6 @@ module PeopleHelper
             labeled_input 'Phone Number', :for => :person_phone do
               form.text_field(:phone, :class => 'text short')
             end
-            labeled_input 'Role' do
-              text form.radio_button(:staff, false, :class => 'radio')
-              label.choice 'Patron', :for => 'person_staff_false'
-              text form.radio_button(:staff, true, :class => 'radio')
-              label.choice 'Staff', :for => 'person_staff_true'
-            end
-            li { form.submit @person.new_record? ? "Create" : "Update" }
-          end
-        end
-        div.column do
-          ul do
             labeled_input 'Address' do
               div do
                 text form.text_field(:street1, :class => 'text medium')
@@ -64,7 +53,29 @@ module PeopleHelper
                 label 'Country', :for => 'person_country'
               end
             end
-            userstamp_labeled_values(@person) if !@person.new_record?
+          end
+        end
+        div.column do
+          ul do
+            labeled_input 'Role' do
+              text form.radio_button(:staff, false, :class => 'radio')
+              label.choice 'Patron', :for => 'person_staff_false'
+              text form.radio_button(:staff, true, :class => 'radio')
+              label.choice 'Staff', :for => 'person_staff_true'
+            end
+            if @person.new_record?
+              labeled_input 'Services' do
+                text check_box_tag(:membership, true, params[:membership], :class => 'checkbox')
+                label.choice 'Membership starting today', :for => 'membership'
+                text check_box_tag(:eab, true, params[:eab], :class => 'checkbox')
+                label.choice 'Digging Rights/EAB starting today', :for => 'eab'
+                text check_box_tag(:visiting, true, params[:visiting], :class => 'checkbox')
+                label.choice 'Visiting the shop today', :for => 'visiting'
+              end
+            else
+              li { userstamp_labeled_values(@person) }
+            end
+            li { form.submit @person.new_record? ? "Create" : "Update" }
           end
         end
       end

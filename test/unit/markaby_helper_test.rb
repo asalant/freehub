@@ -20,6 +20,6 @@ class MarkabyHelperTest < Test::Unit::TestCase
 
   def test_labeled_value
     result = labeled_value 'Label', 'value'
-    assert_equal '<div class="label">Label </div><span class="value">value</span><br/>', result.to_s
+    assert_equal '<li><div class="label">Label </div><div class="value">value</div></li>', result.to_s
   end
 end
