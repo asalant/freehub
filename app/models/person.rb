@@ -50,6 +50,8 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :email, :scope => :organization_id, :case_sensitive => false, :allow_nil => true, :allow_blank => true
   validates_length_of :first_name, :last_name, :street1, :street2, :city, :state, :postal_code, :country, :within => 1..40, :allow_blank => true
   validates_email_veracity_of :email, :domain_check => true
+  # Note that Date.today gets evaluates at class load time, not evaluation time, but we can live with that fudge
+  validates_numericality_of :yob, :allow_nil => true, :only_integer => true, :greater_than => Date.today.year - 100, :less_than => Date.today.year + 1
 
   before_save :titleize_name, :update_full_name, :titleize_address, :downcase_email
   
@@ -104,7 +106,7 @@ class Person < ActiveRecord::Base
     end
   end
 
-  CSV_FIELDS = { :self => %w{first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country created_at membership_expires_on} }
+  CSV_FIELDS = { :self => %w{first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country yob created_at membership_expires_on} }
 
   def self.csv_header
     CSV.generate_line(CSV_FIELDS[:self])

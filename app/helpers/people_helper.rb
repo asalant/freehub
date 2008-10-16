@@ -24,9 +24,6 @@ module PeopleHelper
                 label.choice "Don't send emails", :for => 'person_email_opt_out'
               end
             end
-            labeled_input 'Phone Number', :for => :person_phone do
-              form.text_field(:phone, :class => 'text short')
-            end
             labeled_input 'Address' do
               div do
                 text form.text_field(:street1, :class => 'text medium')
@@ -57,6 +54,12 @@ module PeopleHelper
         end
         div.column do
           ul do
+            labeled_input 'Phone Number', :for => :person_phone do
+              form.text_field(:phone, :class => 'text short')
+            end
+            labeled_input 'Year of Birth', :for => :yob do
+              form.text_field(:yob, :class => 'text short')
+            end
             labeled_input 'Role' do
               text form.radio_button(:staff, false, :class => 'radio')
               label.choice 'Patron', :for => 'person_staff_false'

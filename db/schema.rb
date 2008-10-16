@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "notes", :force => true do |t|
     t.text     "text"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 9) do
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
     t.integer  "organization_id"
+    t.integer  "yob"
   end
 
   add_index "people", ["created_by_id"], :name => "fk_people_created_by"

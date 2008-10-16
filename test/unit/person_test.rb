@@ -24,6 +24,14 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 'First de Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'de last').full_name
   end
 
+  def test_validates_yob
+    assert Person.create(:organization => organizations(:sfbk), :first_name => "first").errors.empty?
+    assert Person.create(:organization => organizations(:sfbk), :first_name => "first", :yob => 1972).errors.empty?
+    assert !Person.create(:organization => organizations(:sfbk), :first_name => "first", :yob => Date.today.year + 1).errors.empty?
+    assert !Person.create(:organization => organizations(:sfbk), :first_name => "first", :yob => "foo").errors.empty?
+    assert !Person.create(:organization => organizations(:sfbk), :first_name => "first", :yob => Date.today.year - 100).errors.empty?
+  end
+
   def test_titleize_address
     person = Person.create!(:organization => organizations(:sfbk), :first_name => "first",
                             :street1 => "street1 st.", :street2 => "street2 st.",
@@ -80,10 +88,10 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   def test_csv_header
-    assert_equal 'first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,created_at,membership_expires_on', Person.csv_header
+    assert_equal 'first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,yob,created_at,membership_expires_on', Person.csv_header
   end
 
   def test_to_csv
-    assert_match /^Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,2008-01-02 00:00:00,\d{4}-\d{2}-\d{2}$/, people(:mary).to_csv
+    assert_match /^Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,1972,2008-01-02 00:00:00,\d{4}-\d{2}-\d{2}$/, people(:mary).to_csv
   end
 end
