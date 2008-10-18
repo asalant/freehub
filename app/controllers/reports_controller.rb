@@ -69,7 +69,7 @@ class ReportsController < ApplicationController
                   :after => params[:report][:after],
                   :before => params[:report][:before]
       @report.delete(:matching_name) if @report[:matching_name] && @report[:matching_name].length < 3
-      @report.delete_if {|key,value| value.respond_to?(:empty?) && value.empty? }
+      @report.delete_if {|key,value| value.nil? || (value.respond_to?(:empty?) && value.empty?) }
     else
       @report = { :for_organization => @organization,
                   :after => Date.today, :before => Date.tomorrow }
