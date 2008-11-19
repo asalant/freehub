@@ -25,7 +25,7 @@ and shared with other community bike shops to manage members and track patron vi
       li "An point of sale system - we do not track shop sales in Freehub"
     end
 
-    p { "For more information please see the #{link_to "project wiki", "http://bikekitchen-trac.cvsdude.com/membership/wiki/FreehubForAll"}." }
+    p { "For more information please see the #{link_to "project wiki", "http://bikekitchen-trac.cvsdude.com/membership/wiki"}." }
   end
 
     div.section do
