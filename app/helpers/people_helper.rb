@@ -69,9 +69,9 @@ module PeopleHelper
             if @person.new_record?
               labeled_input 'Services' do
                 text check_box_tag(:membership, true, params[:membership], :class => 'checkbox')
-                label.choice 'Membership starting today', :for => 'membership'
+                label.choice 'Paid Membership starting today', :for => 'membership'
                 text check_box_tag(:eab, true, params[:eab], :class => 'checkbox')
-                label.choice 'Digging Rights/EAB starting today', :for => 'eab'
+                label.choice 'Paid Digging Rights/EAB starting today', :for => 'eab'
                 text check_box_tag(:visiting, true, params[:visiting], :class => 'checkbox')
                 label.choice 'Visiting the shop today', :for => 'visiting'
               end

@@ -42,6 +42,8 @@ class PeopleControllerTest < Test::Unit::TestCase
     end
     assert_not_nil assigns(:person).membership
     assert assigns(:person).membership.current?
+    assert assigns(:person).membership.paid?
+    assert !assigns(:person).membership.volunteered?
   end
 
   def test_should_create_eab_too
