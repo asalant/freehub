@@ -65,6 +65,7 @@ class PersonTest < ActiveSupport::TestCase
     assert Person.create(:organization => organizations(:sfbk), :email => 'mary@example.com').errors.invalid?(:email)
     assert Person.create(:organization => organizations(:sfbk), :email => 'mary@example').errors.invalid?(:email)
     assert !Person.create(:organization => organizations(:sfbk), :email => 'mary@foo.com').errors.invalid?(:email)
+    assert !Person.create(:organization => organizations(:sfbk), :email => ' mary@foo.com').errors.invalid?(:email)
   end
 
   def test_membership

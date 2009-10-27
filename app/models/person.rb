@@ -53,6 +53,7 @@ class Person < ActiveRecord::Base
   # Note that Date.today gets evaluates at class load time, not evaluation time, but we can live with that fudge
   validates_numericality_of :yob, :allow_nil => true, :only_integer => true, :greater_than => Date.today.year - 100, :less_than => Date.today.year + 1
 
+  before_validation :trim_attributes
   before_save :titleize_name, :update_full_name, :titleize_address, :downcase_email
   
   acts_as_paginated
@@ -120,6 +121,12 @@ class Person < ActiveRecord::Base
   end
 
   private
+
+  def trim_attributes
+    self.first_name.strip! if !self.first_name.blank?
+    self.last_name.strip! if !self.last_name.blank?
+    self.email.strip! if !self.email.blank?
+  end
 
   def titleize_name
     self.first_name = self.first_name.titleize if !self.first_name.blank?

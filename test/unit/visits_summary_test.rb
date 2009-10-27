@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class VisitsSummaryTest < ActiveSupport::TestCase
   def test_days_summary
-    create_visits_fixture
+    create_fixtures
 
     report = VisitsSummary.new(:organization_id => organizations(:sfbk).id, :from => Date.new(2006,4,1), :to => Date.new(2006,4,6))
     assert_equal Date.new(2006,4,1), report.criteria[:from]
@@ -20,7 +20,7 @@ class VisitsSummaryTest < ActiveSupport::TestCase
   end
 
   def test_weeks_summary
-    create_visits_fixture
+    create_fixtures
 
     report = VisitsSummary.new(:organization_id => organizations(:sfbk).id, :from => Date.new(2006,4,1), :to => Date.new(2006,4,4))
 
@@ -35,7 +35,7 @@ class VisitsSummaryTest < ActiveSupport::TestCase
     assert_equal 0, report.weeks.last.total_day.total
   end
 
-  def create_visits_fixture
+  def create_fixtures
     Visit.create!(:person => people(:marty), :datetime => TzTime.local(2006,4,1,18,30), :volunteer => true)
     Visit.create!(:person => people(:marty), :datetime => TzTime.local(2006,4,1,18,30), :volunteer => false) # count as member
     2.times do
