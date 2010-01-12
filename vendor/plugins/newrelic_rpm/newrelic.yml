@@ -3,7 +3,7 @@
 # Rails applications with deep visibility and low overhead.  For more
 # information, visit www.newrelic.com.
 #
-# 
+# <%= generated_for_user %>
 #
 # here are the settings that are common to all environments
 common: &default_settings
@@ -12,7 +12,7 @@ common: &default_settings
   # You must specify the licence key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic RPM service.
-  license_key: 'PASTE_YOUR_KEY_HERE'
+  license_key: '<%= license_key %>'
   
   # Agent Enabled
   # Use this setting to force the agent to run or not run.
