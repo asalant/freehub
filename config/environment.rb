@@ -1,5 +1,17 @@
 # Be sure to restart your server when you modify this file
 
+# Rails 2.0.2, Ruby 1.8.7 issue
+# http://wiki.github.com/radiant/radiant/undefined-method-for-enumerable
+unless '1.9'.respond_to?(:force_encoding)
+  String.class_eval do
+    begin
+      remove_method :chars
+    rescue NameError
+      # OK
+    end
+  end
+end
+
 # Uncomment below to force Rails into production mode when
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
