@@ -3,7 +3,7 @@
 # Rails applications with deep visibility and low overhead.  For more
 # information, visit www.newrelic.com.
 #
-# 
+# This configuration file is custom generated for Freehub
 #
 # here are the settings that are common to all environments
 common: &default_settings
@@ -12,9 +12,9 @@ common: &default_settings
   # You must specify the licence key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic RPM service.
-  license_key: 'PASTE_YOUR_KEY_HERE'
+  license_key: 'aa1e560d0b5c59aa628026bb9b4e7a6874b851aa'
   
-  # Agent Enabled
+  # Agent Enabled (Rails Only)
   # Use this setting to force the agent to run or not run.
   # Default is 'auto' which means the agent will install and run only
   # if a valid dispatcher such as Mongrel is running.  This prevents
@@ -29,15 +29,19 @@ common: &default_settings
   # into a RPM "application" on your home dashboard page. If you want
   # to map this instance into multiple apps, like "AJAX Requests" and
   # "All UI" then specify a semicolon separated list of up to three
-  # distinct names.  This setting does not prevent you from manually
-  # defining applications.
-  app_name: My Application
+  # distinct names.  If you comment this out, it defaults to the 
+  # capitalized RAILS_ENV (i.e., Production, Staging, etc)
+  app_name: Freehub
 
-  # When 'enabled' is turned on, the agent collects performance data
-  # by inserting lightweight tracers on key methods inside the rails
-  # framework and asynchronously aggregating and reporting this
-  # performance data to the NewRelic RPM service at newrelic.com.
-  enabled: false
+  # When "true", the agent collects performance data about your 
+  # application and reports this data to the NewRelic RPM service at 
+  # newrelic.com. This global switch is normally overridden for each 
+  # environment below.
+  enabled: true
+
+  # Developer mode should be off in every enviornment but
+  # development as it has very high overhead in memory
+  developer: false
 
   # The newrelic agent generates its own log file to keep its logging
   # information separate from that of your application.  Specify its
@@ -88,9 +92,12 @@ common: &default_settings
 
   
   # Tells transaction tracer and error collector (when enabled)
-  # whether or not to capture HTTP params.  When true, the RoR
-  # filter_parameter_logging mechanism is used so that sensitive
-  # parameters are not recorded
+  # whether or not to capture HTTP params.  When true, frameworks can
+  # exclude HTTP parameters from being captured.
+  # Rails: the RoR filter_parameter_logging excludes parameters
+  # Java: create a config setting called "ignored_params" and set it to
+  #     a comma separated list of HTTP parameter names.
+  #     ex: ignored_params: credit_card, ssn, password 
   capture_params: false
 
 
@@ -124,6 +131,15 @@ common: &default_settings
     # then capture and send to RPM the current stack trace. This is
     # helpful for pinpointing where long SQL calls originate from
     stack_trace_threshold: 0.500
+
+    # Determines whether the agent will capture query plans for slow
+    # SQL queries.  Only supported in mysql and postgres.  Should be
+    # set to false when using other adapters.
+    # explain_enabled: true
+
+    # Threshold for query execution time below which query plans will not 
+    # not be captured.  Relevant only when `explain_enabled` is true.
+    # explain_threshold: 0.5
   
   # Error collector captures information about uncaught exceptions and
   # sends them to RPM for viewing
@@ -134,8 +150,9 @@ common: &default_settings
     # product levels
     enabled: true
     
-    # Tells error collector whether or not to capture a source snippet
-    # around the place of the error when errors are View related.
+    # Rails Only - tells error collector whether or not to capture a 
+    # source snippet around the place of the error when errors are View 
+    # related.
     capture_source: true    
     
     # To stop specific errors from reporting to RPM, set this property
@@ -148,7 +165,13 @@ common: &default_settings
   # external resource
   # disable_samplers: true
 
-# override default settings based on your application's environment
+
+# Application Environments
+# ------------------------------------------
+# Environment specific settings are in this section.
+# For Rails applications, RAILS_ENV is used to determine the environment
+# For Java applications, pass -Dnewrelic.environment <environment> to set
+# the environment
 
 # NOTE if your application has other named environments, you should
 # provide newrelic conifguration settings for these enviromnents here.
@@ -160,15 +183,15 @@ development:
   # turn the agent on in development mode.
   enabled: false
 
-  # When running in Developer Mode, the New Relic Agent will present
-  # performance information on the last 100 transactions you have
+  # Rails Only - when running in Developer Mode, the New Relic Agent will 
+  # present performance information on the last 100 transactions you have
   # executed since starting the mongrel.  to view this data, go to
   # http://localhost:3000/newrelic
   developer: true
 
 test:
   <<: *default_settings
-  # it almost never makes sense to turn on the agent when running
+  # It almost never makes sense to turn on the agent when running
   # unit, functional or integration tests or the like.
   enabled: false
 
@@ -180,10 +203,10 @@ production:
   <<: *default_settings
   enabled: true
 
-# many applications have a staging environment which behaves
+# Many applications have a staging environment which behaves
 # identically to production.  Support for that environment is provided
 # here.  By default, the staging environment has the agent turned on.
 staging:
   <<: *default_settings
   enabled: true
-  app_name: My Application (Staging)
+  app_name: Freehub (Staging)
