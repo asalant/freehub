@@ -71,7 +71,6 @@ html do
           li { "Check the #{link_to 'project documentation', 'http://wiki.github.com/asalant/freehub/'}" }
         end
         ul do
-          li { "Thanks to #{link_to 'CVSDude', 'http://www.cvsdude.com'} for SVN and wiki"}
           li { "Thanks to #{link_to 'EngineYard', 'http://www.engineyard.com'} for hosting"}
         end
         div.credit { image_tag("ey-logo.gif") }
