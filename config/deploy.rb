@@ -12,15 +12,16 @@ require 'eycap/recipes'
 
 set :keep_releases, 5
 set :application,   'freehub'
-set :repository,    'http://bikekitchen-svn.cvsdude.com/membership/freehub_for_all/trunk'
+set :repository,    'http://github.com/asalant/freehub.git'
+set :branch,        'master'
 set :scm_username,  ''
 set :scm_password,  ''
 set :user,          'freehub'
 set :deploy_to,     "/data/#{application}"
-set :deploy_via,    :filtered_remote_cache
+set :deploy_via,    :remote_cache
 set :repository_cache,    "/var/cache/engineyard/#{application}"
 set :monit_group,   'freehub'
-set :scm,           :subversion
+set :scm,           :git
 
 
 set :production_database,'freehub_production'
