@@ -27,4 +27,10 @@ class OrganizationTest < ActiveSupport::TestCase
     assert_equal organizations(:sfbk).last_visit.datetime.to_s(:db), '2007-02-02 18:02:00'
     assert_nil organizations(:cbi).last_visit
   end
+
+  def test_active?
+    assert organizations(:sfbk).active?(TzTime.parse '2007-02-28')
+    assert !organizations(:sfbk).active?(TzTime.parse '2007-04-01')
+    assert !organizations(:cbi).active?(TzTime.parse '2007-02-02')
+  end
 end

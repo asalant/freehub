@@ -39,6 +39,13 @@ class Organization < ActiveRecord::Base
     @last_visit ||= Visit.for_organization(self).paginate(:size => 1).to_a.first
   end
 
+  # Active if a visit within last 30 days
+  def active?(on = TzTime.now)
+    return false if !self.last_visit
+
+    self.last_visit.datetime.to_i > on.ago(30 * 24 * 3600).to_i
+  end
+
   private
 
   def validate_timezone
