@@ -22,4 +22,9 @@ class OrganizationTest < ActiveSupport::TestCase
 
     assert !Organization.new(:name => 'Name', :key => 'key', :timezone => 'invalid').valid?
   end
+
+  def test_last_visit
+    assert_equal organizations(:sfbk).last_visit.datetime.to_s(:db), '2007-02-02 18:02:00'
+    assert_nil organizations(:cbi).last_visit
+  end
 end

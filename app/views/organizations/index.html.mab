@@ -71,7 +71,7 @@ div.column do
   div.section do
     h2 "Organizations"
 
-    p "These organization have signed up to use Freehub. Some are playing with it to see if they can use it."
+    p "These organization have signed up to use Freehub and are actively using it.
 
     table :width => "100%" do
       tr { th }
