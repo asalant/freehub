@@ -18,7 +18,7 @@ module ApplicationHelper
   end
 
   def date_long(date)
-    date.strftime("%a %B %d %Y") if date
+    date.strftime("%a %b %d %Y") if date
   end
 
   def date_short(date)

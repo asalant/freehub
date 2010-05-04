@@ -78,18 +78,17 @@ div.column do
 
       for organization in @organizations
         next if @organizations.length > 4 && !organization.active?
-        row_class = cycle('odd','even')
-        tr :class => row_class do
-          td { 
+        tr :class => cycle('odd','even') do
+          td do
             b organization.name
             br
             text organization.location
-          }
-          td {
-            text "#{organization.member_count} members" if organization.member_count > 0
-            br
+          end
+          td do
             text "last visit #{datetime_long(organization.last_visit.datetime)}" if !organization.last_visit.nil?
-          }
+            br
+            text "#{organization.member_count} members" if organization.member_count > 9
+          end
           td { link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'
         end
       end
