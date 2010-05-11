@@ -111,3 +111,10 @@ after "deploy:update_code","deploy:symlink_configs"
 # uncomment the following to have a database backup done before every migration
 # before "deploy:migrate", "db:dump"
 
+
+
+Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
+  $: << File.join(vendored_notifier, 'lib')
+end
+
+require 'hoptoad_notifier/capistrano'
