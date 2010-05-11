@@ -35,6 +35,10 @@ class Organization < ActiveRecord::Base
     @member_count ||= Service.for_organization(self).end_after(Date.yesterday).for_service_types(ServiceType[:membership].id).paginate(:size => 0).size
   end
 
+  def visits_count
+    @services_count ||= Visit.for_organization(self).count
+  end
+
   def last_visit
     @last_visit ||= Visit.for_organization(self).paginate(:size => 1).to_a.first
   end
