@@ -77,7 +77,7 @@ div.column do
       tr { th }
 
       for organization in @organizations
-        next if @organizations.length > 4 && (!organization.active? || organization.visit_count < 10)
+        next if @organizations.length > 4 && (!organization.active? || organization.visits_count < 10)
         tr :class => cycle('odd','even') do
           td do
             b organization.name
