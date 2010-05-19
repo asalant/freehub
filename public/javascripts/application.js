@@ -1,11 +1,11 @@
 function instrumentSigninForm(form, submit_button) {
   $(submit_button).focus();
-  $(form).enable();
+  $(submit_button).enable();
 
   var submitted = false;
   Event.observe(form, 'submit', function() {
       if (submitted) {
-          $(form).disable();
+          $(submit_button).disable();
       }
       submitted = true;
   });
