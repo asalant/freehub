@@ -39,7 +39,13 @@ h1 @person.full_name
         li { f.submit "Sign In" }
       end
     end
-    script "$('visit_submit').focus();", :type => 'text/javascript'
+    script_src  = <<END
+Event.observe(window, 'load', function() {
+  instrumentSigninForm('new_visit', 'visit_submit');
+});
+
+END
+    script script_src, :type => 'text/javascript'
   end
 
 div.section do

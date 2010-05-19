@@ -1,2 +1,12 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+function instrumentSigninForm(form, submit_button) {
+  $(submit_button).focus();
+  $(form).enable();
+
+  var submitted = false;
+  Event.observe(form, 'submit', function() {
+      if (submitted) {
+          $(form).disable();
+      }
+      submitted = true;
+  });
+}
