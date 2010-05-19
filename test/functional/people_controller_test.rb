@@ -60,6 +60,8 @@ class PeopleControllerTest < Test::Unit::TestCase
     end
     assert_equal 1, assigns(:person).visits.size
     assert_equal Date.today, assigns(:person).visits.first.datetime.to_date
+
+    assert_redirected_to today_visits_path
   end
 
   def test_should_show_person

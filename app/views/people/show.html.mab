@@ -41,7 +41,7 @@ h1 @person.full_name
     end
     script_src  = <<END
 Event.observe(window, 'load', function() {
-  instrumentSigninForm('new_visit', 'visit_submit');
+  $('visit_submit').focus();
 });
 
 END

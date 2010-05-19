@@ -41,7 +41,7 @@ class VisitsControllerTest < Test::Unit::TestCase
     assert_equal people(:mary), assigns(:visit).person
     assert_equal 'test', assigns(:visit).note.text
 
-    assert_redirected_to visits_path
+    assert_redirected_to visits_url :c
   end
 
   def test_should_create_visit_in_eastern_timezone

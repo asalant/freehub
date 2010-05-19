@@ -53,7 +53,13 @@ class PeopleController < ApplicationController
         @person.visits << Visit.new if params[:visiting]
         
         flash[:notice] = 'Person was successfully created.'
-        format.html { redirect_to(person_path(:id => @person)) }
+        format.html do
+          if params[:visiting]
+            redirect_to today_visits_path
+          else
+            redirect_to(person_path(:id => @person))
+          end
+        end
         format.xml  { render :xml => @person, :status => :created, :location => @person }
       else
         format.html { render :action => "new" }
