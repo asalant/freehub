@@ -43,7 +43,6 @@ h1 @person.full_name
 Event.observe(window, 'load', function() {
   $('visit_submit').focus();
 });
-
 END
     script script_src, :type => 'text/javascript'
   end

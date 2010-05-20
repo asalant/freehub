@@ -1,7 +1,7 @@
 class VisitsController < ApplicationController
 
   permit "admin or (manager of :organization)"
-  
+
   # GET /visits
   # GET /visits.xml
   def index
@@ -9,7 +9,7 @@ class VisitsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @visits }
+      format.xml { render :xml => @visits }
     end
   end
 
@@ -20,7 +20,7 @@ class VisitsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @visit }
+      format.xml { render :xml => @visit }
     end
   end
 
@@ -31,7 +31,7 @@ class VisitsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @visit }
+      format.xml { render :xml => @visit }
     end
   end
 
@@ -51,10 +51,10 @@ class VisitsController < ApplicationController
       if @visit.save
         flash[:notice] = "Visit for #{@person.full_name} was successfully created."
         format.html { redirect_to(params[:destination] || visits_path) }
-        format.xml  { render :xml => @visit, :status => :created, :location => @visit }
+        format.xml { render :xml => @visit, :status => :created, :location => @visit }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @visit.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @visit.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -67,12 +67,12 @@ class VisitsController < ApplicationController
 
     respond_to do |format|
       if @visit.update_attributes(params[:visit])
-        flash[:notice] = 'Visit was successfully updated.'
+        flash[:notice] = "Visit for #{@visit.person.full_name} was successfully updated."
         format.html { redirect_to(params[:destination] || visit_path(:id => @visit)) }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @visit.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @visit.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -86,7 +86,7 @@ class VisitsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(params[:destination] || visits_path) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 
@@ -99,7 +99,7 @@ class VisitsController < ApplicationController
   def day
     @day = date_from_params(params)
     @visits = Visit.for_organization(@organization).after(@day).before(@day.tomorrow)
-    @groups = @visits.inject({ :volunteers => [], :patrons => []}) do |groups, visit|
+    @groups = @visits.inject({:volunteers => [], :patrons => []}) do |groups, visit|
       if visit.volunteer?
         groups[:volunteers] << visit
       else
@@ -108,10 +108,9 @@ class VisitsController < ApplicationController
       groups
     end
 
-
     respond_to do |format|
       format.html { render :action => :day }
-      format.xml  { render :xml => @visits }
+      format.xml { render :xml => @visits }
     end
   end
 end

@@ -154,16 +154,9 @@ ul.tabs li.selected a {
   font-style: italic;
 }
 
-/** From http://blogs.atlassian.com/developer/2007/08/post.html **/
-table.nowrap {
+table.visits {
   width: 100%;
   table-layout:fixed;
-}
-
-table.nowrap td {
-  overflow: hidden;
-  text-overflow: ellipsis; /** IE only **/
-  white-space: nowrap;
 }
 
 tr.even, li.even { background: #ffffff; }

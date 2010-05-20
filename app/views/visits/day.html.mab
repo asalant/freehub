@@ -19,16 +19,18 @@ div.section.visits! do
 
       h3 "#{@groups[group[:key]].size} #{group[:label]}"
 
-      table.nowrap do
+      table.visits do
         reset_cycle
         for visit in @groups[group[:key]]
           tr :class => cycle('odd','even') do
             td(:style => 'width:200px;') { link_to(visit.person.full_name, person_path(:id => visit.person))  }
             td { visit.person.person_type }
             td.time { time_short(visit.datetime) }
-            td.note(:style => 'width:300px;') { note_text(visit.note) }
-            td { link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path),
-                    :method => :delete }
+            td.note(:style => 'width:400px;') { note_text(visit.note) }
+            td :style => 'width:30px;' do
+               link_to 'Edit', edit_visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path)
+            end
+            td { link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path), :method => :delete }
           end
         end
       end
