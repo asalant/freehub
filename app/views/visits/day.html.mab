@@ -13,19 +13,28 @@ div.section.visits! do
     p.list_status "No visits for #{@day.to_s(:db)}."
   else
     p.list_status "#{@visits.size} visitors."
-    table.nowrap do
-      for visit in @visits
-        tr :class => cycle('odd','even') do
-          td(:style => 'width:200px;') { link_to(visit.person.full_name, person_path(:id => visit.person))  }
-          td { visit.volunteer? ? 'Volunteering' : 'Visiting' }
-          td { visit.person.person_type }
-          td.time { time_short(visit.datetime) }
-          td.note(:style => 'width:300px;') { note_text(visit.note) }
-          td { link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path),
-                  :method => :delete }
+
+    [{:key => :patrons, :label => 'Visiting'}, {:key => :volunteers, :label => 'Volunteering'}].each do |group|
+      next if @groups[group[:key]].empty?
+
+      h3 "#{group[:label]} (#{@groups[group[:key]].size})"
+
+      table.nowrap do
+        reset_cycle
+        for visit in @groups[group[:key]]
+          tr :class => cycle('odd','even') do
+            td(:style => 'width:200px;') { link_to(visit.person.full_name, person_path(:id => visit.person))  }
+            td { visit.person.person_type }
+            td.time { time_short(visit.datetime) }
+            td.note(:style => 'width:300px;') { note_text(visit.note) }
+            td { link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path),
+                    :method => :delete }
+          end
         end
       end
     end
+
+
   end
 end
 

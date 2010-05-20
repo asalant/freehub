@@ -99,6 +99,15 @@ class VisitsController < ApplicationController
   def day
     @day = date_from_params(params)
     @visits = Visit.for_organization(@organization).after(@day).before(@day.tomorrow)
+    @groups = @visits.inject({ :volunteers => [], :patrons => []}) do |groups, visit|
+      if visit.volunteer?
+        groups[:volunteers] << visit
+      else
+        groups[:patrons] << visit
+      end
+      groups
+    end
+
 
     respond_to do |format|
       format.html { render :action => :day }
