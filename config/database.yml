@@ -1,6 +1,6 @@
 development:
   adapter: mysql
-  database: freehub_production
+  database: freehub_for_all_development
   username: root
   password:
   host: 127.0.0.1
