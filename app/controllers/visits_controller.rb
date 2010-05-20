@@ -68,7 +68,7 @@ class VisitsController < ApplicationController
     respond_to do |format|
       if @visit.update_attributes(params[:visit])
         flash[:notice] = 'Visit was successfully updated.'
-        format.html { redirect_to(visit_path(:id => @visit)) }
+        format.html { redirect_to(params[:destination] || visit_path(:id => @visit)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

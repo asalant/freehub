@@ -81,6 +81,13 @@ class VisitsControllerTest < Test::Unit::TestCase
     assert_equal 'test', assigns(:visit).note.text
   end
 
+  def test_should_update_visit_with_destination
+    put :update, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1), :visit => { }, :note => { :text => 'test' },
+              :destination => "/sfbk/visits/2007/02/01"
+    assert_redirected_to '/sfbk/visits/2007/02/01'
+    assert_equal 'test', assigns(:visit).note.text
+  end
+
   def test_should_destroy_visit
     assert_difference('Visit.count', -1) do
       delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1)
