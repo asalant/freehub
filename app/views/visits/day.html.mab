@@ -17,7 +17,7 @@ div.section.visits! do
     [{:key => :patrons, :label => 'Visiting'}, {:key => :volunteers, :label => 'Volunteering'}].each do |group|
       next if @groups[group[:key]].empty?
 
-      h3 "#{group[:label]} (#{@groups[group[:key]].size})"
+      h3 "#{@groups[group[:key]].size} #{group[:label]}"
 
       table.nowrap do
         reset_cycle
