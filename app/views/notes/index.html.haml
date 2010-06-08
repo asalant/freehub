@@ -1,5 +1,9 @@
-%h1 #{link_to @person.full_name, person_path(:id => @person)} : Notes
+%h1
+  =link_to @person.full_name, person_path(:id => @person)
+  = ": Notes"
+
 =link_to 'New note', new_note_path
+
 %table
   %tr
     %th Notable

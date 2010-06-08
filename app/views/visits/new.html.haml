@@ -3,17 +3,7 @@
   = ' : '
   =link_to 'Visits', visits_path(:person_id => @person)
   = ' : New'
+
 -form_for @visit do |f|
   =error_messages_for :visit
-  -visit_form_fields(f)
-
--# Original:
-
--#   0: h1 do
--#   1:   link_to @person.full_name, person_path(:id => @person)
--#   2:   text ' : '
--#   3:   link_to 'Visits', visits_path(:person_id => @person)
--#   4:   text ' : New'
--#   8: form_for @visit do |f|
--#   9:   error_messages_for :visit
--#  10:   visit_form_fields(f)
+  =render :partial => 'visits/form', :object => f, :locals => { :visit => @visit }

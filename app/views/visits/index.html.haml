@@ -1,77 +1,25 @@
 %h1
   =link_to @person.full_name, person_path(:id => @person)
   = " : Visits"
+
 =link_to 'New visit', new_visit_path
+
 %table
   %tr
-    %th 
-      -'When'
-    %th 
-      -'Datetime'
-    %th 
-      -'Volunteer'
-    %th 
-      -'Note'
+    %th When
+    %th Datetime
+    %th Volunteer
+    %th Note
   -for visit in @visits
     %tr{:class => cycle('odd','even')}
-      %td { "#
-        -time_ago_in_words(visit.datetime)} ago"
-      %td { "#
-        -datetime_long(visit.datetime)}"
-      %td 
-        -visit.volunteer?
-      -td.note(:style => 'width:360px;') 
-        -note_text(visit.note)
-      %td 
-        =link_to 'Show', visit_path(:id => visit)
-      %td 
-        =link_to 'Edit', edit_visit_path(:id => visit)
-      %td 
-        =link_to 'Remove', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete
-  %tr.list_controls
-    %td{:colspan => 7}
-      %div.paginating_links
-        = 'More: '
-        -paginating_links(@visits)
-      -if @visits.next_page? || @visits.previous_page?
-        -end
-
--# Original:
-
--#   0: h1 do
--#   1:   link_to @person.full_name, person_path(:id => @person)
--#   2:   text " : Visits"
--#   5: link_to 'New visit', new_visit_path
--#   7: table do
--#   8:   tr do
--#   9:     th 
--#  10:       'When'
--#  11:     th 
--#  12:       'Datetime'
--#  13:     th 
--#  14:       'Volunteer'
--#  15:     th 
--#  16:       'Note'
--#  19:   for visit in @visits
--#  20:     tr :class => cycle('odd','even') do
--#  21:       td { "#
--#  22:         time_ago_in_words(visit.datetime)} ago"
--#  23:       td { "#
--#  24:         datetime_long(visit.datetime)}"
--#  25:       td 
--#  26:         visit.volunteer?
--#  27:       td.note(:style => 'width:360px;') 
--#  28:         note_text(visit.note)
--#  29:       td 
--#  30:         link_to 'Show', visit_path(:id => visit)
--#  31:       td 
--#  32:         link_to 'Edit', edit_visit_path(:id => visit)
--#  33:       td 
--#  34:         link_to 'Remove', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete
--#  37:   tr.list_controls do
--#  38:     td :colspan => 7 do
--#  39:       div.paginating_links do
--#  40:         text 'More: '
--#  41:         paginating_links(@visits)
--#  42:       end if @visits.next_page? || @visits.previous_page?
--#  42:       end if @visits.next_page? || @visits.previous_page?
+      %td #{time_ago_in_words(visit.datetime)} ago
+      %td= datetime_long(visit.datetime)
+      %td= visit.volunteer?
+      %td.note{:style => 'width:360px;'}= note_text(visit.note)
+      %td= link_to 'Show', visit_path(:id => visit)
+      %td= link_to 'Edit', edit_visit_path(:id => visit)
+      %td= link_to 'Remove', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete
+  -if @visits.next_page? || @visits.previous_page?
+    %tr.list_controls
+      %td{:colspan => 7}
+        %div.paginating_links More: #{paginating_links(@visits)}

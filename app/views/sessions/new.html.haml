@@ -1,31 +1,17 @@
 %h1 Log In
--form_tag session_path
+
+-form_tag session_path do
   %ul
-    labeled_input 'Login', :for => :login
-      =text_field_tag 'login'
-    labeled_input 'Password', :for => :password
-      =password_field_tag 'password'
+    =labeled_input 'Login', :for => :login do
+      -capture do
+        =text_field_tag 'login'
+    =labeled_input 'Password', :for => :password do
+      -capture do
+        =password_field_tag 'password'
     %li
-      = check_box_tag('remember_me')
-      %label.choice{"Remember me", :for => 'remember_me'}
-    %li 
+      =check_box_tag('remember_me')
+      %label.choice{:for => 'remember_me'} Remember me
+    %li
       =submit_tag 'Log in'
-    %li 
+    %li
       =link_to 'Forgot username or password?', forgot_path
-
--# Original:
-
--#   0: h1 'Log In'
--#   2: form_tag session_path do
--#   3:   ul do
--#   4:     labeled_input 'Login', :for => :login do
--#   5:       text_field_tag 'login'
--#   7:     labeled_input 'Password', :for => :password do
--#   8:       password_field_tag 'password'
--#  10:     li do
--#  11:       text check_box_tag('remember_me')
--#  12:       label.choice "Remember me", :for => 'remember_me'
--#  14:     li 
--#  15:       submit_tag 'Log in'
--#  16:     li 
--#  17:       link_to 'Forgot username or password?', forgot_path

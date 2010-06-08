@@ -23,7 +23,7 @@
       %td= link_to 'Show', service_path(:id => service)
       %td= link_to 'Edit', edit_service_path(:id => service)
       %td= link_to 'Remove', service_path(:id => service), :confirm => 'Are you sure?', :method => :delete
-  %tr.list_controls
-    -if @services.next_page? || @services.previous_page?
+  -if @services.next_page? || @services.previous_page?
+    %tr.list_controls
       %td{:colspan => 9}
         .paginating_links More: #{paginating_links(@services)}

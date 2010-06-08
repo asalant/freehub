@@ -32,6 +32,9 @@ class VisitsControllerTest < Test::Unit::TestCase
   def test_should_get_new
     get :new, :organization_key => 'sfbk', :person_id => people(:mary)
     assert_response :success
+    assert_select 'form' do
+      assert_select 'textarea', 1
+    end
   end
 
   def test_should_create_visit
@@ -73,6 +76,9 @@ class VisitsControllerTest < Test::Unit::TestCase
   def test_should_get_edit
     get :edit, :organization_key => 'sfbk', :person_id => people(:mary), :id => visits(:mary_1)
     assert_response :success
+    assert_select 'form' do
+      assert_select 'textarea', 1
+    end
   end
 
   def test_should_update_visit
