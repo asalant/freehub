@@ -1,21 +1,13 @@
-%h1
-  =link_to @person.full_name, person_path(:id => @person)
-  = " : Services"
+%h1 #{link_to @person.full_name, person_path(:id => @person)} : Services
 =link_to 'New service', new_service_path
 %table
   %tr
-    %th 
-      -'Service type'
-    %th 
-      -'Start date'
-    %th 
-      -'End date'
-    %th 
-      -'Paid'
-    %th 
-      -'Volunteered'
-    %th 
-      -'Note'
+    %th Service type
+    %th Start date
+    %th End date
+    %th Paid
+    %th Volunteered
+    %th Note
   -for service in @services
     %tr{:class => cycle('odd','even')}
       %td 

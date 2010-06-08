@@ -14,13 +14,6 @@ class PeopleControllerTest < Test::Unit::TestCase
     login_as 'greeter'
   end
 
-  def test_should_get_index
-    get :index, :organization_key => 'sfbk'
-    assert_response :success
-    assert_not_nil assigns(:people)
-    assert_equal 5, assigns(:people).size
-  end
-
   def test_should_get_new
     get :new, :organization_key => 'sfbk'
     assert_response :success

@@ -1,17 +1,6 @@
 class PeopleController < ApplicationController
 
   permit "admin or (manager of :organization)"
-  
-  # GET /people
-  # GET /people.xml
-  def index
-    @people = Person.for_organization(@organization)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @people }
-    end
-  end
 
   # GET /people/1
   # GET /people/1.xml

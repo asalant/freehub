@@ -1,8 +1,5 @@
-%h1
-  =link_to @person.full_name, person_path(:id => @person)
-  = ' : '
-  =link_to 'Notes', notes_path(:person_id => @person)
-  = ' : Edit'
+%h1 #{link_to @person.full_name, person_path(:id => @person)} : #{link_to 'Notes', notes_path(:person_id => @person)} : Edit
+
 =error_messages_for :note
 -form_for @note, :url => note_path do |f|
   %ul
@@ -14,20 +11,3 @@
         =f.text_area :text, :rows => 6
     %li 
       =f.submit "Create"
-
--# Original:
-
--#   0: h1 do
--#   1:   link_to @person.full_name, person_path(:id => @person)
--#   2:   text ' : '
--#   3:   link_to 'Notes', notes_path(:person_id => @person)
--#   4:   text ' : Edit'
--#   7: error_messages_for :note
--#   9: form_for @note, :url => note_path do |f|
--#  10:   ul do
--#  11:     labeled_input 'Regarding' do
--#  12:       notable_link(note.notable)
--#  14:     labeled_input 'Text', :for => :text do
--#  15:       f.text_area :text, :rows => 6
--#  17:     li 
--#  18:       f.submit "Create"
