@@ -9,7 +9,7 @@ module MarkabyHelper
     =label_value
     -if required
       %span.req *
-    =block.call if block
+  =block.call if block
 EOL
     ).render(self, :label_value => label_value, :attributes => attributes, :block => block)
   end

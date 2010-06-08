@@ -22,8 +22,7 @@
           -if logged_in?
             %span.greeting
               Hello
-              =link_to edit_user_path(current_user) do
-                %b= current_user.login
+              %b= link_to current_user.login, edit_user_path(current_user)
             %span.log_out
               =link_to 'Log Out', session_path, :method => :delete
           -else

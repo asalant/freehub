@@ -1,80 +1,70 @@
-div.column.left
+%div.column.left
   %div.section
     %h2 About Freehub
-    %p { <<-END
--Freehub is a system developed by the #
-  =link_to "San Francisco Bike Kitchen", "http://www.bikekitchen.org"
--and shared with other community bike shops to manage members and track patron visits.
-    -END
-    -}
+    %p
+      Freehub is a system developed by the
+      =link_to "San Francisco Bike Kitchen", "http://www.bikekitchen.org"
+      and shared with other community bike shops to manage members and track patron visits.
     %p In order to keep Freehub easy to use and understand we strive to keep it simple and focused.
     %p Freehub is:
     %ul.content
       %li A database of members and the services they have access to
       %li A sign in system for use at the front desk of the shop
       %li A reporting tool for looking at shop use, membership status,...
-    %p 
-      -"Freehub is <b>not</b>:"
+    %p Freehub is <b>not</b>:
     %ul.content
       %li A broadcast emailer - Freehub will not send emails to your members or patrons
       %li An accounting tool - we do not track money in Freehub
       %li An inventory tool - we do not track tools or parts in Freehub
       %li An point of sale system - we do not track shop sales in Freehub
-    %p { "For more information please see the #
-      =link_to "project wiki", "http://bikekitchen-trac.cvsdude.com/membership/wiki"}."
-    %div.section
-      %h2 Sign Up
-      %p { "#
-        =link_to 'Sign up now', new_organization_path} to try this free service."
-      -if you want to stop using Freehub.
-        %p You are welcome to try Freehub for your organization. You can export your data at any time
-      %p Keep in mind that we are in a beta phase and can not guarantee availability or stability.
+    %p= "For more information please see the #{link_to "project wiki", "http://bikekitchen-trac.cvsdude.com/membership/wiki"}."
     -if !logged_in?
-      -end
       %div.section
-        %h2 Quick Demo
-        %p { "This #
-          =link_to 'short movie', '/demo/summary.html'} demonstrates the basic features of Freehub."
-        %p 
-          =link_to image_tag("/demo/demo.jpg", :style => "border: 1px solid lightgrey;"), '/demo/summary.html'
+        %h2 Sign Up
+        %p= "#{link_to 'Sign up now', new_organization_path} to try this free service."
+        %p You are welcome to try Freehub for your organization. You can export your data at any time if you want to stop using Freehub.
+        %p Keep in mind that we are in a beta phase and can not guarantee availability or stability.
+    %div.section
+      %h2 Quick Demo
+      %p= "This #{link_to 'short movie', '/demo/summary.html'} demonstrates the basic features of Freehub."
+      %p= link_to image_tag("/demo/demo.jpg", :style => "border: 1px solid lightgrey;"), '/demo/summary.html'
 %div.column
-  %div.section
-    %h2 Log In
-    -form_tag session_path, :id => 'home_login'
-      %ul
-        labeled_input 'Login', :for => :login
-          =text_field_tag 'login'
-        labeled_input 'Password', :for => :password
-          =password_field_tag 'password'
-        %li
-          = check_box_tag('remember_me')
-          %label.choice{"Remember me", :for => 'remember_me'}
-        %li 
-          =submit_tag 'Log In'
   -if !logged_in?
-    -end
+    %div.section
+      %h2 Log In
+      -form_tag session_path, :id => 'home_login' do
+        %ul
+          =labeled_input 'Login', :for => :login do
+            -capture do
+              =text_field_tag 'login'
+          =labeled_input 'Password', :for => :password do
+            -capture do
+              =password_field_tag 'password'
+          %li
+            =check_box_tag('remember_me')
+            %label.choice{:for => 'remember_me'} Remember me
+          %li
+            =submit_tag 'Log In'
   %div.section
     %h2 Organizations
     %p These organization have signed up to use Freehub and are actively using it.
     %table{:width => "100%"}
-      %tr 
-        -th
       -for organization in @organizations
         -if @organizations.length > 4 && (!organization.active? || organization.visits_count < 10)
           -next
-        %tr{:class => cycle('odd','even')}
-          %td
-            %b organization.name
-            %br
-            = organization.location
-          %td{:style => 'width: 200px'}
-            -if !organization.last_visit.nil?
-              = "last visit #{datetime_long(organization.last_visit.datetime)}"
-            %br
-            -if organization.member_count > 9
-              = "#{organization.member_count} members"
-          -if permit? 'admin'}
-            %td{{ link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete }
+          %tr{:class => cycle('odd','even')}
+            %td
+              %b organization.name
+              %br
+              = organization.location
+            %td{:style => 'width: 200px'}
+              -if !organization.last_visit.nil?
+                = "last visit #{datetime_long(organization.last_visit.datetime)}"
+              %br
+              -if organization.member_count > 9
+                = "#{organization.member_count} members"
+            -if permit? 'admin'
+              %td= link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete
 
 -# Original:
 
