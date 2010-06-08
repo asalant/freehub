@@ -1,0 +1,93 @@
+%h1 People
+%table
+  %tr
+    %th 
+      -'First name'
+    %th 
+      -'Last name'
+    %th 
+      -'Staff'
+    %th 
+      -'Email'
+    %th 
+      -'Phone'
+    %th 
+      -'City'
+    %th 
+      -'State'
+    %th 
+      -'Postal code'
+  -for person in @people
+    %tr{:class => cycle('odd','even')}
+      %td 
+        -person.first_name
+      %td 
+        -person.last_name
+      %td 
+        -person.staff
+      %td 
+        -person.email
+      %td 
+        -person.phone
+      %td 
+        -person.city
+      %td 
+        -person.state
+      %td 
+        -person.postal_code
+      %td 
+        =link_to 'Show', person_path(:id => person)
+      %td 
+        =link_to 'Edit', edit_person_path(:id => person)
+      %td 
+        =link_to 'Remove', person_path(:id => person), :confirm => 'Are you sure?', :method => :delete
+%br
+=link_to 'New person', new_person_path
+
+-# Original:
+
+-#   0: h1 "People"
+-#   2: table do
+-#   3:   tr do
+-#   4:     th 
+-#   5:       'First name'
+-#   6:     th 
+-#   7:       'Last name'
+-#   8:     th 
+-#   9:       'Staff'
+-#  10:     th 
+-#  11:       'Email'
+-#  12:     th 
+-#  13:       'Phone'
+-#  14:     th 
+-#  15:       'City'
+-#  16:     th 
+-#  17:       'State'
+-#  18:     th 
+-#  19:       'Postal code'
+-#  22:   for person in @people
+-#  23:     tr :class => cycle('odd','even') do
+-#  24:       td 
+-#  25:         person.first_name
+-#  26:       td 
+-#  27:         person.last_name
+-#  28:       td 
+-#  29:         person.staff
+-#  30:       td 
+-#  31:         person.email
+-#  32:       td 
+-#  33:         person.phone
+-#  34:       td 
+-#  35:         person.city
+-#  36:       td 
+-#  37:         person.state
+-#  38:       td 
+-#  39:         person.postal_code
+-#  40:       td 
+-#  41:         link_to 'Show', person_path(:id => person)
+-#  42:       td 
+-#  43:         link_to 'Edit', edit_person_path(:id => person)
+-#  44:       td 
+-#  45:         link_to 'Remove', person_path(:id => person), :confirm => 'Are you sure?', :method => :delete
+-#  50: br
+-#  52: link_to 'New person', new_person_path

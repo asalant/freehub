@@ -1,0 +1,19 @@
+%h1 #{@user.name} Profile
+%ul
+  -labeled_value 'Name', @user.name
+  -labeled_value 'Email', @user.email
+  -labeled_value 'Login', @user.login
+  -labeled_value 'Activated at', @user.activated_at.nil? ? 'Not yet activated' : datetime_long(@user.activated_at)
+-if permit?('owner of :user')
+  =link_to 'Edit', edit_user_path(@user)
+
+-# Original:
+
+-#   0: h1 "#{@user.name} Profile"
+-#   2: ul do
+-#   3:   labeled_value 'Name', @user.name
+-#   4:   labeled_value 'Email', @user.email
+-#   5:   labeled_value 'Login', @user.login
+-#   6:   labeled_value 'Activated at', @user.activated_at.nil? ? 'Not yet activated' : datetime_long(@user.activated_at)
+-#   8: link_to 'Edit', edit_user_path(@user) if permit?('owner of :user')
+-#   8: link_to 'Edit', edit_user_path(@user) if permit?('owner of :user')

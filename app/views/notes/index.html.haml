@@ -1,0 +1,63 @@
+%h1
+  =link_to @person.full_name, person_path(:id => @person)
+  = " : Notes"
+=link_to 'New note', new_note_path
+%table
+  %tr
+    %th 
+      -'Notable'
+    %th 
+      -'Text'
+    %th 
+      -'Created at'
+    %th 
+      -'Created by'
+  -for note in @notes
+    %tr{:class => cycle('odd','even')}
+      %td 
+        -notable_link(note.notable)
+      %td.note 
+        -note_text(note)
+      %td 
+        -datetime_long(note.created_at)
+      %td 
+        -user_link(note.created_by)
+      %td 
+        =link_to 'Show', note_path(:id => note)
+      %td 
+        =link_to 'Edit', edit_note_path(:id => note)
+      %td 
+        =link_to 'Remove', note_path(:id => note), :confirm => 'Are you sure?', :method => :delete
+
+-# Original:
+
+-#   0: h1 do
+-#   1:   link_to @person.full_name, person_path(:id => @person)
+-#   2:   text " : Notes"
+-#   5: link_to 'New note', new_note_path
+-#   7: table do
+-#   8:   tr do
+-#   9:     th 
+-#  10:       'Notable'
+-#  11:     th 
+-#  12:       'Text'
+-#  13:     th 
+-#  14:       'Created at'
+-#  15:     th 
+-#  16:       'Created by'
+-#  19:   for note in @notes
+-#  20:     tr :class => cycle('odd','even') do
+-#  21:       td 
+-#  22:         notable_link(note.notable)
+-#  23:       td.note 
+-#  24:         note_text(note)
+-#  25:       td 
+-#  26:         datetime_long(note.created_at)
+-#  27:       td 
+-#  28:         user_link(note.created_by)
+-#  29:       td 
+-#  30:         link_to 'Show', note_path(:id => note)
+-#  31:       td 
+-#  32:         link_to 'Edit', edit_note_path(:id => note)
+-#  33:       td 
+-#  34:         link_to 'Remove', note_path(:id => note), :confirm => 'Are you sure?', :method => :delete

@@ -1,9 +1,0 @@
-div.section do
-  p.warn do <<-END
-Your account is pending activation. We've sent an activation email to #{current_user.email}.
-Check that email account and your spam filter for the activation email.
-END
-  end
-end if current_user.activated_at.nil?
-
-sign_in_search_panel

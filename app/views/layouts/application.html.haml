@@ -1,0 +1,165 @@
+%html
+  %head
+    -if @title #defined already
+    -elsif @person && !@person.new_record?
+      -@title = @person.full_name
+    -elsif @organization && !@organization.new_record?
+      -@title = @organization.name
+    -else
+      -@title = "#{params[:controller].singularize.titleize} #{params[:action].titleize}"
+    %title #{@title} on Freehub
+    =javascript_include_tag :all
+    =stylesheet_link_tag 'reset-min'
+    -calendar_date_select_includes 'silver'
+    =stylesheet_link_tag 'application'
+    =stylesheet_link_tag 'form'
+    -if params[:controller] == 'people'
+      =stylesheet_link_tag 'people'
+  %body
+    %div#application
+      %div#header
+        %div#user_status
+          -if logged_in?
+            %span.greeting { "Hello #
+              =link_to b(current_user.login), edit_user_path(current_user)}"
+            %span.log_out 
+              =link_to 'Log Out', session_path, :method => :delete
+          -else
+            %span.log_in 
+              =link_to 'Log In', new_session_path
+        -if flash[:notice]
+          %span#notice flash[:notice]
+      %div#application_nav
+        %ul.tabs
+          -if @organization && !@organization.new_record?
+            -tab_item('Home', organization_path(@organization))
+            -tab_item('Visits', today_visits_path(:organization_key => @organization.key))
+            -tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
+            -if permit? "admin or (manager of :organization)"
+              -tab_item('Settings', edit_organization_path(@organization))
+          -else
+            -tab_item('Home', root_path)
+            -if logged_in? && !current_user.organization.nil?
+              -tab_item(current_user.organization.name, organization_path(current_user.organization))
+      %div#application_header
+        -if @organization && !@organization.new_record?
+          %h2 
+            =link_to organization.name, @organization
+        -else
+          %h2 { text "Welcome to #
+            =link_to 'Freehub', root_path}"
+      div.content.application_body!
+        -self << content_for_layout
+        -div(:style => 'clear:both;') 
+          -
+      %div#application_footer
+        = "Times shown are #{TzTime.zone.name} timezone."
+    %div#footer
+      %div.body
+        %div#logo 
+          =link_to 'Freehub', root_path
+        %ul
+          %li { "Get #
+            =link_to "help or send feedback", "http://wiki.github.com/asalant/freehub/freehub-support"}"
+          %li { "Check the #
+            =link_to 'project documentation', 'http://wiki.github.com/asalant/freehub/'}"
+        %ul
+          %li { "Thanks to #
+            =link_to 'EngineYard', 'http://www.engineyard.com'} for hosting"
+        %div.credit 
+          -image_tag("ey-logo.gif")
+    %script{:type => "text/javascript"}
+        = <<END
+          %var _gaq = _gaq || [];
+          -_gaq.push(['_setAccount', 'UA-16200053-1']);
+          -_gaq.push(['_trackPageview']);
+          -(function() {
+            %var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            -ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            %var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          -})();
+-END
+
+-# Original:
+
+-#   0: html do
+-#   1:   head do
+-#   2:     if @title #defined already
+-#   3:     elsif @person && !@person.new_record?
+-#   4:       @title = @person.full_name
+-#   5:     elsif @organization && !@organization.new_record?
+-#   6:       @title = @organization.name
+-#   7:     else
+-#   8:       @title = "#{params[:controller].singularize.titleize} #{params[:action].titleize}"
+-#  10:     title "#{@title} on Freehub"
+-#  11:     javascript_include_tag :all
+-#  12:     stylesheet_link_tag 'reset-min'
+-#  13:     calendar_date_select_includes 'silver'
+-#  14:     stylesheet_link_tag 'application'
+-#  15:     stylesheet_link_tag 'form'
+-#  16:     stylesheet_link_tag 'people' if params[:controller] == 'people'
+-#  16:     stylesheet_link_tag 'people' if params[:controller] == 'people'
+-#  18:   body do
+-#  19:     div.application! do
+-#  20:       div.header! do
+-#  21:         div.user_status! do
+-#  22:           if logged_in?
+-#  23:             span.greeting { "Hello #
+-#  24:               link_to b(current_user.login), edit_user_path(current_user)}"
+-#  25:             span.log_out 
+-#  26:               link_to 'Log Out', session_path, :method => :delete
+-#  27:           else
+-#  28:             span.log_in 
+-#  29:               link_to 'Log In', new_session_path
+-#  32:         if flash[:notice]
+-#  33:           span.notice! flash[:notice]
+-#  37:       div.application_nav! do
+-#  38:         ul.tabs do
+-#  39:           if @organization && !@organization.new_record?
+-#  40:             tab_item('Home', organization_path(@organization))
+-#  41:             tab_item('Visits', today_visits_path(:organization_key => @organization.key))
+-#  42:             tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
+-#  43:             tab_item('Settings', edit_organization_path(@organization)) if permit? "admin or (manager of :organization)"
+-#  43:             tab_item('Settings', edit_organization_path(@organization)) if permit? "admin or (manager of :organization)"
+-#  44:           else
+-#  45:             tab_item('Home', root_path)
+-#  46:             if logged_in? && !current_user.organization.nil?
+-#  47:               tab_item(current_user.organization.name, organization_path(current_user.organization))
+-#  52:       div.application_header! do
+-#  53:         if @organization && !@organization.new_record?
+-#  54:           h2 
+-#  55:             link_to organization.name, @organization
+-#  56:         else
+-#  57:           h2 { text "Welcome to #
+-#  58:             link_to 'Freehub', root_path}"
+-#  61:       div.content.application_body! do
+-#  62:         self << content_for_layout
+-#  63:         div(:style => 'clear:both;') 
+-#  64:           
+-#  66:       div.application_footer! do
+-#  67:         text "Times shown are #{TzTime.zone.name} timezone."
+-#  71:     div.footer! do
+-#  72:       div.body do
+-#  73:         div.logo! 
+-#  74:           link_to 'Freehub', root_path
+-#  75:         ul do
+-#  76:           li { "Get #
+-#  77:             link_to "help or send feedback", "http://wiki.github.com/asalant/freehub/freehub-support"}"
+-#  78:           li { "Check the #
+-#  79:             link_to 'project documentation', 'http://wiki.github.com/asalant/freehub/'}"
+-#  81:         ul do
+-#  82:           li { "Thanks to #
+-#  83:             link_to 'EngineYard', 'http://www.engineyard.com'} for hosting"
+-#  85:         div.credit 
+-#  86:           image_tag("ey-logo.gif")
+-#  89:     script :type => "text/javascript" do
+-#  90:         text <<END
+-#  91:           var _gaq = _gaq || [];
+-#  92:           _gaq.push(['_setAccount', 'UA-16200053-1']);
+-#  93:           _gaq.push(['_trackPageview']);
+-#  95:           (function() {
+-#  96:             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+-#  97:             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+-#  98:             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+-#  99:           })();
+-# 100: END

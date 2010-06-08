@@ -1,0 +1,27 @@
+%h1
+  =link_to @person.full_name, person_path(:id => @person)
+  = ' : '
+  =link_to 'Visits', visits_path(:person_id => @person)
+  = ' : Detail'
+%ul
+  -labeled_value 'Datetime', datetime_long(@visit.datetime)
+  -labeled_value 'Volunteer', @visit.volunteer?
+  -labeled_value 'Note', note_text(@visit.note)
+  -labeled_value 'Person', @visit.person.full_name
+  -userstamp_labeled_values @visit
+=link_to 'Edit', edit_visit_path(:id => @visit)
+
+-# Original:
+
+-#   0: h1 do
+-#   1:   link_to @person.full_name, person_path(:id => @person)
+-#   2:   text ' : '
+-#   3:   link_to 'Visits', visits_path(:person_id => @person)
+-#   4:   text ' : Detail'
+-#   7: ul do
+-#   8:   labeled_value 'Datetime', datetime_long(@visit.datetime)
+-#   9:   labeled_value 'Volunteer', @visit.volunteer?
+-#  10:   labeled_value 'Note', note_text(@visit.note)
+-#  11:   labeled_value 'Person', @visit.person.full_name
+-#  12:   userstamp_labeled_values @visit
+-#  14: link_to 'Edit', edit_visit_path(:id => @visit)

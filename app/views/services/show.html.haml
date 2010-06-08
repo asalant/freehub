@@ -1,0 +1,31 @@
+%h1
+  =link_to @person.full_name, person_path(:id => @person)
+  = ' : '
+  =link_to 'Services', services_path(:person_id => @person)
+  = ' : Detail'
+%ul
+  -labeled_value 'Service type', @service.service_type.name
+  -labeled_value 'Start date', @service.start_date
+  -labeled_value 'End date', @service.end_date
+  -labeled_value 'Paid', @service.paid
+  -labeled_value 'Volunteered', @service.volunteered
+  -labeled_value 'Note', note_text(@service.note)
+  -userstamp_labeled_values @service
+=link_to 'Edit', edit_service_path(:id => @service)
+
+-# Original:
+
+-#   0: h1 do
+-#   1:   link_to @person.full_name, person_path(:id => @person)
+-#   2:   text ' : '
+-#   3:   link_to 'Services', services_path(:person_id => @person)
+-#   4:   text ' : Detail'
+-#   7: ul do
+-#   8:   labeled_value 'Service type', @service.service_type.name
+-#   9:   labeled_value 'Start date', @service.start_date
+-#  10:   labeled_value 'End date', @service.end_date
+-#  11:   labeled_value 'Paid', @service.paid
+-#  12:   labeled_value 'Volunteered', @service.volunteered
+-#  13:   labeled_value 'Note', note_text(@service.note)
+-#  15:   userstamp_labeled_values @service
+-#  17: link_to 'Edit', edit_service_path(:id => @service)

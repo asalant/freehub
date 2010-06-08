@@ -145,7 +145,7 @@ def convert_all_files
 end
 #
 #s = <<EOF
-#add text here
+#add text here/*.
 #EOF
 #haml = convert_markaby(s.split("\n"))
 #haml.each do |l|

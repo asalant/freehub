@@ -1,0 +1,69 @@
+%h1 Listing users
+%table
+  %tr
+    %th 
+      -'Name'
+    %th 
+      -'Email'
+    %th 
+      -'Login'
+    %th 
+      -'Activated at'
+    %th 
+      -'Created at'
+  -for user in @users
+    %tr{:class => cycle('odd','even')}
+      %td 
+        -user.name
+      %td 
+        -user.email
+      %td 
+        -user.login
+      %td 
+        -user.activated_at.nil? ? 'Not yet activated' : datetime_short(user.activated_at)
+      %td 
+        -datetime_short(user.created_at)
+      %td 
+        =link_to 'Show', user
+      %td 
+        =link_to 'Edit', edit_user_path(user)
+      %td 
+        =link_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete
+%br
+=link_to 'New user', new_user_path
+
+-# Original:
+
+-#   0: h1 "Listing users"
+-#   2: table do
+-#   3:   tr do
+-#   4:     th 
+-#   5:       'Name'
+-#   6:     th 
+-#   7:       'Email'
+-#   8:     th 
+-#   9:       'Login'
+-#  10:     th 
+-#  11:       'Activated at'
+-#  12:     th 
+-#  13:       'Created at'
+-#  16:   for user in @users
+-#  17:     tr :class => cycle('odd','even') do
+-#  18:       td 
+-#  19:         user.name
+-#  20:       td 
+-#  21:         user.email
+-#  22:       td 
+-#  23:         user.login
+-#  24:       td 
+-#  25:         user.activated_at.nil? ? 'Not yet activated' : datetime_short(user.activated_at)
+-#  26:       td 
+-#  27:         datetime_short(user.created_at)
+-#  28:       td 
+-#  29:         link_to 'Show', user
+-#  30:       td 
+-#  31:         link_to 'Edit', edit_user_path(user)
+-#  32:       td 
+-#  33:         link_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete
+-#  38: br
+-#  40: link_to 'New user', new_user_path

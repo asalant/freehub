@@ -1,0 +1,111 @@
+%h1
+  =link_to 'Reports', reports_path
+  = ' : Visits'
+%div.column
+  -form_tag report_path(:action => 'visits'), :method => :get
+    %ul
+      labeled_input 'Date Range', :for => 'date_from'
+        %span
+          -calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+          %label{Date From', :for => 'report[after]}
+        %span
+          -calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+          %label{Date To', :for => 'report[before]}
+        %p.instruct Leave one or both blank to search without date constraints.
+      %li 
+        =submit_tag "Update"
+%div.section
+  -if @visits.empty?
+    %div.list_status No visits for date range.
+  -else
+    %div.list_status #{@visits.to_a.size} of #{@visits.size} visits shown.
+    %table
+      %tr
+        %th 
+          -'Name'
+        %th 
+          -'Type'
+        %th 
+          -'Volunteer'
+        %th 
+          -'Datetime'
+        %th 
+          -'Note'
+      -for visit in @visits
+        %tr{:class => cycle('odd','even')}
+          -td(:style => 'width:200px;') 
+            =link_to(visit.person.full_name, person_path(:id => visit.person))
+          %td 
+            -visit.person.staff? ? 'Staff' : 'Patron'
+          %td 
+            -visit.volunteer?
+          %td { "#
+            -datetime_long(visit.datetime)}"
+          -td.note(:style => 'width:360px;') 
+            -note_text(visit.note)
+      %tr.list_controls
+        %td{:colspan => 5}
+          %div.paginating_links
+            = 'More: '
+            -paginating_links(@visits, :params => { :report => params[:report] } )
+          -if @visits.next_page? || @visits.previous_page?
+            -end
+          %div.export
+            =link_to 'Export all', report_path(:action => 'visits', :params => { :report => params[:report], :format => 'csv' })
+
+-# Original:
+
+-#   0: h1 do
+-#   1:   link_to 'Reports', reports_path
+-#   2:   text ' : Visits'
+-#   5: div.column do
+-#   6:   form_tag report_path(:action => 'visits'), :method => :get do
+-#   7:     ul do
+-#   8:       labeled_input 'Date Range', :for => 'date_from' do
+-#   9:         span do
+-#  10:           calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+-#  11:           label 'Date From', :for => 'report[after]'
+-#  13:         span do
+-#  14:           calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+-#  15:           label 'Date To', :for => 'report[before]'
+-#  17:         p.instruct "Leave one or both blank to search without date constraints."
+-#  19:       li 
+-#  20:         submit_tag "Update"
+-#  25: div.section do
+-#  26:   if @visits.empty?
+-#  27:     div.list_status 'No visits for date range.'
+-#  28:   else
+-#  29:     div.list_status "#{@visits.to_a.size} of #{@visits.size} visits shown."
+-#  30:     table do
+-#  31:       tr do
+-#  32:         th 
+-#  33:           'Name'
+-#  34:         th 
+-#  35:           'Type'
+-#  36:         th 
+-#  37:           'Volunteer'
+-#  38:         th 
+-#  39:           'Datetime'
+-#  40:         th 
+-#  41:           'Note'
+-#  44:       for visit in @visits
+-#  45:         tr :class => cycle('odd','even') do
+-#  46:           td(:style => 'width:200px;') 
+-#  47:             link_to(visit.person.full_name, person_path(:id => visit.person))
+-#  48:           td 
+-#  49:             visit.person.staff? ? 'Staff' : 'Patron'
+-#  50:           td 
+-#  51:             visit.volunteer?
+-#  52:           td { "#
+-#  53:             datetime_long(visit.datetime)}"
+-#  54:           td.note(:style => 'width:360px;') 
+-#  55:             note_text(visit.note)
+-#  58:       tr.list_controls do
+-#  59:         td :colspan => 5 do
+-#  60:           div.paginating_links do
+-#  61:             text 'More: '
+-#  62:             paginating_links(@visits, :params => { :report => params[:report] } )
+-#  63:           end if @visits.next_page? || @visits.previous_page?
+-#  63:           end if @visits.next_page? || @visits.previous_page?
+-#  65:           div.export do
+-#  66:             link_to 'Export all', report_path(:action => 'visits', :params => { :report => params[:report], :format => 'csv' })

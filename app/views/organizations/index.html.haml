@@ -1,0 +1,157 @@
+div.column.left
+  %div.section
+    %h2 About Freehub
+    %p { <<-END
+-Freehub is a system developed by the #
+  =link_to "San Francisco Bike Kitchen", "http://www.bikekitchen.org"
+-and shared with other community bike shops to manage members and track patron visits.
+    -END
+    -}
+    %p In order to keep Freehub easy to use and understand we strive to keep it simple and focused.
+    %p Freehub is:
+    %ul.content
+      %li A database of members and the services they have access to
+      %li A sign in system for use at the front desk of the shop
+      %li A reporting tool for looking at shop use, membership status,...
+    %p 
+      -"Freehub is <b>not</b>:"
+    %ul.content
+      %li A broadcast emailer - Freehub will not send emails to your members or patrons
+      %li An accounting tool - we do not track money in Freehub
+      %li An inventory tool - we do not track tools or parts in Freehub
+      %li An point of sale system - we do not track shop sales in Freehub
+    %p { "For more information please see the #
+      =link_to "project wiki", "http://bikekitchen-trac.cvsdude.com/membership/wiki"}."
+    %div.section
+      %h2 Sign Up
+      %p { "#
+        =link_to 'Sign up now', new_organization_path} to try this free service."
+      -if you want to stop using Freehub.
+        %p You are welcome to try Freehub for your organization. You can export your data at any time
+      %p Keep in mind that we are in a beta phase and can not guarantee availability or stability.
+    -if !logged_in?
+      -end
+      %div.section
+        %h2 Quick Demo
+        %p { "This #
+          =link_to 'short movie', '/demo/summary.html'} demonstrates the basic features of Freehub."
+        %p 
+          =link_to image_tag("/demo/demo.jpg", :style => "border: 1px solid lightgrey;"), '/demo/summary.html'
+%div.column
+  %div.section
+    %h2 Log In
+    -form_tag session_path, :id => 'home_login'
+      %ul
+        labeled_input 'Login', :for => :login
+          =text_field_tag 'login'
+        labeled_input 'Password', :for => :password
+          =password_field_tag 'password'
+        %li
+          = check_box_tag('remember_me')
+          %label.choice{"Remember me", :for => 'remember_me'}
+        %li 
+          =submit_tag 'Log In'
+  -if !logged_in?
+    -end
+  %div.section
+    %h2 Organizations
+    %p These organization have signed up to use Freehub and are actively using it.
+    %table{:width => "100%"}
+      %tr 
+        -th
+      -for organization in @organizations
+        -if @organizations.length > 4 && (!organization.active? || organization.visits_count < 10)
+          -next
+        %tr{:class => cycle('odd','even')}
+          %td
+            %b organization.name
+            %br
+            = organization.location
+          %td{:style => 'width: 200px'}
+            -if !organization.last_visit.nil?
+              = "last visit #{datetime_long(organization.last_visit.datetime)}"
+            %br
+            -if organization.member_count > 9
+              = "#{organization.member_count} members"
+          -if permit? 'admin'}
+            %td{{ link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete }
+
+-# Original:
+
+-#   0: div.column.left do
+-#   1:   div.section do
+-#   2:     h2 "About Freehub"
+-#   4:     p { <<-END
+-#   5: Freehub is a system developed by the #
+-#   6:   link_to "San Francisco Bike Kitchen", "http://www.bikekitchen.org"
+-#   7: and shared with other community bike shops to manage members and track patron visits.
+-#   8:     END
+-#   9:     }
+-#  11:     p "In order to keep Freehub easy to use and understand we strive to keep it simple and focused."
+-#  13:     p "Freehub is:"
+-#  14:     ul.content do
+-#  15:       li "A database of members and the services they have access to"
+-#  16:       li "A sign in system for use at the front desk of the shop"
+-#  17:       li "A reporting tool for looking at shop use, membership status,..."
+-#  20:     p 
+-#  21:       "Freehub is <b>not</b>:"
+-#  22:     ul.content do
+-#  23:       li "A broadcast emailer - Freehub will not send emails to your members or patrons"
+-#  24:       li "An accounting tool - we do not track money in Freehub"
+-#  25:       li "An inventory tool - we do not track tools or parts in Freehub"
+-#  26:       li "An point of sale system - we do not track shop sales in Freehub"
+-#  29:     p { "For more information please see the #
+-#  30:       link_to "project wiki", "http://bikekitchen-trac.cvsdude.com/membership/wiki"}."
+-#  33:     div.section do
+-#  34:       h2 "Sign Up"
+-#  36:       p { "#
+-#  37:         link_to 'Sign up now', new_organization_path} to try this free service."
+-#  39:       p "You are welcome to try Freehub for your organization. You can export your data at any time if you want to stop using Freehub."
+-#  39:       p "You are welcome to try Freehub for your organization. You can export your data at any time if you want to stop using Freehub."
+-#  41:       p "Keep in mind that we are in a beta phase and can not guarantee availability or stability."
+-#  42:     end if !logged_in?
+-#  42:     end if !logged_in?
+-#  44:       div.section do
+-#  45:         h2 "Quick Demo"
+-#  47:         p { "This #
+-#  48:           link_to 'short movie', '/demo/summary.html'} demonstrates the basic features of Freehub."
+-#  50:         p 
+-#  51:           link_to image_tag("/demo/demo.jpg", :style => "border: 1px solid lightgrey;"), '/demo/summary.html'
+-#  55: div.column do
+-#  56:   div.section do
+-#  57:     h2 "Log In"
+-#  59:     form_tag session_path, :id => 'home_login' do
+-#  60:       ul do
+-#  61:         labeled_input 'Login', :for => :login do
+-#  62:           text_field_tag 'login'
+-#  64:         labeled_input 'Password', :for => :password do
+-#  65:           password_field_tag 'password'
+-#  67:         li do
+-#  68:           text check_box_tag('remember_me')
+-#  69:           label.choice "Remember me", :for => 'remember_me'
+-#  71:         li 
+-#  72:           submit_tag 'Log In'
+-#  75:   end if !logged_in?
+-#  75:   end if !logged_in?
+-#  77:   div.section do
+-#  78:     h2 "Organizations"
+-#  80:     p "These organization have signed up to use Freehub and are actively using it."
+-#  82:     table :width => "100%" do
+-#  83:       tr 
+-#  84:         th
+-#  86:       for organization in @organizations
+-#  87:         next if @organizations.length > 4 && (!organization.active? || organization.visits_count < 10)
+-#  87:         next if @organizations.length > 4 && (!organization.active? || organization.visits_count < 10)
+-#  88:         tr :class => cycle('odd','even') do
+-#  89:           td do
+-#  90:             b organization.name
+-#  91:             br
+-#  92:             text organization.location
+-#  94:           td :style => 'width: 200px' do
+-#  95:             text "last visit #{datetime_long(organization.last_visit.datetime)}" if !organization.last_visit.nil?
+-#  95:             text "last visit #{datetime_long(organization.last_visit.datetime)}" if !organization.last_visit.nil?
+-#  96:             br
+-#  97:             text "#{organization.member_count} members" if organization.member_count > 9
+-#  97:             text "#{organization.member_count} members" if organization.member_count > 9
+-#  99:           td { link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'
+-#  99:           td { link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete } if permit? 'admin'

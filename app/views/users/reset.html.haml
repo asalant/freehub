@@ -1,0 +1,21 @@
+%h1 User: Reset password for #{@user.email}
+-error_messages_for :user
+-form_for @user, :url => reset_path(:reset_code => params[:reset_code]), :html => { :method => :post } do |f|
+  labeled_input 'Password', :for => :password
+    -f.password_field :password
+  labeled_input 'Confirm Password', :for => :password_confirmation
+    -f.password_field :password_confirmation
+    %p 
+      =submit_tag 'Reset'
+
+-# Original:
+
+-#   0: h1 "User: Reset password for #{@user.email}"
+-#   2: error_messages_for :user
+-#   4: form_for @user, :url => reset_path(:reset_code => params[:reset_code]), :html => { :method => :post } do |f|
+-#   5:   labeled_input 'Password', :for => :password do
+-#   6:     f.password_field :password
+-#   8:   labeled_input 'Confirm Password', :for => :password_confirmation do
+-#   9:     f.password_field :password_confirmation
+-#  11:     p 
+-#  12:       submit_tag 'Reset'

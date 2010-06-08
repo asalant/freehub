@@ -1,0 +1,35 @@
+%h1
+  =link_to @person.full_name, person_path(:id => @person)
+  = ' : '
+  =link_to 'Visits', visits_path(:person_id => @person)
+  = ' : Edit'
+-form_for @visit, :url => visit_path do |f|
+  -error_messages_for :visit
+  -if params[:destination]
+    =hidden_field_tag :destination, params[:destination]
+  -visit_form_fields(f)
+    -script_src  = <<END
+-Event.observe(window, 'load', function() {
+  -$('note_text').focus();
+-});
+-END
+    %script{script_src, :type => 'text/javascript'}
+
+-# Original:
+
+-#   0: h1 do
+-#   1:   link_to @person.full_name, person_path(:id => @person)
+-#   2:   text ' : '
+-#   3:   link_to 'Visits', visits_path(:person_id => @person)
+-#   4:   text ' : Edit'
+-#   8: form_for @visit, :url => visit_path do |f|
+-#   9:   error_messages_for :visit
+-#  10:   hidden_field_tag :destination, params[:destination] if params[:destination]
+-#  10:   hidden_field_tag :destination, params[:destination] if params[:destination]
+-#  11:   visit_form_fields(f)
+-#  14:     script_src  = <<END
+-#  15: Event.observe(window, 'load', function() {
+-#  16:   $('note_text').focus();
+-#  17: });
+-#  18: END
+-#  19:     script script_src, :type => 'text/javascript'

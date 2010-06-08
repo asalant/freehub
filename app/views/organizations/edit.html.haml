@@ -1,0 +1,23 @@
+%h1
+  =link_to @organization.name, @organization
+  = " : Edit"
+div.column.left
+  -error_messages_for :organization
+  -form_for @organization do |f|
+    %ul
+      -organization_form_fields(f)
+      %li 
+        -f.submit 'Update'
+
+-# Original:
+
+-#   0: h1 do
+-#   1:   link_to @organization.name, @organization
+-#   2:   text " : Edit"
+-#   5: div.column.left do
+-#   6:   error_messages_for :organization
+-#   8:   form_for @organization do |f|
+-#   9:     ul do
+-#  10:       organization_form_fields(f)
+-#  11:       li 
+-#  12:         f.submit 'Update'

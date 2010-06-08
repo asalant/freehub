@@ -1,0 +1,27 @@
+%h1
+  =link_to @person.full_name, person_path(:id => @person)
+  = " : Detail"
+%p do <<-END
+-If this record is a mistake you can
+-#{link_to "remove #
+  -@person.first_name}", person_path(:id => person), :confirm => 'Are you sure?', :method => :delete
+-from the system.
+-END
+-error_messages_for :person
+-form_for @person, :url => person_path(:id => @person) do |f|
+  -person_form_fields(f)
+
+-# Original:
+
+-#   0: h1 do
+-#   1:   link_to @person.full_name, person_path(:id => @person)
+-#   2:   text " : Detail"
+-#   5: p do <<-END
+-#   6: If this record is a mistake you can
+-#   7: #{link_to "remove #
+-#   8:   @person.first_name}", person_path(:id => person), :confirm => 'Are you sure?', :method => :delete
+-#   9: from the system.
+-#  10: END
+-#  13: error_messages_for :person
+-#  15: form_for @person, :url => person_path(:id => @person) do |f|
+-#  16:   person_form_fields(f)
