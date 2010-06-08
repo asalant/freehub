@@ -1,7 +1,7 @@
 %h1 User: Send password reset
 %div.column.left
   -form_for @user, :url => forgot_path do |f|
-    -error_messages_for :user
+    =error_messages_for :user
     %ul
       =labeled_input 'Email', :for => :user_email do
         -capture do

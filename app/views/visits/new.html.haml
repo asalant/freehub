@@ -4,7 +4,7 @@
   =link_to 'Visits', visits_path(:person_id => @person)
   = ' : New'
 -form_for @visit do |f|
-  -error_messages_for :visit
+  =error_messages_for :visit
   -visit_form_fields(f)
 
 -# Original:

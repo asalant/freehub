@@ -1,5 +1,5 @@
 %h1 User: Reset password for #{@user.email}
--error_messages_for :user
+=error_messages_for :user
 -form_for @user, :url => reset_path(:reset_code => params[:reset_code]), :html => { :method => :post } do |f|
   =labeled_input 'Password', :for => :password do
     -capture do

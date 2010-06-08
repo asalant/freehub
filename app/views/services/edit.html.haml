@@ -4,7 +4,7 @@
   =link_to 'Services', services_path(:person_id => @person)
   = ' : Edit'
 -form_for @service, :url => service_path do |f|
-  -error_messages_for :service
+  =error_messages_for :service
   -service_form_fields(f)
 
 -# Original:

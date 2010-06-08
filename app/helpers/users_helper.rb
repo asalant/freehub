@@ -6,7 +6,11 @@ module UsersHelper
   end
 
   def user_link(user)
-    link_to(user.login, user_path(user)) if user
+    return unless user
+    Haml::Engine.new(<<EOL
+= link_to(user.login, user_path(user))
+EOL
+    ).render(self, :user => user)
   end
 
 end

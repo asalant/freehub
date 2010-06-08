@@ -1,25 +1,10 @@
 %h1 People : New
-%p do <<-END
--Only First Name is required. For those who which to not be identified, please sign in as
--#{ link_to 'Anonymous', report_path(:action => :people, :report => { :matching_name => 'Anonymous' }) }.
--END
--error_messages_for :person
+%p
+  Only First Name is required. For those who which to not be identified, please sign in as
+  = "#{ link_to 'Anonymous', report_path(:action => :people, :report => { :matching_name => 'Anonymous' }) }."
+
+=error_messages_for :person
 -form_for @person do |f|
-  -person_form_fields(f)
-%script do <<-END 
--$('person_first_name').focus();
--END
-
--# Original:
-
--#   0: h1 'People : New'
--#   2: p do <<-END
--#   3: Only First Name is required. For those who which to not be identified, please sign in as
--#   4: #{ link_to 'Anonymous', report_path(:action => :people, :report => { :matching_name => 'Anonymous' }) }.
--#   5: END
--#   8: error_messages_for :person
--#  10: form_for @person do |f|
--#  11:   person_form_fields(f)
--#  14: script do <<-END 
--#  15: $('person_first_name').focus();
--#  16: END
+  = render :partial => 'people/form', :object => f, :locals => { :person => @person }
+:javascript
+  $('person_first_name').focus();

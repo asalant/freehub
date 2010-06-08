@@ -1,97 +1,86 @@
-%h1 @person.full_name
-  %ul#summary
-    %li.person_type 
-      -@person.person_type
-    -if !@person.membership
-      %li Not a member
-      %li 
-        =link_to 'Create Membership', new_service_path(:person_id => @person)
-    -elsif @person.membership.current?
-      %li.current Membership expires #{date_short @person.membership.end_date}
-      %li 
-        =link_to 'Renew', new_service_path(:person_id => @person)
-    -else
-      %li.expired Membership expired #{date_short @person.membership.end_date}
-      %li 
-        =link_to 'Renew', new_service_path(:person_id => @person)
-    %li @person.email
-    %li @person.postal_code
-    %li { link_to "Edit #
-      -@person.first_name}", edit_person_path(:id => @person)
-  %div#sign_in
-    %h2 Sign #{@person.first_name} In
-    -form_for Visit.new(:volunteer => @person.staff?), :url => visits_path(:person_id => @person.id) do |f|
-      =hidden_field_tag :destination, today_visits_path
-      %ul
-        %li
-          = f.radio_button(:volunteer, false)
-          %label.inline{Visiting', :for => 'visit_volunteer_false}
-          = f.radio_button(:volunteer, true)
-          %label.inline{Volunteering', :for => 'visit_volunteer_true}
-        %li
-          -fields_for :note do |note|
-            -note.text_area :text, :style => 'display:none;'
-          =link_to_function "Add Note", "Element.show('note_text');Element.hide('add_note_link')", :id => 'add_note_link'
-        %li 
-          -f.submit "Sign In"
-    -script_src  = <<END
--Event.observe(window, 'load', function() {
-  -$('visit_submit').focus();
--});
--END
-    %script{script_src, :type => 'text/javascript'}
+%h1= @person.full_name
+%ul#summary
+  %li.person_type
+    =@person.person_type
+  -if !@person.membership
+    %li Not a member
+    %li= link_to 'Create Membership', new_service_path(:person_id => @person)
+  -elsif @person.membership.current?
+    %li.current Membership expires #{date_short @person.membership.end_date}
+    %li= link_to 'Renew', new_service_path(:person_id => @person)
+  -else
+    %li.expired Membership expired #{date_short @person.membership.end_date}
+    %li= link_to 'Renew', new_service_path(:person_id => @person)
+  %li= @person.email
+  %li= @person.postal_code
+  %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
+%div#sign_in
+  %h2 Sign #{@person.first_name} In
+  -form_for Visit.new(:volunteer => @person.staff?), :url => visits_path(:person_id => @person.id) do |f|
+    =hidden_field_tag :destination, today_visits_path
+    %ul
+      %li
+        = f.radio_button(:volunteer, false)
+        %label.inline{:for => 'visit_volunteer_false'} Visiting
+        = f.radio_button(:volunteer, true)
+        %label.inline{:for => 'visit_volunteer_true'} Volunteering
+      %li
+        -fields_for :note do |note|
+          =note.text_area :text, :style => 'display:none;'
+        =link_to_function "Add Note", "Element.show('note_text');Element.hide('add_note_link')", :id => 'add_note_link'
+      %li
+        =f.submit "Sign In"
+  :javascript
+    Event.observe(window, 'load', function() {
+      $('visit_submit').focus();
+    });
 %div.section
-  div.column.left.visits!
+  %div.column.left#visits
     %h2 Recent Visits
     =link_to 'Add a Visit', new_visit_path(:person_id => @person), :class => 'add_link'
     -visits = @person.visits.paginate(:size => 5)
     -if visits.empty?
-      %p.list_status 
-        -'No past visits. '
+      %p.list_status No past visits.
     -else
       %ul
         -for visit in visits
           %li{:class => cycle('odd','even', :name => 'visits')}
-            %span.what visit.volunteer? ? 'Volunteered' : 'Visited'
-            %span.when{#{time_ago_in_words(visit.datetime)} ago", :title => "#{datetime_long(visit.datetime)}}
+            %span.what= visit.volunteer? ? 'Volunteered' : 'Visited'
+            %span.when{:title => datetime_long(visit.datetime)}= "#{time_ago_in_words(visit.datetime)} ago"
             -if visit.note
-              %span.note { note_text(visit.note) }
-      %p { link_to "See All #
-        -visits.size} Visits with Details", visits_path(:organization_key => @organization.key, :person_id => @person)
-  div.column.services!
+              %span.note= note_text(visit.note)
+      %p
+        =link_to "See All #{visits.size} Visits with Details", visits_path(:organization_key => @organization.key, :person_id => @person)
+  %div.column.services!
     %h2 Current Services
     =link_to 'Add A Service', new_service_path(:person_id => @person), :class => 'add_link'
     -services = @person.services.paginate(:size => 5)
     -if services.empty?
-      %p.list_status 
-        -'No past services.'
+      %p.list_status No past services.
     -else
       %ul
         -for service in services
           %li{:class => cycle('odd','even', :name => 'services')}
-            %span.what #{service.service_type.name}
-            %span.when "#{service.end_date >= Date.today ? 'Ends' : 'Ended'} #{date_short(service.end_date)}" #todo: handle membership, EAB, class differently
+            %span.what= service.service_type.name
+            %span.when= "#{service.end_date >= Date.today ? 'Ends' : 'Ended'} #{date_short(service.end_date)}" #todo: handle membership, EAB, class differently
             -if service.note
-              %span.note { note_text(service.note) }
-      %p { link_to "See All #
-        -services.size} Services with Details", services_path(:organization_key => @organization.key, :person_id => @person)
-div.section.notes!
+              %span.note= note_text(service.note)
+      %p
+        =link_to "See All #{services.size} Services with Details", services_path(:organization_key => @organization.key, :person_id => @person)
+%div.section.notes!
   %h2 Recent Notes
   =link_to 'Add A Note', new_note_path(:person_id => @person), :class => 'add_link'
   -notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
   -if notes.empty?
-    %p.list_status 
-      -'No past notes.'
+    %p.list_status No past notes.
   -else
     %ul
       -for note in notes
         %li{:class => cycle('odd','even', :name => notes)}
-          %span.what { "#{user_link(note.created_by)} #
-            -time_ago_in_words(note.created_at)} ago said:"
-          %span.note 
-            -note_text(note)
-    %p { link_to "See All #
-      -notes_count} Notes.", notes_path(:organization_key => @organization.key, :person_id => @person)
+          %span.what= "#{user_link(note.created_by)} #{time_ago_in_words(note.created_at)} ago said:"
+          %span.note= note_text(note)
+    %p
+      =link_to "See All #{notes_count} Notes.", notes_path(:organization_key => @organization.key, :person_id => @person)
 
 -# Original:
 
