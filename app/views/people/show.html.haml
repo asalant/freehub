@@ -1,4 +1,5 @@
 %h1= @person.full_name
+
 %ul#summary
   %li.person_type
     =@person.person_type
@@ -14,6 +15,7 @@
   %li= @person.email
   %li= @person.postal_code
   %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
+
 %div#sign_in
   %h2 Sign #{@person.first_name} In
   -form_for Visit.new(:volunteer => @person.staff?), :url => visits_path(:person_id => @person.id) do |f|
@@ -34,6 +36,7 @@
     Event.observe(window, 'load', function() {
       $('visit_submit').focus();
     });
+
 %div.section
   %div.column.left#visits
     %h2 Recent Visits
@@ -67,6 +70,7 @@
               %span.note= note_text(service.note)
       %p
         =link_to "See All #{services.size} Services with Details", services_path(:organization_key => @organization.key, :person_id => @person)
+
 %div.section.notes!
   %h2 Recent Notes
   =link_to 'Add A Note', new_note_path(:person_id => @person), :class => 'add_link'
@@ -81,100 +85,3 @@
           %span.note= note_text(note)
     %p
       =link_to "See All #{notes_count} Notes.", notes_path(:organization_key => @organization.key, :person_id => @person)
-
--# Original:
-
--#   0: h1 @person.full_name
--#   2:   ul.summary! do
--#   3:     li.person_type 
--#   4:       @person.person_type
--#   5:     if !@person.membership
--#   6:       li "Not a member"
--#   7:       li 
--#   8:         link_to 'Create Membership', new_service_path(:person_id => @person)
--#   9:     elsif @person.membership.current?
--#  10:       li.current "Membership expires #{date_short @person.membership.end_date}"
--#  11:       li 
--#  12:         link_to 'Renew', new_service_path(:person_id => @person)
--#  13:     else
--#  14:       li.expired "Membership expired #{date_short @person.membership.end_date}"
--#  15:       li 
--#  16:         link_to 'Renew', new_service_path(:person_id => @person)
--#  18:     li @person.email
--#  19:     li @person.postal_code
--#  20:     li { link_to "Edit #
--#  21:       @person.first_name}", edit_person_path(:id => @person)
--#  24:   div.sign_in! do
--#  25:     h2 "Sign #{@person.first_name} In"
--#  27:     form_for Visit.new(:volunteer => @person.staff?), :url => visits_path(:person_id => @person.id) do |f|
--#  28:       hidden_field_tag :destination, today_visits_path
--#  29:       ul do
--#  30:         li do
--#  31:           text f.radio_button(:volunteer, false)
--#  32:           label.inline 'Visiting', :for => 'visit_volunteer_false'
--#  34:           text f.radio_button(:volunteer, true)
--#  35:           label.inline 'Volunteering', :for => 'visit_volunteer_true'
--#  37:         li do
--#  38:           fields_for :note do |note|
--#  39:             note.text_area :text, :style => 'display:none;'
--#  41:           link_to_function "Add Note", "Element.show('note_text');Element.hide('add_note_link')", :id => 'add_note_link'
--#  43:         li 
--#  44:           f.submit "Sign In"
--#  47:     script_src  = <<END
--#  48: Event.observe(window, 'load', function() {
--#  49:   $('visit_submit').focus();
--#  50: });
--#  51: END
--#  52:     script script_src, :type => 'text/javascript'
--#  55: div.section do
--#  56:   div.column.left.visits! do
--#  58:     h2 'Recent Visits'
--#  59:     link_to 'Add a Visit', new_visit_path(:person_id => @person), :class => 'add_link'
--#  61:     visits = @person.visits.paginate(:size => 5)
--#  62:     if visits.empty?
--#  63:       p.list_status 
--#  64:         'No past visits. '
--#  65:     else
--#  66:       ul do
--#  67:         for visit in visits
--#  68:           li :class => cycle('odd','even', :name => 'visits') do
--#  69:             span.what visit.volunteer? ? 'Volunteered' : 'Visited'
--#  70:             span.when "#{time_ago_in_words(visit.datetime)} ago", :title => "#{datetime_long(visit.datetime)}"
--#  71:             span.note { note_text(visit.note) } if visit.note
--#  71:             span.note { note_text(visit.note) } if visit.note
--#  75:       p { link_to "See All #
--#  76:         visits.size} Visits with Details", visits_path(:organization_key => @organization.key, :person_id => @person)
--#  80:   div.column.services! do
--#  81:     h2 "Current Services"
--#  82:     link_to 'Add A Service', new_service_path(:person_id => @person), :class => 'add_link'
--#  84:     services = @person.services.paginate(:size => 5)
--#  85:     if services.empty?
--#  86:       p.list_status 
--#  87:         'No past services.'
--#  88:     else
--#  89:       ul do
--#  90:         for service in services do
--#  91:           li :class => cycle('odd','even', :name => 'services') do
--#  92:             span.what "#{service.service_type.name}"
--#  93:             span.when "#{service.end_date >= Date.today ? 'Ends' : 'Ended'} #{date_short(service.end_date)}" #todo: handle membership, EAB, class differently
--#  94:             span.note { note_text(service.note) } if service.note
--#  94:             span.note { note_text(service.note) } if service.note
--#  98:       p { link_to "See All #
--#  99:         services.size} Services with Details", services_path(:organization_key => @organization.key, :person_id => @person)
--# 104: div.section.notes! do
--# 105:   h2 'Recent Notes'
--# 106:   link_to 'Add A Note', new_note_path(:person_id => @person), :class => 'add_link'
--# 108:   notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
--# 109:   if notes.empty?
--# 110:     p.list_status 
--# 111:       'No past notes.'
--# 112:   else
--# 113:     ul do
--# 114:       for note in notes
--# 115:         li :class => cycle('odd','even', :name => notes) do
--# 116:           span.what { "#{user_link(note.created_by)} #
--# 117:             time_ago_in_words(note.created_at)} ago said:"
--# 118:           span.note 
--# 119:             note_text(note)
--# 123:     p { link_to "See All #
--# 124:       notes_count} Notes.", notes_path(:organization_key => @organization.key, :person_id => @person)

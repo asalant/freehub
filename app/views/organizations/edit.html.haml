@@ -1,6 +1,5 @@
-%h1
-  =link_to @organization.name, @organization
-  = " : Edit"
+%h1 #{link_to @organization.name, @organization} : Edit
+
 %div.column.left
   =error_messages_for :organization
   -form_for @organization do |f|
