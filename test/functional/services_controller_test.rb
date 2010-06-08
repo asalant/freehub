@@ -32,6 +32,11 @@ class ServicesControllerTest < Test::Unit::TestCase
   def test_should_get_new
     get :new, :organization_key => 'sfbk', :person_id => people(:mary)
     assert_response :success
+
+    assert_select 'form' do
+      assert_select 'input', 7
+      assert_select 'textarea', 1
+    end
   end
 
   def test_should_create_service

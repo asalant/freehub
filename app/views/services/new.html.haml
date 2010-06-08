@@ -1,11 +1,12 @@
 %h1
   =link_to @person.full_name, person_path(:id => @person)
-  = ' : '
+  = " : "
   =link_to 'Services', services_path(:person_id => @person)
-  = ' : New'
+  = " : New"
+
 -form_for @service do |f|
   =error_messages_for :service
-  -service_form_fields(f)
+  =render :partial => 'services/form', :object => f
 
 -# Original:
 

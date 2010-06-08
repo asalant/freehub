@@ -1,0 +1,22 @@
+%ul
+  =labeled_input 'Service type', :for => :service_type_id do
+    -capture do
+      -@service_types = ServiceType.find_all.map {|type| [type.name, type.id] }
+      =form.select(:service_type_id, @service_types)
+  =labeled_input 'Start date', :for => :start_date do
+    -capture do
+      =calendar_date_select_tag "service[start_date]", @service[:start_date], :year_range => 5.years.ago..1.years.from_now
+  =labeled_input 'End date', :for => :end_date do
+    -capture do
+      =calendar_date_select_tag "service[end_date]", @service[:end_date], :year_range => 4.years.ago..2.years.from_now
+  %li
+    =form.check_box(:paid, :class => 'checkbox')
+    %label.choice{:for => 'service_paid'} Paid
+    =form.check_box(:volunteered, :class => 'checkbox')
+    %label.choice{:for => 'service_volunteered'} Volunteered
+  -fields_for :note, @service.note do |note|
+    =labeled_input 'Note', :for => :visit_note do
+      -capture do
+        =note.text_area :text, :rows => 6
+  %li 
+    =form.submit @service.new_record? ? "Create" : "Update"
