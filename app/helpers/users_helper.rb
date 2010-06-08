@@ -23,23 +23,4 @@ module UsersHelper
     link_to(user.login, user_path(user)) if user
   end
 
-  def user_form_fields(form)
-    markaby do
-      labeled_input 'Full Name', :for => :name do
-        form.text_field :name
-      end
-      labeled_input 'Email', :for => :email do
-        form.text_field :email
-      end
-      labeled_input 'Login', :for => :login do
-        form.text_field :login
-      end
-      labeled_input 'Password', :for => :password do
-        form.password_field :password
-      end
-      labeled_input 'Confirm Password', :for => :password_confirmation do
-        form.password_field :password_confirmation
-      end
-    end
-  end
 end
