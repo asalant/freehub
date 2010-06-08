@@ -30,7 +30,7 @@
             %span.log_in 
               =link_to 'Log In', new_session_path
         -if flash[:notice]
-          %span#notice =flash[:notice]
+          %span#notice= flash[:notice]
       %div#application_nav
         %ul.tabs
           -if @organization && !@organization.new_record?
