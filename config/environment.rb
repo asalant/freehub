@@ -95,5 +95,3 @@ require 'has_finder_extensions'
 require 'activerecord_extensions'
 require 'gchart'
 require 'hoptoad_notifier'
-
-gem 'haml'

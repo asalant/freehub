@@ -31,9 +31,7 @@ module ApplicationHelper
   end
 
   def tab_item(label, path)
-    markaby do
-      li(:class => request.path == path ? 'selected' : '') { link_to label, path }
-    end
+    "<li class='#{request.path == path ? 'selected' : ''}'><a href='#{path}'>#{label}</a></li>"
   end
 
   def today_visits_path(params={})

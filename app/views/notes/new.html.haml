@@ -3,13 +3,14 @@
   = ' : '
   =link_to 'Notes', visits_path(:person_id => @person)
   = ' : New'
--error_messages_for :note
+=error_messages_for :note
 -form_for @note do |f|
   %ul
-    labeled_input 'Text', :for => :text
-      -f.text_area :text, :rows => 6
+    =labeled_input 'Text', :for => :text do
+      -capture do
+        =f.text_area :text, :rows => 6
     %li 
-      -f.submit "Create"
+      =f.submit "Create"
 
 -# Original:
 

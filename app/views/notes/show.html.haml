@@ -3,9 +3,9 @@
   = ' : '
   =link_to 'Notes', notes_path(:person_id => @person)
   = ' : Detail'
-%ul
-  -labeled_value 'Notable', "#{@note.notable_type} (#{@note.notable_id})"
-  -labeled_value 'Text', note_text(@note)
+%ul.note
+  =labeled_value 'Notable', "#{@note.notable_type} (#{@note.notable_id})"
+  =labeled_value 'Text', note_text(@note)
   -userstamp_labeled_values @note
 =link_to 'Edit', edit_note_path(:id => @note)
 

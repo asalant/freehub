@@ -37,6 +37,13 @@ class NotesControllerTest < Test::Unit::TestCase
   def test_should_show_note
     get :show, :organization_key => 'sfbk', :person_id => people(:mary), :id => notes(:mary_visit_1)
     assert_response :success
+
+    assert_select 'body ul.note' do
+      assert_select 'li:nth-child(1)' do
+        assert_select 'div.label', 'Notable'
+        assert_select 'div.value', /Visit/
+      end
+    end
   end
 
   def test_should_get_edit

@@ -20,38 +20,37 @@
       %div#header
         %div#user_status
           -if logged_in?
-            %span.greeting { "Hello #
-              =link_to b(current_user.login), edit_user_path(current_user)}"
-            %span.log_out 
+            %span.greeting
+              Hello
+              =link_to edit_user_path(current_user) do
+                %b= current_user.login
+            %span.log_out
               =link_to 'Log Out', session_path, :method => :delete
           -else
             %span.log_in 
               =link_to 'Log In', new_session_path
         -if flash[:notice]
-          %span#notice flash[:notice]
+          %span#notice =flash[:notice]
       %div#application_nav
         %ul.tabs
           -if @organization && !@organization.new_record?
-            -tab_item('Home', organization_path(@organization))
-            -tab_item('Visits', today_visits_path(:organization_key => @organization.key))
-            -tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
+            =tab_item('Home', organization_path(@organization))
+            =tab_item('Visits', today_visits_path(:organization_key => @organization.key))
+            =tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
             -if permit? "admin or (manager of :organization)"
-              -tab_item('Settings', edit_organization_path(@organization))
+              =tab_item('Settings', edit_organization_path(@organization))
           -else
-            -tab_item('Home', root_path)
+            =tab_item('Home', root_path)
             -if logged_in? && !current_user.organization.nil?
-              -tab_item(current_user.organization.name, organization_path(current_user.organization))
+              =tab_item(current_user.organization.name, organization_path(current_user.organization))
       %div#application_header
         -if @organization && !@organization.new_record?
-          %h2 
-            =link_to organization.name, @organization
+          %h2 =link_to organization.name, @organization
         -else
-          %h2 { text "Welcome to #
-            =link_to 'Freehub', root_path}"
-      div.content.application_body!
-        -self << content_for_layout
-        -div(:style => 'clear:both;') 
-          -
+          %h2 Welcome to #{link_to 'Freehub', root_path}
+      %div.content#application_body
+        =yield
+        %div{:style => 'clear:both;'}
       %div#application_footer
         = "Times shown are #{TzTime.zone.name} timezone."
     %div#footer
@@ -59,26 +58,21 @@
         %div#logo 
           =link_to 'Freehub', root_path
         %ul
-          %li { "Get #
-            =link_to "help or send feedback", "http://wiki.github.com/asalant/freehub/freehub-support"}"
-          %li { "Check the #
-            =link_to 'project documentation', 'http://wiki.github.com/asalant/freehub/'}"
+          %li Get #{link_to "help or send feedback", "http://wiki.github.com/asalant/freehub/freehub-support"}
+          %li Check the #{link_to 'project documentation', 'http://wiki.github.com/asalant/freehub/'}
         %ul
-          %li { "Thanks to #
-            =link_to 'EngineYard', 'http://www.engineyard.com'} for hosting"
+          %li Thanks to #{link_to 'EngineYard', 'http://www.engineyard.com'} for hosting
         %div.credit 
           -image_tag("ey-logo.gif")
-    %script{:type => "text/javascript"}
-        = <<END
-          %var _gaq = _gaq || [];
-          -_gaq.push(['_setAccount', 'UA-16200053-1']);
-          -_gaq.push(['_trackPageview']);
-          -(function() {
-            %var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            -ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            %var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          -})();
--END
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-16200053-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
 -# Original:
 
