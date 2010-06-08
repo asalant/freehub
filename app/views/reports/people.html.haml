@@ -2,22 +2,24 @@
   =link_to 'Reports', reports_path
   = ' : People'
 %div.column
-  -form_tag report_path(:action => 'people'), :method => :get
+  -form_tag report_path(:action => 'people'), :method => :get do
     %ul
-      labeled_input 'Matching name', :for => 'report[matching_name]'
-        %div 
-          =text_field_tag 'report[matching_name]', @report[:matching_name]
-        %p.instruct Match 3 or more letters in a person's first and last name.
-      labeled_input 'Date Range', :for => 'date_from'
-        %span
-          -calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
-          %label{Created After', :for => 'report[after]}
-        %span
-          -calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
-          %label{Created Before', :for => 'report[before]}
-        %p.instruct Leave one or both blank to search without date constraints.
+      =labeled_input 'Matching name', :for => 'report[matching_name]' do
+        -capture do
+          %div= text_field_tag 'report[matching_name]', @report[:matching_name]
+          %p.instruct Match 3 or more letters in a person's first and last name.
+      =labeled_input 'Date Range', :for => 'date_from' do
+        -capture do
+          %span
+            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+            %label{:for => 'report[after]'} Created After
+          %span
+            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+            %label{:for => 'report[before]'} Created Before
+          %p.instruct Leave one or both blank to search without date constraints.
       %li 
         =submit_tag "Update"
+
 %div.section
   -if @people.empty?
     %div.list_status No people for date range.
@@ -25,119 +27,36 @@
     %div.list_status #{@people.to_a.size} of #{@people.size} people shown.
     %table
       %tr
-      %th 
-        -'Name'
-      %th 
-        -'Staff'
-      %th 
-        -'Email'
-      %th 
-        -'Phone'
-      %th 
-        -'City'
-      %th 
-        -'State'
-      %th 
-        -'Postal code'
-      %th 
-        -'Created'
+      %th Name
+      %th Staff
+      %th Email
+      %th Phone
+      %th City
+      %th State
+      %th Postal code
+      %th Created
       -for person in @people
         %tr{:class => cycle('odd','even')}
-          -td(:style => 'width:200px;') 
+          %td{:style => 'width:200px;'}
             =link_to(person.full_name, person_path(:id => person))
+          %td
+            = person.staff
+          %td{:style => 'width:200px;'}
+            = person.email
           %td 
-            -person.staff
-          -td(:style => 'width:200px;') 
-            -person.email
+            = person.phone
           %td 
-            -person.phone
+            = person.city
           %td 
-            -person.city
+            = person.state
           %td 
-            -person.state
+            = person.postal_code
           %td 
-            -person.postal_code
-          %td 
-            -datetime_short(person.created_at)
+            = datetime_short(person.created_at)
       %tr.list_controls
         %td{:colspan => 8}
-          %div.paginating_links
-            = 'More: '
-            -paginating_links(@people, :params => { :report => params[:report] } )
           -if @people.next_page? || @people.previous_page?
-            -end
+            %div.paginating_links
+              More: #{paginating_links(@people, :params => { :report => params[:report] } )}
           %div.export
             =link_to 'Export all', report_path(:action => 'people', :params => { :report => params[:report], :format => 'csv' })
-
--# Original:
-
--#   0: h1 do
--#   1:   link_to 'Reports', reports_path
--#   2:   text ' : People'
--#   5: div.column do
--#   6:   form_tag report_path(:action => 'people'), :method => :get do
--#   7:     ul do
--#   8:       labeled_input 'Matching name', :for => 'report[matching_name]' do
--#   9:         div 
--#  10:           text_field_tag 'report[matching_name]', @report[:matching_name]
--#  11:         p.instruct  "Match 3 or more letters in a person's first and last name."
--#  13:       labeled_input 'Date Range', :for => 'date_from' do
--#  14:         span do
--#  15:           calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
--#  16:           label 'Created After', :for => 'report[after]'
--#  18:         span do
--#  19:           calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
--#  20:           label 'Created Before', :for => 'report[before]'
--#  22:         p.instruct "Leave one or both blank to search without date constraints."
--#  24:       li 
--#  25:         submit_tag "Update"
--#  30: div.section do
--#  31:   if @people.empty?
--#  32:     div.list_status 'No people for date range.'
--#  33:   else
--#  34:     div.list_status "#{@people.to_a.size} of #{@people.size} people shown."
--#  35:     table do
--#  36:       tr do
--#  37:       th 
--#  38:         'Name'
--#  39:       th 
--#  40:         'Staff'
--#  41:       th 
--#  42:         'Email'
--#  43:       th 
--#  44:         'Phone'
--#  45:       th 
--#  46:         'City'
--#  47:       th 
--#  48:         'State'
--#  49:       th 
--#  50:         'Postal code'
--#  51:       th 
--#  52:         'Created'
--#  55:       for person in @people
--#  56:         tr :class => cycle('odd','even') do
--#  57:           td(:style => 'width:200px;') 
--#  58:             link_to(person.full_name, person_path(:id => person))
--#  59:           td 
--#  60:             person.staff
--#  61:           td(:style => 'width:200px;') 
--#  62:             person.email
--#  63:           td 
--#  64:             person.phone
--#  65:           td 
--#  66:             person.city
--#  67:           td 
--#  68:             person.state
--#  69:           td 
--#  70:             person.postal_code
--#  71:           td 
--#  72:             datetime_short(person.created_at)
--#  75:       tr.list_controls do
--#  76:         td :colspan => 8 do
--#  77:           div.paginating_links do
--#  78:             text 'More: '
--#  79:             paginating_links(@people, :params => { :report => params[:report] } )
--#  80:           end if @people.next_page? || @people.previous_page?
--#  80:           end if @people.next_page? || @people.previous_page?
--#  82:           div.export do
--#  83:             link_to 'Export all', report_path(:action => 'people', :params => { :report => params[:report], :format => 'csv' })

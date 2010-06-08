@@ -138,6 +138,7 @@ class ReportsControllerTest < Test::Unit::TestCase
             :criteria => {  :from => '2006-01-01', :to => '2008-01-01' }
     assert_response :success
     assert assigns(:report)
+    assert assigns(:gchart)
   end
 
 end

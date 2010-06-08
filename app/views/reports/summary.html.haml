@@ -1,76 +1,60 @@
 %h1
   =link_to 'Reports', reports_path
   = ' : Summary'
+
 %div.column
-  -form_tag report_path(:action => 'summary'), :method => :get
+  -form_tag report_path(:action => 'summary'), :method => :get do
     %ul
-      labeled_input 'Date Range', :for => 'criteria[from]'
-        %span
-          -calendar_date_select_tag "criteria[from]", @report.criteria[:from], :year_range => 3.years.ago..1.years.from_now
-          %label{Date From', :for => 'criteria[from]}
-        %span
-          -calendar_date_select_tag "criteria[to]", @report.criteria[:to], :year_range => 3.years.ago..1.years.from_now
-          %label{Date To', :for => 'criteria[to]}
-        %p.instruct Leave one or both blank to search without date constraints.
+      =labeled_input 'Date Range', :for => 'criteria[from]' do
+        -capture do
+          %span
+            =calendar_date_select_tag "criteria[from]", @report.criteria[:from], :year_range => 3.years.ago..1.years.from_now
+            %label{:for => 'criteria[from]'} Date From
+          %span
+            =calendar_date_select_tag "criteria[to]", @report.criteria[:to], :year_range => 3.years.ago..1.years.from_now
+            %label{:for => 'criteria[to]'} Date To
+          %p.instruct Leave one or both blank to search without date constraints.
       %li 
         =submit_tag "Update"
+
 -if @report.days.empty?
   %div.list_status No visits for date range.
 -else
   %div.section
     %h2 Visits by Week
-    = Gchart.line( :size => '840x120',
-        -:data => [ @report.weeks.collect {|week| week.total_day.total }, @report.weeks.collect {|week| week.total_day.staff },
-                   -@report.weeks.collect {|week| week.total_day.volunteer }, @report.weeks.collect {|week| week.total_day.member },
-                   -@report.weeks.collect {|week| week.total_day.patron } ],
-        -:line_colors => ['74A3FB','F9B639','A3FB74','FB8974','CC74FB' ],
-        -:legend => ['Total','Staff','Volunteer','Member','Patron'],
-        -:axis_with_labels => 'x', :axis_labels => [ [@report.weeks.first, @report.weeks.last].collect {|week| date_short(week.start) }],
-        -:format => 'img_tag' )
+    = @gchart
     %table
       %tr
-        %th 
-          -'Starting'
-        %th 
-          -'Staff'
-        %th 
-          -'Volunteers'
-        %th 
-          -'Members'
-        %th 
-          -'Patrons'
-        %th 
-          -'Total'
+        %th Starting
+        %th Staff
+        %th Volunteers
+        %th Members
+        %th Patrons
+        %th Total
       -for week in @report.weeks
         %tr{:class => cycle('odd','even')}
           %td 
-            -date_short(week.start)
+            = date_short(week.start)
           %td 
-            -week.total_day.staff
+            = week.total_day.staff
           %td 
-            -week.total_day.volunteer
+            = week.total_day.volunteer
           %td 
-            -week.total_day.member
+            = week.total_day.member
           %td 
-            -week.total_day.patron
+            = week.total_day.patron
           %td 
-            -week.total_day.total
+            = week.total_day.total
   %div.section
     %h2 Visits by Day
     %table
       %tr
-        %th 
-          -'Day'
-        %th 
-          -'Staff'
-        %th 
-          -'Volunteers'
-        %th 
-          -'Members'
-        %th 
-          -'Patrons'
-        %th 
-          -'Total'
+        %th Day
+        %th Staff
+        %th Volunteers
+        %th Members
+        %th Patrons
+        %th Total
       -for day in @report.days
         -if day.total == 0
           -next
@@ -78,104 +62,12 @@
           %td 
             =link_to date_long(day.date), day_visits_path(day.date)
           %td 
-            -day.staff
+            = day.staff
           %td 
-            -day.volunteer
+            = day.volunteer
           %td 
-            -day.member
+            = day.member
           %td 
-            -day.patron
+            = day.patron
           %td 
-            -day.total
-
--# Original:
-
--#   0: h1 do
--#   1:   link_to 'Reports', reports_path
--#   2:   text ' : Summary'
--#   5: div.column do
--#   6:   form_tag report_path(:action => 'summary'), :method => :get do
--#   7:     ul do
--#   8:       labeled_input 'Date Range', :for => 'criteria[from]' do
--#   9:         span do
--#  10:           calendar_date_select_tag "criteria[from]", @report.criteria[:from], :year_range => 3.years.ago..1.years.from_now
--#  11:           label 'Date From', :for => 'criteria[from]'
--#  13:         span do
--#  14:           calendar_date_select_tag "criteria[to]", @report.criteria[:to], :year_range => 3.years.ago..1.years.from_now
--#  15:           label 'Date To', :for => 'criteria[to]'
--#  17:         p.instruct "Leave one or both blank to search without date constraints."
--#  19:       li 
--#  20:         submit_tag "Update"
--#  25: if @report.days.empty?
--#  26:   div.list_status 'No visits for date range.'
--#  27: else
--#  28:   div.section do
--#  29:     h2 "Visits by Week"
--#  31:     text Gchart.line( :size => '840x120',
--#  32:         :data => [ @report.weeks.collect {|week| week.total_day.total }, @report.weeks.collect {|week| week.total_day.staff },
--#  33:                    @report.weeks.collect {|week| week.total_day.volunteer }, @report.weeks.collect {|week| week.total_day.member },
--#  34:                    @report.weeks.collect {|week| week.total_day.patron } ],
--#  35:         :line_colors => ['74A3FB','F9B639','A3FB74','FB8974','CC74FB' ],
--#  36:         :legend => ['Total','Staff','Volunteer','Member','Patron'],
--#  37:         :axis_with_labels => 'x', :axis_labels => [ [@report.weeks.first, @report.weeks.last].collect {|week| date_short(week.start) }],
--#  38:         :format => 'img_tag' )
--#  40:     table do
--#  41:       tr do
--#  42:         th 
--#  43:           'Starting'
--#  44:         th 
--#  45:           'Staff'
--#  46:         th 
--#  47:           'Volunteers'
--#  48:         th 
--#  49:           'Members'
--#  50:         th 
--#  51:           'Patrons'
--#  52:         th 
--#  53:           'Total'
--#  56:       for week in @report.weeks
--#  57:         tr :class => cycle('odd','even') do
--#  58:           td 
--#  59:             date_short(week.start)
--#  60:           td 
--#  61:             week.total_day.staff
--#  62:           td 
--#  63:             week.total_day.volunteer
--#  64:           td 
--#  65:             week.total_day.member
--#  66:           td 
--#  67:             week.total_day.patron
--#  68:           td 
--#  69:             week.total_day.total
--#  75:   div.section do
--#  76:     h2 "Visits by Day"
--#  77:     table do
--#  78:       tr do
--#  79:         th 
--#  80:           'Day'
--#  81:         th 
--#  82:           'Staff'
--#  83:         th 
--#  84:           'Volunteers'
--#  85:         th 
--#  86:           'Members'
--#  87:         th 
--#  88:           'Patrons'
--#  89:         th 
--#  90:           'Total'
--#  93:       for day in @report.days
--#  94:         next if day.total == 0
--#  94:         next if day.total == 0
--#  95:         tr :class => cycle('odd','even') do
--#  96:           td 
--#  97:             link_to date_long(day.date), day_visits_path(day.date)
--#  98:           td 
--#  99:             day.staff
--# 100:           td 
--# 101:             day.volunteer
--# 102:           td 
--# 103:             day.member
--# 104:           td 
--# 105:             day.patron
--# 106:           td 
--# 107:             day.total
+            = day.total
