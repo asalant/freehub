@@ -17,27 +17,4 @@ module VisitsHelper
       end
     end
   end
-
-  def sign_in_search_panel
-    markaby do
-      div.section.sign_in! do
-        h2 "Sign a Person In"
-        div.form do
-          label.desc 'Name', :style => 'float:left;'
-          image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'
-          text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" },
-                  :url => auto_complete_for_person_full_name_people_path(:organization_key => @organization.key) ,
-                  :method => :get, :min_chars => 2,
-                  :indicator => 'search_status',
-                  :after_update_element => <<-END
-          function(element, value) {
-            window.location = $(value).readAttribute('url');
-          }
-          END
-        p { "Start typing to find a person or #{link_to "add a new person", new_person_path(:organization_key => @organization.key)}." }
-        end
-        script "$('person_full_name').focus();", :type => 'text/javascript'
-      end
-    end
-  end
 end

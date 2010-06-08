@@ -3,15 +3,5 @@
     %p.warn
       Your account is pending activation. We've sent an activation email to #{current_user.email}.
       Check that email account and your spam filter for the activation email.
--sign_in_search_panel
 
--# Original:
-
--#   0: div.section do
--#   1:   p.warn do <<-END
--#   2: Your account is pending activation. We've sent an activation email to #{current_user.email}.
--#   3: Check that email account and your spam filter for the activation email.
--#   4: END
--#   6: end if current_user.activated_at.nil?
--#   6: end if current_user.activated_at.nil?
--#   8: sign_in_search_panel
+= render :partial => 'visits/person_search'

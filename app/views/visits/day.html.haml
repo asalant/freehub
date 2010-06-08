@@ -1,5 +1,5 @@
 -if @day == Date.today
-  -sign_in_search_panel
+  = render :partial => 'visits/person_search'
 div.section.visits!
   -if @day == Date.today
     %h2 In the Shop Today!
