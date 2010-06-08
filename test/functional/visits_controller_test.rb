@@ -1,16 +1,9 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'visits_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class VisitsController; def rescue_action(e) raise e end; end
-
-class VisitsControllerTest < Test::Unit::TestCase
-  fixtures :organizations, :people, :visits, :notes
+class VisitsControllerTest < ActionController::TestCase
 
   def setup
-    @controller = VisitsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
+    super
     login_as 'greeter'
   end
 

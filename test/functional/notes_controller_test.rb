@@ -1,16 +1,9 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'notes_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class NotesController; def rescue_action(e) raise e end; end
-
-class NotesControllerTest < Test::Unit::TestCase
-  fixtures :visits, :notes
+class NotesControllerTest < ActionController::TestCase
 
   def setup
-    @controller = NotesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
+    super
     login_as 'sfbk'
   end
 

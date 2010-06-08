@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_timezone
-    TzTime.zone =  @organization ? TimeZone[@organization.timezone] : TimeZone[ENV['TIMEZONE_DEFAULT']]
+    Time.zone =  @organization ? @organization.timezone : ENV['TIMEZONE_DEFAULT']
   end
 
   # year, month, day

@@ -1,16 +1,9 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'reports_controller'
+require 'test_helper'
 
-# Re-raise errors caught by the controller.
-class ReportsController; def rescue_action(e) raise e end; end
-
-class ReportsControllerTest < Test::Unit::TestCase
-  fixtures :organizations, :people, :visits
+class ReportsControllerTest < ActionController::TestCase
 
   def setup
-    @controller = ReportsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
+    super
     login_as 'greeter'
   end
 
@@ -122,7 +115,7 @@ class ReportsControllerTest < Test::Unit::TestCase
     assert_not_nil assigns(:people)
     assert_equal 2, assigns(:people).size
 
-    TzTime.zone = TimeZone[ENV['TIMEZONE_DEFAULT']]
+    Time.zone = ENV['TIMEZONE_DEFAULT']
 
     output = StringIO.new
     output.binmode

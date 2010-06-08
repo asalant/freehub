@@ -2,7 +2,7 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
 
   include AuthenticatedTestHelper
   include ApplicationHelper
@@ -40,5 +40,5 @@ class Test::Unit::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  TzTime.zone = TimeZone[ENV['TIMEZONE_DEFAULT']]
+  Time.zone = ENV['TIMEZONE_DEFAULT']
 end

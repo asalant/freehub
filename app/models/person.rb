@@ -25,7 +25,6 @@
 #
 
 class Person < ActiveRecord::Base
-  tz_time_attributes :created_at, :updated_at
   
   belongs_to :organization
   has_many :visits, :include => :note, :dependent => :destroy, :order => "datetime DESC"
@@ -64,11 +63,11 @@ class Person < ActiveRecord::Base
   } }
 
   has_finder :after, lambda { |date| {
-      :conditions => [ "people.created_at >= ?", TzTime.at(date) ]
+      :conditions => [ "people.created_at >= ?", Time.at(date) ]
   } }
 
   has_finder :before, lambda { |date| {
-      :conditions => [ "people.created_at < ?", TzTime.at(date) ]
+      :conditions => [ "people.created_at < ?", Time.at(date) ]
   } }
 
   has_finder :matching_name, lambda { |name| {

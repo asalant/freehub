@@ -79,13 +79,13 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   def test_membership_on
-    assert_not_nil people(:mary).services.on(:membership, TzTime.local(2006,4,1))
-    assert_not_nil people(:mary).membership_on(TzTime.local(2006,4,1))
-    assert people(:mary).member_on?(TzTime.local(2006,4,1))
+    assert_not_nil people(:mary).services.on(:membership, Time.zone.local(2006,4,1))
+    assert_not_nil people(:mary).membership_on(Time.zone.local(2006,4,1))
+    assert people(:mary).member_on?(Time.zone.local(2006,4,1))
 
-    assert_nil people(:mary).services.on(:membership, TzTime.local(2000,4,1))
-    assert_nil people(:mary).membership_on(TzTime.local(2000,4,1))
-    assert !people(:mary).member_on?(TzTime.local(2000,4,1))
+    assert_nil people(:mary).services.on(:membership, Time.zone.local(2000,4,1))
+    assert_nil people(:mary).membership_on(Time.zone.local(2000,4,1))
+    assert !people(:mary).member_on?(Time.zone.local(2000,4,1))
   end
 
   def test_csv_header

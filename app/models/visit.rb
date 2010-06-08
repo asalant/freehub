@@ -16,7 +16,6 @@
 #
 
 class Visit < ActiveRecord::Base
-  tz_time_attributes :datetime, :created_at, :updated_at
   
   belongs_to :person
   has_one :note, :as => :notable, :dependent => :destroy
@@ -36,16 +35,16 @@ class Visit < ActiveRecord::Base
   } }
 
   has_finder :after, lambda { |date| {
-      :conditions => [ "visits.datetime >= ?", TzTime.at(date) ]
+      :conditions => [ "visits.datetime >= ?", Time.at(date) ]
   } }
 
   has_finder :before, lambda { |date| {
-      :conditions => [ "visits.datetime < ?", TzTime.at(date) ]
+      :conditions => [ "visits.datetime < ?", Time.at(date) ]
   } }
 
   def initialize(params={})
     super
-    self.datetime ||= TzTime.now
+    self.datetime ||= Time.now
     self.volunteer ||= false
     self.note ||= Note.new
   end

@@ -13,7 +13,6 @@
 #
 
 class Organization < ActiveRecord::Base
-  tz_time_attributes :created_at, :updated_at
   
   has_many :people, :dependent => :destroy
 
@@ -44,7 +43,7 @@ class Organization < ActiveRecord::Base
   end
 
   # Active if a visit within last 30 days
-  def active?(on = TzTime.now)
+  def active?(on = Time.now)
     return false if !self.last_visit
 
     self.last_visit.datetime.to_i > on.ago(30 * 24 * 3600).to_i

@@ -29,9 +29,9 @@ class OrganizationTest < ActiveSupport::TestCase
   end
 
   def test_active?
-    assert organizations(:sfbk).active?(TzTime.parse '2007-02-28')
-    assert !organizations(:sfbk).active?(TzTime.parse '2007-04-01')
-    assert !organizations(:cbi).active?(TzTime.parse '2007-02-02')
+    assert organizations(:sfbk).active?(Time.zone.parse '2007-02-28')
+    assert !organizations(:sfbk).active?(Time.zone.parse '2007-04-01')
+    assert !organizations(:cbi).active?(Time.zone.parse '2007-02-02')
   end
 
   def test_visits_count
