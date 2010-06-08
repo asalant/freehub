@@ -1,0 +1,15 @@
+=labeled_input 'Organization Name', :for => :name do
+  -capture do
+    %div= form.text_field(:name)
+    %p.instruct For example 'San Francisco Bike Kitchen'
+=labeled_input 'Key', :for => :key do
+  -capture do
+    %div= form.text_field(:key)
+    %p.instruct For example 'sfbk', used for URL http://freehub.bikekitchen.org/sfbk
+=labeled_input 'Location', :for => :location do
+  -capture do
+    %div= form.text_field(:location)
+    %p.instruct For example 'San Francisco, CA'
+=labeled_input 'Timezone', :for => :timezone do
+  -capture do
+    =time_zone_select :organization, :timezone

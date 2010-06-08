@@ -1,41 +1,19 @@
 %h1 Register
-div.column.left
+%div.column.left
   %p Sign up for a new Freehub account.
-  %p "After you submit this form you will be able to start using Freehub while your account is pending activation.
-     -You will receive an email shortly with a link to permanently activate your account."
+  %p
+    After you submit this form you will be able to start using Freehub while your account is pending activation.
+    You will receive an email shortly with a link to permanently activate your account.
   -form_for @organization do |f|
-    %div.section
+    %div.section.organization
       %h2 Organization settings
       -error_messages_for :organization
       %ul 
-        -organization_form_fields(f)
-    %div.section
+        = render :partial => 'organizations/form', :object => f
+    %div.section.user
       %h2 Manager account settings
       -error_messages_for :user
       %ul
         -fields_for :user do |user|
-          -user_form_fields(user)
-        %li 
-          -f.submit 'Sign Up'
-
--# Original:
-
--#   0: h1 "Register"
--#   2: div.column.left do
--#   3:   p "Sign up for a new Freehub account."
--#   5:   p "After you submit this form you will be able to start using Freehub while your account is pending activation.
--#   6:      You will receive an email shortly with a link to permanently activate your account."
--#   8:   form_for @organization do |f|
--#  10:     div.section do
--#  11:       h2 'Organization settings'
--#  13:       error_messages_for :organization
--#  14:       ul 
--#  15:         organization_form_fields(f)
--#  18:     div.section do
--#  19:       h2 'Manager account settings'
--#  21:       error_messages_for :user
--#  23:       ul do
--#  24:         fields_for :user do |user|
--#  25:           user_form_fields(user)
--#  27:         li 
--#  28:           f.submit 'Sign Up'
+          = render :partial => 'users/form', :object => user
+          %li= f.submit 'Sign Up'

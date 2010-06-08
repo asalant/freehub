@@ -1,0 +1,28 @@
+=labeled_input 'Full Name', :for => :name do
+  -capture do
+    =form.text_field :name
+=labeled_input 'Email', :for => :email do
+  -capture do
+    =form.text_field :email
+=labeled_input 'Login', :for => :login do
+  -capture do
+    =form.text_field :login
+=labeled_input 'Password', :for => :password do
+  -capture do
+    =form.password_field :password
+=labeled_input 'Confirm Password', :for => :password_confirmation do
+  -capture do
+    =form.password_field :password_confirmation
+
+-# Original:
+
+-#   0: labeled_input 'Full Name', :for => :name do
+-#   1:   form.text_field :name
+-#   3: labeled_input 'Email', :for => :email do
+-#   4:   form.text_field :email
+-#   6: labeled_input 'Login', :for => :login do
+-#   7:   form.text_field :login
+-#   9: labeled_input 'Password', :for => :password do
+-#  10:   form.password_field :password
+-#  12: labeled_input 'Confirm Password', :for => :password_confirmation do
+-#  13:   form.password_field :password_confirmation

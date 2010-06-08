@@ -22,6 +22,11 @@ class OrganizationsControllerTest < Test::Unit::TestCase
   def test_should_get_new
     get :new
     assert_response :success
+    assert_select "form#new_organization" do
+      assert_select '.section.organization input', 3
+      assert_select '.section.organization select', 1
+      assert_select '.section.user input', 6
+    end
   end
 
   def test_should_create_organization
@@ -60,6 +65,9 @@ class OrganizationsControllerTest < Test::Unit::TestCase
     login_as 'sfbk'
     get :edit, :id => organizations(:sfbk)
     assert_response :success
+    assert_select "form" do
+      assert_select 'input', 4
+    end
   end
 
   def test_should_update_organization
