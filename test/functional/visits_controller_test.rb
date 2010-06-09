@@ -46,7 +46,8 @@ class VisitsControllerTest < ActionController::TestCase
       post :create, :organization_key => 'cbi', :person_id => people(:penny), :visit => { }
     end
     assert_equal people(:penny), assigns(:visit).person
-    assert_equal TimeZone["Eastern Time (US & Canada)"].utc_to_local(Time.now.utc).hour, assigns(:visit).datetime.hour
+    assert_equal "Eastern Time (US & Canada)", Time.zone.name
+    assert_equal Time.zone.now.hour, assigns(:visit).datetime.hour
 
     assert_redirected_to visits_path
   end

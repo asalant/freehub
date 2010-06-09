@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 require '<%= controller_file_name %>_controller'
 
 # Re-raise errors caught by the controller.

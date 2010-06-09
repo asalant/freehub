@@ -1,5 +1,5 @@
 require 'test/unit'
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 
 class DomainTest < Test::Unit::TestCase

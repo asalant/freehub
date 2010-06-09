@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 require '<%= file_name %>_mailer'
 
 class <%= class_name %>MailerTest < Test::Unit::TestCase
