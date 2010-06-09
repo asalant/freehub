@@ -15,11 +15,6 @@ class ServiceTest < ActiveSupport::TestCase
     assert_equal 7, Service.for_organization(organizations(:sfbk)).end_after(from).end_before(to).size
   end
 
-  def test_most_recent_for_organization
-    assert_equal 64, Service.for_organization(organizations(:sfbk)).size
-    assert_equal 4, Service.for_organization(organizations(:sfbk)).most_recent.size
-  end
-
   def test_for_service_types
     assert_equal 3, Service.for_service_types('MEMBERSHIP').size
     assert_equal 64, Service.for_service_types(['MEMBERSHIP', 'CLASS']).size

@@ -28,7 +28,6 @@ Rails::Initializer.run do |config|
   config.gem 'hoptoad_notifier'
   config.gem 'googlecharts'
   config.gem 'tzinfo'
-  config.gem 'has_finder'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -59,7 +58,7 @@ Rails::Initializer.run do |config|
   ENV['TIMEZONE_DEFAULT'] = 'Pacific Time (US & Canada)'
 
   config.after_initialize do
-    require 'has_finder_extensions'
+    require 'named_scope_extensions'
     require 'activerecord_extensions'
   end
 

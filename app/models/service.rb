@@ -29,26 +29,21 @@ class Service < ActiveRecord::Base
 
   before_validation :remove_empty_note
 
-  has_finder :for_organization, lambda { |organization| {
+  named_scope :for_organization, lambda { |organization| {
       :conditions => [ "people.organization_id = ?", organization ],
       :include => [ :person, :note ]
   } }
 
-  has_finder :end_after, lambda { |date| {
+  named_scope :end_after, lambda { |date| {
       :conditions => [ "services.end_date > ?", date ]
   } }
 
-  has_finder :end_before, lambda { |date| {
+  named_scope :end_before, lambda { |date| {
       :conditions => [ "services.end_date < ?", date ]
   } }
 
-  has_finder :for_service_types, lambda { |service_types| {
+  named_scope :for_service_types, lambda { |service_types| {
       :conditions => [ "services.service_type_id IN (?)", service_types ]
-  } }
-
-  has_finder :most_recent, lambda { {
-      :group => [ "people.id, services.service_type_id" ],
-      :order => 'services.end_date DESC'
   } }
 
   def initialize(params={})

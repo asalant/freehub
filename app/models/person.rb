@@ -58,19 +58,19 @@ class Person < ActiveRecord::Base
   acts_as_paginated
   chains_finders
 
-  has_finder :for_organization, lambda { |organization| {
+  named_scope :for_organization, lambda { |organization| {
       :conditions => { :organization_id => organization },
   } }
 
-  has_finder :after, lambda { |date| {
+  named_scope :after, lambda { |date| {
       :conditions => [ "people.created_at >= ?", date.to_date.to_time.utc ]
   } }
 
-  has_finder :before, lambda { |date| {
+  named_scope :before, lambda { |date| {
       :conditions => [ "people.created_at < ?", date.to_date.to_time.utc ]
   } }
 
-  has_finder :matching_name, lambda { |name| {
+  named_scope :matching_name, lambda { |name| {
       :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ], 
       :order => "full_name ASC"
   } }

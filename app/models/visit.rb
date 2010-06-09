@@ -28,17 +28,17 @@ class Visit < ActiveRecord::Base
 
   before_save :remove_empty_note, :record_staff_status, :record_member_status
 
-  has_finder :for_organization, lambda { |organization| {
+  named_scope :for_organization, lambda { |organization| {
       :conditions => [ "people.organization_id = ?", organization ],
       :include => [ :person, :note ],
       :order => 'datetime DESC'
   } }
 
-  has_finder :after, lambda { |date| {
+  named_scope :after, lambda { |date| {
       :conditions => [ "visits.datetime >= ?", date.to_date.to_time.utc ]
   } }
 
-  has_finder :before, lambda { |date| {
+  named_scope :before, lambda { |date| {
       :conditions => [ "visits.datetime < ?", date.to_date.to_time.utc ]
   } }
 

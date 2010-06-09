@@ -1,14 +1,10 @@
-module HasFinder
+module NamedScope
   # Provides Model.paginate(options={}) to allow
-  # the paginating_find plugin to be used with the has_finder plugin.
+  # the paginating_find plugin to be used with named_scopes.
   #
   # Usage:
   #   acts_as_paginated
   #   acts_as_paginated :page => 2, size => 10
-  #
-  # Install:
-  #   Save this file as lib/has_finder_extensions.rb and require 'has_finder_extensions'
-  #   in environment.rb.
   module PaginatingFind #:nodoc:
 
     def self.included(mod)
@@ -21,7 +17,7 @@ module HasFinder
         self.paginate_defaults = options
 
         self.class_eval do
-          extend HasFinder::PaginatingFind::SingletonMethods
+          extend NamedScope::PaginatingFind::SingletonMethods
         end
       end
     end
@@ -37,16 +33,12 @@ module HasFinder
   end
 
   # Provides Model.chain_finders(finders={}) to enable dynamic chaining of
-  # HasFinder finders.
+  # named_scope finders.
   #
   # Usage:
   #   chains_finders
   #
   #   Model.chain_finders(:after => Date.today, :belonging_to => User.current_user)
-  #
-  # Install:
-  #   Save this file as lib/has_finder_extensions.rb and require 'has_finder_extensions'
-  #   in environment.rb.
   module ChainsFinders #:nodoc:
 
     def self.included(mod)
@@ -56,7 +48,7 @@ module HasFinder
     module ClassMethods
       def chains_finders(options={})
         self.class_eval do
-          extend HasFinder::ChainsFinders::SingletonMethods
+          extend NamedScope::ChainsFinders::SingletonMethods
         end
       end
     end
@@ -73,5 +65,5 @@ module HasFinder
   end
 end
 
-ActiveRecord::Base.send(:include, HasFinder::PaginatingFind)
-ActiveRecord::Base.send(:include, HasFinder::ChainsFinders)
+ActiveRecord::Base.send(:include, NamedScope::PaginatingFind)
+ActiveRecord::Base.send(:include, NamedScope::ChainsFinders)
