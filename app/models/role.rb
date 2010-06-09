@@ -1,14 +1,13 @@
 # == Schema Information
-# Schema version: 9
 #
 # Table name: roles
 #
-#  id                :integer(11)     not null, primary key
-#  name              :string(40)      
-#  authorizable_type :string(40)      
-#  authorizable_id   :integer(11)     
-#  created_at        :datetime        
-#  updated_at        :datetime        
+#  id                :integer(4)      not null, primary key
+#  name              :string(40)
+#  authorizable_type :string(40)
+#  authorizable_id   :integer(4)
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 # Defines named roles for users that may be applied to
