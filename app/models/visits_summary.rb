@@ -15,8 +15,8 @@ class VisitsSummary
 
   def summarize_days
     date_condition = ""
-    date_condition += "and visits.datetime > '#{criteria[:from].to_time.in_time_zone("UTC").to_s(:db)}' " if criteria[:from]
-    date_condition += "and visits.datetime < '#{criteria[:to].to_time.in_time_zone("UTC").to_s(:db)}' " if criteria[:to]
+    date_condition += "and visits.datetime > '#{criteria[:from].to_date.to_time.to_s(:db)}' " if criteria[:from]
+    date_condition += "and visits.datetime < '#{criteria[:to].to_date.to_time.to_s(:db)}' " if criteria[:to]
     visits_result = ActiveRecord::Base.connection.select_all(<<-END
       select date(convert_tz(visits.datetime,'UTC','#{Time.zone.utc_offset}')) as date, visits.staff, visits.member, visits.volunteer, count(*) as count
         from visits

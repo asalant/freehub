@@ -55,7 +55,7 @@ class OrganizationsControllerTest < ActionController::TestCase
     get :edit, :id => organizations(:sfbk)
     assert_response :success
     assert_select "form" do
-      assert_select 'input', 4
+      assert_select 'input', 5
     end
   end
 

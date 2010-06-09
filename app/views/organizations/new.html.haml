@@ -16,4 +16,5 @@
       %ul
         -fields_for :user do |user|
           = render :partial => 'users/form', :object => user
-          %li= f.submit 'Sign Up'
+          %li
+            = f.submit 'Sign Up'
