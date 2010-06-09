@@ -37,7 +37,7 @@ class VisitsSummaryTest < ActiveSupport::TestCase
 
   def create_fixtures
     Visit.create!(:person => people(:marty), :datetime => Time.zone.local(2006,4,1,18,30), :volunteer => true)
-    Visit.create!(:person => people(:marty), :datetime => Time.zone.local(2006,4,1,18,30), :volunteer => false) # count as member
+    Visit.create!(:person => people(:mary), :datetime => Time.zone.local(2006,4,1,18,30), :volunteer => false) # count as member
     2.times do
       Visit.create!(:person => people(:mary), :datetime => Time.zone.local(2006,4,1,18,30))
     end
