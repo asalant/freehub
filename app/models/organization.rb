@@ -43,7 +43,7 @@ class Organization < ActiveRecord::Base
   end
 
   # Active if a visit within last 30 days
-  def active?(on = Time.now)
+  def active?(on = Time.zone.now)
     return false if !self.last_visit
 
     self.last_visit.datetime.to_i > on.ago(30 * 24 * 3600).to_i
@@ -52,8 +52,9 @@ class Organization < ActiveRecord::Base
   private
 
   def validate_timezone
+    @timezone_names ||= ActiveSupport::TimeZone.us_zones.map { |z| z.name }
     if !errors.on(:timezone)
-      errors.add :timezone if !TimeZone[self.timezone]
+      errors.add :timezone if !@timezone_names.include?(self.timezone)
     end
   end
 end

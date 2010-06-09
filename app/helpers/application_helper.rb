@@ -27,7 +27,7 @@ module ApplicationHelper
 
   # Override ActionView::Helpers::DateHelper#time_ago_in_words to handle timezone conversions
   def time_ago_in_words(from_time, include_seconds=false)
-    distance_of_time_in_words(from_time, Time.now, include_seconds)
+    distance_of_time_in_words(from_time, Time.zone.now, include_seconds)
   end
 
   def tab_item(label, path)

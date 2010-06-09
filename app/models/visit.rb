@@ -35,11 +35,11 @@ class Visit < ActiveRecord::Base
   } }
 
   has_finder :after, lambda { |date| {
-      :conditions => [ "visits.datetime >= ?", Time.at(date) ]
+      :conditions => [ "visits.datetime >= ?", Time.at(date.to_time) ]
   } }
 
   has_finder :before, lambda { |date| {
-      :conditions => [ "visits.datetime < ?", Time.at(date) ]
+      :conditions => [ "visits.datetime < ?", Time.at(date.to_time) ]
   } }
 
   def initialize(params={})

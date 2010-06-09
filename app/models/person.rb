@@ -63,11 +63,11 @@ class Person < ActiveRecord::Base
   } }
 
   has_finder :after, lambda { |date| {
-      :conditions => [ "people.created_at >= ?", Time.at(date) ]
+      :conditions => [ "people.created_at >= ?", Time.at(date.to_time) ]
   } }
 
   has_finder :before, lambda { |date| {
-      :conditions => [ "people.created_at < ?", Time.at(date) ]
+      :conditions => [ "people.created_at < ?", Time.at(date.to_time) ]
   } }
 
   has_finder :matching_name, lambda { |name| {

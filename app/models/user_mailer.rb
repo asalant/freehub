@@ -29,7 +29,7 @@ class UserMailer < ActionMailer::Base
       @recipients  = "#{user.email}"
       @from        = "freehub@bikekitchen.org"
       @subject     = "Freehub: "
-      @sent_on     = Time.now
+      @sent_on     = Time.zone.now
       @body[:user] = user
     end
 end
