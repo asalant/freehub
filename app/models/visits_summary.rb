@@ -15,10 +15,10 @@ class VisitsSummary
 
   def summarize_days
     date_condition = ""
-    date_condition += "and visits.datetime > '#{criteria[:from].to_date.to_time.to_s(:db)}' " if criteria[:from]
-    date_condition += "and visits.datetime < '#{criteria[:to].to_date.to_time.to_s(:db)}' " if criteria[:to]
+    date_condition += "and visits.datetime > '#{criteria[:from].to_date.to_time.utc.to_s(:db)}' " if criteria[:from]
+    date_condition += "and visits.datetime < '#{criteria[:to].to_date.to_time.utc.to_s(:db)}' " if criteria[:to]
     visits_result = ActiveRecord::Base.connection.select_all(<<-END
-      select date(convert_tz(visits.datetime,'UTC','#{Time.zone.utc_offset}')) as date, visits.staff, visits.member, visits.volunteer, count(*) as count
+      select date(convert_tz(visits.datetime,'+00:00','#{Time.zone.formatted_offset}')) as date, visits.staff, visits.member, visits.volunteer, count(*) as count
         from visits
         left join people on visits.person_id = people.id
         where people.organization_id = #{criteria[:organization_id]}
@@ -42,8 +42,8 @@ class VisitsSummary
 
   def fill_empty_days(days)
     filled = []
-    from = criteria[:from] ? criteria[:from] : days.first.date
-    to = criteria[:to] ? criteria[:to] : days.last.date
+    from = criteria[:from] ? criteria[:from].to_date : days.first.date
+    to = criteria[:to] ? criteria[:to].to_date : days.last.date
     filled << VisitsDay.new(from) if (days.first.date > from)
     days.each do |day|
       until filled.last.nil? || filled.last.date.tomorrow == day.date
