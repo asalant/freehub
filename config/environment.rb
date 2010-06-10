@@ -27,7 +27,6 @@ Rails::Initializer.run do |config|
   config.gem 'haml'
   config.gem 'hoptoad_notifier'
   config.gem 'googlecharts'
-  config.gem 'tzinfo'
   config.gem 'calendar_date_select'
   config.gem "newrelic_rpm"
   config.gem "annotate"

@@ -13,7 +13,7 @@ require 'eycap/recipes'
 set :keep_releases, 5
 set :application,   'freehub'
 set :repository,    'http://github.com/asalant/freehub.git'
-set :branch,        'master'
+set :branch,        'rails_upgrade'
 set :scm_username,  ''
 set :scm_password,  ''
 set :user,          'freehub'
