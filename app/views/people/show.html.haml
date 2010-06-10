@@ -71,7 +71,7 @@
       %p
         =link_to "See All #{services.size} Services with Details", services_path(:organization_key => @organization.key, :person_id => @person)
 
-%div.section.notes!
+%div.section#notes
   %h2 Recent Notes
   =link_to 'Add A Note', new_note_path(:person_id => @person), :class => 'add_link'
   -notes, notes_count = Note.for_person(@person, :limit => 3), Note.count_for_person(@person)
