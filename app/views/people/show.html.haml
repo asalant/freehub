@@ -54,7 +54,7 @@
               %span.note= note_text(visit.note)
       %p
         =link_to "See All #{visits.size} Visits with Details", visits_path(:organization_key => @organization.key, :person_id => @person)
-  %div.column.#services
+  %div.column#services
     %h2 Current Services
     =link_to 'Add A Service', new_service_path(:person_id => @person), :class => 'add_link'
     -services = @person.services.paginate(:size => 5)
