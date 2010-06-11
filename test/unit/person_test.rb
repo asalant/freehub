@@ -95,4 +95,16 @@ class PersonTest < ActiveSupport::TestCase
   def test_to_csv
     assert_match /^Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,1972,2008-01-02 00:00:00,\d{4}-\d{2}-\d{2}$/, people(:mary).to_csv
   end
+
+  context "A person Mary with tags" do
+    setup do
+      @person = people(:mary)
+      @person.tag_list = "member, helpful, artist"
+      @person.save!
+    end
+
+    should "save comma-separated tags" do
+      assert_equal %w[member helpful artist], @person.tag_list
+    end
+  end
 end

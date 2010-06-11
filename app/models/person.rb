@@ -54,7 +54,8 @@ class Person < ActiveRecord::Base
 
   before_validation :trim_attributes
   before_save :titleize_name, :update_full_name, :titleize_address, :downcase_email
-  
+
+  acts_as_taggable
   acts_as_paginated
   chains_finders
 
