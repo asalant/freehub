@@ -37,7 +37,7 @@
           %td 
             = visit.volunteer?
           %td
-            = datetime_long(visit.datetime)
+            = datetime_long(visit.arrived_at)
           %td.note{:style => 'width:360px;'}
             = note_text(visit.note)
       %tr.list_controls

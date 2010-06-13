@@ -24,7 +24,7 @@ class OrganizationTest < ActiveSupport::TestCase
   end
 
   def test_last_visit
-    assert_equal organizations(:sfbk).last_visit.datetime.to_s(:db), '2007-02-02 18:02:00'
+    assert_equal organizations(:sfbk).last_visit.arrived_at.to_s(:db), '2007-02-02 18:02:00'
     assert_nil organizations(:cbi).last_visit
   end
 

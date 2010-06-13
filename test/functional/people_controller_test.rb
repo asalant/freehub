@@ -45,7 +45,7 @@ class PeopleControllerTest < ActionController::TestCase
           post :create, :organization_key => 'sfbk', :person => { :first_name => "Newbie" }, :visiting => 'true'
     end
     assert_equal 1, assigns(:person).visits.size
-    assert_equal Date.today, assigns(:person).visits.first.datetime.to_date
+    assert_equal Date.today, assigns(:person).visits.first.arrived_at.to_date
 
     assert_redirected_to today_visits_path
   end

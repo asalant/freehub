@@ -3,8 +3,8 @@ require 'test_helper'
 class VisitTest < ActiveSupport::TestCase
 
   def test_datetime_conversion
-    assert visits(:mary_1).update_attributes(:datetime => Time.parse('2007-04-02 7:05 PM'))
-    assert visits(:mary_1).update_attributes(:datetime => '2007-04-02 19:05 PM')
+    assert visits(:mary_1).update_attributes(:arrived_at => Time.parse('2007-04-02 7:05 PM'))
+    assert visits(:mary_1).update_attributes(:arrived_at => '2007-04-02 19:05 PM')
   end
 
   def test_for_organization_paged
@@ -42,8 +42,8 @@ class VisitTest < ActiveSupport::TestCase
   end
 
   def test_create_defaults
-    assert_equal Date.today, Visit.create!(:person => people(:mary)).datetime.to_date
-    assert_equal Time.zone.local(2007,1,1), Visit.create!(:person => people(:mary), :datetime => Time.zone.local(2007,1,1)).datetime.to_time
+    assert_equal Date.today, Visit.create!(:person => people(:mary)).arrived_at.to_date
+    assert_equal Time.zone.local(2007,1,1), Visit.create!(:person => people(:mary), :arrived_at => Time.zone.local(2007,1,1)).datetime.to_time
     assert_not_nil Visit.new.note
   end
 
@@ -52,7 +52,7 @@ class VisitTest < ActiveSupport::TestCase
     assert visit.staff?
     assert !visit.member?
 
-    visit = Visit.create!(:person => people(:mary), :datetime => Time.zone.local(2006,4,1))
+    visit = Visit.create!(:person => people(:mary), :arrived_at => Time.zone.local(2006,4,1))
     assert !visit.staff?
     assert visit.member?
   end

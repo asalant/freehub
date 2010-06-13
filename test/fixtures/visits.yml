@@ -4,7 +4,7 @@
 # Table name: visits
 #
 #  id            :integer(11)     not null, primary key
-#  datetime      :datetime        
+#  arrived_at      :datetime        
 #  volunteer     :boolean(1)      
 #  created_at    :datetime        
 #  updated_at    :datetime        
@@ -16,14 +16,14 @@
 #
 
 mary_1:
-  datetime: 2007-02-01 18:01:00
+  arrived_at: 2007-02-01 18:01:00
   volunteer: false
   staff: false
   member: true
   person: mary
 
 mary_2:
-  datetime: 2007-02-02 18:02:00
+  arrived_at: 2007-02-02 18:02:00
   volunteer: true
   staff: false
   member: true
@@ -31,6 +31,6 @@ mary_2:
   
 <% (1..100).each do |count| %>
 daryl_<%= count %>:
-  datetime: <%= DateTime.parse('2007-02-02 18:02:00').advance(:hours => count * -16) %>
+  arrived_at: <%= DateTime.parse('2007-02-02 18:02:00').advance(:hours => count * -16) %>
   person: daryl
 <% end %>

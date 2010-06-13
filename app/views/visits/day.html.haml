@@ -23,7 +23,7 @@
             %td
               = visit.person.person_type
             %td.time
-              = time_short(visit.datetime)
+              = time_short(visit.arrived_at)
             %td.note{:style => 'width:400px;'}
               = note_text(visit.note)
             %td{:style => 'width:30px;'}
@@ -34,6 +34,5 @@
 %div.section
   %p
     See #{link_to "previous", day_visits_path(@day.yesterday)}
-    -unless @day == Date.today
-      or #{link_to "next", day_visits_path(@day.tomorrow)}
+    -unless @day == Date.today or #{link_to "next", day_visits_path(@day.tomorrow)}
     day.
