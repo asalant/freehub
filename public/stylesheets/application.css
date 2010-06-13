@@ -198,7 +198,7 @@ div.left div.section {
   padding: 3px;
 }
 
-/** organizations/index.html.mab **/
+/** organizations/index **/
 
 #home_login {
   background: lightyellow;
@@ -206,7 +206,7 @@ div.left div.section {
   padding: 14px;
 }
 
-/** visits/day.html.mab **/
+/** visits/day **/
 
 #sign_in {
   width: 400px;
@@ -221,6 +221,14 @@ div.left div.section {
 #sign_in #person_full_name{
   width: 360px;
   font-size: 14px;
+}
+
+/** people/show **/
+
+li.tags a {
+  font-size: 12px;
+  padding: 1px 3px;
+  background-color: #EEE;
 }
 
 /** Base HTML Styling **/

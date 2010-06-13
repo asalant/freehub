@@ -50,23 +50,9 @@ class PeopleControllerTest < ActionController::TestCase
     assert_redirected_to today_visits_path
   end
 
-  def test_should_show_person
-    get :show, :organization_key => 'sfbk', :id => people(:mary).id
-    assert_response :success
-    assert_template 'show'
-  end
-
   def test_should_get_edit
     get :edit, :organization_key => 'sfbk', :id => people(:mary).id
     assert_response :success
-  end
-
-  def test_should_update_person
-    put :update, :organization_key => 'sfbk', :id => people(:mary).id, :person => { }
-
-    assert_equal organizations(:sfbk), assigns(:person).organization
-    
-    assert_redirected_to person_path(:organization_key => 'sfbk', :id => assigns(:person))
   end
 
   def test_should_destroy_person
@@ -89,5 +75,40 @@ class PeopleControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:items)
     assert_equal 1, assigns(:items).size
+  end
+
+  context "Update person" do
+
+    setup do
+      put :update, :organization_key => 'sfbk', :id => people(:mary),
+          :person => { :tag_list => 'tag1, tag 2' }
+    end
+
+    should_redirect_to 'show person' do
+      person_path(:organization_key => 'sfbk', :id => people(:mary))
+    end
+
+    should "create tags" do
+      assert_equal 2, assigns(:person).tag_list.size
+    end
+
+  end
+
+  context "Show person" do
+    setup do
+      people(:mary).tag_list = 'tag1, tag 2'
+      people(:mary).save
+      get :show, :organization_key => 'sfbk', :id => people(:mary).id
+    end
+
+    should_respond_with :success
+    should_assign_to :person
+
+    should 'render links to tags' do
+      assert_select 'li.tags' do
+        assert_select 'a[href=/sfbk/tags/tag1]'
+        assert_select 'a[href=/sfbk/tags/tag%202]'
+      end
+    end
   end
 end
