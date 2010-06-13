@@ -61,66 +61,9 @@
             %label.choice{:for => 'visiting'} Visiting the shop today
       -else
         %li= userstamp_labeled_values(person)
+      =labeled_input 'Tags', :for => :tag_list do
+        -capture do
+          %div
+            =form.text_field(:tag_list, :class => 'text medium')
+            %label Separated by commas
       %li= form.submit person.new_record? ? "Create" : "Update"
-
--# Original:
-
--#   0: div.section do
--#   1:   div.column.left do
--#   2:     ul do
--#   3:       labeled_input 'Name', :required => true, :for => 'person_first_name' do
--#   4:         span do
--#   5:           text form.text_field(:first_name, :class => 'text short')
--#   6:           label 'First', :for => 'person_first_name'
--#   8:         span do
--#   9:           text form.text_field(:last_name, :class => 'text short')
--#  10:           label 'Last', :for => 'person_last_name'
--#  13:       labeled_input 'Email', :for => :person_email do
--#  14:         span do
--#  15:           text form.text_field(:email, :class => 'text short')
--#  17:         span do
--#  18:           text form.check_box(:email_opt_out, :class => 'checkbox')
--#  19:           label.choice "Don't send emails", :for => 'person_email_opt_out'
--#  22:       labeled_input 'Address' do
--#  23:         div do
--#  24:           text form.text_field(:street1, :class => 'text medium')
--#  25:           label 'Street Address'
--#  27:         div do
--#  28:           text form.text_field(:street2, :class => 'text medium')
--#  29:           label 'Address Line 2'
--#  31:         span do
--#  32:           text form.text_field(:city, :class => 'text short')
--#  33:           label 'City', :for => 'person_city'
--#  35:         span do
--#  36:           text form.text_field(:state, :class => 'text short')
--#  37:           label 'State / Province / Region', :for => 'person_state'
--#  39:         span do
--#  40:           text form.text_field(:postal_code, :class => 'text short')
--#  41:           label 'Postal / Zip Code', :for => 'person_postal_code'
--#  43:         span do
--#  44:           text form.text_field(:country, :class => 'text short')
--#  45:           label 'Country', :for => 'person_country'
--#  50:   div.column do
--#  51:     ul do
--#  52:       labeled_input 'Phone Number', :for => :person_phone do
--#  53:         form.text_field(:phone, :class => 'text short')
--#  55:       labeled_input 'Year of Birth', :for => :yob do
--#  56:         form.text_field(:yob, :class => 'text short')
--#  58:       labeled_input 'Role' do
--#  59:         text form.radio_button(:staff, false, :class => 'radio')
--#  60:         label.choice 'Patron', :for => 'person_staff_false'
--#  61:         text form.radio_button(:staff, true, :class => 'radio')
--#  62:         label.choice 'Staff', :for => 'person_staff_true'
--#  64:       if @person.new_record?
--#  65:         labeled_input 'Services' do
--#  66:           text check_box_tag(:membership, true, params[:membership], :class => 'checkbox')
--#  67:           label.choice 'Paid Membership starting today', :for => 'membership'
--#  68:           text check_box_tag(:eab, true, params[:eab], :class => 'checkbox')
--#  69:           label.choice 'Paid Digging Rights/EAB starting today', :for => 'eab'
--#  70:           text check_box_tag(:visiting, true, params[:visiting], :class => 'checkbox')
--#  71:           label.choice 'Visiting the shop today', :for => 'visiting'
--#  73:       else
--#  74:         li 
--#  75:           userstamp_labeled_values(@person)
--#  77:       li 
--#  78:         form.submit @person.new_record? ? "Create" : "Update"

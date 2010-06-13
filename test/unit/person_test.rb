@@ -120,5 +120,11 @@ class PersonTest < ActiveSupport::TestCase
 
       assert_equal %w[member helpful Artist], @person.tag_list
     end
+
+    should "be found by tag" do
+      people = Person.tagged_with 'member'
+      assert_equal 1, people.size
+      assert_equal @person, people.first
+    end
   end
 end
