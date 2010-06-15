@@ -15,8 +15,11 @@
   %li= @person.email
   %li= @person.postal_code
   %li.tags
-    -for tag in @person.tag_list
-      =link_to tag, tag_path(:id => tag)
+    %ul
+      -for tag in @person.tag_list
+        %li.tag
+          =link_to tag, tag_path(:id => tag)
+          =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :delete
   %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
 
 %div#sign_in
