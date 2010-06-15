@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'
   map.resources :services, :path_prefix => '/:organization_key/people/:person_id'
   map.resources :notes, :path_prefix => '/:organization_key/people/:person_id'
-  map.resources :taggings, :path_prefix => '/:organization_key/people/:person_id'
+  map.resources :taggings, :path_prefix => '/:organization_key/people/:person_id', :only => [:create, :destroy]
 
   map.day_visits ':organization_key/visits/:year/:month/:day',
           :controller => 'visits', :action => 'day',
