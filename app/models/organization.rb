@@ -50,11 +50,10 @@ class Organization < ActiveRecord::Base
 
   def tag_list
     @tags ||= ActsAsTaggableOn::Tag.find(:all,
-               :select => 'tags.id, tags.name',
+               :select => 'distinct(tags.name)',
                :joins => "left join (taggings, people) on (tags.id = taggings.tag_id and taggings.taggable_type = 'Person' and taggings.context = 'tags' and taggings.taggable_id = people.id)",
                :conditions => ["people.organization_id = ?", self]).
-            collect(&:name).uniq
-    #TODO: query should not return duplicates, perhaps use Organization as a tagger of People 
+            collect(&:name)
   end
 
   private
