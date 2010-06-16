@@ -223,16 +223,6 @@ div.left div.section {
   font-size: 14px;
 }
 
-/** people/show **/
-
-li.tags li.tag {
-  display: inline;
-  font-size: 12px;
-  padding: 1px 3px;
-  margin-left: 3px;
-  background-color: #EEE;
-}
-
 /** Base HTML Styling **/
 
 a {

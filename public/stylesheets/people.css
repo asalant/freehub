@@ -18,6 +18,20 @@
   color: red;
 }
 
+
+
+li.tags li {
+  display: inline;
+  font-size: 12px;
+  padding: 1px 3px;
+  margin-left: 3px;
+  background-color: #EEE;
+}
+
+li.tags ul.tags_all {
+    /*display: none;*/
+}
+
 .section h2 {
   float:left;
 }
