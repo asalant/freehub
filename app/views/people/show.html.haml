@@ -21,7 +21,7 @@
           =link_to tag, tag_path(:id => tag)
           =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :delete
     %ul.tags_all
-      -for tag in @all_tags
+      -for tag in @all_tags - @person.tag_list
         %li= "#{tag} +"
   %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
 
