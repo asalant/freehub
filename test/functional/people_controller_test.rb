@@ -101,6 +101,7 @@ class PeopleControllerTest < ActionController::TestCase
 
     should_respond_with :success
     should_assign_to :person
+    should_assign_to :all_tags
 
     should 'render links to tags' do
       assert_select 'li.tags' do

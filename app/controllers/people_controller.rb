@@ -6,6 +6,7 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @person = Person.find(params[:id])
+    @all_tags = @organization.tag_list
 
     respond_to do |format|
       format.html # show.html.erb
