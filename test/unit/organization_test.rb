@@ -37,5 +37,11 @@ class OrganizationTest < ActiveSupport::TestCase
   def test_visits_count
     assert organizations(:sfbk).visits_count > 100
   end
+
+  context 'Organization with tags' do
+    should 'find all tags in use' do
+      assert_equal %w(mechanic mom), organizations(:sfbk).tag_list
+    end
+  end
 end
 

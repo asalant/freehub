@@ -48,6 +48,14 @@ class Organization < ActiveRecord::Base
     self.last_visit.arrived_at.to_i > on.ago(30 * 24 * 3600).to_i
   end
 
+  def tag_list
+    @tags ||= ActsAsTaggableOn::Tag.find(:all,
+               :select => 'tags.id, tags.name',
+               :joins => "left join (taggings, people) on (tags.id = taggings.tag_id and taggings.taggable_type = 'Person' and taggings.context = 'tags' and taggings.taggable_id = people.id)",
+               :conditions => ["people.organization_id = ?", self]).
+            collect(&:name)
+  end
+
   private
 
   def validate_timezone

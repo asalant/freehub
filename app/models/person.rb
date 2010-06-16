@@ -152,3 +152,8 @@ class Person < ActiveRecord::Base
     self.full_name = [first_name, last_name].reject{|e| e.nil? || e.empty?}.join(' ')
   end
 end
+
+
+ActsAsTaggableOn::Tag.class_eval do
+  named_scope :for_organization
+end
