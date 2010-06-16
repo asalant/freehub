@@ -7,3 +7,8 @@ mary_mechanic:
   taggable: mary (Person)
   context: tags
   tag: mechanic
+
+marty_mechanic:
+  taggable: marty (Person)
+  context: tags
+  tag: mechanic

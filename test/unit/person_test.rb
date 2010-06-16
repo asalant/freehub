@@ -123,7 +123,7 @@ class PersonTest < ActiveSupport::TestCase
     end
 
     should "be found by tag" do
-      people = Person.tagged_with 'mechanic'
+      people = Person.tagged_with 'mom'
       assert_equal 1, people.size
       assert_equal @person, people.first
     end

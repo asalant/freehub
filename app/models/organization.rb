@@ -53,7 +53,8 @@ class Organization < ActiveRecord::Base
                :select => 'tags.id, tags.name',
                :joins => "left join (taggings, people) on (tags.id = taggings.tag_id and taggings.taggable_type = 'Person' and taggings.context = 'tags' and taggings.taggable_id = people.id)",
                :conditions => ["people.organization_id = ?", self]).
-            collect(&:name)
+            collect(&:name).uniq
+    #TODO: query should not return duplicates, perhaps use Organization as a tagger of People 
   end
 
   private
