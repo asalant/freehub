@@ -1,0 +1,9 @@
+mary_mom:
+  taggable: mary (Person)
+  context: tags
+  tag: mom
+
+mary_mechanic:
+  taggable: mary (Person)
+  context: tags
+  tag: mechanic
