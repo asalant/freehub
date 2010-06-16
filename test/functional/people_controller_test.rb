@@ -89,15 +89,13 @@ class PeopleControllerTest < ActionController::TestCase
     end
 
     should "create tags" do
-      assert_equal 2, assigns(:person).tag_list.size
+      assert_equal ['tag1', 'tag 2'], assigns(:person).tag_list
     end
 
   end
 
   context "Show person" do
     setup do
-      people(:mary).tag_list = 'tag1, tag 2'
-      people(:mary).save
       get :show, :organization_key => 'sfbk', :id => people(:mary).id
     end
 
@@ -106,8 +104,8 @@ class PeopleControllerTest < ActionController::TestCase
 
     should 'render links to tags' do
       assert_select 'li.tags' do
-        assert_select 'a[href=/sfbk/tags/tag1]'
-        assert_select 'a[href=/sfbk/tags/tag%202]'
+        assert_select 'a[href=/sfbk/tags/mom]'
+        assert_select 'a[href=/sfbk/tags/mechanic]'
       end
     end
   end

@@ -99,30 +99,31 @@ class PersonTest < ActiveSupport::TestCase
   context "A person Mary with tags" do
     setup do
       @person = people(:mary)
-      @person.tag_list = "member, helpful, Artist"
-      @person.save! && @person.reload
+      assert_equal %w(mechanic mom), @person.tag_list
     end
 
     should "save comma-separated tags" do
-      assert_equal %w[member helpful Artist], @person.tag_list
+      @person.tag_list = "helpful, Artist"
+      @person.save! && @person.reload
+      assert_equal %w[helpful Artist], @person.tag_list
     end
 
     should "add tag" do
       @person.tag_list << 'other'
       @person.save! && @person.reload
 
-      assert_equal %w[member helpful Artist other], @person.tag_list
+      assert_equal %w[mechanic mom other], @person.tag_list
     end
 
     should "not add same tag with different case" do
-      @person.tag_list << 'artist'
+      @person.tag_list << 'Mom'
       @person.save! && @person.reload
 
-      assert_equal %w[member helpful Artist], @person.tag_list
+      assert_equal %w[mechanic mom], @person.tag_list
     end
 
     should "be found by tag" do
-      people = Person.tagged_with 'member'
+      people = Person.tagged_with 'mechanic'
       assert_equal 1, people.size
       assert_equal @person, people.first
     end
