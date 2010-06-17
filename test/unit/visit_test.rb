@@ -38,12 +38,12 @@ class VisitTest < ActiveSupport::TestCase
   end
 
   def test_csv_header
-    assert_equal 'first_name,last_name,email,email_opt_out,phone,postal_code,datetime,staff,member,volunteer,note', Visit.csv_header
+    assert_equal 'first_name,last_name,email,email_opt_out,phone,postal_code,arrived_at,staff,member,volunteer,note', Visit.csv_header
   end
 
   def test_create_defaults
     assert_equal Date.today, Visit.create!(:person => people(:mary)).arrived_at.to_date
-    assert_equal Time.zone.local(2007,1,1), Visit.create!(:person => people(:mary), :arrived_at => Time.zone.local(2007,1,1)).datetime.to_time
+    assert_equal Time.zone.local(2007,1,1), Visit.create!(:person => people(:mary), :arrived_at => Time.zone.local(2007,1,1)).arrived_at.to_time
     assert_not_nil Visit.new.note
   end
 
@@ -69,3 +69,22 @@ class VisitTest < ActiveSupport::TestCase
   end
 
 end
+
+# == Schema Information
+#
+# Table name: visits
+#
+#  id            :integer(4)      not null, primary key
+#  arrived_at    :datetime
+#  volunteer     :boolean(1)      default(FALSE)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  created_by_id :integer(4)
+#  updated_by_id :integer(4)
+#  person_id     :integer(4)
+#  staff         :boolean(1)
+#  member        :boolean(1)
+#  start_at      :datetime
+#  end_at        :datetime
+#
+

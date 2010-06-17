@@ -1,20 +1,3 @@
-# == Schema Information
-# Schema version: 9
-#
-# Table name: visits
-#
-#  id            :integer(11)     not null, primary key
-#  arrived_at      :datetime        
-#  volunteer     :boolean(1)      
-#  created_at    :datetime        
-#  updated_at    :datetime        
-#  created_by_id :integer(11)     
-#  updated_by_id :integer(11)     
-#  person_id     :integer(11)     
-#  staff         :boolean(1)      
-#  member        :boolean(1)      
-#
-
 mary_1:
   arrived_at: 2007-02-01 18:01:00
   volunteer: false
@@ -34,3 +17,22 @@ daryl_<%= count %>:
   arrived_at: <%= DateTime.parse('2007-02-02 18:02:00').advance(:hours => count * -16) %>
   person: daryl
 <% end %>
+
+# == Schema Information
+#
+# Table name: visits
+#
+#  id            :integer(4)      not null, primary key
+#  arrived_at    :datetime
+#  volunteer     :boolean(1)      default(FALSE)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  created_by_id :integer(4)
+#  updated_by_id :integer(4)
+#  person_id     :integer(4)
+#  staff         :boolean(1)
+#  member        :boolean(1)
+#  start_at      :datetime
+#  end_at        :datetime
+#
+

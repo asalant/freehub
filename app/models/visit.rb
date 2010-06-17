@@ -1,21 +1,3 @@
-# == Schema Information
-#
-# Table name: visits
-#
-#  id            :integer(4)      not null, primary key
-#  arrived_at    :datetime
-#  checked_in_at :datetime
-#  checkde_out_at:datetime
-#  volunteer     :boolean(1)      default(FALSE)
-#  created_at    :datetime
-#  updated_at    :datetime
-#  created_by_id :integer(4)
-#  updated_by_id :integer(4)
-#  person_id     :integer(4)
-#  staff         :boolean(1)
-#  member        :boolean(1)
-#
-
 class Visit < ActiveRecord::Base
   
   belongs_to :person
@@ -32,7 +14,7 @@ class Visit < ActiveRecord::Base
   named_scope :for_organization, lambda { |organization| {
       :conditions => [ "people.organization_id = ?", organization ],
       :include => [ :person, :note ],
-      :order => 'datetime DESC'
+      :order => 'arrived_at DESC'
   } }
 
   named_scope :after, lambda { |date| {
@@ -84,3 +66,22 @@ class Visit < ActiveRecord::Base
   end
 
 end
+
+# == Schema Information
+#
+# Table name: visits
+#
+#  id            :integer(4)      not null, primary key
+#  arrived_at    :datetime
+#  volunteer     :boolean(1)      default(FALSE)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  created_by_id :integer(4)
+#  updated_by_id :integer(4)
+#  person_id     :integer(4)
+#  staff         :boolean(1)
+#  member        :boolean(1)
+#  start_at      :datetime
+#  end_at        :datetime
+#
+
