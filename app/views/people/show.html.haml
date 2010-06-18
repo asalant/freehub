@@ -14,16 +14,23 @@
     %li= link_to 'Renew', new_service_path(:person_id => @person)
   %li= @person.email
   %li= @person.postal_code
-  %li.tags
+  %li.tags.view
+    View:
     %ul.tags_on
       -for tag in @person.tag_list
         %li
           =link_to tag, tag_path(:id => tag)
+  %li.tags.edit
+    Edit:
+    %ul.tags_on
+      -for tag in @person.tag_list
+        %li
+          = tag
           =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :delete
     %ul.tags_all
       -for tag in @all_tags - @person.tag_list
         %li
-          =link_to tag, tag_path(:id => tag)
+          = tag
           =link_to '+', taggings_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :create
   %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
 

@@ -8,6 +8,7 @@
     -else
       -@title = "#{params[:controller].singularize.titleize} #{params[:action].titleize}"
     %title #{@title} on Freehub
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
     = javascript_include_tag :all
     = stylesheet_link_tag 'reset-min'
     = calendar_date_select_includes 'silver'
