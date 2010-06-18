@@ -1,0 +1,7 @@
+env.rhino.js:
+* Version: 1.2.0.6
+* Modifications: removed the Env.js header log message
+
+js.jar:
+* Version: (not sure)
+* Origin: pulled from the "rhino" directory from env.js (v1.2.0.2)
