@@ -5,30 +5,20 @@
 
         return $(this).each(function()
         {
-            var tag_control = this;
-            var view_control = $('.view', tag_control);
-            var edit_control = $('.edit', tag_control);
-
-            view_control.each(function()
+            var tags_control = this;
+            $('.view a.show_edit', this).bind('click', function()
             {
-                $('a.show_edit', this).bind('click', function()
-                {
-                    view_control.hide();
-                    edit_control.show();
-                    return false;
-                });
+                $('.view', tags_control).hide();
+                $('.edit', tags_control).show();
+                return false;
             });
-
-            edit_control.each(function()
+            
+            $('.edit', this).hide();
+            $('.edit a.show_view', this).bind('click', function()
             {
-                $(this).hide();
-                $('.all', this).hide();
-                $('a.show_view', this).bind('click', function()
-                {
-                    view_control.show();
-                    edit_control.hide();
-                    return false;
-                });
+                $('.view', tags_control).show();
+                $('.edit', tags_control).hide();
+                return false;
             });
         });
     }
