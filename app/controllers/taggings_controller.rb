@@ -4,13 +4,25 @@ class TaggingsController < ApplicationController
   def create
     @person.tag_list << params[:id]
     @person.save
-    redirect_to_person_path
+    if request.xhr?
+      index
+    else
+      redirect_to_person_path
+    end
   end
 
   def destroy
     @person.tag_list.delete params[:id]
     @person.save
-    redirect_to_person_path
+    if request.xhr?
+      index
+    else
+      redirect_to_person_path
+    end
+  end
+
+  def index
+    render :template => '/taggings/_index', :layout => false
   end
 
   private

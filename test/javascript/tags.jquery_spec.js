@@ -3,17 +3,41 @@ require("../../public/javascripts/tags.jquery.js");
 
 Screw.Unit(function()
 {
-    describe("Tags", function()
+    describe("Tags plugin", function()
     {
         before(function()
         {
             $('#fixture').fixture();
-            $('.tags').tags_edit();
+            $('.tags_control').tags_control();
         });
 
-        it("hides all tags", function()
+        describe("view initialization", function()
         {
-            expect($(".tags_all").is(":visible")).to(be_false);
+            it("hides edit view", function()
+            {
+                expect($(".tags_control .edit").is(":visible")).to(be_false);
+            });
+
+            it("shows edit", function()
+            {
+                $('a.show_edit').trigger('click');
+                expect($(".tags_control .view").is(":visible")).to(be_false);
+                expect($(".tags_control .edit").is(":visible")).to(be_true);
+            });
+        });
+
+        describe("edit initialization", function()
+        {
+            it("shows view", function()
+            {
+                $(".tags_control .view").hide();
+                $(".tags_control .edit").show();
+                
+                $('a.show_view').trigger('click');
+                expect($(".tags_control .view").is(":visible")).to(be_true);
+                expect($(".tags_control .edit").is(":visible")).to(be_false);
+            });
+
         });
     });
 });
