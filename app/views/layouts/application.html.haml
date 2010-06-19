@@ -14,8 +14,7 @@
     = calendar_date_select_includes 'silver'
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'form'
-    -if params[:controller] == 'people'
-      =stylesheet_link_tag 'people'
+    = yield :head
   %body
     %div#application
       %div#header

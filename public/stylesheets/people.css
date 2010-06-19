@@ -20,11 +20,14 @@
 
 
 
-li.tags li {
+.tags_control ul.tags li {
   display: inline;
   font-size: 12px;
   padding: 1px 3px;
   margin-left: 3px;
+}
+
+.tags_control ul.tags li.tag {
   background-color: #EEE;
 }
 

@@ -1,3 +1,17 @@
+-content_for :head do
+  =stylesheet_link_tag 'people'
+  =javascript_include_tag 'tags.jquery.js'
+  :javascript
+    (function($)
+    {
+      $(function()
+      {
+        $('.tags_control').tags_control();
+        $('#visit_submit').focus();
+      });
+    })(jQuery);
+
+
 %h1= @person.full_name
 
 %ul#summary
@@ -14,24 +28,7 @@
     %li= link_to 'Renew', new_service_path(:person_id => @person)
   %li= @person.email
   %li= @person.postal_code
-  %li.tags.view
-    View:
-    %ul.tags_on
-      -for tag in @person.tag_list
-        %li
-          =link_to tag, tag_path(:id => tag)
-  %li.tags.edit
-    Edit:
-    %ul.tags_on
-      -for tag in @person.tag_list
-        %li
-          = tag
-          =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :delete
-    %ul.tags_all
-      -for tag in @all_tags - @person.tag_list
-        %li
-          = tag
-          =link_to '+', taggings_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :create
+  %li= render :partial => '/taggings/index'
   %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
 
 %div#sign_in
@@ -50,10 +47,6 @@
         =link_to_function "Add Note", "Element.show('note_text');Element.hide('add_note_link')", :id => 'add_note_link'
       %li
         =f.submit "Sign In"
-  :javascript
-    Event.observe(window, 'load', function() {
-      $('visit_submit').focus();
-    });
 
 %div.section
   %div.column.left#visits

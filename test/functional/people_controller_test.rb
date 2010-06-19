@@ -104,7 +104,7 @@ class PeopleControllerTest < ActionController::TestCase
     should_assign_to :all_tags
 
     should 'render links to tags' do
-      assert_select 'li.tags' do
+      assert_select '.tags_control' do
         assert_select 'a[href=/sfbk/tags/mom]'
         assert_select 'a[href=/sfbk/tags/mechanic]'
       end
