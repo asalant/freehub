@@ -63,7 +63,6 @@ Rails::Initializer.run do |config|
     require 'named_scope_extensions'
     require 'activerecord_extensions'
   end
-
 end
 
 # Date picker control

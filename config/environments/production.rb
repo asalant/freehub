@@ -27,13 +27,9 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
-
-ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.smtp_settings = {
-  :domain             => "bikekitchen.org",
-  :perform_deliveries => true,
-  :address            => 'smtp.ey02.engineyard.com',
-  :port               => 25
-}
+# Set up with SendGrid for Engine Yard per
+# https://community.engineyard.com/faqs/questions/ssmtp
+# https://community.engineyard.com/discussions/problems/615-setting-up-ssmtp-for-mail-relay-to-sendgrid
+config.action_mailer.delivery_method = :sendmail
 
 SITE_URL = 'http://freehub.bikekitchen.org'
