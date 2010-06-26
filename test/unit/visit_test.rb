@@ -70,6 +70,7 @@ class VisitTest < ActiveSupport::TestCase
 
 end
 
+
 # == Schema Information
 #
 # Table name: visits
@@ -84,7 +85,5 @@ end
 #  person_id     :integer(4)
 #  staff         :boolean(1)
 #  member        :boolean(1)
-#  start_at      :datetime
-#  end_at        :datetime
 #
 
