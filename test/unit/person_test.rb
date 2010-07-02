@@ -96,3 +96,4 @@ class PersonTest < ActiveSupport::TestCase
     assert_match /^Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,1972,2008-01-02 00:00:00,\d{4}-\d{2}-\d{2}$/, people(:mary).to_csv
   end
 end
+

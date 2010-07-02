@@ -49,3 +49,4 @@ class ServiceTest < ActiveSupport::TestCase
   end
 
 end
+

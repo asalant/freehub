@@ -27,7 +27,7 @@
 class Person < ActiveRecord::Base
   
   belongs_to :organization
-  has_many :visits, :include => :note, :dependent => :destroy, :order => "datetime DESC"
+  has_many :visits, :include => :note, :dependent => :destroy, :order => "arrived_at DESC"
   has_many :services, :include => :note, :dependent => :destroy,  :order => "end_date DESC" do
     def last(service_type)
       self.detect { |service| service.service_type_id == ServiceType[service_type].id }

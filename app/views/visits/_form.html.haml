@@ -1,7 +1,7 @@
 %ul
-  =labeled_input 'Datetime', :for => :visit_datetime do
+  =labeled_input 'Datetime', :for => :visit_arrived_at do
     -capture do
-      =calendar_date_select_tag "visit[datetime]", visit.datetime, :time => true, :year_range => 3.years.ago..0.years.from_now
+      =calendar_date_select_tag "visit[arrived_at]", visit.arrived_at, :time => true, :year_range => 3.years.ago..0.years.from_now
   =labeled_input 'Volunteer', :for => :visit_volunteer do
     -capture do
       =form.check_box :volunteer

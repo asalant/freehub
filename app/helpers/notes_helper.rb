@@ -16,7 +16,7 @@ module NotesHelper
 
   def notable_label(model)
     if model.is_a? Visit
-      "Visit on #{date_long(model.datetime)}"
+      "Visit on #{date_long(model.arrived_at)}"
     elsif model.is_a? Person
       "Person named #{model.full_name}"
     elsif model.is_a? Service
