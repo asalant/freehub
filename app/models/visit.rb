@@ -3,7 +3,7 @@
 # Table name: visits
 #
 #  id            :integer(4)      not null, primary key
-#  datetime      :datetime
+#  arrived_at    :datetime
 #  volunteer     :boolean(1)      default(FALSE)
 #  created_at    :datetime
 #  updated_at    :datetime
@@ -20,7 +20,7 @@ class Visit < ActiveRecord::Base
   has_one :note, :as => :notable, :dependent => :destroy
   has_userstamps
 
-  validates_presence_of :person_id, :datetime
+  validates_presence_of :person_id, :arrived_at
 
   acts_as_paginated
   chains_finders
@@ -30,26 +30,26 @@ class Visit < ActiveRecord::Base
   named_scope :for_organization, lambda { |organization| {
       :conditions => [ "people.organization_id = ?", organization ],
       :include => [ :person, :note ],
-      :order => 'datetime DESC'
+      :order => 'arrived_at DESC'
   } }
 
   named_scope :after, lambda { |date| {
-      :conditions => [ "convert_tz(visits.datetime,'+00:00','#{Time.zone.formatted_offset}') >= ?", date.to_date.to_time.utc ]
+      :conditions => [ "convert_tz(visits.arrived_at,'+00:00','#{Time.zone.formatted_offset}') >= ?", date.to_date.to_time.utc ]
   } }
 
   named_scope :before, lambda { |date| {
-      :conditions => [ "convert_tz(visits.datetime,'+00:00','#{Time.zone.formatted_offset}') < ?", date.to_date.to_time.utc ]
+      :conditions => [ "convert_tz(visits.arrived_at,'+00:00','#{Time.zone.formatted_offset}') < ?", date.to_date.to_time.utc ]
   } }
 
   def initialize(params={})
     super
-    self.datetime ||= Time.now
+    self.arrived_at ||= Time.now
     self.volunteer ||= false
     self.note ||= Note.new
   end
 
   CSV_FIELDS = { :person => %w{first_name last_name email email_opt_out phone postal_code},
-                 :self => %w{datetime staff member volunteer note} }
+                 :self => %w{arrived_at staff member volunteer note} }
 
   def self.csv_header
     CSV.generate_line(CSV_FIELDS[:person] + CSV_FIELDS[:self])
@@ -57,7 +57,7 @@ class Visit < ActiveRecord::Base
 
   def to_csv
     values = person.attributes.values_at(*CSV_FIELDS[:person])
-    values << (datetime.nil? ? nil : datetime.strftime("%Y-%m-%d %H:%M"))
+    values << (arrived_at.nil? ? nil : arrived_at.strftime("%Y-%m-%d %H:%M"))
     values << staff?
     values << member?
     values << volunteer?
@@ -77,8 +77,11 @@ class Visit < ActiveRecord::Base
   end
 
   def record_member_status
-    self.member = person.member_on?(datetime)
+    self.member = person.member_on?(arrived_at)
     true
   end
 
 end
+
+
+

@@ -61,7 +61,7 @@
             = organization.location
           %td{:style => 'width: 200px'}
             -if !organization.last_visit.nil?
-              = "last visit #{datetime_long(organization.last_visit.datetime)}"
+              = "last visit #{datetime_long(organization.last_visit.arrived_at)}"
             %br
             -if organization.member_count > 9
               = "#{organization.member_count} members"

@@ -49,7 +49,7 @@
         -for visit in visits
           %li{:class => cycle('odd','even', :name => 'visits')}
             %span.what= visit.volunteer? ? 'Volunteered' : 'Visited'
-            %span.when{:title => datetime_long(visit.datetime)}= "#{time_ago_in_words(visit.datetime)} ago"
+            %span.when{:title => datetime_long(visit.arrived_at)}= "#{time_ago_in_words(visit.arrived_at)} ago"
             -if visit.note
               %span.note= note_text(visit.note)
       %p

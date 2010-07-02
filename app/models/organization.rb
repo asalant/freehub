@@ -45,7 +45,7 @@ class Organization < ActiveRecord::Base
   def active?(on = Time.zone.now)
     return false if !self.last_visit
 
-    self.last_visit.datetime.to_i > on.ago(30 * 24 * 3600).to_i
+    self.last_visit.arrived_at.to_i > on.ago(30 * 24 * 3600).to_i
   end
 
   private

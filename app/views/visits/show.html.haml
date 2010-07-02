@@ -4,7 +4,7 @@
   =link_to 'Visits', visits_path(:person_id => @person)
   = ' : Detail'
 %ul
-  =labeled_value 'Datetime', datetime_long(@visit.datetime)
+  =labeled_value 'Datetime', datetime_long(@visit.arrived_at)
   =labeled_value 'Volunteer', @visit.volunteer?
   =labeled_value 'Note', note_text(@visit.note)
   =labeled_value 'Person', @visit.person.full_name

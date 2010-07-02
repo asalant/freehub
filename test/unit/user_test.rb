@@ -111,3 +111,4 @@ protected
     User.create({ :name => 'Quire', :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
   end
 end
+

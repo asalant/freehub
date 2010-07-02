@@ -47,7 +47,7 @@ class VisitsControllerTest < ActionController::TestCase
     end
     assert_equal people(:penny), assigns(:visit).person
     assert_equal "Eastern Time (US & Canada)", Time.zone.name
-    assert_equal Time.zone.now.hour, assigns(:visit).datetime.hour
+    assert_equal Time.zone.now.hour, assigns(:visit).arrived_at.hour
 
     assert_redirected_to visits_path
   end

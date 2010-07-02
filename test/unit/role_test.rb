@@ -14,3 +14,4 @@ class RoleTest < ActiveSupport::TestCase
   end
 
 end
+

@@ -7,3 +7,4 @@ class NoteTest < ActiveSupport::TestCase
     assert_equal 2, Note.for_person(people(:mary), :limit => 2).size
   end
 end
+
