@@ -10,14 +10,14 @@
             $('.view', tags_control).show();
             $('.edit', tags_control).hide();
 
-            $('.view a.show_edit', this).bind('click', function()
+            $('.view a.show_edit', this).live('click', function()
             {
                 $('.view', tags_control).hide();
                 $('.edit', tags_control).show();
                 return false;
             });
 
-            $('.edit a.show_view', this).bind('click', function()
+            $('.edit a.show_view', this).live('click', function()
             {
                 $('.view', tags_control).show();
                 $('.edit', tags_control).hide();
