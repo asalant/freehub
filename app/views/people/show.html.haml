@@ -29,7 +29,7 @@
   %li= @person.email
   %li= @person.postal_code
   %li.tags_container{:id => "person_tags_#{@person.id}"}= render :partial => '/taggings/index'
-  %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
+  %li{:style => 'clear:both;'}= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
 
 %div#sign_in
   %h2 Sign #{@person.first_name} In

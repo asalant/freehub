@@ -18,10 +18,8 @@
   color: red;
 }
 
-
-
 .tags_control ul.tags li {
-  display: inline;
+  float: left;
   font-size: 12px;
   padding: 1px 3px;
   margin-left: 3px;
