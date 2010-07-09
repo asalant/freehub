@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .tags_control
   .view
     %ul.tags
@@ -11,9 +12,9 @@
       -for tag in @person.tag_list
         %li.tag
           = tag
-          =link_to_remote 'x', :update => "person_tags_#{@person.id}", :url => tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :delete, :class => 'delete'
-      -remote_form_for :taggings, { :url => taggings_path(:organization_key => @organization.key, :person_id => @person), :update => "person_tags_#{@person.id}" } do |f|
-        %select{ :name => :id, :onchange => 'if (this.selectedIndex > 0) { this.form.onsubmit(); }' }
+          =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :delete, :class => 'delete'
+      -form_for :taggings, :url => taggings_path(:organization_key => @organization.key, :person_id => @person) do |f|
+        %select{ :name => :id, :onchange => 'if (this.selectedIndex > 0) { this.form.submit(); }' }
           %option Add tag
           -for tag in @organization.tag_list - @person.tag_list
             %option{:value => tag}= tag

@@ -56,6 +56,14 @@ class Organization < ActiveRecord::Base
             collect(&:name)
   end
 
+  def tag_list
+    @tags ||= ActsAsTaggableOn::Tag.find(:all,
+               :select => 'distinct(tags.name)',
+               :joins => "left join (taggings, people) on (tags.id = taggings.tag_id and taggings.taggable_type = 'Person' and taggings.context = 'tags' and taggings.taggable_id = people.id)",
+               :conditions => ["people.organization_id = ?", self]).
+            collect(&:name)
+  end
+
   private
 
   def validate_timezone

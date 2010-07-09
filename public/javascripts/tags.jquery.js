@@ -6,7 +6,7 @@
         return $(this).each(function()
         {
             var tags_control = this;
-            
+
             $('.view', tags_control).show();
             $('.edit', tags_control).hide();
 

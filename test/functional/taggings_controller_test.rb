@@ -69,5 +69,6 @@ class TaggingsControllerTest < ActionController::TestCase
         assert_equal ['mechanic', 'mom', 'three'], people(:mary).tag_list
       end
     end
+    
   end
 end
