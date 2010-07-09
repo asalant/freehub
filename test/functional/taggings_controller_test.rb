@@ -55,5 +55,19 @@ class TaggingsControllerTest < ActionController::TestCase
         assert_equal ['mechanic', 'mom', 'three'], people(:mary).tag_list
       end
     end
+
+    context 'after adding a tag via ajax' do
+      setup do
+        xhr :put, :create, :organization_key => 'sfbk', :person_id => people(:mary), :id => 'three'
+        people(:mary).reload
+      end
+
+      should_render_without_layout
+      should_render_template 'taggings/_index.html.haml'
+
+      should 'have the new tag' do
+        assert_equal ['mechanic', 'mom', 'three'], people(:mary).tag_list
+      end
+    end
   end
 end

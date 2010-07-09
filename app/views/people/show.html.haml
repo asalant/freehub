@@ -6,7 +6,7 @@
     {
       $(function()
       {
-        $('.tags_control').tags_control();
+        $('.tags_container').tags_control();
         $('#visit_submit').focus();
       });
     })(jQuery);
@@ -28,7 +28,7 @@
     %li= link_to 'Renew', new_service_path(:person_id => @person)
   %li= @person.email
   %li= @person.postal_code
-  %li= render :partial => '/taggings/index'
+  %li.tags_container{:id => "person_tags_#{@person.id}"}= render :partial => '/taggings/index'
   %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
 
 %div#sign_in

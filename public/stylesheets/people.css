@@ -31,6 +31,18 @@
   background-color: #EEE;
 }
 
+.tags_control .view {
+  display:none;
+}
+
+.tags_control .edit {
+  display:block;
+}
+
+.tags_control form {
+  display: inline;
+}
+
 .section h2 {
   float:left;
 }
