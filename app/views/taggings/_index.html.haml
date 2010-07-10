@@ -1,6 +1,7 @@
 .tags_control
   .view
     %ul.tags
+      %li=image_tag 'tag_yellow.png'
       -for tag in @person.tag_list
         %li.tag
           =link_to tag, tag_path(:organization_key => @organization.key, :id => tag)
@@ -16,7 +17,7 @@
       %li
         -form_for :taggings, :url => taggings_path(:organization_key => @organization.key, :person_id => @person) do |f|
           %select
-            %option{:value => ''} Add tag
+            %option{:value => ''} Choose tag
             -for tag in @organization.tag_list - @person.tag_list
               %option{:value => tag}= tag
             %option{:value => ''}= '------'
