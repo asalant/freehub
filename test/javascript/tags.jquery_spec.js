@@ -42,14 +42,22 @@ Screw.Unit(function()
 
         describe("deletes tag", function()
         {
-           it("should dispatch delete event", function()
-           {
-               var event_data;
+            var event_data;
+            before(function()
+            {
                $(".tags_control").bind('delete', function(event, data)
                {
                    event_data = data;
                });
+           });
 
+           after(function()
+           {
+              event_data = null; 
+           });
+
+           it("should dispatch delete event", function()
+           {
                $('.tags_control .edit a.delete:first').trigger('click');
                expect(event_data).to_not(be_null);
                expect(event_data.url).to(equal, '/sfbk/people/602306942/taggings/key%20holder');
@@ -58,18 +66,48 @@ Screw.Unit(function()
 
         describe("adds tag", function()
         {
-           it("should dispatch add event", function()
-           {
-               var event_data;
+            var event_data;
+            before(function()
+            {
                $(".tags_control").bind('add', function(event, data)
                {
                    event_data = data;
                });
+           });
 
+           after(function()
+           {
+              event_data = null;
+           });
+
+           it("should dispatch add event", function()
+           {
                $('.tags_control select').val('two').trigger('change');
                expect(event_data).to_not(be_null);
                expect(event_data.url).to(equal, '/sfbk/people/602306942/taggings');
                expect(event_data.tag).to(equal, 'two');
+           });
+
+           it("should add new tag", function()
+           {
+               mock(window).should_receive('prompt').and_return('new');
+               $('.tags_control select')[0].selectedIndex = 4;
+               $('.tags_control select').trigger('change');
+               expect(event_data.url).to(equal, '/sfbk/people/602306942/taggings');
+               expect(event_data.tag).to(equal, 'new');
+
+               Smoke.checkExpectations();
+           });
+
+           it("should not add empty new tag", function()
+           {
+               mock(window).should_receive('prompt').and_return('');
+               $('.tags_control select')[0].selectedIndex = 4;
+               $('.tags_control select').trigger('change');
+               expect(event_data).to(be_null);
+               expect($('.tags_control select')[0].selectedIndex).to(equal, 0);
+
+               Smoke.checkExpectations();
            });
 
         });

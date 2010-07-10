@@ -6,35 +6,50 @@
         return $(this).each(function()
         {
             var tags_control = $(this);
+            var context = tags_control.parent()[0];
 
             $('.view', this).show();
             $('.edit', this).hide();
 
-            $('.view a.show_edit', this).live('click', function()
+            $('.view a.show_edit', context).bind('click', function(event)
             {
                 $('.view', tags_control).hide();
                 $('.edit', tags_control).show();
-                return false;
+                event.preventDefault();
             });
 
-            $('.edit a.show_view', this).live('click', function()
+            $('.edit a.show_view', context).bind('click', function(event)
             {
                 $('.view', tags_control).show();
                 $('.edit', tags_control).hide();
-                return false;
+                event.preventDefault();
             });
 
-            $('.edit a.delete').live('click', function (event)
+            $('.edit a.delete', context).bind('click', function (event)
             {
                 tags_control.trigger('delete', { url: $(this).attr('href') });
                 event.preventDefault();
             });
 
-            $('select', this).live('change', function(event)
+            $('select', context).bind('change', function(event)
             {
-                if ($(this).val() != '')
+                if (this.selectedIndex == 0)
                 {
-                    tags_control.trigger('add', { url: $(this).parent('form').attr('action'), tag: $(this).val() });
+                    return;
+                }
+                
+                var tag = $(this).val();
+                if (this.selectedIndex == $('option', this).size() - 1)
+                {
+                    tag = window.prompt("Enter new tag:");
+                }
+                if (tag)
+                {
+                    tags_control.trigger('add', { url: $(this).parent('form').attr('action'), tag: tag });
+                }
+                else
+                {
+                    this.selectedIndex = 0;
                 }
             });
 
@@ -47,12 +62,11 @@
                     data: { _method: 'DELETE', auth_token: window.AUTHENTICITY_TOKEN},
                     success: function(data, status)
                     {
-                        tags_control.replaceWith(data);
+                        replaceControl(data);
                     }
                 });
                 return data;
             });
-
 
             tags_control.bind('add', function(event, data)
             {
@@ -63,11 +77,18 @@
                     data: { _method: 'POST', auth_token: window.AUTHENTICITY_TOKEN, id: data.tag },
                     success: function(data, status)
                     {
-                        tags_control.replaceWith(data);
+                        replaceControl(data);
                     }
                 });
                 return data;
             });
+
+            function replaceControl(data)
+            {
+                tags_control.replaceWith(data);
+                $('.tags_control', context).tags_control();
+                $('.view a.show_edit', context).trigger('click');
+            }
         });
     }
 })(jQuery);
