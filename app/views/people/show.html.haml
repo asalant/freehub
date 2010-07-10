@@ -6,7 +6,7 @@
     {
       $(function()
       {
-        $('.tags_container').tags_control();
+        $('.tags_control').tags_control();
         $('#visit_submit').focus();
       });
     })(jQuery);
@@ -30,7 +30,7 @@
   %li= @person.postal_code
   %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
   %li &nbsp;
-  %li.tags_container{:id => "person_tags_#{@person.id}"}= render :partial => '/taggings/index'
+  %li= render :partial => '/taggings/index'
 
 %div#sign_in
   %h2 Sign #{@person.first_name} In

@@ -8,17 +8,17 @@
         %a{:href => '#', :class => 'show_edit'} Edit tags
   .edit
     %ul.tags
-      %li=image_tag 'spinner.gif', :id => 'update_status', :style => 'display:none;'
+      %li=image_tag 'spinner.gif', :class => 'spinner'
       -for tag in @person.tag_list
         %li.tag
           = tag
-          =link_to_remote 'x', :update => "person_tags_#{@person.id}", :loading => "$('update_status').show()", :url => tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :method => :delete, :class => 'delete'
+          =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :class => 'delete'
       %li
-        -remote_form_for :taggings, { :update => "person_tags_#{@person.id}", :loading => "$('update_status').show()", :url => taggings_path(:organization_key => @organization.key, :person_id => @person) } do |f|
-          %select{ :name => :id, :onchange => 'if (this.selectedIndex > 0) { this.form.onsubmit(); }' }
-            %option Add tag
+        -form_for :taggings, :url => taggings_path(:organization_key => @organization.key, :person_id => @person) do |f|
+          %select
+            %option{:value => ''} Add tag
             -for tag in @organization.tag_list - @person.tag_list
               %option{:value => tag}= tag
-            -#%option New tag
+            %option{:value => ''} New tag
       %li
         %a{:href => '#', :class => 'show_view'} Done

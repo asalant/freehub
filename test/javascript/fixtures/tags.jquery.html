@@ -5,50 +5,54 @@
     <title>Tags | JavaScript Testing Results</title>
     <link rel="stylesheet" href="screw.css" type="text/css" charset="utf-8"/>
     <script type="text/javascript" src="../../../vendor/plugins/blue-ridge/lib/blue-ridge.js"></script>
+    <script type="text/javascript">
+        window.AUTHENTICITY_TOKEN = 'xxx';
+    </script>
 </head>
 
 <body>
 <div id="fixture">
 
     <div class='tags_control'>
-      <div class='view'>
-        <ul class='tags'>
-          <li class='tag'>
-            <a href="/sfbk/tags/key%20holder">key holder</a>
-          </li>
-          <li class='tag'>
-            <a href="/sfbk/tags/one">one</a>
+        <div class='view'>
+            <ul class='tags'>
+                <li class='tag'>
+                    <a href="/sfbk/tags/key%20holder">key holder</a>
+                </li>
+                <li class='tag'>
+                    <a href="/sfbk/tags/one">one</a>
 
-          </li>
-          <li>
-            <a class='show_edit' href='#'>Edit tags</a>
-          </li>
-        </ul>
-      </div>
-      <div class='edit'>
-        <ul class='tags'>
+                </li>
+                <li>
+                    <a class='show_edit' href='#'>Edit tags</a>
+                </li>
+            </ul>
+        </div>
+        <div class='edit'>
+            <ul class='tags'>
 
-          <li class='tag'>
-            key holder
-            <a href="/sfbk/people/602306942/taggings/key%20holder" onclick="var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'uJm7ZfXzYD8ojeNvD4YAm+azn/8xbXA1drupkI81mq8='); f.appendChild(s);f.submit();return false;">x</a>
-          </li>
-          <li class='tag'>
-            one
-            <a href="/sfbk/people/602306942/taggings/one" onclick="var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'uJm7ZfXzYD8ojeNvD4YAm+azn/8xbXA1drupkI81mq8='); f.appendChild(s);f.submit();return false;">x</a>
-          </li>
-          <select>
+                <li class='tag'>
+                    key holder
+                    <a class="delete" href="/sfbk/people/602306942/taggings/key%20holder">x</a>
+                </li>
+                <li class='tag'>
+                    one
+                    <a class="delete" href="/sfbk/people/602306942/taggings/one">x</a>
+                </li>
+                <form action="/sfbk/people/602306942/taggings">
+                    <select>
+                        <option>Add tag</option>
+                        <option value='two'>two</option>
+                        <option value='three'>three</option>
+                        <option>New tag</option>
+                    </select>
+                </form>
+                <li>
+                    <a class='show_view' href='#'>Done editing</a>
 
-            <option>Add tag</option>
-            <option value='two'>two</option>
-            <option value='three'>three</option>
-            <option>New tag</option>
-          </select>
-          <li>
-            <a class='show_view' href='#'>Done editing</a>
-
-          </li>
-        </ul>
-      </div>
+                </li>
+            </ul>
+        </div>
     </div>
 
 

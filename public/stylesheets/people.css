@@ -41,6 +41,14 @@
   display: inline;
 }
 
+.tags_control .spinner {
+    display: none;
+}
+
+.tags_control.ajax_loading .spinner {
+    display: block;
+}
+
 .section h2 {
   float:left;
 }
