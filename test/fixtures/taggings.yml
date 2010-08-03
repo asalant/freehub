@@ -17,3 +17,8 @@ marty_key_holder:
   taggable: marty (Person)
   context: tags
   tag: key_holder
+
+mary_scbc_church:
+  taggable: mary_scbc (Person)
+  context: tags
+  tag: church
