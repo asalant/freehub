@@ -1,5 +1,6 @@
 -content_for :head do
   =stylesheet_link_tag 'people'
+  =stylesheet_link_tag 'tags'
   =javascript_include_tag 'tags.jquery.js'
   :javascript
     (function($)
@@ -30,7 +31,7 @@
   %li= @person.postal_code
   %li= link_to "Edit #{@person.first_name}", edit_person_path(:id => @person)
   %li &nbsp;
-  %li= render :partial => '/taggings/index'
+  %li= render :partial => '/taggings/index', :locals => { :person => @person }
 
 %div#sign_in
   %h2 Sign #{@person.first_name} In

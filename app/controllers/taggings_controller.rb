@@ -22,7 +22,7 @@ class TaggingsController < ApplicationController
   end
 
   def index
-    render :template => '/taggings/_index', :layout => false
+    render :partial => '/taggings/index', :locals => { :person => @person }
   end
 
   private

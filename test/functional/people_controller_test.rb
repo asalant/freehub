@@ -89,7 +89,7 @@ class PeopleControllerTest < ActionController::TestCase
     end
 
     should "create tags" do
-      assert_equal ['tag1', 'tag 2'], assigns(:person).tag_list
+      assert_equal ['tag 2', 'tag1'], assigns(:person).tag_list
     end
 
   end
