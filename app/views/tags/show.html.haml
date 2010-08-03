@@ -10,38 +10,46 @@
       });
     })(jQuery);
 
-%h1 Tag : #{@tag}
+%div.column{:style => 'width: 650px; margin-right: 40px;'}
 
-%div.section
-  %div.list_status #{@people.to_a.size} of #{@people.size} people shown.
-  %table{:width => '100%'}
-    -for person in @people
-      %tr
-        %td
-          %ul
-            %li.person_name
-              =link_to(person.full_name, person_path(:id => person))
-            %li= person.email
-            %li= person.postal_code
-            %li.last_visit
-              -if person.visits.first
-                Last visit #{date_long person.visits.first.arrived_at}
+  %h1 Tag : #{@tag}
+
+  %div.section
+    %div.list_status #{@people.to_a.size} of #{@people.size} people shown.
+    %table{:width => '100%'}
+      -for person in @people
+        %tr
+          %td
+            %ul
+              %li.person_name
+                =link_to(person.full_name, person_path(:id => person))
+              %li= person.email
+              %li= person.postal_code
+              %li.last_visit
+                -if person.visits.first
+                  Last visit #{date_long person.visits.first.arrived_at}
+                -else
+                  No visits
+          %td{:style => 'text-align: right;'}
+            %ul
+              %li.person_type
+                =person.person_type
+              -if !person.membership
+                %li Not a member
+              -elsif person.membership.current?
+                %li.current Membership expires #{date_short person.membership.end_date}
               -else
-                No visits
-        %td{:style => 'text-align: right;'}
-          %ul
-            %li.person_type
-              =person.person_type
-            -if !person.membership
-              %li Not a member
-            -elsif person.membership.current?
-              %li.current Membership expires #{date_short person.membership.end_date}
-            -else
-              %li.expired Membership expired #{date_short person.membership.end_date}
-            %li &nbsp;
-            %li=render :partial => '/taggings/index', :locals => { :person => person }
-    %tr.list_controls
-      %td{:colspan => 2}
-        -if @people.next_page? || @people.previous_page?
-          %div.paginating_links
-            More: #{paginating_links(@people)}
+                %li.expired Membership expired #{date_short person.membership.end_date}
+              %li &nbsp;
+              %li=render :partial => '/taggings/index', :locals => { :person => person }
+      %tr.list_controls
+        %td{:colspan => 2}
+          -if @people.next_page? || @people.previous_page?
+            %div.paginating_links
+              More: #{paginating_links(@people)}
+            
+%div.column{:style => 'width: 200px;'}
+  %h2 All Tags
+  %ul
+    -for tag in @organization.tag_list
+      %li=link_to(tag, tag_path(:id => tag))
