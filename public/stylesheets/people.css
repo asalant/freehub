@@ -18,11 +18,23 @@
   color: red;
 }
 
+.tags_control {
+  float: right;
+}
+
 .tags_control ul.tags li {
   float: left;
   font-size: 12px;
-  padding: 1px 3px;
+  padding: 3px 3px 2px 3px;
   margin-left: 3px;
+}
+
+.tags_control ul.tags li.form select {
+  margin: 0;
+}
+
+.tags_control ul.tags li.form {
+  padding-top: 2px;
 }
 
 .tags_control ul.tags li.tag {
@@ -35,10 +47,6 @@
 
 .tags_control .edit {
   display:block;
-}
-
-.tags_control form {
-  display: inline;
 }
 
 .tags_control .spinner {
