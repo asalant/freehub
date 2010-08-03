@@ -105,14 +105,14 @@ class PersonTest < ActiveSupport::TestCase
     should "save comma-separated tags" do
       @person.tag_list = "helpful, Artist"
       @person.save! && @person.reload
-      assert_equal %w[helpful Artist], @person.tag_list
+      assert_equal %w[Artist helpful], @person.tag_list
     end
 
-    should "add tag" do
-      @person.tag_list << 'other'
+    should "add tag and sort tags" do
+      @person.tag_list << 'keyholder'
       @person.save! && @person.reload
 
-      assert_equal %w[mechanic mom other], @person.tag_list
+      assert_equal %w[keyholder mechanic mom], @person.tag_list
     end
 
     should "not add same tag with different case" do

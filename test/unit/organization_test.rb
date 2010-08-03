@@ -40,7 +40,7 @@ class OrganizationTest < ActiveSupport::TestCase
 
   context 'Organization with tags' do
     should 'find all tags in use' do
-      assert_equal %w(mechanic mom), organizations(:sfbk).tag_list
+      assert_equal ['key holder', 'mechanic', 'mom'], organizations(:sfbk).tag_list
     end
   end
 end

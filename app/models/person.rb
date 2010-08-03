@@ -107,6 +107,11 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def tag_list_with_sorting
+    tag_list_without_sorting.sort!
+  end
+  alias_method_chain :tag_list, :sorting
+
   CSV_FIELDS = { :self => %w{first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country yob created_at membership_expires_on} }
 
   def self.csv_header
@@ -151,9 +156,4 @@ class Person < ActiveRecord::Base
   def update_full_name
     self.full_name = [first_name, last_name].reject{|e| e.nil? || e.empty?}.join(' ')
   end
-end
-
-
-ActsAsTaggableOn::Tag.class_eval do
-  named_scope :for_organization
 end
