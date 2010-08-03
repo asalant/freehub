@@ -95,5 +95,38 @@ class PersonTest < ActiveSupport::TestCase
   def test_to_csv
     assert_match /^Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,1972,2008-01-02 00:00:00,\d{4}-\d{2}-\d{2}$/, people(:mary).to_csv
   end
+
+  context "A person Mary with tags" do
+    setup do
+      @person = people(:mary)
+      assert_equal %w(mechanic mom), @person.tag_list
+    end
+
+    should "save comma-separated tags" do
+      @person.tag_list = "helpful, Artist"
+      @person.save! && @person.reload
+      assert_equal %w[Artist helpful], @person.tag_list
+    end
+
+    should "add tag and sort tags" do
+      @person.tag_list << 'keyholder'
+      @person.save! && @person.reload
+
+      assert_equal %w[keyholder mechanic mom], @person.tag_list
+    end
+
+    should "not add same tag with different case" do
+      @person.tag_list << 'Mom'
+      @person.save! && @person.reload
+
+      assert_equal %w[mechanic mom], @person.tag_list
+    end
+
+    should "be found by tag" do
+      people = Person.tagged_with 'mom'
+      assert_equal 1, people.size
+      assert_equal @person, people.first
+    end
+  end
 end
 

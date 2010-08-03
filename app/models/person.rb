@@ -54,7 +54,8 @@ class Person < ActiveRecord::Base
 
   before_validation :trim_attributes
   before_save :titleize_name, :update_full_name, :titleize_address, :downcase_email
-  
+
+  acts_as_taggable
   acts_as_paginated
   chains_finders
 
@@ -105,6 +106,11 @@ class Person < ActiveRecord::Base
       'Patron'
     end
   end
+
+  def tag_list_with_sorting
+    tag_list_without_sorting.sort!
+  end
+  alias_method_chain :tag_list, :sorting
 
   CSV_FIELDS = { :self => %w{first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country yob created_at membership_expires_on} }
 

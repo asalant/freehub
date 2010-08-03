@@ -1,0 +1,37 @@
+%h1 Tag : #{@tag}
+
+%div.section
+  %div.list_status #{@people.to_a.size} of #{@people.size} people shown.
+  %table
+    %tr
+      %th Name
+      %th Staff
+      %th Email
+      %th Phone
+      %th City
+      %th State
+      %th Postal code
+      %th Created
+    -for person in @people
+      %tr{:class => cycle('odd','even')}
+        %td{:style => 'width:200px;'}
+          =link_to(person.full_name, person_path(:id => person))
+        %td
+          = person.staff
+        %td{:style => 'width:200px;'}
+          = person.email
+        %td
+          = person.phone
+        %td
+          = person.city
+        %td
+          = person.state
+        %td
+          = person.postal_code
+        %td
+          = datetime_short(person.created_at)
+    %tr.list_controls
+      %td{:colspan => 8}
+        -if @people.next_page? || @people.previous_page?
+          %div.paginating_links
+            More: #{paginating_links(@people, :params => { :report => params[:report] } )}

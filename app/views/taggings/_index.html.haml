@@ -1,0 +1,26 @@
+.tags_control
+  .view
+    %ul.tags
+      %li=image_tag 'tag_yellow.png'
+      -for tag in @person.tag_list
+        %li.tag
+          =link_to tag, tag_path(:organization_key => @organization.key, :id => tag)
+      %li
+        %a{:href => '#', :class => 'show_edit'} Edit tags
+  .edit
+    %ul.tags
+      %li=image_tag 'spinner.gif', :class => 'spinner'
+      -for tag in @person.tag_list
+        %li.tag
+          = tag
+          =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => @person, :id => tag), :class => 'delete'
+      %li.form
+        -form_for :taggings, :url => taggings_path(:organization_key => @organization.key, :person_id => @person) do |f|
+          %select
+            %option{:value => ''} Choose tag
+            -for tag in @organization.tag_list - @person.tag_list
+              %option{:value => tag}= tag
+            %option{:value => ''}= '------'
+            %option{:value => ''} New tag
+      %li
+        %a{:href => '#', :class => 'show_view'} Done
