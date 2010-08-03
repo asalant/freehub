@@ -1,37 +1,47 @@
+-content_for :head do
+  =stylesheet_link_tag 'tags'
+  =javascript_include_tag 'tags.jquery.js'
+  :javascript
+    (function($)
+    {
+      $(function()
+      {
+        $('.tags_control').tags_control();
+      });
+    })(jQuery);
+
 %h1 Tag : #{@tag}
 
 %div.section
   %div.list_status #{@people.to_a.size} of #{@people.size} people shown.
-  %table
-    %tr
-      %th Name
-      %th Staff
-      %th Email
-      %th Phone
-      %th City
-      %th State
-      %th Postal code
-      %th Created
+  %table{:width => '100%'}
     -for person in @people
-      %tr{:class => cycle('odd','even')}
-        %td{:style => 'width:200px;'}
-          =link_to(person.full_name, person_path(:id => person))
+      %tr
         %td
-          = person.staff
-        %td{:style => 'width:200px;'}
-          = person.email
-        %td
-          = person.phone
-        %td
-          = person.city
-        %td
-          = person.state
-        %td
-          = person.postal_code
-        %td
-          = datetime_short(person.created_at)
+          %ul
+            %li.person_name
+              =link_to(person.full_name, person_path(:id => person))
+            %li= person.email
+            %li= person.postal_code
+            %li.last_visit
+              -if person.visits.first
+                Last visit #{date_long person.visits.first.arrived_at}
+              -else
+                No visits
+        %td{:style => 'text-align: right;'}
+          %ul
+            %li.person_type
+              =person.person_type
+            -if !person.membership
+              %li Not a member
+            -elsif person.membership.current?
+              %li.current Membership expires #{date_short person.membership.end_date}
+            -else
+              %li.expired Membership expired #{date_short person.membership.end_date}
+            %li &nbsp;
+            %li=render :partial => '/taggings/index', :locals => { :person => person }
     %tr.list_controls
-      %td{:colspan => 8}
+      %td{:colspan => 2}
         -if @people.next_page? || @people.previous_page?
           %div.paginating_links
-            More: #{paginating_links(@people, :params => { :report => params[:report] } )}
+            More: #{paginating_links(@people)}

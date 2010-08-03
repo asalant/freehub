@@ -18,45 +18,6 @@
   color: red;
 }
 
-.tags_control {
-  float: right;
-}
-
-.tags_control ul.tags li {
-  float: left;
-  font-size: 12px;
-  padding: 3px 3px 2px 3px;
-  margin-left: 3px;
-}
-
-.tags_control ul.tags li.form select {
-  margin: 0;
-}
-
-.tags_control ul.tags li.form {
-  padding-top: 2px;
-}
-
-.tags_control ul.tags li.tag {
-  background-color: #EEE;
-}
-
-.tags_control .view {
-  display:none;
-}
-
-.tags_control .edit {
-  display:block;
-}
-
-.tags_control .spinner {
-    display: none;
-}
-
-.tags_control.ajax_loading .spinner {
-    display: block;
-}
-
 .section h2 {
   float:left;
 }
