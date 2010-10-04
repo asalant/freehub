@@ -24,9 +24,9 @@ class ReportsController < ApplicationController
       format.xml { render :xml => @visits }
       format.csv do
         stream_csv("#{@organization.key}_visits_#{@report[:after]}_#{@report[:before]}.csv") do |output|
-          output << Visit.csv_header
+          output.write Visit.csv_header
           @visits.each do |visit|
-            output << "\n#{visit.to_csv}"
+            output.write "\n#{visit.to_csv}"
           end
         end
       end
@@ -54,9 +54,9 @@ class ReportsController < ApplicationController
       format.xml { render :xml => @services }
       format.csv do
         stream_csv("#{@organization.key}_services_#{@report[:end_after]}_#{@report[:end_before]}.csv") do |output|
-          output << CSV.generate_line(Service::CSV_FIELDS[:person] + Service::CSV_FIELDS[:self])
+          output.write CSV.generate_line(Service::CSV_FIELDS[:person] + Service::CSV_FIELDS[:self])
           @services.each do |service|
-            output << "\n#{service.to_csv}"
+            output.write "\n#{service.to_csv}"
           end
         end
       end
@@ -82,9 +82,9 @@ class ReportsController < ApplicationController
       format.xml { render :xml => @people }
       format.csv do
         stream_csv("#{@organization.key}_people_#{@report[:after]}_#{@report[:before]}.csv") do |output|
-          output << CSV.generate_line(Person::CSV_FIELDS[:self])
+          output.write CSV.generate_line(Person::CSV_FIELDS[:self])
           @people.each do |person|
-            output << "\n#{person.to_csv}"
+            output.write "\n#{person.to_csv}"
           end
         end
       end
