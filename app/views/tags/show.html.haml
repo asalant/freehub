@@ -24,7 +24,6 @@
               %li.person_name
                 =link_to(person.full_name, person_path(:id => person))
               %li= person.email
-              %li= person.postal_code
               %li.last_visit
                 -if person.visits.first
                   Last visit #{date_long person.visits.first.arrived_at}

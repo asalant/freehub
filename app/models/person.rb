@@ -61,6 +61,7 @@ class Person < ActiveRecord::Base
 
   named_scope :for_organization, lambda { |organization| {
       :conditions => { :organization_id => organization },
+      :order => "full_name ASC"
   } }
 
   named_scope :after, lambda { |date| {
@@ -72,8 +73,7 @@ class Person < ActiveRecord::Base
   } }
 
   named_scope :matching_name, lambda { |name| {
-      :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ], 
-      :order => "full_name ASC"
+      :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ]
   } }
 
   def initialize(params={})
