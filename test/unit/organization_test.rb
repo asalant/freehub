@@ -21,6 +21,7 @@ class OrganizationTest < ActiveSupport::TestCase
     assert_equal "Eastern Time (US & Canada)", Organization.new(:name => 'Name', :key => 'key', :timezone => 'Eastern Time (US & Canada)').timezone
 
     assert !Organization.new(:name => 'Name', :key => 'key', :timezone => 'invalid').valid?
+    assert Organization.new(:name => 'Name', :key => 'key', :timezone => 'London').valid?
   end
 
   def test_last_visit
