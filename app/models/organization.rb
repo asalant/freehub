@@ -59,7 +59,7 @@ class Organization < ActiveRecord::Base
   private
 
   def validate_timezone
-    @timezone_names ||= ActiveSupport::TimeZone.us_zones.map { |z| z.name }
+    @timezone_names ||= ActiveSupport::TimeZone.all.map { |z| z.name }
     if !errors.on(:timezone)
       errors.add :timezone if !@timezone_names.include?(self.timezone)
     end
