@@ -11,10 +11,10 @@ class TaggingsControllerTest < ActionController::TestCase
         get :index, :organization_key => 'sfbk', :person_id => people(:mary)
       end
 
-      should_render_without_layout
-      should_render_template 'taggings/_index.html.haml'
-      should_assign_to :person
-      should_assign_to :organization
+      should should_render_without_layout
+      should render_template 'taggings/_index.html.haml'
+      should assign_to :person
+      should assign_to :organization
     end
 
     context 'after deleting a tag' do
@@ -37,8 +37,8 @@ class TaggingsControllerTest < ActionController::TestCase
         xhr :delete, :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => 'mechanic'
       end
       
-      should_render_without_layout
-      should_render_template 'taggings/_index.html.haml'
+      should should_render_without_layout
+      should render_template 'taggings/_index.html.haml'
     end
 
     context 'after adding a tag' do
@@ -62,8 +62,8 @@ class TaggingsControllerTest < ActionController::TestCase
         people(:mary).reload
       end
 
-      should_render_without_layout
-      should_render_template 'taggings/_index.html.haml'
+      should should_render_without_layout
+      should render_template 'taggings/_index.html.haml'
 
       should 'have the new tag' do
         assert_equal ['mechanic', 'mom', 'three'], people(:mary).tag_list

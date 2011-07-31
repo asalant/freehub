@@ -99,9 +99,9 @@ class PeopleControllerTest < ActionController::TestCase
       get :show, :organization_key => 'sfbk', :id => people(:mary).id
     end
 
-    should_respond_with :success
-    should_assign_to :person
-    should_assign_to :all_tags
+    should respond_with :success
+    should assign_to :person
+    should assign_to :all_tags
 
     should 'render links to tags' do
       assert_select '.tags_control' do
