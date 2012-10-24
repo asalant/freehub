@@ -65,11 +65,11 @@ class Person < ActiveRecord::Base
   } }
 
   named_scope :after, lambda { |date| {
-      :conditions => [ "people.created_at >= ?", date.to_date.to_time.utc ]
+      :conditions => [ "people.created_at >= ?", Time.zone.parse(date.to_s) ]
   } }
 
   named_scope :before, lambda { |date| {
-      :conditions => [ "people.created_at < ?", date.to_date.to_time.utc ]
+      :conditions => [ "people.created_at < ?", Time.zone.parse(date.to_s) ]
   } }
 
   named_scope :matching_name, lambda { |name| {

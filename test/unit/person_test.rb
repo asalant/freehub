@@ -55,8 +55,14 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 2, Person.for_organization(organizations(:sfbk)).matching_name('ma').size
   end
 
-  def test_in_date_range
-    from, to = Date.new(2007,1,1), Date.new(2008,1,3)
+  def test_in_date_range_with_times
+    from, to = Time.zone.parse('2007-01-01'), Time.zone.parse('2008-01-03')
+    assert_equal 7, Person.after(from).size
+    assert_equal 2, Person.after(from).before(to).size
+  end
+
+  def test_in_date_range_with_strings
+    from, to = '2007-01-01', '2008-01-03'
     assert_equal 7, Person.after(from).size
     assert_equal 2, Person.after(from).before(to).size
   end
