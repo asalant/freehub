@@ -112,7 +112,7 @@ class Person < ActiveRecord::Base
   end
   alias_method_chain :tag_list, :sorting
 
-  CSV_FIELDS = { :self => %w{first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country yob created_at membership_expires_on} }
+  CSV_FIELDS = { :self => %w{id first_name last_name staff email email_opt_out phone postal_code street1 street2 city state postal_code country yob created_at membership_expires_on} }
 
   def self.csv_header
     CSV.generate_line(CSV_FIELDS[:self])
