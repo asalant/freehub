@@ -1,6 +1,6 @@
 source :gemcutter, :rubygems
 
-gem "rails", "2.3.11"
+gem "rails", "2.3.15"
 gem "mysql"
 
 gem 'haml', "3.0.25"
