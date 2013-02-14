@@ -1,8 +1,9 @@
 source :gemcutter, :rubygems
 
-gem "rails", "2.3.15"
+gem "rails", "2.3.17"
 gem "mysql"
 
+gem 'json', '1.7.7' # (CVE-2013-026) Can remove once rails depends on > 1.7.6
 gem 'haml', "3.0.25"
 gem 'googlecharts', "1.6.0"
 gem 'calendar_date_select', "1.16.1"
