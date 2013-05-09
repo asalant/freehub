@@ -59,7 +59,7 @@
                 $.ajax({
                     type: 'POST',
                     url: data.url,
-                    data: { _method: 'DELETE', auth_token: window.AUTHENTICITY_TOKEN},
+                    data: { _method: 'DELETE'},
                     success: function(data, status)
                     {
                         replaceControl(data);
@@ -74,7 +74,7 @@
                 $.ajax({
                     type: 'POST',
                     url: data.url,
-                    data: { _method: 'POST', auth_token: window.AUTHENTICITY_TOKEN, id: data.tag },
+                    data: { _method: 'POST', id: data.tag },
                     success: function(data, status)
                     {
                         replaceControl(data);
