@@ -28,8 +28,7 @@ config.action_view.cache_template_loading            = true
 # config.threadsafe!
 
 # Set up with SendGrid for Engine Yard per
-# https://community.engineyard.com/faqs/questions/ssmtp
-# https://community.engineyard.com/discussions/problems/615-setting-up-ssmtp-for-mail-relay-to-sendgrid
+# https://github.com/engineyard/ey-cloud-recipes/tree/master/cookbooks/ssmtp
 config.action_mailer.delivery_method = :sendmail
 
 SITE_URL = 'http://freehub.bikekitchen.org'
