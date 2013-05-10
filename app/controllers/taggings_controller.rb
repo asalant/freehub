@@ -3,7 +3,7 @@ class TaggingsController < ApplicationController
 
   def create
     @person.tag_list << params[:id]
-    @person.save
+    @person.save!
     if request.xhr?
       index
     else
@@ -12,8 +12,8 @@ class TaggingsController < ApplicationController
   end
 
   def destroy
-    @person.tag_list.delete params[:id]
-    @person.save
+    tagging = Tagging.find params[:id]
+    @person.taggings.delete tagging
     if request.xhr?
       index
     else
