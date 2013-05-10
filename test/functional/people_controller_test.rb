@@ -105,8 +105,8 @@ class PeopleControllerTest < ActionController::TestCase
 
     should 'render links to tags' do
       assert_select '.tags_control' do
-        assert_select 'a[href=/sfbk/tags/mom]'
-        assert_select 'a[href=/sfbk/tags/mechanic]'
+        assert_select "a[href=/sfbk/tags/#{tags(:mom).id}]"
+        assert_select "a[href=/sfbk/tags/#{tags(:mechanic).id}]"
       end
     end
   end

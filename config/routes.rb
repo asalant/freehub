@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.reset    '/reset/:reset_code', :controller => 'users',     :action => 'reset',
                                      :requirements => { :reset_code => /\w+/ }
 
-  # Organization mappings go last so they don't take precedence'
+  # Organization mappings go last so they don't take precedence
   map.resources :tags, :path_prefix => '/:organization_key', :only => :show
   map.resources :people, :path_prefix => '/:organization_key', :collection => { :auto_complete_for_person_full_name => :get }
   map.resources :visits, :path_prefix => '/:organization_key/people/:person_id'

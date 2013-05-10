@@ -5,13 +5,12 @@ class TagsControllerTest < ActionController::TestCase
     setup do
       login_as 'greeter'
 
-      people(:mary).tag_list = 'greeter'
       people(:mary).save!
     end
 
     context "show" do
       setup do
-        get :show, :organization_key => 'sfbk', :id => 'greeter'
+        get :show, :organization_key => 'sfbk', :id => tags(:mom).id
       end
 
       should respond_with :success

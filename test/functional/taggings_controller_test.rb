@@ -19,7 +19,7 @@ class TaggingsControllerTest < ActionController::TestCase
 
     context 'after deleting a tag' do
       setup do
-        delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => 'mechanic'
+        delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => taggings(:mary_mechanic).id
         people(:mary).reload
       end
 
@@ -34,7 +34,7 @@ class TaggingsControllerTest < ActionController::TestCase
 
     context 'after deleting a tag via ajax' do
       setup do
-        xhr :delete, :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => 'mechanic'
+        xhr :delete, :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => taggings(:mary_mechanic).id
       end
       
       should_not render_with_layout
