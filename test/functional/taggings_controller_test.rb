@@ -11,7 +11,7 @@ class TaggingsControllerTest < ActionController::TestCase
         get :index, :organization_key => 'sfbk', :person_id => people(:mary)
       end
 
-      should should_not render_with_layout
+      should_not render_with_layout
       should render_template 'taggings/_index.html.haml'
       should assign_to :person
       should assign_to :organization
@@ -19,7 +19,7 @@ class TaggingsControllerTest < ActionController::TestCase
 
     context 'after deleting a tag' do
       setup do
-        delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => 'mechanic'
+        delete :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => taggings(:mary_mechanic).id
         people(:mary).reload
       end
 
@@ -34,10 +34,10 @@ class TaggingsControllerTest < ActionController::TestCase
 
     context 'after deleting a tag via ajax' do
       setup do
-        xhr :delete, :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => 'mechanic'
+        xhr :delete, :destroy, :organization_key => 'sfbk', :person_id => people(:mary), :id => taggings(:mary_mechanic).id
       end
       
-      should should_not render_with_layout
+      should_not render_with_layout
       should render_template 'taggings/_index.html.haml'
     end
 
@@ -62,7 +62,7 @@ class TaggingsControllerTest < ActionController::TestCase
         people(:mary).reload
       end
 
-      should should_not render_with_layout
+      should_not render_with_layout
       should render_template 'taggings/_index.html.haml'
 
       should 'have the new tag' do

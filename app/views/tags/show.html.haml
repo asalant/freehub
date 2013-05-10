@@ -50,5 +50,5 @@
 %div.column{:style => 'width: 200px;'}
   %h2 All Tags
   %ul
-    -for tag in @organization.tag_list
-      %li=link_to(tag, tag_path(:id => tag))
+    -for tag in @organization.tags
+      %li=link_to tag, tag_path(:organization_key => @organization.key, :id => tag.id)
