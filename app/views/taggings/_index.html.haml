@@ -2,7 +2,7 @@
   .view
     %ul.tags
       %li=image_tag 'tag_yellow.png'
-      -for tag in person.tags
+      -for tag in person.tags.sort_by {|tag| tag.name.downcase }
         %li.tag
           =link_to tag, tag_path(:organization_key => @organization.key, :id => tag.id)
       %li
