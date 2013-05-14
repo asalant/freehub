@@ -10,7 +10,7 @@
   .edit
     %ul.tags
       %li=image_tag 'spinner.gif', :class => 'spinner'
-      -for tagging in person.taggings
+      -for tagging in person.taggings.sort_by {|tagging| tagging.tag.name.downcase }
         %li.tag
           = tagging.tag.name
           =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => person, :id => tagging.id), :class => 'delete'
