@@ -19,7 +19,7 @@
           %select
             %option{:value => ''} Choose tag
             -for tag in @organization.tags - person.tags
-              %option{:value => tag.id}= tag.name
+              %option{:value => tag.name}= tag.name
             %option{:value => ''}= '------'
             %option{:value => ''} New tag
       %li
