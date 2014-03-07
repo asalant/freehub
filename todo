@@ -1,0 +1,18 @@
+Move to new ruby / rails version
+================================
+
+The vendor plugins are very old and the format of keeping 
+them in a vendor dir is depricated.
+rails-authorization-plugin
+is a pain because it hasn't been worked on in years,
+can we switch to using devise? Not sure if that would make 
+existing users lose their passwords.
+
+In the newer versions of rails the initialization / boot process
+has changed.  We need to migrate the config files to the new format.
+
+
+Time zone issues
+================
+The build only works on when using Pacific Ocean time zone.  Some where
+in the tests (maybe the fixtures..?) there is a implicit assumption.
