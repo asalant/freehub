@@ -50,6 +50,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     thoughtbot-shoulda (2.11.1)
+    validates_email_format_of (1.5.3)
 
 PLATFORMS
   ruby
@@ -69,3 +70,4 @@ DEPENDENCIES
   rails (= 2.3.17)
   rdoc
   thoughtbot-shoulda
+  validates_email_format_of

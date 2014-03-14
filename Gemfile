@@ -10,6 +10,7 @@ gem 'calendar_date_select', "1.16.1"
 gem "acts-as-taggable-on", "2.0.6"
 gem "newrelic_rpm"
 gem 'hoptoad_notifier'
+gem 'validates_email_format_of'
 
 group :development, :test do
   gem 'debugger'
