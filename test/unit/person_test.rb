@@ -89,7 +89,7 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   def test_csv_header
-    assert_equal 'id,first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,yob,created_at,membership_expires_on', Person.csv_header
+    assert_equal "id,first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,yob,created_at,membership_expires_on\n", Person.csv_header
   end
 
   def test_to_csv

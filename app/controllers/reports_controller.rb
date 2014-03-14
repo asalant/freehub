@@ -26,7 +26,7 @@ class ReportsController < ApplicationController
         stream_csv("#{@organization.key}_visits_#{@report[:after]}_#{@report[:before]}.csv") do |output|
           output.write Visit.csv_header
           @visits.each do |visit|
-            output.write "\n#{visit.to_csv}"
+            output.write "#{visit.to_csv}"
           end
         end
       end
