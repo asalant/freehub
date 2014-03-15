@@ -8,7 +8,9 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 # Authorization plugin
 AUTHORIZATION_MIXIN = 'object roles'
-DEFAULT_REDIRECTION_HASH = { :controller => 'sessions', :action => 'new' }
+
+PERMISSION_DENIED_REDIRECTION = { :controller => 'sessions', :action => 'new' }
+LOGIN_REQUIRED_REDIRECTION = PERMISSION_DENIED_REDIRECTION
 STORE_LOCATION_METHOD = :store_return_location
 
 Rails::Initializer.run do |config|
