@@ -1,3 +1,3 @@
 #!/usr/bin/env ruby
-require '../freehub/config/boot'
+require File.dirname(__FILE__) + '/../config/boot'
 require 'commands/console'
