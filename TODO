@@ -1,4 +1,0 @@
-= 2/12/2012
-Resolve deprecation warnings (rdoc, add_spec, haml)
-Fix SendGrid emailing on staging
-
