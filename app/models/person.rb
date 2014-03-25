@@ -73,7 +73,7 @@ class Person < ActiveRecord::Base
   } }
 
   named_scope :matching_name, (lambda do |name|
-    { :conditions => [ "LOWER(full_name) LIKE ?", name.downcase ]   }
+    { :conditions => [ "full_name LIKE ?", "%#{name}%"]   }
   end )
 
   def initialize(params={})
