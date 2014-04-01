@@ -68,6 +68,10 @@ class TaggingsControllerTest < ActionController::TestCase
       should 'have the new tag' do
         assert_equal ['mechanic', 'mom', 'three'], people(:mary).tag_list
       end
+
+      should 'render links to delete tags' do
+        assert_select '.tags_control .edit .tag a.delete', 3
+      end
     end
     
   end
