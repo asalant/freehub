@@ -44,7 +44,7 @@ class ReportsControllerTest < ActionController::TestCase
     assert_nothing_raised { @response.body.call(@response, output) }
     lines = output.string.split("\n")
     assert_equal assigns(:visits).size + 1, lines.size
-    assert_equal Visit.csv_header, lines[0]
+    assert_equal Visit.csv_header, lines[0]+"\n"
     assert_equal "attachment; filename=\"sfbk_visits_2006-01-01_2008-01-01.csv\"", @response.headers['Content-Disposition']
   end
 
@@ -84,7 +84,7 @@ class ReportsControllerTest < ActionController::TestCase
     assert_nothing_raised { @response.body.call(@response, output) }
     lines = output.string.split("\n")
     assert_equal assigns(:services).size + 1, lines.size
-    assert_equal Service.csv_header, lines[0]
+    assert_equal Service.csv_header, lines[0]+"\n"
     assert_equal "attachment; filename=\"sfbk_services_2006-01-01_2009-01-01.csv\"", @response.headers['Content-Disposition']
   end
 
@@ -122,7 +122,7 @@ class ReportsControllerTest < ActionController::TestCase
     assert_nothing_raised { @response.body.call(@response, output) }
     lines = output.string.split("\n")
     assert_equal assigns(:people).size + 1, lines.size
-    assert_equal Person.csv_header, lines[0]
+    assert_equal Person.csv_header, lines[0]+"\n"
     assert_equal "attachment; filename=\"sfbk_people_2008-01-01_2008-01-05.csv\"", @response.headers['Content-Disposition']
   end
 

@@ -30,7 +30,7 @@ class ServiceTest < ActiveSupport::TestCase
   end
 
   def test_csv_header
-    assert_equal 'first_name,last_name,email,email_opt_out,phone,postal_code,service_type_id,start_date,end_date,volunteered,paid,note', Service.csv_header
+    assert_equal "first_name,last_name,email,email_opt_out,phone,postal_code,service_type_id,start_date,end_date,volunteered,paid,note\n", Service.csv_header
   end
   
   def test_to_csv

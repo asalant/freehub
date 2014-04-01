@@ -5,6 +5,7 @@ class TaggingsController < ApplicationController
     @person.tag_list << params[:id]
     @person.save!
     if request.xhr?
+      @person.taggings.reload
       index
     else
       redirect_to_person_path

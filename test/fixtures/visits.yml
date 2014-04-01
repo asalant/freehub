@@ -15,22 +15,22 @@
 #
 
 mary_1:
-  arrived_at: 2007-02-01 18:01:00
+  arrived_at: <%= DateTime.parse('2007-02-01 18:01:00 PST') %>
   volunteer: false
   staff: false
   member: true
   person: mary
 
 mary_2:
-  arrived_at: 2007-02-02 18:02:00
+  arrived_at: <%= DateTime.parse('2007-02-02 18:02:00 PST') %>
   volunteer: true
   staff: false
   member: true
   person: mary
-  
+
 <% (1..100).each do |count| %>
 daryl_<%= count %>:
-  arrived_at: <%= DateTime.parse('2007-02-02 18:02:00').advance(:hours => count * -16) %>
+  arrived_at: <%= DateTime.parse('2007-02-02 18:02:00 PST').advance(:hours => count * -16) %>
   person: daryl
 <% end %>
 

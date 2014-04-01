@@ -26,7 +26,7 @@ class ReportsController < ApplicationController
         stream_csv("#{@organization.key}_visits_#{@report[:after]}_#{@report[:before]}.csv") do |output|
           output.write Visit.csv_header
           @visits.each do |visit|
-            output.write "\n#{visit.to_csv}"
+            output.write "#{visit.to_csv}"
           end
         end
       end
@@ -56,7 +56,7 @@ class ReportsController < ApplicationController
         stream_csv("#{@organization.key}_services_#{@report[:end_after]}_#{@report[:end_before]}.csv") do |output|
           output.write CSV.generate_line(Service::CSV_FIELDS[:person] + Service::CSV_FIELDS[:self])
           @services.each do |service|
-            output.write "\n#{service.to_csv}"
+            output.write "#{service.to_csv}"
           end
         end
       end
@@ -84,7 +84,7 @@ class ReportsController < ApplicationController
         stream_csv("#{@organization.key}_people_#{@report[:after]}_#{@report[:before]}.csv") do |output|
           output.write CSV.generate_line(Person::CSV_FIELDS[:self])
           @people.each do |person|
-            output.write "\n#{person.to_csv}"
+            output.write "#{person.to_csv}"
           end
         end
       end

@@ -38,7 +38,7 @@ class VisitTest < ActiveSupport::TestCase
   end
 
   def test_csv_header
-    assert_equal 'first_name,last_name,email,email_opt_out,phone,postal_code,arrived_at,staff,member,volunteer,note', Visit.csv_header
+    assert_equal "first_name,last_name,email,email_opt_out,phone,postal_code,arrived_at,staff,member,volunteer,note\n", Visit.csv_header
   end
 
   def test_create_defaults
