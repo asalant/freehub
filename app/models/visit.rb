@@ -52,11 +52,11 @@ class Visit < ActiveRecord::Base
                  :self => %w{arrived_at staff member volunteer note} }
 
   def self.csv_header
-    CSV.generate_line(CSV_FIELDS[:person] + CSV_FIELDS[:self])
+    CSV.generate_line(['person_id'] + CSV_FIELDS[:person] + CSV_FIELDS[:self])
   end
 
   def to_csv
-    values = person.attributes.values_at(*CSV_FIELDS[:person])
+    values = [person.id].concat person.attributes.values_at(*CSV_FIELDS[:person])
     values << (arrived_at.nil? ? nil : arrived_at.strftime("%Y-%m-%d %H:%M"))
     values << staff?
     values << member?
