@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/alex-frost/rails-authorization-plugin.git
+  remote: git://github.com/asalant/rails-authorization-plugin.git
   revision: 505bd47addf2ef5e3b5d98a7ea8d1352c2aa4ee6
   specs:
     authorization (1.0.12)

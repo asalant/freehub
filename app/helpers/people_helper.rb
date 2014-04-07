@@ -5,11 +5,13 @@ module PeopleHelper
     return unless entries
     items = entries.map do |entry|
       content_tag("li", phrase ? highlight(entry[field], phrase) : h(entry[field]),
+          :class => 'person',
           :url => person_path(:organization_key => @organization.key, :id => entry.id))
     end
     items << content_tag("li", content_tag("b", 'Add Person'),
+        :class => 'add',
         :url => new_person_path(:organization_key => @organization.key))
-    content_tag("ul", items.uniq)
+    content_tag("ul", items.uniq.join(''))
   end
 
 end
