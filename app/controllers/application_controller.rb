@@ -46,4 +46,7 @@ class ApplicationController < ActionController::Base
     Date.new params[:year].to_i, params[:month].to_i, params[:day].to_i
   end
 
+  def authorize_manager_or_admin
+    @current_user.organization.id == @organization.id && ( @current_user.roles.first.name == "admin" || @current_user.roles.first.name == "manager")
+  end
 end
