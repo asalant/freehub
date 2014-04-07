@@ -1,11 +1,9 @@
 class OrganizationsController < ApplicationController
 
   skip_before_filter :login_required, :only => [:index, :show, :new, :create]
-  before_filter :assign_id_param, :resolve_organization_by_id, :manager_or_admin?, :except => [ :index, :new, :create ] 
+  before_filter :assign_id_param, :resolve_organization_by_id, :authorize_admin_or_manager, :except => [ :index, :new, :create ] 
+  before_filter :authorize_admin, :only => [ :destory ]
 
-  permit "admin", :only => [ :destroy ]
-#  permit "admin or (manager of :organization)", :only => [ :show, :edit, :update ] 
-    
   # GET /organizations
   # GET /organizations.xml
   def index
@@ -96,8 +94,5 @@ class OrganizationsController < ApplicationController
 
   def assign_id_param
     params[:id] ||= @organization.id if @organization
-  end
-  def manager_or_admin?
-    @current_user.organization.id == @organization.id && ( @current_user.roles.first.name == "admin" || @current_user.roles.first.name == "manager")
   end
 end

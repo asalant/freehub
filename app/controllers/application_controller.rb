@@ -46,7 +46,32 @@ class ApplicationController < ActionController::Base
     Date.new params[:year].to_i, params[:month].to_i, params[:day].to_i
   end
 
-  def authorize_manager_or_admin
-    @current_user.organization.id == @organization.id && ( @current_user.roles.first.name == "admin" || @current_user.roles.first.name == "manager")
+  def user_is_admin_or_manager?
+    is_user_in_organization? && ( @current_user.roles.first.name == "admin" || @current_user.roles.first.name == "manager")
+  end
+
+  def authorize_admin_or_manager
+    redirect_unauthrized unless user_is_admin_or_manager? 
+  end
+
+  def redirect_unauthrized
+    redirect_to({ :controller => 'sessions', :action => 'new' })
+  end
+  
+  def authorize_admin
+    redirect_unauthrized unless user_is_admin?
+  end
+
+  def user_is_admin?
+    is_user_in_organization? && @current_user.roles.first.name == "admin"
+  end
+  
+  def is_user_in_organization?
+    user_organization = @current_user.organization
+    if user_organization.nil? || @organization.nil?
+      return false
+    end 
+    @current_user.organization.id == @organization.id 
   end
 end
+

@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
 
-  permit "admin or (manager of :organization)"
+  before_filter :authorize_admin_or_manager
 
   def show
     @tag = ActsAsTaggableOn::Tag.find(params[:id])
