@@ -49,7 +49,8 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.valid? && @user.valid? && @organization.save && @user.save
-        @user.has_role 'manager', @organization
+        role = Role.create( :name => 'manager', :authorizable => @organization )
+        @user.roles << role if role and not @user.roles.exists?( role.id )
         self.current_user = @user
         flash[:notice] = 'Organization was successfully created.'
         format.html { redirect_to @organization }
