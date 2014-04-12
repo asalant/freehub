@@ -1,5 +1,4 @@
 class TaggingsController < ApplicationController
-
   before_filter :authorize_admin_or_manager
 
   def create
