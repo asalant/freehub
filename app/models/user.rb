@@ -25,8 +25,7 @@ class User < ActiveRecord::Base
   # Authenticated user
   cattr_accessor :current_user
 
-  # Authorization plugin
-  acts_as_authorized_user
+  has_and_belongs_to_many :roles
   
   def accepts_role?(role, user)
     'owner' == role && self == user
@@ -138,7 +137,14 @@ class User < ActiveRecord::Base
   end
 
   def organization
-    @organization ||= self.is_manager_for_what.first
+    @organization ||= is_manager_for_what
+  end
+
+  def is_manager_for_what
+    role = roles.find_all_by_name("manager").first
+    if role
+      role.authorizable
+    end
   end
 
   protected

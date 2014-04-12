@@ -14,6 +14,7 @@
 class Organization < ActiveRecord::Base
   
   has_many :people, :dependent => :destroy
+  has_many :accepted_roles, :as => :authorizable, :class_name => 'Role'
 
   validates_presence_of :name, :key, :timezone
   validates_length_of :name, :within => 3..40,    :unless => proc { |organization| organization.errors.on :name }
@@ -22,8 +23,6 @@ class Organization < ActiveRecord::Base
   validates_format_of :key, :with => /\A\w+\Z/i,  :unless => proc { |organization| organization.errors.on :key }
   validate :validate_timezone
 
-  acts_as_authorizable
-  
   def initialize(attributes=nil)
     super(attributes)
     self[:timezone] ||= 'Pacific Time (US & Canada)'
