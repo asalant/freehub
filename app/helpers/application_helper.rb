@@ -64,4 +64,24 @@ EOL
     ).render(self, :label_value => label_value, :value => value)
   end
 
+  def user_is_manager?
+    is_user_in_organization? &&  @current_user.roles.first.name == "manager"
+  end
+
+  def user_is_admin?
+    if @current_user && @current_user != :false
+      @current_user.roles.first.name == "admin"
+    end
+  end
+
+  def is_user_in_organization?
+    user_organization = @current_user.organization
+
+    if user_organization.nil? || @organization.nil?
+      return false
+    end
+
+    user_organization.id == @organization.id
+  end
+
 end
