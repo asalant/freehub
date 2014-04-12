@@ -34,11 +34,11 @@ class VisitTest < ActiveSupport::TestCase
   end
 
   def test_to_csv
-    assert_match /^Mary,Member,mary@example.com,false,415 123-1234,95105,2007-02-01 10:01,false,true,false,Mary.+/, visits(:mary_1).to_csv
+    assert_match /^365790011,Mary,Member,mary@example.com,false,415 123-1234,95105,2007-02-01 10:01,false,true,false,Mary.+/, visits(:mary_1).to_csv
   end
 
   def test_csv_header
-    assert_equal "first_name,last_name,email,email_opt_out,phone,postal_code,arrived_at,staff,member,volunteer,note\n", Visit.csv_header
+    assert_equal "person_id,first_name,last_name,email,email_opt_out,phone,postal_code,arrived_at,staff,member,volunteer,note\n", Visit.csv_header
   end
 
   def test_create_defaults

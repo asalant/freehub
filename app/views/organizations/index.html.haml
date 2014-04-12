@@ -65,5 +65,5 @@
             %br
             -if organization.member_count > 9
               = "#{organization.member_count} members"
-          -if permit? 'admin'
+          -if user_is_admin?
             %td= link_to 'Remove', organization, :confirm => 'Are you sure?', :method => :delete

@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   # Timezone of the organization or default
   before_filter :set_timezone
 
+
   private
 
   def resolve_organization
@@ -46,4 +47,16 @@ class ApplicationController < ActionController::Base
     Date.new params[:year].to_i, params[:month].to_i, params[:day].to_i
   end
 
+  def authorize_admin_or_manager
+    redirect_unauthrized unless user_is_admin? || user_is_manager?
+  end
+
+  def authorize_admin
+    redirect_unauthrized unless user_is_admin?
+  end
+
+
+  def redirect_unauthrized
+    redirect_to({ :controller => 'sessions', :action => 'new' })
+  end
 end

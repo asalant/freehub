@@ -3,9 +3,9 @@ class OrganizationsController < ApplicationController
   skip_before_filter :login_required, :only => [:index, :show, :new, :create]
   before_filter :assign_id_param, :resolve_organization_by_id, :except => [ :index, :new, :create ] 
 
-  permit "admin", :only => [ :destroy ]
-  permit "admin or (manager of :organization)", :only => [ :show, :edit, :update ] 
-    
+  before_filter :authorize_admin_or_manager, :only => [ :show, :edit, :update ] 
+  before_filter :authorize_admin, :only => [ :destory ]
+
   # GET /organizations
   # GET /organizations.xml
   def index
@@ -49,7 +49,8 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.valid? && @user.valid? && @organization.save && @user.save
-        @user.has_role 'manager', @organization
+        role = Role.create( :name => 'manager', :authorizable => @organization )
+        @user.roles << role if role and not @user.roles.exists?( role.id )
         self.current_user = @user
         flash[:notice] = 'Organization was successfully created.'
         format.html { redirect_to @organization }

@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   before_filter :resolve_user_by_id
   skip_before_filter :login_from_cookie, :login_required, :only => [:new, :create, :activate, :reset, :forgot]
 
-  permit "admin", :only => [:index]
-  permit "admin or (owner of :user)", :only => [:edit, :update, :destroy]
+  before_filter :authorize_admin, :only => [:index]
+  before_filter :authorize_admin_or_manager, :only => [:edit, :update, :destroy]
   
   # render new.rhtml
   def new
