@@ -22,6 +22,9 @@ class ApplicationController < ActionController::Base
   # Timezone of the organization or default
   before_filter :set_timezone
 
+  # Default character set
+  before_filter :set_charset
+
   private
 
   def resolve_organization
@@ -46,4 +49,7 @@ class ApplicationController < ActionController::Base
     Date.new params[:year].to_i, params[:month].to_i, params[:day].to_i
   end
 
+  def set_charset
+    response.headers["Content-Type"] = "text/html; charset=utf-8"
+  end
 end
