@@ -73,7 +73,7 @@ class PeopleControllerTest < ActionController::TestCase
   context "Auto-complete" do
 
     setup do
-      get :auto_complete_for_person_full_name, :organization_key => 'sfbk', :person => { :full_name => 'memb' }
+      get :auto_complete_for_person_full_name, :organization_key => 'sfbk', :person => { :full_name => 'eri' }
     end
 
     should respond_with :success

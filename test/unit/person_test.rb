@@ -66,7 +66,7 @@ class PersonTest < ActiveSupport::TestCase
 
   def test_in_date_range
     from, to = Date.new(2007,1,1), Date.new(2008,1,3)
-    assert_equal 7, Person.after(from).size
+    assert_equal 8, Person.after(from).size
     assert_equal 2, Person.after(from).before(to).size
   end
 

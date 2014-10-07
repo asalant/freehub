@@ -94,8 +94,8 @@ class ReportsControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:report)
     assert_not_nil assigns(:people)
-    assert_equal 4, assigns(:people).size
-    assert_equal 4, assigns(:people).to_a.size
+    assert_equal 5, assigns(:people).size
+    assert_equal 5, assigns(:people).to_a.size
     assert_equal 1, assigns(:people).page
   end
 

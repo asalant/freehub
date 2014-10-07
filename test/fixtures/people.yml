@@ -57,6 +57,23 @@ marty:
   created_at: 2008-01-03
   organization: sfbk
 
+erik:
+  first_name: Erik
+  last_name: Dölerud
+  full_name: Erik Dölerud
+  street1:
+  street2:
+  city:
+  state:
+  postal_code:
+  country:
+  email: erik@example.com
+  phone:
+  staff: true
+  created_at: 2008-01-04
+  organization: sfbk
+
+
 daryl:
   first_name: Daryl
   last_name: Dayuse
