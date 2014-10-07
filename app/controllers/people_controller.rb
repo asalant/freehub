@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class PeopleController < ApplicationController
 
   permit "admin or (manager of :organization)"

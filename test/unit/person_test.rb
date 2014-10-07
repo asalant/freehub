@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'test_helper'
 
 class PersonTest < ActiveSupport::TestCase
@@ -19,9 +21,16 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 'First', person.full_name
   end
 
+  def test_saves_name_with_international_chars
+    person = Person.create! :organization => organizations(:sfbk), :first_name => 'Erik', :last_name => 'Dölerud'
+    assert_equal person.full_name, 'Erik Dölerud'
+    assert_equal person.last_name, 'Dölerud'
+  end
+
   def test_titleize_name
     assert_equal 'First Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'last').full_name
     assert_equal 'First de Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'de last').full_name
+    assert_equal 'Erik Dölerud', Person.create!(:organization => organizations(:sfbk), :first_name => 'erik', :last_name => 'dölerud').full_name
   end
 
   def test_validates_yob
@@ -57,7 +66,7 @@ class PersonTest < ActiveSupport::TestCase
 
   def test_in_date_range
     from, to = Date.new(2007,1,1), Date.new(2008,1,3)
-    assert_equal 7, Person.after(from).size
+    assert_equal 8, Person.after(from).size
     assert_equal 2, Person.after(from).before(to).size
   end
 

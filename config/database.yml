@@ -1,5 +1,6 @@
 development:
   adapter: mysql
+  encoding: utf8
   database: freehub_for_all_development
   username: root
   password:
@@ -10,6 +11,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   adapter: mysql
+  encoding: utf8
   database: freehub_for_all_test
   username: root
   password:
