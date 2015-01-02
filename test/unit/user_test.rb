@@ -106,6 +106,19 @@ class UserTest < ActiveSupport::TestCase
     assert User.authenticate('sfbk', 'new_password')
   end
 
+  def test_is_magager_of
+    assert users(:sfbk).is_manager_of?(organizations(:sfbk))
+    assert !users(:sfbk).is_manager_of?(nil)
+    assert !users(:sfbk).is_manager_of?(organizations(:scbc))
+    assert !create_user.is_manager_of?(organizations(:scbc))
+  end
+
+  def test_is_magager_of
+    assert users(:admin).is_admin?
+    assert !users(:sfbk).is_admin?
+  end
+
+
 protected
   def create_user(options = {})
     User.create({ :name => 'Quire', :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))

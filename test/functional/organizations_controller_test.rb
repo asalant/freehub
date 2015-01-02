@@ -27,7 +27,7 @@ class OrganizationsControllerTest < ActionController::TestCase
 
     assert assigns(:organization)
     assert assigns(:user)
-    assert_equal assigns(:user).roles.first.authorizable, assigns(:organization)
+    assert assigns(:user).is_manager_of?(assigns(:organization))
 
     assert_redirected_to '/dbc'
   end

@@ -65,23 +65,14 @@ EOL
   end
 
   def user_is_manager?
-    is_user_in_organization? &&  @current_user.roles.first.name == "manager"
+    wrapped_current_user.try(:is_manager_of?, @organization)
   end
 
   def user_is_admin?
-    if @current_user && @current_user != :false
-      @current_user.roles.first.name == "admin"
-    end
+    wrapped_current_user.try(:is_admin?)
   end
 
-  def is_user_in_organization?
-    user_organization = @current_user.organization
-
-    if user_organization.nil? || @organization.nil?
-      return false
-    end
-
-    user_organization.id == @organization.id
+  def wrapped_current_user
+    User.current_user if User.current_user != :false
   end
-
 end
