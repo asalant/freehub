@@ -76,6 +76,10 @@ class Person < ActiveRecord::Base
       :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ]
   } }
 
+  named_scope :is_staff, lambda { |is_staff| {
+      :conditions => [ "people.staff = ?", is_staff]
+  } }
+
   def initialize(params={})
     super
     self.country ||= 'US'
