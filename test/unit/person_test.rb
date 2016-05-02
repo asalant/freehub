@@ -98,11 +98,11 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   def test_csv_header
-    assert_equal "id,first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,yob,created_at,membership_expires_on\n", Person.csv_header
+    assert_equal "id,first_name,last_name,staff,email,email_opt_out,phone,postal_code,street1,street2,city,state,postal_code,country,yob,tag_list,created_at,membership_expires_on\n", Person.csv_header
   end
 
   def test_to_csv
-    assert_match /^\d+,Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,1972,2008-01-02 00:00:00,\d{4}-\d{2}-\d{2}$/, people(:mary).to_csv
+    assert_match /^\d+,Mary,Member,false,mary@example.com,false,415 123-1234,95105,123 Street St,,San Francisco,CA,95105,USA,1972,"mechanic, mom",2008-01-02 00:00:00,\d{4}-\d{2}-\d{2}$/, people(:mary).to_csv
   end
 
   context "A person Mary with tags" do
