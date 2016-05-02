@@ -74,11 +74,7 @@ class Service < ActiveRecord::Base
     values << end_date ? nil : end_date.to_s(:db)
     values << volunteered
     values << paid
-    if note.nil?
-      values << nil
-    else
-      values << note.text
-    end
+    values << note.nil? ? nil : note.text
     CSV.generate_line values
   end
 
