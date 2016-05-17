@@ -70,6 +70,17 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 2, Person.after(from).before(to).size
   end
 
+  def test_is_staff
+    assert_equal 2, Person.is_staff(true).size
+    Person.is_staff(true).each do |person| 
+      assert person.staff
+    end
+    assert_equal 6, Person.is_staff(false).size
+    Person.is_staff(false).each do |person| 
+      assert !person.staff
+    end
+  end
+
   def test_email_validation
     assert Person.create(:organization => organizations(:sfbk), :email => 'mary@example.com').errors.invalid?(:email)
     assert Person.create(:organization => organizations(:sfbk), :email => 'mary@example').errors.invalid?(:email)
