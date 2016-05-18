@@ -8,6 +8,18 @@
         -capture do
           %div= text_field_tag 'report[matching_name]', @report[:matching_name]
           %p.instruct Match 3 or more letters in a person's first and last name.
+      =labeled_input 'Type', :for => 'report[is_staff]' do
+        -capture do
+          %span.option
+            = radio_button_tag 'report[is_staff]', "all", @report[:is_staff] == nil
+            %label{:for => 'report[is_staff]'} All
+          %span.option
+            = radio_button_tag 'report[is_staff]', 1, @report[:is_staff] == "1"
+            %label{:for => 'report[is_staff]'} Staff
+          %span.option
+            = radio_button_tag 'report[is_staff]', 0, @report[:is_staff] == "0"
+            %label{:for => 'report[is_staff]'} Patrons
+          %p.instruct Select All, Staff, or Patrons
       =labeled_input 'Date Range', :for => 'date_from' do
         -capture do
           %span

@@ -67,8 +67,10 @@ class ReportsController < ApplicationController
     if (params[:report])
       @report = params[:report].merge :for_organization => @organization,
                                       :after => params[:report][:after],
-                                      :before => params[:report][:before]
+                                      :before => params[:report][:before],
+                                      :is_staff => params[:report][:is_staff]
       @report.delete(:matching_name) if @report[:matching_name] && @report[:matching_name].length < 3
+      @report.delete(:is_staff) if @report[:is_staff] && @report[:is_staff] == "all"
       @report.delete_if { |key, value| value.nil? || (value.respond_to?(:empty?) && value.empty?) }
     else
       @report = {:for_organization => @organization,
