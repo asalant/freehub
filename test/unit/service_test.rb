@@ -34,11 +34,11 @@ class ServiceTest < ActiveSupport::TestCase
   end
   
   def test_to_csv
-    assert_match /^Mary,Member,mary@example.com,false,415 123-1234,95105,MEMBERSHIP,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},false,true,\n/, services(:mary_membership).to_csv
+    assert_match /^Mary,Member,mary@example.com,false,415 123-1234,95105,MEMBERSHIP,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},false,true,$/, services(:mary_membership).to_csv
   end
 
   def test_to_csv_with_note
-    assert_match /^Mary,Member,mary@example.com,false,415 123-1234,95105,MEMBERSHIP,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},true,true,Mary did two hours volunteering toward a membership today./, services(:mary_membership_expired).to_csv
+    assert_match /^Mary,Member,mary@example.com,false,415 123-1234,95105,MEMBERSHIP,\d{4}-\d{2}-\d{2},\d{4}-\d{2}-\d{2},true,true,Membership earned with 12 volunteer hours.$/, services(:mary_membership_expired).to_csv
   end
 
   def test_note_association
