@@ -17,4 +17,3 @@ group :development, :test do
   gem 'annotate'
   gem 'thoughtbot-shoulda'
 end
-
