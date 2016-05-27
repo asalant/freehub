@@ -35,7 +35,7 @@ module ApplicationHelper
   end
 
   def today_visits_path(params={})
-    today = Date.today
+    today = Time.zone.now
     day_visits_path params.merge(:year => today.year, :month => today.month, :day => today.day)
   end
 
