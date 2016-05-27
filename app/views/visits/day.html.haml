@@ -1,8 +1,8 @@
--if @day == Date.today
+-if @day == Time.zone.today
   = render :partial => 'visits/person_search'
 
 %div.section.visits!
-  -if @day == Date.today
+  -if @day == Time.zone.today
     %h2 In the Shop Today!
   -else
     %h2 In the Shop on #{date_long(@day)}
@@ -34,6 +34,6 @@
 %div.section
   %p
     See #{link_to "previous", day_visits_path(@day.yesterday)}
-    -unless @day == Date.today 
+    -unless @day == Time.zone.today 
       or #{link_to "next", day_visits_path(@day.tomorrow)}
     day.
