@@ -31,6 +31,7 @@ GEM
     json (1.7.7)
     mysql (2.9.1)
     newrelic_rpm (3.7.3.204)
+    power_assert (0.3.0)
     rack (1.1.6)
     rails (2.3.17)
       actionmailer (= 2.3.17)
@@ -42,6 +43,8 @@ GEM
     rake (10.1.1)
     rdoc (4.1.1)
       json (~> 1.4)
+    test-unit (3.1.9)
+      power_assert
     thoughtbot-shoulda (2.11.1)
     validates_email_format_of (1.5.3)
 
@@ -61,8 +64,9 @@ DEPENDENCIES
   newrelic_rpm
   rails (= 2.3.17)
   rdoc
+  test-unit
   thoughtbot-shoulda
   validates_email_format_of
 
 BUNDLED WITH
-   1.12.1
+   1.12.4
