@@ -13,9 +13,8 @@ gem 'hoptoad_notifier'
 gem 'validates_email_format_of'
 
 group :development, :test do
-  gem 'debugger'
   gem 'rdoc'
   gem 'annotate'
+  gem 'test-unit'
   gem 'thoughtbot-shoulda'
 end
-
