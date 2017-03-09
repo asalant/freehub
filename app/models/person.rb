@@ -72,9 +72,9 @@ class Person < ActiveRecord::Base
       :conditions => [ "people.created_at < ?", date.to_date.to_time.utc ]
   } }
 
-  named_scope :matching_name, lambda { |name| {
-      :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ]
-  } }
+  named_scope :matching_name, (lambda do |name|
+    { :conditions => [ "full_name LIKE ?", "%#{name}%"]   }
+  end )
 
   named_scope :is_staff, lambda { |is_staff| {
       :conditions => [ "people.staff = ?", is_staff]
