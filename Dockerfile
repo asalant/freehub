@@ -8,6 +8,8 @@
 FROM ruby:1.9.3
 MAINTAINER Alon Salant <alon@salant.org>
 
+RUN apt-get update && apt-get install -y mysql-client
+
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
 # commands.
