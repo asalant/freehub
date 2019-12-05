@@ -29,6 +29,7 @@ GEM
       activesupport
       builder
     json (1.7.7)
+    kgio (2.11.2)
     mysql (2.9.1)
     newrelic_rpm (3.7.3.204)
     power_assert (0.3.0)
@@ -40,12 +41,16 @@ GEM
       activeresource (= 2.3.17)
       activesupport (= 2.3.17)
       rake (>= 0.8.3)
+    raindrops (0.19.0)
     rake (10.1.1)
     rdoc (4.1.1)
       json (~> 1.4)
     test-unit (3.1.9)
       power_assert
     thoughtbot-shoulda (2.11.1)
+    unicorn (5.5.1)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     validates_email_format_of (1.5.3)
 
 PLATFORMS
@@ -66,7 +71,8 @@ DEPENDENCIES
   rdoc
   test-unit
   thoughtbot-shoulda
+  unicorn
   validates_email_format_of
 
 BUNDLED WITH
-   1.12.4
+   1.15.4
