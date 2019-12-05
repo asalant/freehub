@@ -18,3 +18,7 @@ group :development, :test do
   gem 'test-unit'
   gem 'thoughtbot-shoulda'
 end
+
+group :production do
+  gem 'unicorn'
+end
