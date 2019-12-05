@@ -65,11 +65,12 @@ class Person < ActiveRecord::Base
   } }
 
   named_scope :after, lambda { |date| {
-      :conditions => [ "people.created_at >= ?", date.to_date.to_time.utc ]
+      :conditions => [ "convert_tz(people.created_at,'+00:00','#{Time.zone.formatted_offset}') >= ?", date.to_date.to_time.utc ]
+
   } }
 
   named_scope :before, lambda { |date| {
-      :conditions => [ "people.created_at < ?", date.to_date.to_time.utc ]
+      :conditions => [ "convert_tz(people.created_at,'+00:00','#{Time.zone.formatted_offset}') < ?", date.to_date.to_time.utc ]
   } }
 
   named_scope :matching_name, lambda { |name| {
@@ -125,7 +126,7 @@ class Person < ActiveRecord::Base
   def to_csv
     values = self.attributes.values_at(*CSV_FIELDS[:self])
     values[values.size - 3] = tag_list_with_sorting.to_s
-    values[values.size - 2] = created_at.nil? ? nil : created_at.to_s(:db)
+    values[values.size - 2] = created_at.nil? ? nil : created_at.strftime("%Y-%m-%d %H:%M")
     values[values.size - 1] = self.services.last(:membership).nil? ? nil : self.services.last(:membership).end_date.to_s(:db)
     CSV.generate_line values
   end
