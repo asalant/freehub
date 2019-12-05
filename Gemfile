@@ -11,9 +11,9 @@ gem "acts-as-taggable-on", "2.0.6"
 gem "newrelic_rpm"
 gem 'hoptoad_notifier'
 gem 'validates_email_format_of'
+gem 'rdoc'
 
 group :development, :test do
-  gem 'rdoc'
   gem 'annotate'
   gem 'test-unit'
   gem 'thoughtbot-shoulda'
