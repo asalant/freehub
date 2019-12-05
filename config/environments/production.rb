@@ -29,6 +29,16 @@ config.action_view.cache_template_loading            = true
 
 # Set up with SendGrid for Engine Yard per
 # https://github.com/engineyard/ey-cloud-recipes/tree/master/cookbooks/ssmtp
-config.action_mailer.delivery_method = :sendmail
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.perform_deliveries = true
+config.action_mailer.raise_delivery_errors = true
+config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.sendgrid.net",
+    :port => 587,
+    :domain => "bikekitchen.org",
+    :user_name => EY::Config.get(:sendgrid, ENV['SENDGRID_USERNAME']),
+    :password => EY::Config.get(:sendgrid, ENV['SENDGRID_PASSWORD'])
+}
 
 SITE_URL = 'http://freehub.bikekitchen.org'

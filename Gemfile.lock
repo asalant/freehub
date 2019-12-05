@@ -23,6 +23,7 @@ GEM
       rake (>= 0.8.7)
     builder (3.2.2)
     calendar_date_select (1.16.1)
+    ey_config (0.0.7)
     googlecharts (1.6.0)
     haml (3.0.25)
     hoptoad_notifier (2.4.11)
@@ -61,6 +62,7 @@ DEPENDENCIES
   annotate
   authorization!
   calendar_date_select (= 1.16.1)
+  ey_config
   googlecharts (= 1.6.0)
   haml (= 3.0.25)
   hoptoad_notifier

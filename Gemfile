@@ -21,4 +21,5 @@ end
 
 group :production do
   gem 'unicorn'
+  gem 'ey_config'
 end
