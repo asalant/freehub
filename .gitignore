@@ -1,3 +1,5 @@
 tmp/
 .idea
 *.iml
+.generators
+.rakeTasks
