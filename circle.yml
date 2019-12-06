@@ -1,8 +1,0 @@
-dependencies:
-  pre:
-    - rvm install rubygems latest-1.8 --force
-    - gem install bundler 
-
-machine:
-  timezone:
-    America/Los_Angeles
