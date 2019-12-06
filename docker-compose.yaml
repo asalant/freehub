@@ -1,8 +1,8 @@
 # Based on https://blog.codeship.com/running-rails-development-environment-docker/
 app:
   build: .
-    environment:
-      - DATABASE_HOST=mysql
+  environment:
+    - DATABASE_HOST=mysql
   command: /app/script/server
   volumes:
     - .:/app
