@@ -4,7 +4,7 @@ development:
   database: freehub_for_all_development
   username: root
   password: password
-  host: 127.0.0.1
+  host: <%= ENV['DATABASE_HOST'] %>
 
 # Warning: The database defined as 'test' will be erased and
 # re-generated from your development database when you run 'rake'.
@@ -15,4 +15,4 @@ test:
   database: freehub_for_all_test
   username: root
   password: password
-  host: 127.0.0.1
+  host: <%= ENV['DATABASE_HOST'] %>
