@@ -17,19 +17,25 @@
       %table.visits
         -reset_cycle
         -for visit in @groups[group[:key]]
-          %tr{:class => cycle('odd','even')}
-            %td{:style => 'width:200px;'}
+          - cycle_class = cycle('odd','even')
+          - if visit.note and visit.note.text
+            - note_class = 'followed_by_note'
+          %tr{:class => [cycle_class, note_class]}
+            %td.full_name
               =link_to(visit.person.full_name, person_path(:id => visit.person))
-            %td
+            %td.person_type
               = visit.person.person_type
             %td.time
               = time_short(visit.arrived_at)
-            %td.note{:style => 'width:400px;'}
-              = note_text(visit.note)
-            %td{:style => 'width:30px;'}
+            %td.action.edit
               =link_to 'Edit', edit_visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path)
-            %td 
+            %td.action.remove
               =link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path), :method => :delete
+          - if visit.note
+            %tr{:class => cycle_class}
+              %td
+              %td.note{:colspan => 4}
+                = note_text(visit.note)
 
 %div.section
   %p
