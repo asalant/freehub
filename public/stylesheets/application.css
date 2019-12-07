@@ -1,7 +1,27 @@
+/** Basic two column responsive layout **/
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
 /** Top Level Layout **/
 
 #application{
-  width:955px;
+  max-width:955px;
   text-align: left;
   margin: 0 auto;
 }
@@ -12,7 +32,7 @@
 }
 
 #footer .body {
-  width:955px;
+  max-width:955px;
   text-align: left;
   margin: 0 auto;
   color: white;
@@ -156,17 +176,35 @@ ul.tabs li.selected a {
 
 table.visits {
   width: 100%;
-  table-layout:fixed;
+  table-layout:auto;
 }
 
 tr.even, li.even { background: #ffffff; }
 tr.odd, li.odd  { background: lightcyan; }
 
+td.full_name {
+  white-space: nowrap;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 td.note {
+  width: 400px;
   font-style: italic;
 }
 
+td.person_type {
+  width: 40px;
+}
+
 td.time {
+  white-space: nowrap;
+  text-align: right;
+}
+
+td.action.edit {
+  width: 50%;
   text-align: right;
 }
 
