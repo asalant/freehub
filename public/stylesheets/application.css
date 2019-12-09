@@ -14,9 +14,7 @@
   grid-template-rows: auto;
   justify-items: center;
   grid-template-areas:
-          "column column"
-          "column-left column-right"
-          "footer footer";
+          "column-left column-right";
 }
 
 @media (max-width: 800px) {
@@ -24,7 +22,6 @@
     grid-template-columns: auto;
     grid-template-rows: auto auto;
     grid-template-areas:
-            'column'
             'column-left'
             'column-right';
   }
@@ -38,26 +35,37 @@
 .column-left {
   grid-area: column-left;
   width: 100%;
-  padding: 0 26px 0 26px;
 }
 
 .column-right {
   grid-area: column-right;
   width: 100%;
-  padding: 0 26px 0 26px;
 }
 
 #footer {
-  background:black;
+  background: black;
   height: 100px;
 }
 
 #footer .body {
-  max-width:955px;
-  text-align: left;
-  margin: 0 auto;
+  padding-left: 26px;
+  padding-top: 16px;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
   color: white;
   font-size: 11px;
+}
+
+@media (max-width: 800px) {
+  #footer .body {
+    flex-flow: column;
+  }
+}
+
+.footer-item {
+  padding: 0 20px 16px 14px;
 }
 
 #footer .body a {
@@ -65,29 +73,7 @@
 }
 
 #footer #logo {
-  float:left;
-  height: 60px;
-  text-align:center;
-  padding: 40px 20px 0 14px;
   font-size: 30px;
-}
-
-#footer ul {
-  float: left;
-  margin-top: 30px;
-  margin-left: 20px;
-}
-
-#footer .credit {
-  float: right;
-  padding-top: 14px;
-  padding-right: 40px;
-}
-
-#application_nav,
-#application_body,
-#application_footer {
-  clear:both;
 }
 
 #application_header,
@@ -113,7 +99,6 @@
   background: url('../images/footer_bg.png') no-repeat;
   font-style: italic;
   padding: 14px 14px 26px 14px;
-  clear: both;
 }
 
 /** Page Header **/
@@ -296,7 +281,6 @@ body {
   /** brown **/ /** background: #996633; **/
   /** green **/ /** background: #669900; **/
   /** grey **/  background: #EEEEEE;
-  text-align:center;
 }
 
 /** Explicitly style submit buttons to address iOS **/

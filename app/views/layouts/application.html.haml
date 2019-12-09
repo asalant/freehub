@@ -61,14 +61,14 @@
         = "Times shown are #{Time.zone.name} timezone."
     %div#footer
       %div.body
-        %div#logo 
-          = link_to 'Freehub', root_path
-        %ul
+        %div.footer-item
+          = link_to 'Freehub', root_path, :id => 'logo'
+        %ul.footer-item
           %li Get #{link_to "help or send feedback", "https://github.com/asalant/freehub/wiki/Freehub-Support"}
           %li Check the #{link_to 'project documentation', 'https://github.com/asalant/freehub/wiki'}
-        %ul
+        %ul.footer-item
           %li Thanks to #{link_to 'EngineYard', 'http://www.engineyard.com'} for hosting
-        %div.credit 
+        %div.footer-item
           =image_tag("ey-logo.gif")
     :javascript
       var _gaq = _gaq || [];
