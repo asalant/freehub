@@ -34,4 +34,4 @@ EXPOSE 3000
 # The main command to run when the container starts. Also
 # tell the Rails dev server to bind to all interfaces by
 # default.
-CMD ["./script/server"]
+CMD ["./script/server -b 0.0.0.0"]
