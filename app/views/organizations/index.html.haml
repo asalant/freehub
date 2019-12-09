@@ -1,4 +1,4 @@
-%div.column.left
+%div.column-left
   %div.section
     %h2 About Freehub
     %p
@@ -27,8 +27,8 @@
   %div.section
     %h2 Quick Demo
     %p= "This #{link_to 'short movie', '/demo/summary.html'} demonstrates the basic features of Freehub."
-    %p= link_to image_tag("/demo/demo.jpg", :style => "border: 1px solid lightgrey;"), '/demo/summary.html'
-%div.column
+    %p= link_to image_tag("/demo/demo.jpg", :style => "max-width: 100%; border: 1px solid lightgrey;"), '/demo/summary.html'
+%div.column-right
   -if !logged_in?
     %div.section
       %h2 Log In
@@ -50,7 +50,7 @@
     %p These organizations have signed up for Freehub and are actively using it.
     %table{:width => "100%"}
       %tr
-        %th
+        %th{:colspan => 2}
       -for organization in @organizations
         -if @organizations.length > 4 && (!organization.active? || organization.visits_count < 10)
           -next
@@ -59,7 +59,7 @@
             %b= organization.name
             %br
             = organization.location
-          %td{:style => 'width: 200px'}
+          %td
             -if !organization.last_visit.nil?
               = "last visit #{datetime_long(organization.last_visit.arrived_at)}"
             %br

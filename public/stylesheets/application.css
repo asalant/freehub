@@ -1,29 +1,50 @@
-/** Basic two column responsive layout **/
-
-.column {
-  float: left;
-  width: 50%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
-}
-
 /** Top Level Layout **/
 
 #application{
   max-width:955px;
   text-align: left;
   margin: 0 auto;
+}
+
+#application_body {
+  background: white;
+  padding: 26px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
+  justify-items: center;
+  grid-template-areas:
+          "column column"
+          "column-left column-right"
+          "footer footer";
+}
+
+@media (max-width: 800px) {
+  #application_body {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+            'column'
+            'column-left'
+            'column-right';
+  }
+}
+
+.column {
+  grid-area: column;
+  padding: 6px 26px 6px 26px;
+}
+
+.column-left {
+  grid-area: column-left;
+  width: 100%;
+  padding: 0 26px 0 26px;
+}
+
+.column-right {
+  grid-area: column-right;
+  width: 100%;
+  padding: 0 26px 0 26px;
 }
 
 #footer {
@@ -88,15 +109,6 @@
   color: #555;
 }
 
-#application_body {
-  background: white;
-  padding: 26px;
-}
-
-#application_body {
-  /** background: url('../images/body_bg.png') repeat-y; **/
-}
-
 #application_footer {
   background: url('../images/footer_bg.png') no-repeat;
   font-style: italic;
@@ -122,8 +134,8 @@
   color: #555;
 }
 
-#user_status .log_out {
-  padding-left: 10px;
+#user_status span {
+  padding: 0 5px;
 }
 
 #notice {
