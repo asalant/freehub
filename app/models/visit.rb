@@ -34,11 +34,11 @@ class Visit < ActiveRecord::Base
   } }
 
   named_scope :after, lambda { |date| {
-      :conditions => [ "convert_tz(visits.arrived_at,'+00:00','#{Time.zone.formatted_offset}') >= ?", date.to_date.to_time.utc ]
+      :conditions => [ "timezone('#{Time.zone.formatted_offset}', visits.arrived_at) >= ?", date.to_date.to_time.utc ]
   } }
 
   named_scope :before, lambda { |date| {
-      :conditions => [ "convert_tz(visits.arrived_at,'+00:00','#{Time.zone.formatted_offset}') < ?", date.to_date.to_time.utc ]
+      :conditions => [ "timezone('#{Time.zone.formatted_offset}', visits.arrived_at) < ?", date.to_date.to_time.utc ]
   } }
 
   def initialize(params={})
