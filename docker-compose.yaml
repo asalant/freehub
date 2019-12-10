@@ -10,7 +10,14 @@ app:
     - "3000:3000"
   links:
     - postgres
+    - mysql
+mysql:
+  image: mysql:5.6
+  environment:
+    - MYSQL_ROOT_PASSWORD=password
+  ports:
+    - "3306"
 postgres:
-  image: postgres:9.4.11
+  image: postgres:9.4
   ports:
     - "5432"
