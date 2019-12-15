@@ -1,7 +1,7 @@
 /** Top Level Layout **/
 
 #application{
-  max-width:955px;
+  max-width: 955px;
   text-align: left;
   margin: 0 auto;
 }
@@ -15,6 +15,13 @@
   justify-items: center;
   grid-template-areas:
           "column-left column-right";
+}
+
+#application_header_wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  background: dimgray;
 }
 
 @media (max-width: 800px) {
@@ -61,6 +68,10 @@
 @media (max-width: 800px) {
   #footer .body {
     flex-flow: column;
+  }
+
+  #application_header_wrapper {
+    flex-direction: column-reverse;
   }
 }
 
@@ -134,6 +145,7 @@
 #application_header {
   padding: 14px;
 }
+
 #application_header h2 {
   font-size: 20px;
 }

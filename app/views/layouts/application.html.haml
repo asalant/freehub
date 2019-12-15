@@ -37,23 +37,24 @@
               =link_to 'Log In', new_session_path
         -if flash[:notice]
           %span#notice= flash[:notice]
-      %div#application_nav
-        %ul.tabs
+      %div#application_header_wrapper
+        %div#application_nav
+          %ul.tabs
+            -if @organization && !@organization.new_record?
+              = tab_item('Home', organization_path(@organization))
+              = tab_item('Visits', today_visits_path(:organization_key => @organization.key))
+              = tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
+              -if permit? "admin or (manager of :organization)"
+                =tab_item('Settings', edit_organization_path(@organization))
+            -else
+              =tab_item('Home', root_path)
+              -if logged_in? && !current_user.organization.nil?
+                = tab_item(current_user.organization.name, organization_path(current_user.organization))
+        %div#application_header
           -if @organization && !@organization.new_record?
-            = tab_item('Home', organization_path(@organization))
-            = tab_item('Visits', today_visits_path(:organization_key => @organization.key))
-            = tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
-            -if permit? "admin or (manager of :organization)"
-              =tab_item('Settings', edit_organization_path(@organization))
+            %h2= link_to @organization.name, @organization
           -else
-            =tab_item('Home', root_path)
-            -if logged_in? && !current_user.organization.nil?
-              = tab_item(current_user.organization.name, organization_path(current_user.organization))
-      %div#application_header
-        -if @organization && !@organization.new_record?
-          %h2= link_to @organization.name, @organization
-        -else
-          %h2 Welcome to #{link_to 'Freehub', root_path}
+            %h2 Welcome to #{link_to 'Freehub', root_path}
       %div.content#application_body
         = yield
         %div{:style => 'clear:both;'}
