@@ -43,7 +43,6 @@
 }
 
 #footer {
-  background: black;
   height: 100px;
 }
 
@@ -56,6 +55,7 @@
   align-items: center;
   color: white;
   font-size: 11px;
+  background: black;
 }
 
 @media (max-width: 800px) {
@@ -81,7 +81,7 @@
   /** brown **/ /** background: #663300; **/
   /** green **/ /** background: #99CC00; **/
   /** grey **/  /** background: #BBB; **/
-  /** darkgrey **/  background: dimgray; 
+  /** darkgrey **/  background: dimgray;
 }
 
 #application_header,
