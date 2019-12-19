@@ -1,3 +1,9 @@
+/**
+ * TODO: Migrate to new JavaScript testing solution
+ * These tests were written using the BlueRidge JS testing plugin for Rails that was
+ * abandoned in 2009. I'm leaving them here to help with migrating to a new testing framework
+ * when the time comes - I suggest when we make any changes to tag functionality. [Alon]
+ */
 require("spec_helper.js");
 require("../../public/javascripts/tags.jquery.js");
 
