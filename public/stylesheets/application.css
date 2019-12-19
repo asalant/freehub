@@ -1,7 +1,7 @@
 /** Top Level Layout **/
 
-#application{
-  max-width:955px;
+#application {
+  max-width: 955px;
   text-align: left;
   margin: 0 auto;
 }
@@ -15,16 +15,6 @@
   justify-items: center;
   grid-template-areas:
           "column-left column-right";
-}
-
-@media (max-width: 800px) {
-  #application_body {
-    grid-template-columns: auto;
-    grid-template-rows: auto auto;
-    grid-template-areas:
-            'column-left'
-            'column-right';
-  }
 }
 
 .column {
@@ -58,12 +48,6 @@
   background: black;
 }
 
-@media (max-width: 800px) {
-  #footer .body {
-    flex-flow: column;
-  }
-}
-
 .footer-item {
   padding: 0 20px 16px 14px;
 }
@@ -76,18 +60,22 @@
   font-size: 30px;
 }
 
-#application_header,
 #application_nav {
   /** brown **/ /** background: #663300; **/
   /** green **/ /** background: #99CC00; **/
   /** grey **/  /** background: #BBB; **/
-  /** darkgrey **/  background: dimgray;
+  /** darkgrey **/
+  background: dimgray;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  background: dimgray;
+  align-items: center;
 }
 
-#application_header,
-#application_nav,
-#application_header a {
+#application_nav h2 a {
   color: white;
+  padding: 14
 }
 
 #application_footer,
@@ -131,10 +119,7 @@
 
 /** Application Header **/
 
-#application_header {
-  padding: 14px;
-}
-#application_header h2 {
+#application_nav h2 {
   font-size: 20px;
 }
 
@@ -153,6 +138,7 @@ ul.tabs li {
 
 ul.tabs li a {
   color: white;
+
 }
 
 ul.tabs li.selected,
@@ -377,4 +363,24 @@ div.uploadStatus {
 
 div.progressBar {
   margin: 5px;
+}
+
+@media (max-width: 800px) {
+  #application_body {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+            'column-left'
+            'column-right';
+  }
+
+  #footer .body {
+    flex-flow: column;
+  }
+
+  #application_nav {
+    flex-flow: column;
+    align-items: start;
+    padding-top: 10px;
+  }
 }

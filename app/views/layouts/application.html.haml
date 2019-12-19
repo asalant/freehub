@@ -38,6 +38,10 @@
         -if flash[:notice]
           %span#notice= flash[:notice]
       %div#application_nav
+        -if @organization && !@organization.new_record?
+          %h2= link_to @organization.name, @organization
+        -else
+          %h2 Welcome to #{link_to 'Freehub', root_path}
         %ul.tabs
           -if @organization && !@organization.new_record?
             = tab_item('Home', organization_path(@organization))
@@ -49,11 +53,6 @@
             =tab_item('Home', root_path)
             -if logged_in? && !current_user.organization.nil?
               = tab_item(current_user.organization.name, organization_path(current_user.organization))
-      %div#application_header
-        -if @organization && !@organization.new_record?
-          %h2= link_to @organization.name, @organization
-        -else
-          %h2 Welcome to #{link_to 'Freehub', root_path}
       %div.content#application_body
         = yield
         %div{:style => 'clear:both;'}
