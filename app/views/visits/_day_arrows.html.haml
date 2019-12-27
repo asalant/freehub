@@ -1,0 +1,6 @@
+%div.section
+  %p
+    See #{link_to "previous", day_visits_path(@day.yesterday)}
+    -unless @day == Time.zone.today
+      or #{link_to "next", day_visits_path(@day.tomorrow)}
+    day.
