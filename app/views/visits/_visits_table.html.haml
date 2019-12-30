@@ -1,0 +1,20 @@
+-[{:key => :patrons, :label => 'Visiting'}, {:key => :volunteers, :label => 'Volunteering'}].each do |group|
+  -if @groups[group[:key]].empty?
+    -next
+  %h3 #{@groups[group[:key]].size} #{group[:label]}
+  %table.visits
+    -reset_cycle
+    -for visit in @groups[group[:key]]
+      %tr{:class => cycle('odd','even')}
+        %td{:style => 'width:200px;'}
+          =link_to(visit.person.full_name, person_path(:id => visit.person))
+        %td
+          = visit.person.person_type
+        %td.time
+          = time_short(visit.arrived_at)
+        %td.note{:style => 'width:400px;'}
+          = note_text(visit.note)
+        %td{:style => 'width:30px;'}
+          =link_to 'Edit', edit_visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path)
+        %td
+          =link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path), :method => :delete
