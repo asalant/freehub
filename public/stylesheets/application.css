@@ -201,7 +201,8 @@ td.action.edit {
 }
 
 div.section {
-  padding: 10px 0;
+  padding: 10px 0 10px 10px;
+  clear: both;
 }
 
 div.section div.left,
