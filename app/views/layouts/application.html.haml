@@ -53,7 +53,7 @@
             =tab_item('Home', root_path)
             -if logged_in? && !current_user.organization.nil?
               = tab_item(current_user.organization.name, organization_path(current_user.organization))
-      %div.content#application_body
+      %div.content#application_body.flex-container
         = yield
         %div{:style => 'clear:both;'}
       %div#application_footer

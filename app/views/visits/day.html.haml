@@ -1,45 +1,47 @@
 -if @day == Time.zone.today
-  = render :partial => 'visits/person_search'
+  %div.flex-column
+    = render :partial => 'visits/person_search'
 
-%div.section.visits!
-  -if @day == Time.zone.today
-    %h2 In the Shop Today!
-  -else
-    %h2 In the Shop on #{date_long(@day)}
-  -if @visits.empty?
-    %p.list_status No visits for #{@day.to_s(:db)}.
-  -else
-    %p.list_status #{@visits.size} visitors.
-    -[{:key => :patrons, :label => 'Visiting'}, {:key => :volunteers, :label => 'Volunteering'}].each do |group|
-      -if @groups[group[:key]].empty?
-        -next
-      %h3 #{@groups[group[:key]].size} #{group[:label]}
-      %table.visits
-        -reset_cycle
-        -for visit in @groups[group[:key]]
-          - cycle_class = cycle('odd','even')
-          - if visit.note and visit.note.text
-            - note_class = 'followed_by_note'
-          %tr{:class => [cycle_class, note_class]}
-            %td.full_name
-              =link_to(visit.person.full_name, person_path(:id => visit.person))
-            %td.person_type
-              = visit.person.person_type
-            %td.time
-              = time_short(visit.arrived_at)
-            %td.action.edit
-              =link_to 'Edit', edit_visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path)
-            %td.action.remove
-              =link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path), :method => :delete
-          - if visit.note
-            %tr{:class => cycle_class}
-              %td
-              %td.note{:colspan => 4}
-                = note_text(visit.note)
+%div.flex-fullwidth
+  %div.section.visits!
+    -if @day == Time.zone.today
+      %h2 In the Shop Today!
+    -else
+      %h2 In the Shop on #{date_long(@day)}
+    -if @visits.empty?
+      %p.list_status No visits for #{@day.to_s(:db)}.
+    -else
+      %p.list_status #{@visits.size} visitors.
+      -[{:key => :patrons, :label => 'Visiting'}, {:key => :volunteers, :label => 'Volunteering'}].each do |group|
+        -if @groups[group[:key]].empty?
+          -next
+        %h3 #{@groups[group[:key]].size} #{group[:label]}
+        %table.visits
+          -reset_cycle
+          -for visit in @groups[group[:key]]
+            - cycle_class = cycle('odd','even')
+            - if visit.note and visit.note.text
+              - note_class = 'followed_by_note'
+            %tr{:class => [cycle_class, note_class]}
+              %td.full_name
+                =link_to(visit.person.full_name, person_path(:id => visit.person))
+              %td.person_type
+                = visit.person.person_type
+              %td.time
+                = time_short(visit.arrived_at)
+              %td.action.edit
+                =link_to 'Edit', edit_visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path)
+              %td.action.remove
+                =link_to 'Remove', visit_path(:person_id => visit.person, :id => visit, :destination => day_visits_path), :method => :delete
+            - if visit.note
+              %tr{:class => cycle_class}
+                %td
+                %td.note{:colspan => 4}
+                  = note_text(visit.note)
 
-%div.section
-  %p
-    See #{link_to "previous", day_visits_path(@day.yesterday)}
-    -unless @day == Time.zone.today 
-      or #{link_to "next", day_visits_path(@day.tomorrow)}
-    day.
+  %div.section
+    %p
+      See #{link_to "previous", day_visits_path(@day.yesterday)}
+      -unless @day == Time.zone.today
+        or #{link_to "next", day_visits_path(@day.tomorrow)}
+      day.
