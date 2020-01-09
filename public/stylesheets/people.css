@@ -45,7 +45,7 @@
 
 #note_text {
   height: 60px;
-  width: 380px;
+  width: 100%;
 }
 
 #visits li, #services li, #notes li {
