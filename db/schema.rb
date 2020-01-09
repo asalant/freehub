@@ -21,9 +21,7 @@ ActiveRecord::Schema.define(:version => 20100626223127) do
     t.datetime "updated_at"
   end
 
-  add_index "notes", ["created_by_id"], :name => "fk_notes_created_by"
   add_index "notes", ["notable_type", "notable_id"], :name => "index_notes_on_notable_type_and_notable_id"
-  add_index "notes", ["updated_by_id"], :name => "fk_notes_updated_by"
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
@@ -58,10 +56,6 @@ ActiveRecord::Schema.define(:version => 20100626223127) do
     t.integer  "yob"
   end
 
-  add_index "people", ["created_by_id"], :name => "fk_people_created_by"
-  add_index "people", ["organization_id"], :name => "fk_people_organization"
-  add_index "people", ["updated_by_id"], :name => "fk_people_updated_by"
-
   create_table "roles", :force => true do |t|
     t.string   "name",              :limit => 40
     t.string   "authorizable_type", :limit => 40
@@ -89,10 +83,6 @@ ActiveRecord::Schema.define(:version => 20100626223127) do
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
   end
-
-  add_index "services", ["created_by_id"], :name => "fk_services_created_by"
-  add_index "services", ["person_id"], :name => "fk_services_person"
-  add_index "services", ["updated_by_id"], :name => "fk_services_updated_by"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -137,9 +127,5 @@ ActiveRecord::Schema.define(:version => 20100626223127) do
     t.boolean  "staff"
     t.boolean  "member"
   end
-
-  add_index "visits", ["created_by_id"], :name => "fk_visits_created_by"
-  add_index "visits", ["person_id"], :name => "fk_visits_person"
-  add_index "visits", ["updated_by_id"], :name => "fk_visits_updated_by"
 
 end

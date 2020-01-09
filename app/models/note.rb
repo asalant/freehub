@@ -43,7 +43,8 @@ class Note < ActiveRecord::Base
             OR  (notes.notable_type = 'Visit' AND notes.notable_id IN (SELECT visits.id FROM visits WHERE visits.person_id = #{person.id}))"
 
     sql += " ORDER BY #{options[:order]}" if options[:order]
-    sql += " LIMIT #{options[:offset]},#{options[:limit]}" if options[:limit]
+    sql += " LIMIT #{options[:limit]}" if options[:limit]
+    sql += " OFFSET #{options[:offset]} "
     sql
   end
   

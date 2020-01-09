@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem "rails", "2.3.17"
-gem "mysql"
+gem "pg", "0.18.4"
 gem "authorization", github:  "asalant/rails-authorization-plugin"
 gem 'json', '1.7.7' # (CVE-2013-026) Can remove once rails depends on > 1.7.6
 gem 'haml', "3.0.25"

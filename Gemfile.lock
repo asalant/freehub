@@ -30,8 +30,8 @@ GEM
       builder
     json (1.7.7)
     kgio (2.11.2)
-    mysql (2.9.1)
     newrelic_rpm (3.7.3.204)
+    pg (0.18.4)
     power_assert (0.3.0)
     rack (1.1.6)
     rails (2.3.17)
@@ -65,8 +65,8 @@ DEPENDENCIES
   haml (= 3.0.25)
   hoptoad_notifier
   json (= 1.7.7)
-  mysql
   newrelic_rpm
+  pg (= 0.18.4)
   rails (= 2.3.17)
   rdoc
   test-unit

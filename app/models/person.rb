@@ -65,12 +65,12 @@ class Person < ActiveRecord::Base
   } }
 
   named_scope :after, lambda { |date| {
-      :conditions => [ "convert_tz(people.created_at,'+00:00','#{Time.zone.formatted_offset}') >= ?", date.to_date.to_time.utc ]
+      :conditions => [ "timezone('#{Time.zone.formatted_offset}', people.created_at) >= ?", date.to_date.to_time.utc ]
 
   } }
 
   named_scope :before, lambda { |date| {
-      :conditions => [ "convert_tz(people.created_at,'+00:00','#{Time.zone.formatted_offset}') < ?", date.to_date.to_time.utc ]
+      :conditions => [ "timezone('#{Time.zone.formatted_offset}', people.created_at) < ?", date.to_date.to_time.utc ]
   } }
 
   named_scope :matching_name, lambda { |name| {

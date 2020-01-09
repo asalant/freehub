@@ -2,13 +2,14 @@
 app:
   build: .
   environment:
-    - DATABASE_HOST=mysql
+    - DATABASE_HOST=postgres
   command: /app/script/server
   volumes:
     - .:/app
   ports:
     - "3000:3000"
   links:
+    - postgres
     - mysql
 mysql:
   image: mysql:5.6
@@ -16,3 +17,7 @@ mysql:
     - MYSQL_ROOT_PASSWORD=password
   ports:
     - "3306"
+postgres:
+  image: postgres:9.4
+  ports:
+    - "5432"
