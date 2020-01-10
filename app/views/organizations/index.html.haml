@@ -1,4 +1,4 @@
-%div.column-left
+%div.flex-column
   %div.section
     %h2 About Freehub
     %p
@@ -28,7 +28,7 @@
     %h2 Quick Demo
     %p= "This #{link_to 'short movie', '/demo/summary.html'} demonstrates the basic features of Freehub."
     %p= link_to image_tag("/demo/demo.jpg", :style => "max-width: 100%; border: 1px solid lightgrey;"), '/demo/summary.html'
-%div.column-right
+%div.flex-column
   -if !logged_in?
     %div.section
       %h2 Log In
