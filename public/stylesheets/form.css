@@ -61,6 +61,12 @@ label.choice {
   width:90%;
 }
 
+label.remember_me {
+  display: inline;
+  padding: 0 4px;
+  margin: 0;
+}
+
 form .req {
   color: red !important;
   font-size: 14px;

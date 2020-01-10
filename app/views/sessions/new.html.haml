@@ -1,17 +1,19 @@
-%h1 Log In
+%div.flex-column
 
--form_tag session_path do
-  %ul
-    =labeled_input 'Login', :for => :login do
-      -capture do
-        =text_field_tag 'login'
-    =labeled_input 'Password', :for => :password do
-      -capture do
-        =password_field_tag 'password'
-    %li
-      =check_box_tag('remember_me')
-      %label.choice{:for => 'remember_me'} Remember me
-    %li
-      =submit_tag 'Log in'
-    %li
-      =link_to 'Forgot username or password?', forgot_path
+  %h1 Log In
+
+  -form_tag session_path do
+    %ul
+      =labeled_input 'Login', :for => :login do
+        -capture do
+          =text_field_tag 'login'
+      =labeled_input 'Password', :for => :password do
+        -capture do
+          =password_field_tag 'password'
+      %li
+        =check_box_tag('remember_me')
+        %label.choice.remember_me{:for => 'remember_me'} Remember me
+      %li
+        =submit_tag 'Log in'
+      %li
+        =link_to 'Forgot username or password?', forgot_path
