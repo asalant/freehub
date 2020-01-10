@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.flex-container {
+  background-color: lightgray;
+  padding: 10px;
+  max-width: 955px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.item {
+  background-color: white;
+  height: 100px;
+  margin: 5px;
+  padding: 20px;
+  font-size: 30px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.flex-column {
+  width: 50%;
+  min-width: 380px;
+}
+
+@media (max-width: 400px) {
+  .flex-column {
+    width: 100%;
+    min-width: inherit;
+  }
+}
+
+.flex-fullwidth {
+  width: 100%;
+}
+
+.A {
+  height: 200px;
+}
