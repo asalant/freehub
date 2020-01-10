@@ -247,6 +247,7 @@ div.left div.section {
   background: lightyellow;
   border: 1px solid tan;
   padding: 14px;
+  max-width: 360px;
 }
 
 #sign_in #person_full_name{
