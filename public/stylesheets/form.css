@@ -62,7 +62,7 @@ label.choice {
 }
 
 label.remember_me {
-  display: inline;
+  display: inline-block;
   padding: 0 4px;
   margin: 0;
 }
@@ -116,6 +116,13 @@ select.short {
 input.text,
 input.file {
   padding: 2px 0pt;
+}
+
+input[type=text],
+input[type=password],
+textarea {
+  border: 1px solid #ccc;
+  padding: 2px;
 }
 
 /** Rails Core error styles **/
