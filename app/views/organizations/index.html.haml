@@ -30,7 +30,7 @@
     %p= link_to image_tag("/demo/demo.jpg", :style => "max-width: 100%; border: 1px solid lightgrey;"), '/demo/summary.html'
 %div.flex-column
   -if !logged_in?
-    %div.section
+    %div.section.log_in
       %h2 Log In
       -form_tag session_path, :id => 'home_login' do
         %ul

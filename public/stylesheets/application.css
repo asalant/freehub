@@ -31,7 +31,7 @@
   width: 100%;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 800px) {
   .flex-column {
     width: 100%;
     min-width: inherit;
@@ -129,6 +129,7 @@
   margin: 14px 0 0 14px;
 }
 
+#application_header h2,
 #application_header h2 a
 {
   color: white;
@@ -138,6 +139,12 @@
 ul.tabs {
   float:right;
   margin: 12px 12px -1px; /* -1px is a hack to hide bottom edge on mobile */
+}
+
+@media (max-width: 800px) {
+  ul.tabs {
+    float: inherit;
+  }
 }
 
 ul.tabs li {
@@ -231,6 +238,7 @@ div.left div.section {
   background: lightyellow;
   border: 1px solid tan;
   padding: 14px;
+  max-width: 360px;
 }
 
 /** visits/day **/
