@@ -109,6 +109,7 @@
   background: lightcyan;
   color: #555;
   padding: 4px;
+  white-space: nowrap;
 }
 
 /** Application Header **/
