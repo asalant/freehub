@@ -54,6 +54,12 @@
   background: black;
 }
 
+@media (max-width: 800px) {
+  #footer .body {
+    flex-flow: column;
+  }
+}
+
 .footer-item {
   padding: 0 20px 16px 14px;
 }
@@ -64,31 +70,6 @@
 
 #footer #logo {
   font-size: 30px;
-}
-
-#application_nav {
-  /** brown **/ /** background: #663300; **/
-  /** green **/ /** background: #99CC00; **/
-  /** grey **/  /** background: #BBB; **/
-  /** darkgrey **/
-  background: dimgray;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  background: dimgray;
-  align-items: center;
-}
-
-#application_nav h2,
-#application_nav h2 a
-{
-  color: white;
-  padding-left: 14px;
-}
-
-#application_nav h2 a {
-  color: white;
-  padding: 14
 }
 
 #application_footer,
@@ -132,14 +113,30 @@
 
 /** Application Header **/
 
-#application_nav h2 {
+
+#application_header {
+  /** brown **/ /** background: #663300; **/
+  /** green **/ /** background: #99CC00; **/
+  /** grey **/  /** background: #BBB; **/
+  /** darkgrey **/
+  background: dimgray;
+}
+
+#application_header h2
+{
   font-size: 20px;
+  margin: 14px 0 0 14px;
+}
+
+#application_header h2 a
+{
+  color: white;
 }
 
 /** Application Navigation **/
 ul.tabs {
   float:right;
-  margin: 12px 12px 0;
+  margin: 12px 12px -1px; /* -1px is a hack to hide bottom edge on mobile */
 }
 
 ul.tabs li {
@@ -367,16 +364,4 @@ div.uploadStatus {
 
 div.progressBar {
   margin: 5px;
-}
-
-@media (max-width: 800px) {
-  #footer .body {
-    flex-flow: column;
-  }
-
-  #application_nav {
-    flex-flow: column;
-    align-items: start;
-    padding-top: 10px;
-  }
 }
