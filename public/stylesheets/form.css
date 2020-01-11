@@ -95,6 +95,7 @@ form p.instruct {
   form p.instruct {
     position: unset;
     margin: 4px 0 0 0;
+    clear:both;
   }
 }
 
