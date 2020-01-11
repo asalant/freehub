@@ -1,20 +1,11 @@
-%h1
-  =link_to @person.full_name, person_path(:id => @person)
-  = " : "
-  =link_to 'Services', services_path(:person_id => @person)
-  = " : New"
+%div.flex-column
 
--form_for @service do |f|
-  =error_messages_for :service
-  =render :partial => 'services/form', :object => f
+  %h1
+    =link_to @person.full_name, person_path(:id => @person)
+    = " : "
+    =link_to 'Services', services_path(:person_id => @person)
+    = " : New"
 
--# Original:
-
--#   0: h1 do
--#   1:   link_to @person.full_name, person_path(:id => @person)
--#   2:   text ' : '
--#   3:   link_to 'Services', services_path(:person_id => @person)
--#   4:   text ' : New'
--#   8: form_for @service do |f|
--#   9:   error_messages_for :service
--#  10:   service_form_fields(f)
+  -form_for @service do |f|
+    =error_messages_for :service
+    =render :partial => 'services/form', :object => f
