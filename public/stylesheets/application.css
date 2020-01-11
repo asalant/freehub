@@ -8,7 +8,7 @@
 
 #application_body {
   background: white;
-  padding: 26px;
+  padding: 3%;
 }
 
 /** Layout styles **/
@@ -213,7 +213,7 @@ td.action.edit {
 }
 
 div.section {
-  padding: 10px 0 10px 10px;
+  padding: 10px 0;
   clear: both;
 }
 
