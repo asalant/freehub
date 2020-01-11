@@ -182,6 +182,9 @@ table.visits {
 
 tr.even, li.even { background: #ffffff; }
 tr.odd, li.odd  { background: lightcyan; }
+tr.followed_by_note {
+  border-bottom: none;
+}
 
 td.full_name {
   white-space: nowrap;

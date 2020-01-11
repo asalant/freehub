@@ -20,6 +20,7 @@
           -reset_cycle
           -for visit in @groups[group[:key]]
             - cycle_class = cycle('odd','even')
+            - note_class = nil
             - if visit.note and visit.note.text
               - note_class = 'followed_by_note'
             %tr{:class => [cycle_class, note_class]}
