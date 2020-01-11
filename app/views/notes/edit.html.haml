@@ -1,13 +1,15 @@
-%h1 #{link_to @person.full_name, person_path(:id => @person)} : #{link_to 'Notes', notes_path(:person_id => @person)} : Edit
+%div.flex-column
 
-=error_messages_for :note
--form_for @note, :url => note_path do |f|
-  %ul
-    =labeled_input 'Regarding' do
-      -capture do
-        =notable_link(@note.notable)
-    =labeled_input 'Text', :for => :text do
-      -capture do
-        =f.text_area :text, :rows => 6
-    %li 
-      =f.submit "Create"
+  %h1 #{link_to @person.full_name, person_path(:id => @person)} : #{link_to 'Notes', notes_path(:person_id => @person)} : Edit
+
+  =error_messages_for :note
+  -form_for @note, :url => note_path do |f|
+    %ul
+      =labeled_input 'Regarding' do
+        -capture do
+          =notable_link(@note.notable)
+      =labeled_input 'Text', :for => :text do
+        -capture do
+          =f.text_area :text, :rows => 6
+      %li
+        =f.submit "Create"
