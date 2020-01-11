@@ -1,15 +1,16 @@
-%h1
-  =link_to @person.full_name, person_path(:id => @person)
-  = ' : '
-  =link_to 'Visits', visits_path(:person_id => @person)
-  = ' : Edit'
+%div.flex-fullwidth
+  %h1
+    =link_to @person.full_name, person_path(:id => @person)
+    = ' : '
+    =link_to 'Visits', visits_path(:person_id => @person)
+    = ' : Edit'
 
--form_for @visit, :url => visit_path do |f|
-  =error_messages_for :visit
-  -if params[:destination]
-    =hidden_field_tag :destination, params[:destination]
-  =render :partial => 'visits/form', :object => f, :locals => { :visit => @visit }
-  :javascript
-    Event.observe(window, 'load', function() {
-      $('note_text').focus();
-    });
+  -form_for @visit, :url => visit_path do |f|
+    =error_messages_for :visit
+    -if params[:destination]
+      =hidden_field_tag :destination, params[:destination]
+    =render :partial => 'visits/form', :object => f, :locals => { :visit => @visit }
+    :javascript
+      Event.observe(window, 'load', function() {
+        $('note_text').focus();
+      });
