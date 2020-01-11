@@ -298,6 +298,7 @@ input[type=submit]:hover {
 #application_body h1 {
   font-size: 24px;
   padding: 0 0 12px 0;
+  line-height: 1em;
 }
 
 #application_body h2 {

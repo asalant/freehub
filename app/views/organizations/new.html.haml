@@ -1,20 +1,21 @@
-%h1 Register
-%div.column.left
-  %p Sign up for a new Freehub account.
-  %p
-    After you submit this form you will be able to start using Freehub while your account is pending activation.
-    You will receive an email shortly with a link to permanently activate your account.
-  -form_for @organization do |f|
-    %div.section.organization
-      %h2 Organization settings
-      =error_messages_for :organization
-      %ul 
-        = render :partial => 'organizations/form', :object => f
-    %div.section.user
-      %h2 Manager account settings
-      =error_messages_for :user
-      %ul
-        -fields_for :user do |user|
-          = render :partial => 'users/form', :object => user
-          %li
-            = f.submit 'Sign Up'
+%div.flex-column
+  %h1 Register
+  %div.column.left
+    %p Sign up for a new Freehub account.
+    %p
+      After you submit this form you will be able to start using Freehub while your account is pending activation.
+      You will receive an email shortly with a link to permanently activate your account.
+    -form_for @organization do |f|
+      %div.section.organization
+        %h2 Organization settings
+        =error_messages_for :organization
+        %ul
+          = render :partial => 'organizations/form', :object => f
+      %div.section.user
+        %h2 Manager account settings
+        =error_messages_for :user
+        %ul
+          -fields_for :user do |user|
+            = render :partial => 'users/form', :object => user
+            %li
+              = f.submit 'Sign Up'

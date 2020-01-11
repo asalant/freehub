@@ -1,7 +1,8 @@
--if current_user.activated_at.nil?
-  %div.section
-    %p.warn
-      Your account is pending activation. We've sent an activation email to #{current_user.email}.
-      Check that email account and your spam filter for the activation email.
+%div.flex-column
+  -if current_user.activated_at.nil?
+    %div.section
+      %p.warn
+        Your account is pending activation. We've sent an activation email to #{current_user.email}.
+        Check that email account and your spam filter for the activation email.
 
-= render :partial => 'visits/person_search'
+  = render :partial => 'visits/person_search'
