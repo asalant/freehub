@@ -90,6 +90,14 @@ form p.instruct {
   z-index:1000;
 }
 
+
+@media (max-width: 800px) {
+  form p.instruct {
+    position: unset;
+    margin: 4px 0 0 0;
+  }
+}
+
 form span.option {
 	width:10%;
 }

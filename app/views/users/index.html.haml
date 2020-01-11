@@ -1,20 +1,22 @@
-%h1 Listing users
-%table
-  %tr
-    %th Name
-    %th Email
-    %th Login
-    %th Activated at
-    %th Created at
-  -for user in @users
-    %tr{:class => cycle('odd','even')}
-      %td= user.name
-      %td= user.email
-      %td= user.login
-      %td= user.activated_at.nil? ? 'Not yet activated' : datetime_short(user.activated_at)
-      %td= datetime_short(user.created_at)
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete
-%br
-=link_to 'New user', new_user_path
+%div.flex-fullwidth
+
+  %h1 Listing users
+  %table
+    %tr
+      %th Name
+      %th Email
+      %th Login
+      %th Activated at
+      %th Created at
+    -for user in @users
+      %tr{:class => cycle('odd','even')}
+        %td= user.name
+        %td= user.email
+        %td= user.login
+        %td= user.activated_at.nil? ? 'Not yet activated' : datetime_short(user.activated_at)
+        %td= datetime_short(user.created_at)
+        %td= link_to 'Show', user
+        %td= link_to 'Edit', edit_user_path(user)
+        %td= link_to 'Remove', user, :confirm => 'Are you sure?', :method => :delete
+  %br
+  =link_to 'New user', new_user_path
