@@ -113,7 +113,8 @@ input.radio {
 
 input.medium,
 select.medium {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 input.short,
