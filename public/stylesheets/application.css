@@ -186,6 +186,10 @@ tr.followed_by_note {
   border-bottom: none;
 }
 
+tr.followed_by_note td {
+  padding-bottom: 0;
+}
+
 td.full_name {
   white-space: nowrap;
   width: 200px;
