@@ -31,13 +31,6 @@
   width: 100%;
 }
 
-@media (max-width: 800px) {
-  .flex-column {
-    width: 100%;
-    min-width: inherit;
-  }
-}
-
 #footer {
   height: 100px;
 }
@@ -52,12 +45,6 @@
   color: white;
   font-size: 11px;
   background: black;
-}
-
-@media (max-width: 800px) {
-  #footer .body {
-    flex-flow: column;
-  }
 }
 
 .footer-item {
@@ -145,6 +132,15 @@ ul.tabs {
   ul.tabs {
     float: inherit;
   }
+
+  #footer .body {
+    flex-flow: column;
+  }
+
+  .flex-column {
+    width: 100%;
+    min-width: inherit;
+  }
 }
 
 ul.tabs li {
@@ -156,7 +152,6 @@ ul.tabs li {
 
 ul.tabs li a {
   color: white;
-
 }
 
 ul.tabs li.selected,
