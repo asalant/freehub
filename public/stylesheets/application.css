@@ -143,6 +143,14 @@ ul.tabs {
   }
 }
 
+@media (min-width: 800px) {
+  .credit {
+    margin-left: auto;
+    position: relative;
+    left: -100px;
+  }
+}
+
 ul.tabs li {
   float:left;
   font-size: 14px;
