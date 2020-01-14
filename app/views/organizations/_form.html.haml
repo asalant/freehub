@@ -4,7 +4,7 @@
     %p.instruct For example 'San Francisco Bike Kitchen'
 =labeled_input 'Key', :for => :key do
   -capture do
-    %div= form.text_field(:key)
+    %div= form.text_field(:key, :autocapitalize => 'none')
     %p.instruct For example 'sfbk', used for URL http://freehub.bikekitchen.org/sfbk
 =labeled_input 'Location', :for => :location do
   -capture do

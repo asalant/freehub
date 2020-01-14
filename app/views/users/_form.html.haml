@@ -3,7 +3,7 @@
     =form.text_field :name
 =labeled_input 'Email', :for => :email do
   -capture do
-    =form.text_field :email
+    =form.text_field :email, :autocapitalize => 'none'
 =labeled_input 'Login', :for => :login do
   -capture do
     =form.text_field :login
