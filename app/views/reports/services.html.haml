@@ -1,61 +1,63 @@
-%h1
-  =link_to 'Reports', reports_path
-  = ' : Services'
-  
-%div.column
-  -form_tag report_path(:action => 'services'), :method => :get do
-    %ul
-      =labeled_input 'Service Type', :for => :service_type do
-        -capture do
-          -@service_types.each do |service_type|
-            =check_box_tag 'report[for_service_types][]', service_type.id, @report[:for_service_types].include?(service_type.id)
-            %label.inline= service_type.name
-      =labeled_input 'Date Range', :for => 'date_from' do
-        -capture do
-          %span
-            =calendar_date_select_tag "report[end_after]", @report[:end_after], :year_range => 3.years.ago..1.years.from_now
-            %label{:for => 'report[end_after]'} Ending After
-          %span
-            =calendar_date_select_tag "report[end_before]", @report[:end_before], :year_range => 3.years.ago..1.years.from_now
-            %label{:for => 'report[end_before]'} Ending Before
-          %p.instruct Leave one or both blank to search without date constraints.
-      %li 
-        =submit_tag "Update"
+%div.flex-column
+  %h1
+    =link_to 'Reports', reports_path
+    = ' : Services'
 
-%div.section
-  -if @services.empty?
-    %div.list_status No services for date range.
-  -else
-    %div.list_status #{@services.to_a.size} of #{@services.size} services shown.
-    %table
-      %tr
-        %th Name
-        %th Service type
-        %th Start date
-        %th End date
-        %th Paid
-        %th Volunteered
-        %th Note
-      -for service in @services
-        %tr{:class => cycle('odd','even')}
-          %td{:style => 'width:200px;'}
-            =link_to(service.person.full_name, person_path(:id => service.person))
-          %td{:style => 'width:100px;'}
-            = service.service_type.name
-          %td 
-            = date_short(service.start_date)
-          %td 
-            = date_short(service.end_date)
-          %td 
-            = service.paid
-          %td 
-            = service.volunteered
-          %td.note{:style => 'width:360px;'}
-            =note_text(service.note)
-      %tr.list_controls
-        %td{:colspan => 7}
-          -if @services.next_page? || @services.previous_page?
-            %div.paginating_links
-              More: #{paginating_links(@services, :params => { :report => params[:report] } )}
-          %div.export
-            =link_to 'Export all', report_path(:action => 'services', :params => { :report => params[:report], :format => 'csv' })
+  %div.column
+    -form_tag report_path(:action => 'services'), :method => :get do
+      %ul
+        =labeled_input 'Service Type', :for => :service_type do
+          -capture do
+            -@service_types.each do |service_type|
+              =check_box_tag 'report[for_service_types][]', service_type.id, @report[:for_service_types].include?(service_type.id)
+              %label.inline= service_type.name
+        =labeled_input 'Date Range', :for => 'date_from' do
+          -capture do
+            %span
+              =calendar_date_select_tag "report[end_after]", @report[:end_after], :year_range => 3.years.ago..1.years.from_now
+              %label{:for => 'report[end_after]'} Ending After
+            %span
+              =calendar_date_select_tag "report[end_before]", @report[:end_before], :year_range => 3.years.ago..1.years.from_now
+              %label{:for => 'report[end_before]'} Ending Before
+            %p.instruct Leave one or both blank to search without date constraints.
+        %li
+          =submit_tag "Update"
+
+%div.flex-fullwidth
+  %div.section
+    -if @services.empty?
+      %div.list_status No services for date range.
+    -else
+      %div.list_status #{@services.to_a.size} of #{@services.size} services shown.
+      %table
+        %tr
+          %th Name
+          %th Service type
+          %th Start date
+          %th End date
+          %th Paid
+          %th Volunteered
+          %th Note
+        -for service in @services
+          %tr{:class => cycle('odd','even')}
+            %td{:style => 'width:200px;'}
+              =link_to(service.person.full_name, person_path(:id => service.person))
+            %td{:style => 'width:100px;'}
+              = service.service_type.name
+            %td
+              = date_short(service.start_date)
+            %td
+              = date_short(service.end_date)
+            %td
+              = service.paid
+            %td
+              = service.volunteered
+            %td.note{:style => 'width:360px;'}
+              =note_text(service.note)
+        %tr.list_controls
+          %td{:colspan => 7}
+            -if @services.next_page? || @services.previous_page?
+              %div.paginating_links
+                More: #{paginating_links(@services, :params => { :report => params[:report] } )}
+            %div.export
+              =link_to 'Export all', report_path(:action => 'services', :params => { :report => params[:report], :format => 'csv' })
