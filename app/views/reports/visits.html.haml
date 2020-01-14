@@ -2,20 +2,20 @@
   =link_to 'Reports', reports_path
   = ' : Visits'
 
-%div.column
-  -form_tag report_path(:action => 'visits'), :method => :get do
-    %ul
-      =labeled_input 'Date Range', :for => 'date_from' do
-        -capture do
-          %span
-            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
-            %label{:for => 'report[after]'} Date From
-          %span
-            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
-            %label{:for => 'report[before]'} Date To
-          %p.instruct Leave one or both blank to search without date constraints.
-      %li 
-        =submit_tag "Update"
+-form_tag report_path(:action => 'visits'), :method => :get do
+  %ul
+    =labeled_input 'Date Range', :for => 'date_from' do
+      -capture do
+        %span
+          =calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+          %label{:for => 'report[after]'} Date From
+        %span
+          =calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+          %label{:for => 'report[before]'} Date To
+        %p.instruct Leave one or both blank to search without date constraints.
+    %li
+      =submit_tag "Update"
+
 %div.section
   -if @visits.empty?
     %div.list_status No visits for date range.
@@ -32,9 +32,9 @@
         %tr{:class => cycle('odd','even')}
           %td{:style => 'width:200px;'}
             =link_to(visit.person.full_name, person_path(:id => visit.person))
-          %td 
+          %td
             = visit.person.staff? ? 'Staff' : 'Patron'
-          %td 
+          %td
             = visit.volunteer?
           %td
             = datetime_long(visit.arrived_at)

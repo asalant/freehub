@@ -2,26 +2,25 @@
   %h1
     =link_to 'Reports', reports_path
     = ' : Services'
-
-  %div.column
-    -form_tag report_path(:action => 'services'), :method => :get do
-      %ul
-        =labeled_input 'Service Type', :for => :service_type do
-          -capture do
-            -@service_types.each do |service_type|
-              =check_box_tag 'report[for_service_types][]', service_type.id, @report[:for_service_types].include?(service_type.id)
-              %label.inline= service_type.name
-        =labeled_input 'Date Range', :for => 'date_from' do
-          -capture do
-            %span
-              =calendar_date_select_tag "report[end_after]", @report[:end_after], :year_range => 3.years.ago..1.years.from_now
-              %label{:for => 'report[end_after]'} Ending After
-            %span
-              =calendar_date_select_tag "report[end_before]", @report[:end_before], :year_range => 3.years.ago..1.years.from_now
-              %label{:for => 'report[end_before]'} Ending Before
-            %p.instruct Leave one or both blank to search without date constraints.
-        %li
-          =submit_tag "Update"
+    
+  -form_tag report_path(:action => 'services'), :method => :get do
+    %ul
+      =labeled_input 'Service Type', :for => :service_type do
+        -capture do
+          -@service_types.each do |service_type|
+            =check_box_tag 'report[for_service_types][]', service_type.id, @report[:for_service_types].include?(service_type.id)
+            %label.inline= service_type.name
+      =labeled_input 'Date Range', :for => 'date_from' do
+        -capture do
+          %span
+            =calendar_date_select_tag "report[end_after]", @report[:end_after], :year_range => 3.years.ago..1.years.from_now
+            %label{:for => 'report[end_after]'} Ending After
+          %span
+            =calendar_date_select_tag "report[end_before]", @report[:end_before], :year_range => 3.years.ago..1.years.from_now
+            %label{:for => 'report[end_before]'} Ending Before
+          %p.instruct Leave one or both blank to search without date constraints.
+      %li
+        =submit_tag "Update"
 
 %div.flex-fullwidth
   %div.section
