@@ -303,9 +303,9 @@ input[type=submit]:hover {
 }
 
 #application_body h1 {
-  font-size: 20px;
+  font-size: 24px;
   padding: 0 0 12px 0;
-  line-height: 1em;
+  line-height: 1.2em;
 }
 
 #application_body h2 {
