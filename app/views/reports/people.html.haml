@@ -2,7 +2,7 @@
   %h1
     =link_to 'Reports', reports_path
     = ' : People'
-    
+
   -form_tag report_path(:action => 'people'), :method => :get do
     %ul
       =labeled_input 'Matching name', :for => 'report[matching_name]' do
@@ -25,10 +25,10 @@
       =labeled_input 'Date Range', :for => 'date_from' do
         -capture do
           %span
-            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'report[after]'} Created After
           %span
-            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'report[before]'} Created Before
           %p.instruct Leave one or both blank to search without date constraints.
       %li

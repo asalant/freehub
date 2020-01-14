@@ -8,10 +8,10 @@
       =labeled_input 'Date Range', :for => 'date_from' do
         -capture do
           %span
-            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'report[after]'} Date From
           %span
-            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'report[before]'} Date To
           %p.instruct Leave one or both blank to search without date constraints.
       %li

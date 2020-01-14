@@ -19,10 +19,10 @@
       =labeled_input 'Date Range', :for => 'criteria[from]' do
         -capture do
           %span
-            =calendar_date_select_tag "criteria[from]", @report.criteria[:from], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "criteria[from]", @report.criteria[:from], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'criteria[from]'} Date From
           %span
-            =calendar_date_select_tag "criteria[to]", @report.criteria[:to], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "criteria[to]", @report.criteria[:to], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'criteria[to]'} Date To
           %p.instruct Leave one or both blank to search without date constraints.
       %li
