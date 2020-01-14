@@ -1,72 +1,86 @@
-%h1
-  =link_to 'Reports', reports_path
-  = ' : Summary'
+-content_for :head do
+  :javascript
+    (function($)
+    {
+      $(function()
+      {
+        $('form input[name=chartWidth]').val($('.flex-fullwidth').first().width());
+      });
+    })(jQuery);
 
--form_tag report_path(:action => 'summary'), :method => :get do
-  %ul
-    =labeled_input 'Date Range', :for => 'criteria[from]' do
-      -capture do
-        %span
-          =calendar_date_select_tag "criteria[from]", @report.criteria[:from], :year_range => 3.years.ago..1.years.from_now
-          %label{:for => 'criteria[from]'} Date From
-        %span
-          =calendar_date_select_tag "criteria[to]", @report.criteria[:to], :year_range => 3.years.ago..1.years.from_now
-          %label{:for => 'criteria[to]'} Date To
-        %p.instruct Leave one or both blank to search without date constraints.
-    %li
-      =submit_tag "Update"
+%div.flex-column
+  %h1
+    =link_to 'Reports', reports_path
+    = ' : Summary'
 
--if @report.days.empty?
-  %div.list_status No visits for date range.
--else
-  %div.section
-    %h2 Visits by Week
-    = @gchart
-    %table
-      %tr
-        %th Starting
-        %th Staff
-        %th Volunteers
-        %th Members
-        %th Patrons
-        %th Total
-      -for week in @report.weeks
-        %tr{:class => cycle('odd','even')}
-          %td
-            = date_short(week.start)
-          %td
-            = week.total_day.staff
-          %td
-            = week.total_day.volunteer
-          %td
-            = week.total_day.member
-          %td
-            = week.total_day.patron
-          %td
-            = week.total_day.total
-  %div.section
-    %h2 Visits by Day
-    %table
-      %tr
-        %th Day
-        %th Staff
-        %th Volunteers
-        %th Members
-        %th Patrons
-        %th Total
-      -for day in @report.days
-        -if day.total == 0
-          -next
-        %tr{:class => cycle('odd','even')}
-          %td
-            =link_to date_long(day.date), day_visits_path(day.date)
-          %td
-            = day.staff
-          %td
-            = day.volunteer
-          %td
-            = day.member
-          %td
-            = day.patron
-          %td
-            = day.total
+  -form_tag report_path(:action => 'summary'), :method => :get do
+    =hidden_field_tag 'chartWidth'
+    %ul
+      =labeled_input 'Date Range', :for => 'criteria[from]' do
+        -capture do
+          %span
+            =calendar_date_select_tag "criteria[from]", @report.criteria[:from], :year_range => 3.years.ago..1.years.from_now
+            %label{:for => 'criteria[from]'} Date From
+          %span
+            =calendar_date_select_tag "criteria[to]", @report.criteria[:to], :year_range => 3.years.ago..1.years.from_now
+            %label{:for => 'criteria[to]'} Date To
+          %p.instruct Leave one or both blank to search without date constraints.
+      %li
+        =submit_tag "Update"
+
+%div.flex-fullwidth
+  -if @report.days.empty?
+    %div.list_status No visits for date range.
+  -else
+    %div.section
+      %h2 Visits by Week
+      %div.gchart
+        = @gchart
+      %table
+        %tr
+          %th Starting
+          %th Staff
+          %th Volunteers
+          %th Members
+          %th Patrons
+          %th Total
+        -for week in @report.weeks
+          %tr{:class => cycle('odd','even')}
+            %td
+              = date_short(week.start)
+            %td
+              = week.total_day.staff
+            %td
+              = week.total_day.volunteer
+            %td
+              = week.total_day.member
+            %td
+              = week.total_day.patron
+            %td
+              = week.total_day.total
+    %div.section
+      %h2 Visits by Day
+      %table
+        %tr
+          %th Day
+          %th Staff
+          %th Volunteers
+          %th Members
+          %th Patrons
+          %th Total
+        -for day in @report.days
+          -if day.total == 0
+            -next
+          %tr{:class => cycle('odd','even')}
+            %td
+              =link_to date_long(day.date), day_visits_path(day.date)
+            %td
+              = day.staff
+            %td
+              = day.volunteer
+            %td
+              = day.member
+            %td
+              = day.patron
+            %td
+              = day.total

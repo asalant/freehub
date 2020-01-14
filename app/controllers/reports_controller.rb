@@ -97,9 +97,10 @@ class ReportsController < ApplicationController
     criteria = params[:criteria] || {:from => Time.now.beginning_of_year.to_date}
     criteria[:organization_id] = @organization.id
     criteria.delete_if { |key, value| value.respond_to?(:empty?) && value.empty? }
+    chartWidth = params[:chartWidth].to_i > 0  && params[:chartWidth] || 840;
 
     @report= VisitsSummary.new(criteria)
-    @gchart = Gchart.line(:size => '840x120',
+    @gchart = Gchart.line(:size => "#{chartWidth}x120",
                           :data => [@report.weeks.collect { |week| week.total_day.total }, @report.weeks.collect { |week| week.total_day.staff },
                                     @report.weeks.collect { |week| week.total_day.volunteer }, @report.weeks.collect { |week| week.total_day.member },
                                     @report.weeks.collect { |week| week.total_day.patron }],
