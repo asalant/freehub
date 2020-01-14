@@ -12,4 +12,4 @@
     %p.instruct For example 'San Francisco, CA'
 =labeled_input 'Timezone', :for => :timezone do
   -capture do
-    =form.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {:default => "Pacific Time (US & Canada)"}, :class => 'medium'
+    =form.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {:default => "Pacific Time (US & Canada)"}, :class => 'medium css_select'
