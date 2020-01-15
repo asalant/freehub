@@ -143,13 +143,13 @@ textarea {
 input[type=submit] {
   -webkit-appearance: none;
   padding: 2px 20px;
-  background-color: lightgray;
-  border-color: lightgray;
+  background-color: #eee;
+  border-color: #e5e5e5;
   border-radius: 2px;
 }
 
 input[type=submit]:hover {
-  background-color: darkgray;
+  background-color: #e5e5e5;
 }
 
 /**
@@ -232,7 +232,7 @@ all select elements and to match Freehub visual style
   display: table;
 }
 
-#errorExplanation { 
+#errorExplanation {
   max-width: 380px;
   border: 2px solid #c00;
   margin-bottom: 20px;
