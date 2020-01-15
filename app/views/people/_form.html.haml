@@ -11,7 +11,7 @@
   =labeled_input 'Email', :for => :person_email do
     -capture do
       %span
-        = form.text_field(:email, :class => 'text short')
+        = form.text_field(:email, :class => 'text short', :autocapitalize => 'none')
       %span
         = form.check_box(:email_opt_out, :class => 'checkbox')
         %label.choice{:for => 'person_email_opt_out'} Don't send emails
