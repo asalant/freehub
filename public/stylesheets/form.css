@@ -232,8 +232,8 @@ all select elements and to match Freehub visual style
   display: table;
 }
 
-#errorExplanation {
-  width: 400px;
+#errorExplanation { 
+  max-width: 380px;
   border: 2px solid #c00;
   margin-bottom: 20px;
   padding: 5px;
