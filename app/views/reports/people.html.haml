@@ -1,7 +1,8 @@
-%h1
-  =link_to 'Reports', reports_path
-  = ' : People'
-%div.column
+%div.flex-column
+  %h1
+    =link_to 'Reports', reports_path
+    = ' : People'
+
   -form_tag report_path(:action => 'people'), :method => :get do
     %ul
       =labeled_input 'Matching name', :for => 'report[matching_name]' do
@@ -10,65 +11,67 @@
           %p.instruct Match 3 or more letters in a person's first and last name.
       =labeled_input 'Type', :for => 'report[is_staff]' do
         -capture do
-          %span.option
-            = radio_button_tag 'report[is_staff]', "all", @report[:is_staff] == nil
-            %label{:for => 'report[is_staff]'} All
-          %span.option
-            = radio_button_tag 'report[is_staff]', 1, @report[:is_staff] == "1"
-            %label{:for => 'report[is_staff]'} Staff
-          %span.option
-            = radio_button_tag 'report[is_staff]', 0, @report[:is_staff] == "0"
-            %label{:for => 'report[is_staff]'} Patrons
+          %div
+            %span.option
+              = radio_button_tag 'report[is_staff]', "all", @report[:is_staff] == nil
+              %label{:for => 'report[is_staff]'} All
+            %span.option
+              = radio_button_tag 'report[is_staff]', 1, @report[:is_staff] == "1"
+              %label{:for => 'report[is_staff]'} Staff
+            %span.option
+              = radio_button_tag 'report[is_staff]', 0, @report[:is_staff] == "0"
+              %label{:for => 'report[is_staff]'} Patrons
           %p.instruct Select All, Staff, or Patrons
       =labeled_input 'Date Range', :for => 'date_from' do
         -capture do
           %span
-            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'report[after]'} Created After
           %span
-            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'report[before]'} Created Before
           %p.instruct Leave one or both blank to search without date constraints.
-      %li 
+      %li
         =submit_tag "Update"
 
-%div.section
-  -if @people.empty?
-    %div.list_status No people for date range.
-  -else
-    %div.list_status #{@people.to_a.size} of #{@people.size} people shown.
-    %table
-      %tr
-      %th Name
-      %th Staff
-      %th Email
-      %th Phone
-      %th City
-      %th State
-      %th Postal code
-      %th Created
-      -for person in @people
-        %tr{:class => cycle('odd','even')}
-          %td{:style => 'width:200px;'}
-            =link_to(person.full_name, person_path(:id => person))
-          %td
-            = person.staff
-          %td{:style => 'width:200px;'}
-            = person.email
-          %td 
-            = person.phone
-          %td 
-            = person.city
-          %td 
-            = person.state
-          %td 
-            = person.postal_code
-          %td 
-            = datetime_short(person.created_at)
-      %tr.list_controls
-        %td{:colspan => 8}
-          -if @people.next_page? || @people.previous_page?
-            %div.paginating_links
-              More: #{paginating_links(@people, :params => { :report => params[:report] } )}
-          %div.export
-            =link_to 'Export all', report_path(:action => 'people', :params => { :report => params[:report], :format => 'csv' })
+%div.flex-fullwidth
+  %div.section
+    -if @people.empty?
+      %div.list_status No people for date range.
+    -else
+      %div.list_status #{@people.to_a.size} of #{@people.size} people shown.
+      %table
+        %tr
+        %th Name
+        %th Staff
+        %th Email
+        %th Phone
+        %th City
+        %th State
+        %th Postal code
+        %th Created
+        -for person in @people
+          %tr{:class => cycle('odd','even')}
+            %td{:style => 'width:200px;'}
+              =link_to(person.full_name, person_path(:id => person))
+            %td
+              = person.staff
+            %td{:style => 'width:200px;'}
+              = person.email
+            %td
+              = person.phone
+            %td
+              = person.city
+            %td
+              = person.state
+            %td
+              = person.postal_code
+            %td
+              = datetime_short(person.created_at)
+        %tr.list_controls
+          %td{:colspan => 8}
+            -if @people.next_page? || @people.previous_page?
+              %div.paginating_links
+                More: #{paginating_links(@people, :params => { :report => params[:report] } )}
+            %div.export
+              =link_to 'Export all', report_path(:action => 'people', :params => { :report => params[:report], :format => 'csv' })

@@ -1,6 +1,7 @@
 %html
   %head
     %meta{'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
+    %meta{:name => 'viewport', :content => 'initial-scale=1,maximum-scale=1,user-scalable=no'}
     -if @title #defined already
     -elsif @person && !@person.new_record?
       -@title = @person.full_name
@@ -28,42 +29,47 @@
             %span.log_out
               = link_to 'Log Out', session_path, :method => :delete
           -else
-            %span.log_in 
+            %span.sign_up
+              =link_to 'Sign Up', new_organization_path
+            %span
+              |
+            %span.log_in
               =link_to 'Log In', new_session_path
         -if flash[:notice]
           %span#notice= flash[:notice]
-      %div#application_nav
-        %ul.tabs
+      %div#application_header.flex-container
+        %div.flex-column
           -if @organization && !@organization.new_record?
-            = tab_item('Home', organization_path(@organization))
-            = tab_item('Visits', today_visits_path(:organization_key => @organization.key))
-            = tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
-            -if permit? "admin or (manager of :organization)"
-              =tab_item('Settings', edit_organization_path(@organization))
+            %h2= link_to @organization.name, @organization
           -else
-            =tab_item('Home', root_path)
-            -if logged_in? && !current_user.organization.nil?
-              = tab_item(current_user.organization.name, organization_path(current_user.organization))
-      %div#application_header
-        -if @organization && !@organization.new_record?
-          %h2= link_to @organization.name, @organization
-        -else
-          %h2 Welcome to #{link_to 'Freehub', root_path}
-      %div.content#application_body
+            %h2 Welcome to #{link_to 'Freehub', root_path}
+        %div#application_nav.flex-column
+          %ul.tabs
+            -if @organization && !@organization.new_record?
+              = tab_item('Home', organization_path(@organization))
+              = tab_item('Visits', today_visits_path(:organization_key => @organization.key))
+              = tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
+              -if permit? "admin or (manager of :organization)"
+                =tab_item('Settings', edit_organization_path(@organization))
+            -else
+              =tab_item('Home', root_path)
+              -if logged_in? && !current_user.organization.nil?
+                = tab_item(current_user.organization.name, organization_path(current_user.organization))
+      %div.content#application_body.flex-container
         = yield
         %div{:style => 'clear:both;'}
       %div#application_footer
         = "Times shown are #{Time.zone.name} timezone."
     %div#footer
       %div.body
-        %div#logo 
-          = link_to 'Freehub', root_path
-        %ul
-          %li Get #{link_to "help or send feedback", "https://github.com/asalant/freehub/wiki/Freehub-Support"}
-          %li Check the #{link_to 'project documentation', 'https://github.com/asalant/freehub/wiki'}
-        %ul
+        %div.footer-item
+          = link_to 'Freehub', root_path, :id => 'logo'
+        %ul.footer-item
+          %li #{link_to "Get help or send feedback", "https://github.com/asalant/freehub/wiki/Freehub-Support"}
+          %li Check out the #{link_to 'project documentation', 'https://github.com/asalant/freehub/wiki'}
+          %li &nbsp;
           %li Thanks to #{link_to 'EngineYard', 'http://www.engineyard.com'} for hosting
-        %div.credit 
+        %div.footer-item.credit
           =image_tag("ey-logo.gif")
     :javascript
       var _gaq = _gaq || [];

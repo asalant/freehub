@@ -16,7 +16,7 @@
           =link_to 'x', tagging_path(:organization_key => @organization.key, :person_id => person, :id => tagging.id), :class => 'delete'
       %li.form
         -form_for :taggings, :url => taggings_path(:organization_key => @organization.key, :person_id => person) do |f|
-          %select
+          %select.css_select
             %option{:value => ''} Choose tag
             -for tag in @organization.tags - person.tags
               %option{:value => tag.name}= tag.name

@@ -2,6 +2,12 @@
   float: right;
 }
 
+@media (max-width: 800px) {
+  .tags_control {
+    float: inherit;
+  }
+}
+
 .tags_control ul.tags li {
   float: left;
   font-size: 12px;

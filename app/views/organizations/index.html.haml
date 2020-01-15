@@ -1,4 +1,4 @@
-%div.column.left
+%div.flex-column
   %div.section
     %h2 About Freehub
     %p
@@ -27,22 +27,22 @@
   %div.section
     %h2 Quick Demo
     %p= "This #{link_to 'short movie', '/demo/summary.html'} demonstrates the basic features of Freehub."
-    %p= link_to image_tag("/demo/demo.jpg", :style => "border: 1px solid lightgrey;"), '/demo/summary.html'
-%div.column
+    %p= link_to image_tag("/demo/demo.jpg", :style => "max-width: 100%; border: 1px solid lightgrey;"), '/demo/summary.html'
+%div.flex-column
   -if !logged_in?
-    %div.section
+    %div.section.log_in
       %h2 Log In
       -form_tag session_path, :id => 'home_login' do
         %ul
           =labeled_input 'Login', :for => :login do
             -capture do
-              =text_field_tag 'login'
+              =text_field_tag 'login', '', :autocapitalize => 'none'
           =labeled_input 'Password', :for => :password do
             -capture do
               =password_field_tag 'password'
           %li
             =check_box_tag('remember_me')
-            %label.choice{:for => 'remember_me'} Remember me
+            %label.choice.remember_me{:for => 'remember_me'} Remember me
           %li
             =submit_tag 'Log In'
   %div.section
@@ -50,7 +50,7 @@
     %p These organizations have signed up for Freehub and are actively using it.
     %table{:width => "100%"}
       %tr
-        %th
+        %th{:colspan => 2}
       -for organization in @organizations
         -if @organizations.length > 4 && (!organization.active? || organization.visits_count < 10)
           -next
@@ -59,7 +59,7 @@
             %b= organization.name
             %br
             = organization.location
-          %td{:style => 'width: 200px'}
+          %td
             -if !organization.last_visit.nil?
               = "last visit #{datetime_long(organization.last_visit.arrived_at)}"
             %br

@@ -1,5 +1,5 @@
-%h1 Register
-%div.column.left
+%div.flex-column
+  %h1 Register
   %p Sign up for a new Freehub account.
   %p
     After you submit this form you will be able to start using Freehub while your account is pending activation.
@@ -8,7 +8,7 @@
     %div.section.organization
       %h2 Organization settings
       =error_messages_for :organization
-      %ul 
+      %ul
         = render :partial => 'organizations/form', :object => f
     %div.section.user
       %h2 Manager account settings

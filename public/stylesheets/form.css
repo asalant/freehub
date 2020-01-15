@@ -61,6 +61,12 @@ label.choice {
   width:90%;
 }
 
+label.remember_me {
+  display: inline-block;
+  padding: 0 4px;
+  margin: 0;
+}
+
 form .req {
   color: red !important;
   font-size: 14px;
@@ -80,8 +86,17 @@ form p.instruct {
   padding:8px 10px 9px;
   position:absolute;
   top:0pt;
-  width:50%;
+  width:60%;
   z-index:1000;
+}
+
+
+@media (max-width: 800px) {
+  form p.instruct {
+    position: unset;
+    margin: 4px 0 0 0;
+    clear:both;
+  }
 }
 
 form span.option {
@@ -99,7 +114,8 @@ input.radio {
 
 input.medium,
 select.medium {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 input.short,
@@ -112,6 +128,102 @@ input.file {
   padding: 2px 0pt;
 }
 
+input[type=text],
+input[type=password],
+textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #ccc;
+  padding: 2px;
+  border-radius: 0;
+}
+
+/** Explicitly style submit buttons to address iOS **/
+input[type=submit] {
+  -webkit-appearance: none;
+  padding: 2px 20px;
+  background-color: #eee;
+  border-color: #e5e5e5;
+  border-radius: 2px;
+}
+
+input[type=submit]:hover {
+  background-color: #e5e5e5;
+}
+
+/**
+From https://www.filamentgroup.com/lab/select-css.html, modified to apply to
+all select elements and to match Freehub visual style
+**/
+
+/* class applies to select element itself, not a wrapper element */
+.css_select {
+	display: block;
+	line-height: 1.3;
+	padding: .3em 1.4em .2em .3em;
+	width: 100%;
+	max-width: 100%; /* useful when width is set to anything other than 100% */
+	box-sizing: border-box;
+	margin: 0;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	/* note: bg image below uses 2 urls. The first is an svg data uri for the arrow icon, and the second is the gradient.
+		for the icon, if you want to change the color, be sure to use `%23` instead of `#`, since it's a url. You can also swap in a different svg icon or an external image reference
+
+	*/
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+	background-repeat: no-repeat, repeat;
+	/* arrow icon position (1em from the right, 50% vertical) , then gradient position*/
+	background-position: right .7em top 50%, 0 0;
+	/* icon size, then gradient */
+	background-size: .65em auto, 100%;
+}
+/* Hide arrow icon in IE browsers */
+.css_select::-ms-expand {
+	display: none;
+}
+/* Hover style */
+.css_select:hover {
+	border-color: #888;
+}
+/* Focus style */
+.css_select:focus {
+	border-color: #aaa;
+	/* It'd be nice to use -webkit-focus-ring-color here but it doesn't work on box-shadow */
+	box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+	box-shadow: 0 0 0 3px -moz-mac-focusring;
+	color: #222;
+	outline: none;
+}
+
+/* Set options to normal weight */
+.css_select option {
+	font-weight:normal;
+}
+
+/* Support for rtl text, explicit support for Arabic and Hebrew */
+*[dir="rtl"] .css_select, :root:lang(ar) .css_select, :root:lang(iw) .css_select {
+	background-position: left .7em top 50%, 0 0;
+	padding: .6em .8em .5em 1.4em;
+}
+
+/* Disabled styles */
+.css_select:disabled, .css_select[aria-disabled=true] {
+	color: graytext;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22graytext%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+}
+
+.css_select:disabled:hover, .css_select[aria-disabled=true] {
+	border-color: #aaa;
+}
+
 /** Rails Core error styles **/
 
 .fieldWithErrors {
@@ -121,7 +233,7 @@ input.file {
 }
 
 #errorExplanation {
-  width: 400px;
+  max-width: 380px;
   border: 2px solid #c00;
   margin-bottom: 20px;
   padding: 5px;

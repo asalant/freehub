@@ -1,9 +1,10 @@
-%h1
-  =link_to @person.full_name, person_path(:id => @person)
-  = ' : '
-  =link_to 'Visits', visits_path(:person_id => @person)
-  = ' : New'
+%div.flex-column
+  %h1
+    =link_to @person.full_name, person_path(:id => @person)
+    = ' : '
+    =link_to 'Visits', visits_path(:person_id => @person)
+    = ' : New'
 
--form_for @visit do |f|
-  =error_messages_for :visit
-  =render :partial => 'visits/form', :object => f, :locals => { :visit => @visit }
+  -form_for @visit do |f|
+    =error_messages_for :visit
+    =render :partial => 'visits/form', :object => f, :locals => { :visit => @visit }

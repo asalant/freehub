@@ -1,29 +1,32 @@
-%h1
-  =link_to @person.full_name, person_path(:id => @person)
-  = " : Services"
+%div.flex-fullwidth
 
-=link_to 'New service', new_service_path
+  %h1
+    =link_to @person.full_name, person_path(:id => @person)
+    = " : Services"
 
-%table
-  %tr
-    %th Service type
-    %th Start date
-    %th End date
-    %th Paid
-    %th Volunteered
-    %th Note
-  -for service in @services
-    %tr{:class => cycle('odd','even')}
-      %td= service.service_type.name
-      %td= service.start_date
-      %td= service.end_date
-      %td= service.paid
-      %td= service.volunteered
-      %td.note= note_text(service.note)
-      %td= link_to 'Show', service_path(:id => service)
-      %td= link_to 'Edit', edit_service_path(:id => service)
-      %td= link_to 'Remove', service_path(:id => service), :confirm => 'Are you sure?', :method => :delete
-  -if @services.next_page? || @services.previous_page?
-    %tr.list_controls
-      %td{:colspan => 9}
-        .paginating_links More: #{paginating_links(@services)}
+  =link_to 'New service', new_service_path
+
+  %table
+    %tr
+      %th Service type
+      %th Start date
+      %th End date
+      %th Paid
+      %th Volunteered
+      %th Note
+      %th{:colspan => 3}
+    -for service in @services
+      %tr{:class => cycle('odd','even')}
+        %td= service.service_type.name
+        %td= service.start_date
+        %td= service.end_date
+        %td= service.paid
+        %td= service.volunteered
+        %td.note= note_text(service.note)
+        %td= link_to 'Show', service_path(:id => service)
+        %td= link_to 'Edit', edit_service_path(:id => service)
+        %td= link_to 'Remove', service_path(:id => service), :confirm => 'Are you sure?', :method => :delete
+    -if @services.next_page? || @services.previous_page?
+      %tr.list_controls
+        %td{:colspan => 9}
+          .paginating_links More: #{paginating_links(@services)}

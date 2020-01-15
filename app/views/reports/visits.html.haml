@@ -1,49 +1,51 @@
-%h1
-  =link_to 'Reports', reports_path
-  = ' : Visits'
+%div.flex-column
+  %h1
+    =link_to 'Reports', reports_path
+    = ' : Visits'
 
-%div.column
   -form_tag report_path(:action => 'visits'), :method => :get do
     %ul
       =labeled_input 'Date Range', :for => 'date_from' do
         -capture do
           %span
-            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "report[after]", @report[:after], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'report[after]'} Date From
           %span
-            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 3.years.ago..1.years.from_now
+            =calendar_date_select_tag "report[before]", @report[:before], :year_range => 10.years.ago..1.years.from_now
             %label{:for => 'report[before]'} Date To
           %p.instruct Leave one or both blank to search without date constraints.
-      %li 
+      %li
         =submit_tag "Update"
-%div.section
-  -if @visits.empty?
-    %div.list_status No visits for date range.
-  -else
-    %div.list_status #{@visits.to_a.size} of #{@visits.size} visits shown.
-    %table
-      %tr
-        %th Name
-        %th Type
-        %th Volunteer
-        %th Datetime
-        %th Note
-      -for visit in @visits
-        %tr{:class => cycle('odd','even')}
-          %td{:style => 'width:200px;'}
-            =link_to(visit.person.full_name, person_path(:id => visit.person))
-          %td 
-            = visit.person.staff? ? 'Staff' : 'Patron'
-          %td 
-            = visit.volunteer?
-          %td
-            = datetime_long(visit.arrived_at)
-          %td.note{:style => 'width:360px;'}
-            = note_text(visit.note)
-      %tr.list_controls
-        %td{:colspan => 5}
-          -if @visits.next_page? || @visits.previous_page?
-            %div.paginating_links
-              More: #{paginating_links(@visits, :params => { :report => params[:report] } )}
-          %div.export
-            =link_to 'Export all', report_path(:action => 'visits', :params => { :report => params[:report], :format => 'csv' })
+
+%div.flex-fullwidth
+  %div.section
+    -if @visits.empty?
+      %div.list_status No visits for date range.
+    -else
+      %div.list_status #{@visits.to_a.size} of #{@visits.size} visits shown.
+      %table
+        %tr
+          %th Name
+          %th Type
+          %th Volunteer
+          %th Datetime
+          %th Note
+        -for visit in @visits
+          %tr{:class => cycle('odd','even')}
+            %td{:style => 'width:200px;'}
+              =link_to(visit.person.full_name, person_path(:id => visit.person))
+            %td
+              = visit.person.staff? ? 'Staff' : 'Patron'
+            %td
+              = visit.volunteer?
+            %td
+              = datetime_long(visit.arrived_at)
+            %td.note{:style => 'width:360px;'}
+              = note_text(visit.note)
+        %tr.list_controls
+          %td{:colspan => 5}
+            -if @visits.next_page? || @visits.previous_page?
+              %div.paginating_links
+                More: #{paginating_links(@visits, :params => { :report => params[:report] } )}
+            %div.export
+              =link_to 'Export all', report_path(:action => 'visits', :params => { :report => params[:report], :format => 'csv' })

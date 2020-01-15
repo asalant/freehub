@@ -1,25 +1,27 @@
-%h1
-  =link_to @person.full_name, person_path(:id => @person)
-  = " : Visits"
+%div.flex-fullwidth
+  %h1
+    =link_to @person.full_name, person_path(:id => @person)
+    = " : Visits"
 
-=link_to 'New visit', new_visit_path
+  =link_to 'New visit', new_visit_path
 
-%table
-  %tr
-    %th When
-    %th Datetime
-    %th Volunteer
-    %th Note
-  -for visit in @visits
-    %tr{:class => cycle('odd','even')}
-      %td #{time_ago_in_words(visit.arrived_at)} ago
-      %td= datetime_long(visit.arrived_at)
-      %td= visit.volunteer?
-      %td.note{:style => 'width:360px;'}= note_text(visit.note)
-      %td= link_to 'Show', visit_path(:id => visit)
-      %td= link_to 'Edit', edit_visit_path(:id => visit)
-      %td= link_to 'Remove', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete
-  -if @visits.next_page? || @visits.previous_page?
-    %tr.list_controls
-      %td{:colspan => 7}
-        %div.paginating_links More: #{paginating_links(@visits)}
+  %table
+    %tr
+      %th When
+      %th Datetime
+      %th Volunteer
+      %th Note
+      %th{:colspan => 3}
+    -for visit in @visits
+      %tr{:class => cycle('odd','even')}
+        %td #{time_ago_in_words(visit.arrived_at)} ago
+        %td= datetime_long(visit.arrived_at)
+        %td= visit.volunteer?
+        %td.note{:style => 'width:360px;'}= note_text(visit.note)
+        %td= link_to 'Show', visit_path(:id => visit)
+        %td= link_to 'Edit', edit_visit_path(:id => visit)
+        %td= link_to 'Remove', visit_path(:id => visit), :confirm => 'Are you sure?', :method => :delete
+    -if @visits.next_page? || @visits.previous_page?
+      %tr.list_controls
+        %td{:colspan => 7}
+          %div.paginating_links More: #{paginating_links(@visits)}

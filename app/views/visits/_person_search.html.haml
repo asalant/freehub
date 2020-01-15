@@ -3,7 +3,7 @@
   %div.form
     %label.desc{:style => 'float:left;'} Name
     =image_tag 'spinner.gif', :id => 'search_status', :style => 'display:none;'
-    =text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()" }, { :url => auto_complete_for_person_full_name_people_path(:organization_key => @organization.key), :method => :get, :min_chars => 2, :indicator => 'search_status', :after_update_element => "function(element, value) { window.location = $(value).readAttribute('url'); }" }
+    =text_field_with_auto_complete :person, :full_name, { :onfocus => "this.select()", :autocomplete => 'off' }, { :url => auto_complete_for_person_full_name_people_path(:organization_key => @organization.key), :method => :get, :min_chars => 2, :indicator => 'search_status', :after_update_element => "function(element, value) { window.location = $(value).readAttribute('url'); }" }
   %p
     Start typing to find a person or
     = "#{link_to "add a new person", new_person_path(:organization_key => @organization.key)}."

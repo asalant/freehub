@@ -1,6 +1,7 @@
-%h1 Listing reports
+%div.flex-fullwidth
+  %h1 Listing reports
 
-%div.column.left
+%div.flex-column
   %div.section
     %h2 People
     %p
@@ -12,7 +13,7 @@
       The #{link_to 'Services Report', report_path(:action => 'services', :organization_key => @organization.key)}
       lists services by type (Membership, Class, Digging Rights) in a date range and can be exported as CSV for use in a spreadsheet program.
 
-%div.column
+%div.flex-column
   %div.section
     %h2 Visits
     %p
@@ -23,4 +24,3 @@
     %p
       The #{link_to 'Summary Report', report_path(:action => 'summary', :organization_key => @organization.key)}
       provides a high level view of who is visiting the shop when.
-

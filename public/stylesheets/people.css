@@ -1,8 +1,13 @@
 #summary {
-  float:right;
   text-align: right;
   font-size: 13px;
   padding: 10px;
+}
+
+@media (max-width: 800px) {
+  #summary {
+    text-align: inherit;
+  }
 }
 
 #summary .person_type {
@@ -32,8 +37,7 @@
 }
 
 #sign_in {
-  width: 400px;
-  float: left;
+  width: 360px;
   padding: 10px;
 }
 
@@ -45,7 +49,7 @@
 
 #note_text {
   height: 60px;
-  width: 380px;
+  width: 100%;
 }
 
 #visits li, #services li, #notes li {

@@ -10,7 +10,7 @@
       });
     })(jQuery);
 
-%div.column{:style => 'width: 650px; margin-right: 40px;'}
+%div{:style => 'width: 650px; margin-right: 40px;'}
 
   %h1 Tag : #{@tag}
 
@@ -46,8 +46,8 @@
           -if @people.next_page? || @people.previous_page?
             %div.paginating_links
               More: #{paginating_links(@people)}
-            
-%div.column{:style => 'width: 200px;'}
+
+%div{:style => 'width: 200px;'}
   %h2 All Tags
   %ul
     -for tag in @organization.tags
