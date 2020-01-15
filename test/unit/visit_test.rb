@@ -42,7 +42,7 @@ class VisitTest < ActiveSupport::TestCase
   end
 
   def test_create_defaults
-    assert_equal Date.today, Visit.create!(:person => people(:mary)).arrived_at.to_date
+    assert_equal Time.zone.today, Visit.create!(:person => people(:mary)).arrived_at.to_date
     assert_equal Time.zone.local(2007,1,1), Visit.create!(:person => people(:mary), :arrived_at => Time.zone.local(2007,1,1)).arrived_at.to_time
     assert_not_nil Visit.new.note
   end
@@ -69,5 +69,3 @@ class VisitTest < ActiveSupport::TestCase
   end
 
 end
-
-
