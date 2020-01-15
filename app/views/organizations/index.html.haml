@@ -36,7 +36,7 @@
         %ul
           =labeled_input 'Login', :for => :login do
             -capture do
-              =text_field_tag 'login'
+              =text_field_tag 'login', '', :autocapitalize => 'none'
           =labeled_input 'Password', :for => :password do
             -capture do
               =password_field_tag 'password'
