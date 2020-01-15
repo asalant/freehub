@@ -272,6 +272,12 @@ div.left div.section {
   font-size: 14px;
 }
 
+@media (max-width: 800px) {
+  div.auto_complete ul li {
+    padding: 8px 3px !important;
+  }
+}
+
 /** Base HTML Styling **/
 
 a {
