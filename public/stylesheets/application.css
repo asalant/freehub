@@ -59,6 +59,14 @@
   }
 }
 
+@media (min-width: 800px) {
+  .credit {
+    margin-left: auto;
+    position: relative;
+    left: -100px;
+  }
+}
+
 .footer-item {
   padding: 0 20px 16px 14px;
 }
@@ -137,31 +145,13 @@
 /** Application Navigation **/
 ul.tabs {
   float:right;
-  margin: 12px 12px -1px; /* -1px is a hack to hide bottom edge on mobile */
-}
-
-@media (max-width: 800px) {
-  ul.tabs {
-    float: inherit;
-  }
-
-  #footer .body {
-    flex-flow: column;
-  }
-}
-
-@media (min-width: 800px) {
-  .credit {
-    margin-left: auto;
-    position: relative;
-    left: -100px;
-  }
+  margin: 12px 12px 0;
 }
 
 ul.tabs li {
   float:left;
   font-size: 14px;
-  padding: 6px 14px 10px 14px;
+  padding: 6px 18px 10px 18px;
   color: white;
 }
 
@@ -175,6 +165,15 @@ ul.tabs li.selected a {
   color: #555;
 }
 
+@media (max-width: 800px) {
+  ul.tabs {
+    float: inherit;
+  }
+
+  ul.tabs li {
+    padding: 6px 14px 10px 14px;
+  }
+}
 
 .list_controls, .list_controls td {
   border: 1px solid tan;
