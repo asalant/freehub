@@ -31,7 +31,13 @@ module ApplicationHelper
   end
 
   def tab_item(label, path)
-    "<li class='#{request.path == path ? 'selected' : ''}'><a href='#{path}'>#{label}</a></li>"
+    if label === 'Home'
+      "<li class='#{request.path == path ? 'selected' : ''}'><a href='#{path}'>#{label}</a></li>"
+    elsif label === 'Visits'
+      "<li class='#{request.path.include?('/visits/') ? 'selected' : ''}'><a href='#{path}'>#{label}</a></li>"
+    else
+       "<li class='#{request.path.start_with?(path) ? 'selected' : ''}'><a href='#{path}'>#{label}</a></li>"
+    end
   end
 
   def today_visits_path(params={})
