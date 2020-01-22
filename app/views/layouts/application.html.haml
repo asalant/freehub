@@ -46,15 +46,15 @@
         %div#application_nav.flex-column
           %ul.tabs
             -if @organization && !@organization.new_record?
-              = tab_item('Home', organization_path(@organization))
-              = tab_item('Visits', today_visits_path(:organization_key => @organization.key))
-              = tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key))
+              = tab_item('Home', organization_path(@organization), request.path, )
+              = tab_item('Visits', default_visits_path(:organization_key => @organization.key), request.path, :select_children => true)
+              = tab_item('Reports', report_path(:action => 'index', :organization_key => @organization.key), request.path, :select_children => true)
               -if permit? "admin or (manager of :organization)"
-                =tab_item('Settings', edit_organization_path(@organization))
+                =tab_item('Settings', edit_organization_path(@organization), request.path)
             -else
-              =tab_item('Home', root_path)
+              =tab_item('Home', root_path, request.path)
               -if logged_in? && !current_user.organization.nil?
-                = tab_item(current_user.organization.name, organization_path(current_user.organization))
+                = tab_item(current_user.organization.name, organization_path(current_user.organization), request.path)
       %div.content#application_body.flex-container
         = yield
         %div{:style => 'clear:both;'}
