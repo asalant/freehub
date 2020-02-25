@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem "rails", "2.3.17"
 gem "mysql"
-gem "tzinfo", "~> 0.3.31"  # Resolves "undefined method `new0' for DateTime:Class". See https://www.chiliproject.org/issues/903
+gem "tzinfo", "~> 0.3.31"  # See https://github.com/asalant/freehub/pull/56
 gem "authorization", github:  "asalant/rails-authorization-plugin"
 gem 'json', '1.7.7' # (CVE-2013-026) Can remove once rails depends on > 1.7.6
 gem 'haml', "3.0.25"
