@@ -1,3 +1,5 @@
+{<img src="https://circleci.com/gh/asalant/freehub.svg?style=shield" alt="Freehub on CircleCI" />}[https://circleci.com/gh/asalant/freehub]
+
 == Freehub
 
 Freehub is a Rails application created by the San Francisco Bike Kitchen
