@@ -76,7 +76,11 @@ class Person < ActiveRecord::Base
   named_scope :matching_name, lambda { |name| {
       :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ]
   } }
-
+  
+  named_scope :matching_email, lambda { |email| {
+      :conditions => [ "LOWER(email) LIKE :email", { :email => "%#{email.downcase}%"} ]
+  } }
+  
   named_scope :is_staff, lambda { |is_staff| {
       :conditions => [ "people.staff = ?", is_staff]
   } }
