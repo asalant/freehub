@@ -140,10 +140,10 @@ class Person < ActiveRecord::Base
   end
 
   def titleize_name
-    self.first_name = self.first_name.titleize if !self.first_name.blank?
+    self.first_name = self.first_name.custom_titlecase if !self.first_name.blank?
     if !self.last_name.blank?
       parts = self.last_name.split " "
-      parts << parts.pop.titleize
+      parts << parts.pop.custom_titlecase
       self.last_name = parts.join " "
     end
   end
