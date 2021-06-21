@@ -31,6 +31,7 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 'First Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'last').full_name
     assert_equal 'First de Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'de last').full_name
     assert_equal 'Erik Dölerud', Person.create!(:organization => organizations(:sfbk), :first_name => 'erik', :last_name => 'dölerud').full_name
+    assert_equal 'First McLast', Person.create!(:organization => organizations(:sfbk), :first_name => 'First', :last_name => 'McLast').full_name
   end
 
   def test_validates_yob
