@@ -31,6 +31,7 @@ class PersonTest < ActiveSupport::TestCase
     assert_equal 'First Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'last').full_name
     assert_equal 'First de Last', Person.create!(:organization => organizations(:sfbk), :first_name => 'first', :last_name => 'de last').full_name
     assert_equal 'Erik Dölerud', Person.create!(:organization => organizations(:sfbk), :first_name => 'erik', :last_name => 'dölerud').full_name
+    assert_equal 'First McLast', Person.create!(:organization => organizations(:sfbk), :first_name => 'First', :last_name => 'McLast').full_name
   end
 
   def test_validates_yob
@@ -62,6 +63,11 @@ class PersonTest < ActiveSupport::TestCase
   def test_matching_name
     assert_equal 3, Person.matching_name('ma').size
     assert_equal 2, Person.for_organization(organizations(:sfbk)).matching_name('ma').size
+  end
+
+  def test_matching_email
+    assert_equal 2, Person.matching_email('ma').size
+    assert_equal 1, Person.matching_email('mary@example.com').size
   end
 
   def test_in_date_range

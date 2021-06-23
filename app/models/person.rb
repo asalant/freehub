@@ -76,7 +76,11 @@ class Person < ActiveRecord::Base
   named_scope :matching_name, lambda { |name| {
       :conditions => [ "LOWER(full_name) LIKE :name", { :name => "%#{name.downcase}%"} ]
   } }
-
+  
+  named_scope :matching_email, lambda { |email| {
+      :conditions => [ "LOWER(email) LIKE :email", { :email => "%#{email.downcase}%"} ]
+  } }
+  
   named_scope :is_staff, lambda { |is_staff| {
       :conditions => [ "people.staff = ?", is_staff]
   } }
@@ -140,10 +144,10 @@ class Person < ActiveRecord::Base
   end
 
   def titleize_name
-    self.first_name = self.first_name.titleize if !self.first_name.blank?
+    self.first_name = self.first_name.custom_titlecase if !self.first_name.blank?
     if !self.last_name.blank?
       parts = self.last_name.split " "
-      parts << parts.pop.titleize
+      parts << parts.pop.custom_titlecase
       self.last_name = parts.join " "
     end
   end

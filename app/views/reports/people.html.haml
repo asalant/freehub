@@ -9,6 +9,10 @@
         -capture do
           %div= text_field_tag 'report[matching_name]', @report[:matching_name]
           %p.instruct Match 3 or more letters in a person's first and last name.
+      =labeled_input 'Matching email', :for => 'report[matching_email]' do
+        -capture do
+          %div= text_field_tag 'report[matching_email]', @report[:matching_email]
+          %p.instruct Match letters in a person's email address.
       =labeled_input 'Type', :for => 'report[is_staff]' do
         -capture do
           %div
