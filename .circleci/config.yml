@@ -1,4 +1,7 @@
-version: 2 # use CircleCI 2.0
+version: 2.1 # use CircleCI 2.1
+orbs: 
+  docker: circleci/docker@2.1.2
+  jq: circleci/jq@2.2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     parallelism: 3 # run three instances of this job in parallel
@@ -14,6 +17,7 @@ jobs: # a collection of steps
           MYSQL_ROOT_PASSWORD=password
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
+      - docker/install-dockerize # We use dockerize
 
       # Install compatible bundler
       - run:
@@ -38,12 +42,6 @@ jobs: # a collection of steps
             - vendor/bundle
 
       # Our primary container isn't MYSQL so wait for it
-      - run:
-          name: Install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.6.1
-
       - run:
           name: Waiting for MySQL to be ready
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
