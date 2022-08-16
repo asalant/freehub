@@ -48,7 +48,7 @@ GEM
     test-unit (3.1.9)
       power_assert
     thoughtbot-shoulda (2.11.1)
-    tzinfo (0.3.56)
+    tzinfo (0.3.61)
     unicorn (5.5.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
@@ -72,7 +72,7 @@ DEPENDENCIES
   rdoc
   test-unit
   thoughtbot-shoulda
-  tzinfo (~> 0.3.31)
+  tzinfo (~> 0.3.61)
   unicorn
   validates_email_format_of
 
