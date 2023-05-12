@@ -11,6 +11,12 @@
       -@title = "#{params[:controller].singularize.titleize} #{params[:action].titleize}"
     %title #{@title} on Freehub
     = javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
+    = javascript_include_tag 'https://www.googletagmanager.com/gtag/js?id=G-3E8F22S0MR', async: true 
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3E8F22S0MR');
     = javascript_include_tag :all
     = stylesheet_link_tag 'reset-min'
     = calendar_date_select_includes 'silver'
