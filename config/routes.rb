@@ -22,6 +22,9 @@ ActionController::Routing::Routes.draw do |map|
           :controller => 'visits', :action => 'day',
           :requirements => {:year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/}
 
+  map.default_visits ':organization_key/visits',
+          :controller => 'visits', :action => 'today'
+
   map.reports ':organization_key/reports', :controller => 'reports', :action => 'index'
   map.report ':organization_key/reports/:action', :controller => 'reports'
 
