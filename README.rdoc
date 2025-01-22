@@ -1,4 +1,4 @@
-{<img src="https://circleci.com/gh/asalant/freehub.svg?style=shield" alt="Freehub on CircleCI" />}[https://circleci.com/gh/asalant/freehub]
+{rdoc-image:https://dl.circleci.com/status-badge/img/gh/asalant/freehub/tree/master.svg?style=svg}[https://dl.circleci.com/status-badge/redirect/gh/asalant/freehub/tree/master]
 
 == Freehub
 
