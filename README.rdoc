@@ -1,4 +1,4 @@
-{rdoc-image:https://dl.circleci.com/status-badge/img/gh/asalant/freehub/tree/master.svg?style=svg}[https://dl.circleci.com/status-badge/redirect/gh/asalant/freehub/tree/master]
+{rdoc-image:https://github.com/asalant/freehub/actions/workflows/test.yml/badge.svg}[https://github.com/asalant/freehub/actions/workflows/test.yml]
 
 == Freehub
 
