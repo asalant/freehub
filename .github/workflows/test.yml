@@ -46,9 +46,9 @@ jobs:
           EOF
 
           # Build and run tests
-          docker-compose -f docker-compose.test.yml build
-          docker-compose -f docker-compose.test.yml run --rm app
+          docker compose -f docker-compose.test.yml build
+          docker compose -f docker-compose.test.yml run --rm app
 
       - name: Cleanup
         if: always()
-        run: docker-compose -f docker-compose.test.yml down -v
+        run: docker compose -f docker-compose.test.yml down -v
