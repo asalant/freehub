@@ -1,0 +1,54 @@
+name: Tests
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and test with Docker Compose
+        run: |
+          # Create a test-specific docker-compose override
+          cat > docker-compose.test.yml << 'EOF'
+          services:
+            app:
+              build: .
+              environment:
+                - DATABASE_HOST=mysql
+                - RAILS_ENV=test
+              depends_on:
+                mysql:
+                  condition: service_healthy
+              command: >
+                sh -c "
+                  gem update --system 1.8.25 &&
+                  bundle exec rake db:create db:schema:load &&
+                  bundle exec rake test
+                "
+            mysql:
+              image: mysql:5.6
+              environment:
+                - MYSQL_ROOT_PASSWORD=password
+                - MYSQL_DATABASE=freehub_for_all_test
+              healthcheck:
+                test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+                interval: 10s
+                timeout: 5s
+                retries: 5
+          EOF
+
+          # Build and run tests
+          docker compose -f docker-compose.test.yml build
+          docker compose -f docker-compose.test.yml run --rm app
+
+      - name: Cleanup
+        if: always()
+        run: docker compose -f docker-compose.test.yml down -v
