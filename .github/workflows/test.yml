@@ -10,70 +10,45 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:5.6
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: freehub_for_all_test
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
-    container:
-      image: corgibytes/ruby-1.9.3:1.1.0
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Update apt sources for Jessie archive
+      - name: Build and test with Docker Compose
         run: |
-          echo "deb http://archive.debian.org/debian jessie main" > /etc/apt/sources.list
-          echo "deb http://archive.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list
+          # Create a test-specific docker-compose override
+          cat > docker-compose.test.yml << 'EOF'
+          services:
+            app:
+              build: .
+              environment:
+                - DATABASE_HOST=mysql
+                - RAILS_ENV=test
+              depends_on:
+                mysql:
+                  condition: service_healthy
+              command: >
+                sh -c "
+                  gem update --system 1.8.25 &&
+                  bundle exec rake db:create db:schema:load &&
+                  bundle exec rake test
+                "
+            mysql:
+              image: mysql:5.6
+              environment:
+                - MYSQL_ROOT_PASSWORD=password
+                - MYSQL_DATABASE=freehub_for_all_test
+              healthcheck:
+                test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+                interval: 10s
+                timeout: 5s
+                retries: 5
+          EOF
 
-      - name: Install MySQL client
-        run: |
-          apt-get update
-          apt-get install -y --force-yes mysql-client libmysqlclient-dev
+          # Build and run tests
+          docker-compose -f docker-compose.test.yml build
+          docker-compose -f docker-compose.test.yml run --rm app
 
-      - name: Downgrade RubyGems for Rails 2.3 compatibility
-        run: gem update --system 1.8.25
-
-      - name: Install Bundler
-        run: gem install bundler -v 1.15.4
-
-      - name: Cache bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: bundle-${{ hashFiles('Gemfile.lock') }}
-          restore-keys: bundle-
-
-      - name: Bundle install
-        run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      - name: Wait for MySQL
-        run: |
-          for i in {1..30}; do
-            mysqladmin ping -h mysql -u root -ppassword && break
-            echo "Waiting for MySQL..."
-            sleep 2
-          done
-
-      - name: Setup database
-        env:
-          DATABASE_HOST: mysql
-          RAILS_ENV: test
-        run: |
-          bundle exec rake db:create db:schema:load
-
-      - name: Run tests
-        env:
-          DATABASE_HOST: mysql
-          RAILS_ENV: test
-        run: bundle exec rake test
+      - name: Cleanup
+        if: always()
+        run: docker-compose -f docker-compose.test.yml down -v
