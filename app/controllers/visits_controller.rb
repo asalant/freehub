@@ -91,9 +91,7 @@ class VisitsController < ApplicationController
   end
 
   def today
-    today = Date.today
-    params.merge! :year => today.year, :month => today.month, :day => today.day
-    day
+    redirect_to today_visits_path(:organization_key => @organization.key)
   end
 
   def day
