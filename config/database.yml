@@ -20,4 +20,10 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  url: <%= ENV["DATABASE_URL"] %>
+  host: <%= URI.parse(ENV["DATABASE_URL"]).host %>
+  port: <%= URI.parse(ENV["DATABASE_URL"]).port || 3306 %>
+  database: <%= URI.parse(ENV["DATABASE_URL"]).path.sub("/", "") %>
+  username: <%= URI.parse(ENV["DATABASE_URL"]).user %>
+  password: <%= URI.parse(ENV["DATABASE_URL"]).password %>  
+  sslca: /etc/ssl/certs/ca-certificates.crt
+  sslverify: true
