@@ -42,7 +42,5 @@ COPY . ./
 # from the outside.
 EXPOSE 3000
 
-# The main command to run when the container starts. Also
-# tell the Rails dev server to bind to all interfaces by
-# default.
-CMD ["./script/server", "-b", "0.0.0.0"]
+# Production: run Unicorn (override in docker-compose for development)
+CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-p", "3000"]
