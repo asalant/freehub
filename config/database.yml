@@ -30,6 +30,4 @@ production:
   database: <%= db_url.path.sub("/", "") %>
   username: <%= db_url.user %>
   password: <%= db_url.password %>
-  sslca: /etc/ssl/certs/ca-certificates.crt
-  sslverify: true
 <% end %>
