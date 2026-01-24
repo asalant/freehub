@@ -20,10 +20,16 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  host: <%= URI.parse(ENV["DATABASE_URL"]).host %>
-  port: <%= URI.parse(ENV["DATABASE_URL"]).port || 3306 %>
-  database: <%= URI.parse(ENV["DATABASE_URL"]).path.sub("/", "") %>
-  username: <%= URI.parse(ENV["DATABASE_URL"]).user %>
-  password: <%= URI.parse(ENV["DATABASE_URL"]).password %>  
+<% if ENV["DATABASE_URL"].to_s.empty? %>
+  # DATABASE_URL not set - app will fail to start
+  host: DATABASE_URL_NOT_SET
+<% else %>
+<%   db_url = URI.parse(ENV["DATABASE_URL"].split('?').first) %>
+  host: <%= db_url.host %>
+  port: <%= db_url.port || 3306 %>
+  database: <%= db_url.path.sub("/", "") %>
+  username: <%= db_url.user %>
+  password: <%= db_url.password %>
   sslca: /etc/ssl/certs/ca-certificates.crt
   sslverify: true
+<% end %>
