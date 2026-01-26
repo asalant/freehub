@@ -1,7 +1,7 @@
 # Unicorn configuration for production
 
 worker_processes Integer(ENV['WEB_CONCURRENCY'] || 2)
-timeout 120
+timeout 30
 preload_app true
 
 # Listen on port 3000, bound to all interfaces
