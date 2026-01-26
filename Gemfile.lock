@@ -4,19 +4,37 @@ GIT
   specs:
     authorization (1.0.12)
 
+GIT
+  remote: https://github.com/makandra/rails.git
+  revision: c5617b2672bb0a51d01aee619c9329a0b38f6322
+  branch: 2-3-lts
+  specs:
+    actionmailer (2.3.18.60)
+      actionpack (= 2.3.18.60)
+    actionpack (2.3.18.60)
+      activesupport (= 2.3.18.60)
+      rack (< 1.5)
+    activerecord (2.3.18.60)
+      activesupport (= 2.3.18.60)
+    activeresource (2.3.18.60)
+      activesupport (= 2.3.18.60)
+    activesupport (2.3.18.60)
+    rack (1.4.7.27)
+    rails (2.3.18.60)
+      actionmailer (= 2.3.18.60)
+      actionpack (= 2.3.18.60)
+      activerecord (= 2.3.18.60)
+      activeresource (= 2.3.18.60)
+      activesupport (= 2.3.18.60)
+      railties (= 2.3.18.60)
+    railties (2.3.18.60)
+      actionpack (= 2.3.18.60)
+      activesupport (= 2.3.18.60)
+      rake (>= 0.8.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (2.3.17)
-      actionpack (= 2.3.17)
-    actionpack (2.3.17)
-      activesupport (= 2.3.17)
-      rack (~> 1.1.0)
-    activerecord (2.3.17)
-      activesupport (= 2.3.17)
-    activeresource (2.3.17)
-      activesupport (= 2.3.17)
-    activesupport (2.3.17)
     acts-as-taggable-on (2.0.6)
     annotate (2.6.2)
       activerecord (>= 2.3.0)
@@ -33,14 +51,6 @@ GEM
     mysql (2.9.1)
     newrelic_rpm (3.7.3.204)
     power_assert (0.3.0)
-    rack (1.1.6)
-    rails (2.3.17)
-      actionmailer (= 2.3.17)
-      actionpack (= 2.3.17)
-      activerecord (= 2.3.17)
-      activeresource (= 2.3.17)
-      activesupport (= 2.3.17)
-      rake (>= 0.8.3)
     raindrops (0.19.0)
     rake (10.1.1)
     rdoc (4.1.1)
@@ -58,6 +68,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer!
+  actionpack!
+  activerecord!
+  activeresource!
+  activesupport!
   acts-as-taggable-on (= 2.0.6)
   annotate
   authorization!
@@ -68,7 +83,8 @@ DEPENDENCIES
   json (= 1.7.7)
   mysql
   newrelic_rpm
-  rails (= 2.3.17)
+  rack!
+  rails (~> 2.3.18)!
   rdoc
   test-unit
   thoughtbot-shoulda
@@ -77,4 +93,4 @@ DEPENDENCIES
   validates_email_format_of
 
 BUNDLED WITH
-   1.15.4
+   1.17.3

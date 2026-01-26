@@ -1,6 +1,14 @@
 source 'https://rubygems.org'
 
-gem "rails", "2.3.17"
+git 'https://github.com/makandra/rails.git', :branch => '2-3-lts' do
+  gem 'rails', '~> 2.3.18'
+  gem 'actionmailer', :require => false
+  gem 'actionpack', :require => false
+  gem 'activerecord', :require => false
+  gem 'activeresource', :require => false
+  gem 'activesupport', :require => false
+  gem 'rack', :require => false
+end
 gem "mysql"
 gem "tzinfo", "~> 0.3.61"  # See https://github.com/asalant/freehub/pull/56
 gem 'authorization', git:  "https://github.com/asalant/rails-authorization-plugin"

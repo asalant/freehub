@@ -14,6 +14,10 @@
 - [x] **Homepage N+1 queries** - Replaced per-org queries with single `active` scope using SQL aggregation and correlated subquery. Added composite index on `visits(person_id, arrived_at)`. Upgraded DB to Premium AMD 2GB. Homepage: 30s+ → ~1.9s.
 - [x] **Review other slow pages** if any
 
+## Security
+
+- [x] **Rails LTS** - Switched to [Rails LTS community edition](https://github.com/makandra/rails/tree/2-3-lts) (2.3.18.60). Patches 209+ CVEs including remote code execution, SQL injection, XSS, and directory traversal. Rack upgraded from 1.1.6 to 1.4.7.27. Hardened mode enabled (disables XML/JSON parameter parsing, escapes HTML in JSON).
+
 ## DNS Cutover
 
 - [ ] **Add custom domains** in App Platform settings:
