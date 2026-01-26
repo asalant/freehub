@@ -7,7 +7,7 @@
 - [x] **Web analytics** - GA4 already configured, removed old Universal Analytics code
 - [x] **Update footer branding** - Removed EngineYard references from footer
 - [x] **Verify DO automated backups** - Daily backups enabled with 7-day retention
-- [ ] **DO notifications** - Add freehub@bikekitchen.org as recipient for DigitalOcean alerts
+- [x] **DO notifications** - Set freehub@bikekitchen.org as contact for team, database, and app alerts
 
 ## Performance (Before Go-Live)
 
