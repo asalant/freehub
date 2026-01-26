@@ -6,14 +6,16 @@ Configuration changes required for running Freehub (Rails 2.3) on DigitalOcean.
 
 ### 1. App Platform Environment Variables
 
-Set `RAILS_ENV=production` as an app-level environment variable:
+Set these app-level environment variables:
 
 1. Go to **App Platform** → your app → **Settings**
 2. Under **App-Level Environment Variables**, add:
-   - **Key**: `RAILS_ENV`
-   - **Value**: `production`
+   - `RAILS_ENV` = `production`
+   - `SITE_URL` = `https://freehub.bikekitchen.org` (staging: `https://freehub-staging.bikekitchen.org`)
+   - `HOPTOAD_API_KEY` = *(Airbrake/Hoptoad API key)*
+   - `RESEND_API_KEY` = *(Resend SMTP API key)*
 
-Without this, Rails defaults to development mode and won't use the production database configuration.
+`RAILS_ENV` is required — without it, Rails defaults to development mode and won't use the production database configuration.
 
 ---
 

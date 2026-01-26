@@ -44,7 +44,7 @@ Rails::Initializer.run do |config|
 
 
   # Global constants
-  SITE_URL = 'http://localhost:3000'
+  SITE_URL = ENV['SITE_URL'] || 'http://localhost:3000'
   ENV['TIMEZONE_DEFAULT'] = 'Pacific Time (US & Canada)'
 
   config.after_initialize do
