@@ -52,8 +52,6 @@
       %tr
         %th{:colspan => 2}
       -for organization in @organizations
-        -if @organizations.length > 4 && (!organization.active? || organization.visits_count < 10)
-          -next
         %tr{:class => cycle('odd','even')}
           %td
             %b= organization.name
