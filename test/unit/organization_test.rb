@@ -39,18 +39,18 @@ class OrganizationTest < ActiveSupport::TestCase
     assert organizations(:sfbk).visits_count > 100
   end
 
-  def test_find_active
+  def test_active_scope
     # sfbk has 102 visits, last visit on 2007-02-02
     # scbc and cbi have no visits
 
     # Within 30 days of last visit and has >= 10 visits
-    active = Organization.find_active(Time.zone.parse('2007-02-28'))
+    active = Organization.active(Time.zone.parse('2007-02-28'))
     assert active.include?(organizations(:sfbk))
     assert !active.include?(organizations(:scbc))
     assert !active.include?(organizations(:cbi))
 
     # Outside 30 days - no orgs are active
-    active = Organization.find_active(Time.zone.parse('2007-04-01'))
+    active = Organization.active(Time.zone.parse('2007-04-01'))
     assert !active.include?(organizations(:sfbk))
   end
 
