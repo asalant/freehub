@@ -75,7 +75,13 @@ doctl databases configuration update af845ccd-eb8d-4f0d-99b5-2c8cffc71681 --engi
 
 ---
 
-### 4. Database Trusted Sources
+### 4. Database Tier
+
+Using **Premium AMD, 1 vCPU, 2GB RAM** ($36/mo) with NVMe storage. Upgraded from Regular 1 vCPU/1GB for better query performance — dedicated CPU and NVMe disk significantly improve aggregation queries across large tables.
+
+---
+
+### 5. Database Trusted Sources
 
 By default, DigitalOcean managed databases block external connections. To allow developers to connect directly to the database:
 
