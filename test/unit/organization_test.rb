@@ -49,6 +49,11 @@ class OrganizationTest < ActiveSupport::TestCase
     assert !active.include?(organizations(:scbc))
     assert !active.include?(organizations(:cbi))
 
+    # Virtual attributes populated by scope
+    sfbk = active.detect { |o| o == organizations(:sfbk) }
+    assert_equal Time.zone.parse('2007-02-02 18:02'), sfbk.last_visited_at
+    assert_equal 1, sfbk.member_count
+
     # Outside 30 days - no orgs are active
     active = Organization.active(Time.zone.parse('2007-04-01'))
     assert !active.include?(organizations(:sfbk))
