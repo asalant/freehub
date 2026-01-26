@@ -1,7 +1,7 @@
 class OrganizationsController < ApplicationController
 
   caches_action :index, :expires_in => 24.hours,
-                :if => Proc.new { |c| !c.send(:logged_in?) }
+                :if => Proc.new { |c| !c.send(:logged_in?) && c.send(:flash).empty? }
 
   skip_before_filter :login_required, :only => [:index, :show, :new, :create]
   before_filter :assign_id_param, :resolve_organization_by_id, :except => [ :index, :new, :create ] 
