@@ -48,6 +48,17 @@ class Organization < ActiveRecord::Base
     self.last_visit.arrived_at.to_i > on.ago(30 * 24 * 3600).to_i
   end
 
+  def self.find_active(on = Time.zone.now)
+    thirty_days_ago = on - 30.days
+    find(:all,
+      :select => 'organizations.*, COUNT(visits.id) as visits_count, MAX(visits.arrived_at) as last_visited_at',
+      :joins => 'INNER JOIN people ON people.organization_id = organizations.id INNER JOIN visits ON visits.person_id = people.id',
+      :group => 'organizations.id',
+      :having => ['COUNT(visits.id) >= 10 AND MAX(visits.arrived_at) >= ?', thirty_days_ago],
+      :order => 'organizations.name ASC'
+    )
+  end
+
   def tags
     unless @tags
       tags = Set.new ActsAsTaggableOn::Tag.find(:all,

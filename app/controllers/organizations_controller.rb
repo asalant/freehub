@@ -9,7 +9,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.xml
   def index
-    @organizations = Organization.find(:all, :order => 'name ASC')
+    @organizations = Organization.find_active
 
     respond_to do |format|
       format.html # index.html.erb
