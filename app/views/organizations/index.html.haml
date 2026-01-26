@@ -58,8 +58,8 @@
             %br
             = organization.location
           %td
-            -if !organization.last_visit.nil?
-              = "last visit #{datetime_long(organization.last_visit.arrived_at)}"
+            -if organization.last_visited_at
+              = "last visit #{datetime_long(organization.last_visited_at)}"
             %br
             -if organization.member_count > 9
               = "#{organization.member_count} members"

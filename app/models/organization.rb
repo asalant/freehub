@@ -27,8 +27,16 @@ class Organization < ActiveRecord::Base
   named_scope :active, lambda { |*args|
     on = args.first || Time.zone.now
     thirty_days_ago = on - 30.days
+    yesterday = Date.yesterday
     {
-      :select => 'organizations.*, COUNT(visits.id) as visits_count, MAX(visits.arrived_at) as last_visited_at',
+      :select => "organizations.*, " \
+                 "COUNT(visits.id) as visits_count, " \
+                 "MAX(visits.arrived_at) as last_visited_at, " \
+                 "(SELECT COUNT(*) FROM services " \
+                   "INNER JOIN people AS members ON members.id = services.person_id " \
+                   "WHERE members.organization_id = organizations.id " \
+                   "AND services.end_date > '#{yesterday}' " \
+                   "AND services.service_type_id = 'MEMBERSHIP') as active_member_count",
       :joins => 'INNER JOIN people ON people.organization_id = organizations.id INNER JOIN visits ON visits.person_id = people.id',
       :group => 'organizations.id',
       :having => ['COUNT(visits.id) >= 10 AND MAX(visits.arrived_at) >= ?', thirty_days_ago],
@@ -42,7 +50,11 @@ class Organization < ActiveRecord::Base
   end
 
   def member_count
-    @member_count ||= Service.for_organization(self).end_after(Date.yesterday).for_service_types(ServiceType[:membership].id).paginate(:size => 0).size
+    if val = read_attribute(:active_member_count)
+      val.to_i
+    else
+      @member_count ||= Service.for_organization(self).end_after(Date.yesterday).for_service_types(ServiceType[:membership].id).paginate(:size => 0).size
+    end
   end
 
   def visits_count
@@ -51,6 +63,12 @@ class Organization < ActiveRecord::Base
 
   def last_visit
     @last_visit ||= Visit.for_organization(self).paginate(:size => 1).to_a.first
+  end
+
+  def last_visited_at
+    if val = read_attribute(:last_visited_at)
+      Time.zone.parse("#{val} UTC")
+    end
   end
 
   # Active if a visit within last 30 days
