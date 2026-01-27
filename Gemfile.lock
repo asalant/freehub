@@ -44,7 +44,6 @@ GEM
       rake (>= 0.8.7)
     builder (3.3.0)
     calendar_date_select (1.16.1)
-    googlecharts (1.6.0)
     haml (3.0.25)
     json (1.7.7)
     kgio (2.11.2)
@@ -78,7 +77,6 @@ DEPENDENCIES
   annotate
   authorization!
   calendar_date_select (= 1.16.1)
-  googlecharts (= 1.6.0)
   haml (= 3.0.25)
   json (= 1.7.7)
   mysql

@@ -97,17 +97,8 @@ class ReportsController < ApplicationController
     criteria = params[:criteria] || {:from => Time.now.beginning_of_year.to_date}
     criteria[:organization_id] = @organization.id
     criteria.delete_if { |key, value| value.respond_to?(:empty?) && value.empty? }
-    chartWidth = params[:chartWidth].to_i > 0  && params[:chartWidth] || 840;
 
     @report= VisitsSummary.new(criteria)
-    @gchart = Gchart.line(:size => "#{chartWidth}x120",
-                          :data => [@report.weeks.collect { |week| week.total_day.total }, @report.weeks.collect { |week| week.total_day.staff },
-                                    @report.weeks.collect { |week| week.total_day.volunteer }, @report.weeks.collect { |week| week.total_day.member },
-                                    @report.weeks.collect { |week| week.total_day.patron }],
-                          :line_colors => ['74A3FB', 'F9B639', 'A3FB74', 'FB8974', 'CC74FB'],
-                          :legend => ['Total', 'Staff', 'Volunteer', 'Member', 'Patron'],
-                          :axis_with_labels => 'x', :axis_labels => [[@report.weeks.first, @report.weeks.last].collect { |week| date_short(week.start) }],
-                          :format => 'img_tag')
 
     respond_to do |format|
       format.html # summary.html.mab
