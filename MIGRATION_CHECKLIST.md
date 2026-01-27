@@ -3,7 +3,7 @@
 ## Before DNS Cutover
 
 - [x] **Email delivery** - Switched from `sendmail` to Resend SMTP (port 2587, domain `bikekitchen.org`). API key in `RESEND_API_KEY` env var. DNS verified. Signup and activation emails tested on staging.
-- [x] **Error logging** - Moved Hoptoad API key to `HOPTOAD_API_KEY` env var. Airbrake account still active.
+- [x] **Error logging** - Upgraded `hoptoad_notifier` to `airbrake` 3.2.1 (fixes Rack compatibility with Rails LTS). API key in `HOPTOAD_API_KEY` env var. Airbrake account still active.
 - [x] **Web analytics** - GA4 already configured, removed old Universal Analytics code
 - [x] **Update footer branding** - Removed EngineYard references from footer
 - [x] **Verify DO automated backups** - Daily backups enabled with 7-day retention

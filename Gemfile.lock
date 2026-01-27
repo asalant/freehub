@@ -36,18 +36,19 @@ GEM
   remote: https://rubygems.org/
   specs:
     acts-as-taggable-on (2.0.6)
+    airbrake (3.2.1)
+      builder
+      multi_json
     annotate (2.6.2)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
-    builder (3.2.2)
+    builder (3.3.0)
     calendar_date_select (1.16.1)
     googlecharts (1.6.0)
     haml (3.0.25)
-    hoptoad_notifier (2.4.11)
-      activesupport
-      builder
     json (1.7.7)
     kgio (2.11.2)
+    multi_json (1.15.0)
     mysql (2.9.1)
     newrelic_rpm (3.7.3.204)
     power_assert (0.3.0)
@@ -74,12 +75,12 @@ DEPENDENCIES
   activeresource!
   activesupport!
   acts-as-taggable-on (= 2.0.6)
+  airbrake (~> 3.1)
   annotate
   authorization!
   calendar_date_select (= 1.16.1)
   googlecharts (= 1.6.0)
   haml (= 3.0.25)
-  hoptoad_notifier
   json (= 1.7.7)
   mysql
   newrelic_rpm
