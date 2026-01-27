@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100626223127) do
+ActiveRecord::Schema.define(:version => 20260126215346) do
 
   create_table "notes", :force => true do |t|
     t.text     "text"
@@ -77,6 +77,10 @@ ActiveRecord::Schema.define(:version => 20100626223127) do
     t.datetime "updated_at"
   end
 
+  create_table "schema_info", :id => false, :force => true do |t|
+    t.integer "version"
+  end
+
   create_table "services", :force => true do |t|
     t.date     "start_date"
     t.date     "end_date"
@@ -139,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20100626223127) do
   end
 
   add_index "visits", ["created_by_id"], :name => "fk_visits_created_by"
+  add_index "visits", ["person_id", "arrived_at"], :name => "index_visits_on_person_id_and_arrived_at"
   add_index "visits", ["person_id"], :name => "fk_visits_person"
   add_index "visits", ["updated_by_id"], :name => "fk_visits_updated_by"
 

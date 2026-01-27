@@ -1,20 +1,9 @@
--content_for :head do
-  :javascript
-    (function($)
-    {
-      $(function()
-      {
-        $('form input[name=chartWidth]').val($('.flex-fullwidth').first().width());
-      });
-    })(jQuery);
-
 %div.flex-column
   %h1
     =link_to 'Reports', reports_path
     = ' : Summary'
 
   -form_tag report_path(:action => 'summary'), :method => :get do
-    =hidden_field_tag 'chartWidth'
     %ul
       =labeled_input 'Date Range', :for => 'criteria[from]' do
         -capture do
@@ -34,8 +23,6 @@
   -else
     %div.section
       %h2 Visits by Week
-      %div.gchart
-        = @gchart
       %table
         %tr
           %th Starting

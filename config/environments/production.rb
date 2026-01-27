@@ -27,8 +27,13 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
-# Set up with SendGrid for Engine Yard per
-# https://github.com/engineyard/ey-cloud-recipes/tree/master/cookbooks/ssmtp
-config.action_mailer.delivery_method = :sendmail
-
-SITE_URL = 'http://freehub.bikekitchen.org'
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  :address => 'smtp.resend.com',
+  :port => 2587,
+  :domain => 'bikekitchen.org',
+  :authentication => :plain,
+  :user_name => 'resend',
+  :password => ENV['RESEND_API_KEY'],
+  :enable_starttls_auto => true
+}

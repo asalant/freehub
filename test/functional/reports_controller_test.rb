@@ -128,21 +128,9 @@ class ReportsControllerTest < ActionController::TestCase
 
   def test_summary_report
     get :summary, :organization_key => 'sfbk',
-            :criteria => {  :from => '2006-01-01', :to => '2008-01-01' },
-            :chartWidth => "300"
+            :criteria => {  :from => '2006-01-01', :to => '2008-01-01' }
     assert_response :success
     assert assigns(:report)
-    assert assigns(:gchart)
-    assert_match "300x120", assigns(:gchart)
   end
-
-
-    def test_summary_report_defaults_chart_width
-      get :summary, :organization_key => 'sfbk',
-              :criteria => {  :from => '2006-01-01', :to => '2008-01-01' },
-              :chartWidth => "foo"
-      assert assigns(:gchart)
-      assert_match "840x120", assigns(:gchart)
-    end
 
 end

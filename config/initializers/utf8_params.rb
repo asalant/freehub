@@ -1,4 +1,4 @@
-raise "Check if this is still needed on #{Rails.version} (it is not in Rails 3.x)" unless Rails.version == '2.3.17'
+raise "Check if this is still needed on #{Rails.version} (it is not in Rails 3.x)" unless Rails.version.start_with?('2.3.')
 
 class ActionController::Base
 
