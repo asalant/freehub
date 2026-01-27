@@ -1,4 +1,4 @@
 require 'airbrake/rails'
 Airbrake.configure do |config|
-  config.api_key = ENV['HOPTOAD_API_KEY']
+  config.api_key = ENV['AIRBRAKE_API_KEY']
 end
