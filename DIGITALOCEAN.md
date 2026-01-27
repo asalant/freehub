@@ -12,7 +12,7 @@ Set these app-level environment variables:
 2. Under **App-Level Environment Variables**, add:
    - `RAILS_ENV` = `production`
    - `SITE_URL` = `https://freehub.bikekitchen.org` (staging: `https://freehub-staging.bikekitchen.org`)
-   - `HOPTOAD_API_KEY` = *(Airbrake/Hoptoad API key)*
+   - `AIRBRAKE_API_KEY` = *(Airbrake API key)*
    - `RESEND_API_KEY` = *(Resend SMTP API key)*
 
 `RAILS_ENV` is required — without it, Rails defaults to development mode and won't use the production database configuration.
