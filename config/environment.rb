@@ -1,8 +1,5 @@
 # Be sure to restart your server when you modify this file
 
-# Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.17' unless defined? RAILS_GEM_VERSION
-
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -38,13 +35,18 @@ Rails::Initializer.run do |config|
   config.time_zone = 'Pacific Time (US & Canada)'
   config.active_record.default_timezone = :utc
 
+  # Rails LTS security hardening: disables XML/JSON parameter parsing,
+  # escapes HTML entities in JSON, and other security improvements.
+  # See https://makandracards.com/railslts/16311-enabling-additional-security-features-rails-lts
+  config.rails_lts_options = { :default => :hardened }
+
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 
 
   # Global constants
-  SITE_URL = 'http://localhost:3000'
+  SITE_URL = ENV['SITE_URL'] || 'http://localhost:3000'
   ENV['TIMEZONE_DEFAULT'] = 'Pacific Time (US & Canada)'
 
   config.after_initialize do

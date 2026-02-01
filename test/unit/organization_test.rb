@@ -39,6 +39,26 @@ class OrganizationTest < ActiveSupport::TestCase
     assert organizations(:sfbk).visits_count > 100
   end
 
+  def test_active_scope
+    # sfbk has 102 visits, last visit on 2007-02-02
+    # scbc and cbi have no visits
+
+    # Within 30 days of last visit and has >= 10 visits
+    active = Organization.active(Time.zone.parse('2007-02-28'))
+    assert active.include?(organizations(:sfbk))
+    assert !active.include?(organizations(:scbc))
+    assert !active.include?(organizations(:cbi))
+
+    # Virtual attributes populated by scope
+    sfbk = active.detect { |o| o == organizations(:sfbk) }
+    assert_equal Time.zone.parse('2007-02-02 18:02'), sfbk.last_visited_at
+    assert_equal 1, sfbk.member_count
+
+    # Outside 30 days - no orgs are active
+    active = Organization.active(Time.zone.parse('2007-04-01'))
+    assert !active.include?(organizations(:sfbk))
+  end
+
   context 'Organization with tags' do
     should 'find all tag names in use' do
       assert_equal ['key holder', 'mechanic', 'mom'], organizations(:sfbk).tag_list
