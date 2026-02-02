@@ -1,149 +1,141 @@
-# DigitalOcean Configuration
+# Freehub Deployment on Digital Ocean
 
-Configuration changes required for running Freehub (Rails 2.3) on DigitalOcean.
+https://freehub.bikekitchen.org is hosted on the [DigitalOcean App Platform](https://www.digitalocean.com/products/app-platform) with a managed MySQL database.
 
----
+> **Tip**: [Claude Code](https://docs.anthropic.com/en/docs/claude-code) is a helpful assistant for configuring and managing the DigitalOcean application environment.
 
-### 1. App Platform Environment Variables
+## Overview
 
-Set these app-level environment variables:
-
-1. Go to **App Platform** → your app → **Settings**
-2. Under **App-Level Environment Variables**, add:
-   - `RAILS_ENV` = `production`
-   - `SITE_URL` = `https://freehub.bikekitchen.org` (staging: `https://freehub-staging.bikekitchen.org`)
-   - `AIRBRAKE_API_KEY` = *(Airbrake API key)*
-   - `RESEND_API_KEY` = *(Resend SMTP API key)*
-
-`RAILS_ENV` is required — without it, Rails defaults to development mode and won't use the production database configuration.
-
----
-
-### 2. MySQL Password Encryption (Legacy)
-
-Changed the `freehub_app` database user to use legacy MySQL 5.x password encryption:
-
-1. Go to **Databases** → your database cluster → **Users & Databases**
-2. Find the `freehub_app` user
-3. Click **More** (three dots) → **Edit Password Encryption**
-4. Select **Legacy - MySQL 5.x** (`mysql_native_password`) → **Save**
-
-**Why**: The old `mysql` gem in Rails 2.3 doesn't support MySQL 8.0's default `caching_sha2_password` authentication plugin.
-
-**Security note**: `mysql_native_password` is less secure than `caching_sha2_password`, but is required for compatibility with older MySQL client libraries.
+| Component | Service | Notes |
+|-----------|---------|-------|
+| **Application** | DigitalOcean App Platform | Rails 2.3 app in Docker |
+| **Database** | DigitalOcean Managed MySQL 8 | Premium AMD, 2GB RAM |
+| **DNS** | Bluehost | bikekitchen.org domain |
+| **SSL** | DigitalOcean (Let's Encrypt) | Auto-managed, auto-renewed |
+| **Email** | Resend | Transactional emails via SMTP |
+| **Error Tracking** | Airbrake | Automatic error notifications |
+| **Analytics** | Google Analytics (GA4) | Usage statistics |
+| **Uptime Monitoring** | DigitalOcean | Alerts on downtime |
 
 ---
 
-### 3. Disable sql_require_primary_key
+## DNS
 
-We disabled `sql_require_primary_key` on the DigitalOcean managed MySQL database to support Rails 2.3 HABTM (has_and_belongs_to_many) join tables which don't have primary keys.
+DNS for `freehub.bikekitchen.org` is managed in **Bluehost** (bikekitchen.org domain).
 
-**What was changed:**
-
-Disabled `sql_require_primary_key` via DigitalOcean API:
-
-```bash
-doctl databases configuration update af845ccd-eb8d-4f0d-99b5-2c8cffc71681 --engine mysql --config-json '{"sql_require_primary_key": false}'
 ```
-
-**Why**: The `roles_users` join table (for the `Role has_and_belongs_to_many :users` relationship) doesn't have a primary key. Rails 2.3 HABTM doesn't support primary keys on join tables, but DigitalOcean's default MySQL 8.0 configuration requires them for replication purposes.
-
-**Affected tables:**
-
-| Table | Purpose | Notes |
-|-------|---------|-------|
-| `roles_users` | User role assignments (HABTM join table) | Small, rarely updated |
-| `schema_info` | Legacy Rails 1.x migration tracking | Not used at runtime, may exist in old backups |
-| `schema_migrations` | Rails migration version tracking | Only written during deploys |
-
-**Implications:**
-
-- **Single-node cluster**: No impact
-- **Multi-node cluster**: Potential replication lag on updates/deletes to tables without PKs, since MySQL must do full table scans to identify rows. Risk is minimal for `roles_users` due to its small size and infrequent updates.
-
-**How to revert:**
-
-1. Add a primary key to `roles_users`:
-   ```sql
-   ALTER TABLE roles_users ADD COLUMN id INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
-   ```
-
-2. Re-enable the requirement:
-   ```bash
-   doctl databases configuration update af845ccd-eb8d-4f0d-99b5-2c8cffc71681 --engine mysql --config-json '{"sql_require_primary_key": true}'
-   ```
-
-3. Optionally, convert the HABTM to `has_many :through` in the Rails models for a cleaner long-term solution.
-
----
-
-### 4. Database Tier
-
-Using **Premium AMD, 1 vCPU, 2GB RAM** ($36/mo) with NVMe storage. Upgraded from Regular 1 vCPU/1GB for better query performance — dedicated CPU and NVMe disk significantly improve aggregation queries across large tables.
-
----
-
-### 5. Database Trusted Sources
-
-By default, DigitalOcean managed databases block external connections. To allow developers to connect directly to the database:
-
-1. Go to **Databases** → your database cluster → **Settings**
-2. Scroll to **Trusted Sources**
-3. Add the developer's IP address (find it with `curl ifconfig.me`)
-
-**Note**: For security, avoid using "Allow all IPv4". Add specific IPs as needed.
-
-**To connect locally**:
-```bash
-mysql -h db-mysql-sfo3-freehub-do-user-32369540-0.d.db.ondigitalocean.com -P 25060 -u doadmin -p --ssl-mode=REQUIRED freehub_production
+freehub.bikekitchen.org          CNAME  freehub-app-s65go.ondigitalocean.app
+freehub-staging.bikekitchen.org  CNAME  freehub-staging-hkbze.ondigitalocean.app
 ```
 
 ---
 
-## Deployment Workflow
+## External Services
 
-### Overview
+### Email (Resend)
 
-- **Staging** (`freehub-staging`): Auto-deploys from `master` branch
-- **Production** (`freehub-production`): Manual deploy from `master` branch
+Transactional emails (account activation, password reset, etc.) are sent via [Resend](https://resend.com) SMTP.
 
-### App Platform Configuration
+- **SMTP host**: `smtp.resend.com`
+- **Port**: 2587
+- **Domain**: `bikekitchen.org`
 
-Configure each app's deploy settings:
+The API key is configured via the `RESEND_API_KEY` environment variable.
 
-1. **Staging**: Settings → Component → Auto-deploy: **ON**
-2. **Production**: Settings → Component → Auto-deploy: **OFF**
+### Error Tracking (Airbrake)
+
+Errors are tracked by [Airbrake](https://airbrake.io) and notifications are sent to configured team members.
+
+The API key is configured via the `AIRBRAKE_API_KEY` environment variable.
+
+### Analytics (Google Analytics)
+
+Usage statistics are tracked in Google Analytics (GA4). Access via the Google Analytics dashboard.
+
+---
+
+## DigitalOcean Configuration
+
+### Apps
+
+| App | URL | Auto-deploy |
+|-----|-----|-------------|
+| **Production** | https://freehub.bikekitchen.org | OFF (manual) |
+| **Staging** | https://freehub-staging.bikekitchen.org | ON (from master) |
+
+**Note**: Staging is archived when not in use to save costs. Archiving is free for up to 20 apps and 3 months; DigitalOcean may charge beyond that. See [Setting Up Staging](#setting-up-staging) if you need to recreate it.
+
+### Environment Variables
+
+Set in App Platform → Settings → App-Level Environment Variables:
+
+| Variable | Value |
+|----------|-------|
+| `RAILS_ENV` | `production` |
+| `SITE_URL` | `https://freehub.bikekitchen.org` |
+| `AIRBRAKE_API_KEY` | *(Airbrake API key)* |
+| `RESEND_API_KEY` | *(Resend SMTP API key)* |
+
+`RAILS_ENV` is required — without it, Rails defaults to development mode.
+
+### Database
+
+**Tier**: Premium AMD, 1 vCPU, 2GB RAM ($36/mo) with NVMe storage.
+
+**Connect locally** (requires your IP in Trusted Sources):
+```bash
+mysql -h db-mysql-sfo3-freehub-do-user-32369540-0.d.db.ondigitalocean.com \
+  -P 25060 -u doadmin -p --ssl-mode=REQUIRED freehub_production
+```
+
+To add your IP to Trusted Sources:
+1. Go to **Databases** → your cluster → **Settings** → **Trusted Sources**
+2. Add your IP (find it with `curl ifconfig.me`)
+
+### SSL Certificates
+
+Managed automatically by App Platform via Let's Encrypt. Certificates auto-renew before expiration.
+
+### Uptime Monitoring
+
+Checks that the site is accessible and emails `freehub@bikekitchen.org` if down for 2+ minutes.
+
+| Resource | ID |
+|----------|-----|
+| Uptime check | `290bf29b-2886-4c2f-bedb-eef81a150606` |
+| Down alert | `f77f8306-b692-4a21-96e9-898618c437a2` |
+
+```bash
+# View status
+doctl monitoring uptime get 290bf29b-2886-4c2f-bedb-eef81a150606
+
+# List alerts
+doctl monitoring uptime alert list 290bf29b-2886-4c2f-bedb-eef81a150606
+```
+
+---
+
+## Deployment
 
 ### Making Changes
 
-1. **Create a feature branch** (optional for small changes):
-   ```bash
-   git checkout -b my-feature
-   # make changes
-   git commit -m "Description of changes"
-   git push origin my-feature
-   ```
-
-2. **Merge to master**:
+1. **Push to master** — automatically deploys to staging
    ```bash
    git checkout master
-   git merge my-feature
+   git commit -m "Description of changes"
    git push origin master
    ```
-   This automatically deploys to **staging**.
 
-3. **Test on staging**:
-   - Visit the staging app URL
-   - Verify changes work correctly
+2. **Test on staging** — verify changes work at staging URL
 
-4. **Deploy to production**:
-   - Go to **App Platform** → `freehub-production` → **Actions** → **Deploy**
-   - Or use CLI: `doctl apps create-deployment e1229281-8c8b-46ec-a930-9737caab742d`
+3. **Deploy to production**:
+   - App Platform → `freehub-production` → **Actions** → **Deploy**
+   - Or: `doctl apps create-deployment e1229281-8c8b-46ec-a930-9737caab742d`
 
-5. **Tag the release** (for history):
+4. **Tag the release**:
    ```bash
-   git tag v1.0.1
-   git push origin v1.0.1
+   git tag v2.0.1
+   git push origin v2.0.1
    ```
 
 ### Tagging Conventions
@@ -153,11 +145,89 @@ Use semantic versioning: `vMAJOR.MINOR.PATCH`
 - `v1.1.0` - minor: new features, backwards compatible
 - `v2.0.0` - major: breaking changes
 
-List existing tags:
-```bash
-git tag -l
-```
-
 ### Rollback
 
-To rollback production to a previous version, redeploy a previous commit from the App Platform console under **Activity** → select a previous deployment → **Redeploy**.
+In App Platform console: **Activity** → select previous deployment → **Redeploy**.
+
+---
+
+## Setting Up Staging
+
+If the staging app was deleted (or auto-deleted after 3 months of being archived), follow these steps to recreate it.
+
+### 1. Create the App
+
+1. Go to **App Platform** → **Create App**
+2. Connect to the **GitHub** repository (`asalant/freehub`)
+3. Select the `master` branch
+4. Enable **Autodeploy**
+
+### 2. Configure the App
+
+1. Set **Instance Size** to a single basic instance
+2. Select the same **VPC** as production (SFO3)
+3. Add the existing database:
+   - Click **Add Resource** → **Database**
+   - Select **Previously Created DigitalOcean Database**
+   - Choose the existing cluster and select the `freehub_staging` database
+
+### 3. Set Environment Variables
+
+Add these app-level environment variables:
+
+| Variable | Value |
+|----------|-------|
+| `RAILS_ENV` | `production` |
+| `SITE_URL` | `https://freehub-staging.bikekitchen.org` |
+| `AIRBRAKE_API_KEY` | *(Airbrake API key)* |
+| `RESEND_API_KEY` | *(Resend SMTP API key)* |
+
+### 4. Update DNS
+
+After the app is created, update the CNAME in Bluehost to point to the new app URL:
+
+```
+freehub-staging.bikekitchen.org  CNAME  <new-app-name>.ondigitalocean.app
+```
+
+### 5. Add Custom Domain
+
+1. Go to **Settings** → **Domains**
+2. Add `freehub-staging.bikekitchen.org`
+3. SSL certificate will be provisioned automatically
+
+### 6. Archive When Done Testing
+
+When not actively using staging, archive it to save costs:
+
+**App Platform** → `freehub-staging` → **Settings** → **Archive App**
+
+Archiving is free for up to 3 months (and up to 20 apps). DigitalOcean may charge for longer archives.
+
+---
+
+## Database Compatibility Notes
+
+These settings were required for Rails 2.3 compatibility with MySQL 8.
+
+### Legacy Password Encryption
+
+The `freehub_app` user uses legacy MySQL 5.x password encryption (`mysql_native_password`) because the old `mysql` gem doesn't support MySQL 8.0's default `caching_sha2_password`.
+
+To configure: **Databases** → cluster → **Users & Databases** → `freehub_app` → **Edit Password Encryption** → **Legacy - MySQL 5.x**
+
+### Disabled sql_require_primary_key
+
+Rails 2.3 HABTM join tables don't have primary keys, but MySQL 8 requires them by default.
+
+```bash
+doctl databases configuration update af845ccd-eb8d-4f0d-99b5-2c8cffc71681 \
+  --engine mysql --config-json '{"sql_require_primary_key": false}'
+```
+
+**Affected tables:**
+
+| Table | Purpose |
+|-------|---------|
+| `roles_users` | User role assignments (HABTM join table) |
+| `schema_migrations` | Rails migration tracking |
