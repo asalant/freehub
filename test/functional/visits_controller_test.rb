@@ -116,4 +116,9 @@ class VisitsControllerTest < ActionController::TestCase
     assert_equal 0, assigns(:groups)[:volunteers].size
     assert_equal 2, assigns(:groups)[:patrons].size
   end
+
+  def test_visits_for_today
+    get :today, :organization_key => 'sfbk'
+    assert_redirected_to today_visits_path(:organization_key => 'sfbk')
+  end
 end
