@@ -52,8 +52,7 @@ GEM
     power_assert (0.3.0)
     raindrops (0.19.0)
     rake (10.1.1)
-    rdoc (4.1.1)
-      json (~> 1.4)
+    rdoc (6.1.2.1)
     test-unit (3.1.9)
       power_assert
     thoughtbot-shoulda (2.11.1)
