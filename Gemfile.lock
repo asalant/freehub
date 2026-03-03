@@ -44,6 +44,7 @@ GEM
       rake (>= 0.8.7)
     builder (3.3.0)
     calendar_date_select (1.16.1)
+    expiring_memory_store (0.1.2)
     haml (3.0.25)
     json (1.7.7)
     kgio (2.11.2)
@@ -57,6 +58,7 @@ GEM
     test-unit (3.1.9)
       power_assert
     thoughtbot-shoulda (2.11.1)
+    timecop (0.9.10)
     tzinfo (0.3.61)
     unicorn (5.5.1)
       kgio (~> 2.6)
@@ -77,6 +79,7 @@ DEPENDENCIES
   annotate
   authorization!
   calendar_date_select (= 1.16.1)
+  expiring_memory_store
   haml (= 3.0.25)
   json (= 1.7.7)
   mysql
@@ -85,6 +88,7 @@ DEPENDENCIES
   rdoc
   test-unit
   thoughtbot-shoulda
+  timecop
   tzinfo (~> 0.3.61)
   unicorn
   validates_email_format_of

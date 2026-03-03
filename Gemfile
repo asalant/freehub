@@ -19,11 +19,13 @@ gem "acts-as-taggable-on", "2.0.6"
 gem 'airbrake', '~> 3.1'
 gem 'validates_email_format_of'
 gem 'rdoc'
+gem 'expiring_memory_store'
 
 group :development, :test do
   gem 'annotate'
   gem 'test-unit'
   gem 'thoughtbot-shoulda'
+  gem 'timecop'
 end
 
 group :production do
