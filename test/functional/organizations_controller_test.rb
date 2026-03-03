@@ -1,7 +1,54 @@
 require 'test_helper'
+require 'timecop'
 
 class OrganizationsControllerTest < ActionController::TestCase
-      
+
+  def setup
+    ActionController::Base.cache_store.clear
+  end
+
+  def test_index_is_cached_for_anonymous_users
+    get :index
+    first_body = @response.body
+
+    User.current_user = nil
+    Visit.create!(:person => people(:daryl), :arrived_at => Time.zone.now)
+
+    get :index
+    second_body = @response.body
+
+    assert_equal first_body, second_body, "Expected cached response for anonymous user"
+  end
+
+  def test_index_cache_is_not_used_for_logged_in_users
+    login_as 'sfbk'
+
+    get :index
+    first_body = @response.body
+
+    Visit.create!(:person => people(:daryl), :arrived_at => Time.zone.now)
+
+    get :index
+    second_body = @response.body
+
+    assert_not_equal first_body, second_body, "Expected fresh response for logged-in user"
+  end
+
+  def test_index_cache_expires
+    get :index
+    first_body = @response.body
+
+    User.current_user = nil
+    Visit.create!(:person => people(:daryl), :arrived_at => Time.zone.now)
+
+    Timecop.travel(25.hours.from_now) do
+      get :index
+      second_body = @response.body
+
+      assert_not_equal first_body, second_body, "Expected cache to expire after 25 hours"
+    end
+  end
+
   def test_should_get_index
     get :index
     assert_response :success

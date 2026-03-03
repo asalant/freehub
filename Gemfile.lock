@@ -58,6 +58,7 @@ GEM
     test-unit (3.1.9)
       power_assert
     thoughtbot-shoulda (2.11.1)
+    timecop (0.9.10)
     tzinfo (0.3.61)
     unicorn (5.5.1)
       kgio (~> 2.6)
@@ -87,6 +88,7 @@ DEPENDENCIES
   rdoc
   test-unit
   thoughtbot-shoulda
+  timecop
   tzinfo (~> 0.3.61)
   unicorn
   validates_email_format_of
