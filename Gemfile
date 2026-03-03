@@ -28,4 +28,5 @@ end
 
 group :production do
   gem 'unicorn'
+  gem 'expiring_memory_store'
 end
