@@ -30,8 +30,14 @@ module ApplicationHelper
     distance_of_time_in_words(from_time, Time.zone.now, include_seconds)
   end
 
-  def tab_item(label, path)
-    "<li class='#{request.path == path ? 'selected' : ''}'><a href='#{path}'>#{label}</a></li>"
+  def tab_item(label, tab_path, request_path, params = { :select_children => false})
+    selected = false
+    if params[:select_children]
+      selected = request_path.start_with?(tab_path)
+    else
+      selected = tab_path == request_path
+    end
+    "<li class='#{selected ? 'selected' : ''}'><a href='#{tab_path}'>#{label}</a></li>"
   end
 
   def today_visits_path(params={})
